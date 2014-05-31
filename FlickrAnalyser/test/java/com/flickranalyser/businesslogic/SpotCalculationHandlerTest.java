@@ -1,7 +1,9 @@
 package com.flickranalyser.businesslogic;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.junit.Assert;
@@ -15,7 +17,7 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class SpotCalculationHandlerTest {
 
-	private List<PointOfInterest> pointOfInterestsToTest = new LinkedList<PointOfInterest>();
+	private Set<PointOfInterest> pointOfInterestsToTest = new HashSet<PointOfInterest>();
 	private static final Logger log = Logger.getLogger(SpotCalculationHandlerTest.class.getName());
 	
 	

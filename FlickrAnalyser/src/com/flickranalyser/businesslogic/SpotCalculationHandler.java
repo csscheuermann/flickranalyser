@@ -2,6 +2,7 @@ package com.flickranalyser.businesslogic;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +19,7 @@ public class SpotCalculationHandler {
 
 	private static final Logger log = Logger.getLogger(SpotCalculationHandlerTest.class.getName());
 	
-	public Spot getSpot(List<PointOfInterest> pointOfInterests, Spot hardcodedSpot){
+	public Spot getSpot(Set<PointOfInterest> pointOfInterests, Spot hardcodedSpot){
 		
 	
 		//First ask FlickrRequestHandler 

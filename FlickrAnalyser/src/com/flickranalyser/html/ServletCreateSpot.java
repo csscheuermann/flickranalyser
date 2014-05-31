@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.flickranalyser.businesslogic.SpotCalculationHandler;
+import com.flickranalyser.data.flickr.FlickrRequestHandler;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
 import com.javadocmd.simplelatlng.LatLng;
@@ -33,10 +34,10 @@ public class ServletCreateSpot extends HttpServlet{
 		Spot hardcodedSpot = new Spot(new LatLng(48.1333, 11.5667), "Munich", "This is our first try");
 		
 		//Get all Point of Interests Daniel
-		
+		FlickrRequestHandler  flickrRequestHandler = new FlickrRequestHandler();
 		
 		SpotCalculationHandler spotCalculationHandler = new SpotCalculationHandler();
-		Spot spotAttribute = spotCalculationHandler.getSpot(pointOfInterests,hardcodedSpot );
+		Spot spotAttribute = spotCalculationHandler.getSpot(flickrRequestHandler.getAllImagesForSpot(hardcodedSpot),hardcodedSpot );
 		//Call Logic
 		
 		//Set the Attributes (POJOS) for the JSP
