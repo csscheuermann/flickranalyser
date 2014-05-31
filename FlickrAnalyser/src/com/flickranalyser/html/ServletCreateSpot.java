@@ -36,11 +36,11 @@ public class ServletCreateSpot extends HttpServlet{
 		
 		
 		SpotCalculationHandler spotCalculationHandler = new SpotCalculationHandler();
-		spotCalculationHandler.getSpot(pointOfInterests,hardcodedSpot );
+		Spot spotAttribute = spotCalculationHandler.getSpot(pointOfInterests,hardcodedSpot );
 		//Call Logic
 		
 		//Set the Attributes (POJOS) for the JSP
-		//req.setAttribute("spot", POJO );
+		req.setAttribute("spot", spotAttribute );
 		
 		
 		try {
