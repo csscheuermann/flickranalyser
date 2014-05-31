@@ -29,9 +29,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <body>
   <h1> Here everything will happen</h1>
 
-<%= Spot spot = (Spot)request.getAttribute("spot") %>
 
-<%   out.println( "<p>Size of List" + spot.getClusterList().size() +"</p>" ); %>
+<% Spot spot = ((Spot) request.getAttribute("spot")); %>
+<% out.println( "Cluster Found: " + spot.getClusterList().size());%>
+
+
+
+
+
 
 
 
