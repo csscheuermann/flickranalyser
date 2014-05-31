@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -27,6 +29,7 @@ import com.flickr4java.flickr.auth.Auth;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.SearchParameters;
+import com.flickranalyser.businesslogic.SpotCalculationHandlerTest;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
 import com.google.appengine.api.urlfetch.HTTPRequest;
@@ -37,6 +40,8 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class FlickrRequestHandler {
 
+	private static final Logger log = Logger.getLogger(FlickrRequestHandler.class.getName());
+	
 	private static final String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
 	private static final String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
 	private static final String PHOTO_SEARCH_REQUEST = "flickr.photos.search";
@@ -44,35 +49,6 @@ public class FlickrRequestHandler {
 	private String sharedSecret = "e7992cc453964557";
 
 	public Set<PointOfInterest> getAllImagesForSpot(Spot spot) {
-
-		// REST rest = new REST();
-		// Flickr flickr = new Flickr( FLICKR_API_KEY,sharedSecret, rest);
-		// System.out.println("apikey:"+flickr.getApiKey());
-		// System.out.println("shared secret:"+flickr.getSharedSecret());
-		//
-		// System.out.println(flickr.getAuthInterface().getRequestToken());
-		// // try {
-		// // flickr.getPhotosInterface().getPhoto("");
-		// // } catch (FlickrException e1) {
-		// // // TODO Auto-generated catch block
-		// // e1.printStackTrace();
-		// // }
-		// SearchParameters searchParameters = new SearchParameters();
-		// //
-		// searchParameters.setLatitude(String.valueOf(spot.getLatLngPoint().getLatitude()));
-		// //
-		// searchParameters.setLongitude(String.valueOf(spot.getLatLngPoint().getLongitude()));
-		// try {
-		// int photosPerPage = 100;
-		// int page = 1;
-		// PhotoList<Photo> result =
-		// flickr.getPhotosInterface().search(searchParameters, photosPerPage,
-		// page);
-		// System.out.println(result);
-		// } catch (FlickrException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 
 		Set<PointOfInterest> result = new HashSet<PointOfInterest>();
 
@@ -94,13 +70,13 @@ public class FlickrRequestHandler {
 			JsonObject photosObject;
 			
 			try {
-				System.out.println("Retrieving all images for spot "+spot+" (page="+requestedPage+",numberPages="+numberPages+")");
+				log.log(Level.INFO,"Retrieving all images for spot "+spot+" (page="+requestedPage+",numberPages="+numberPages+")");
 				String jsonResponse = Request.Get(urlForRequest.toString())
 						.execute().returnContent().asString();
 				requestedPage++;
 				photosObject = JsonObject.readFrom(jsonResponse);
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.log(Level.WARNING, "Could not execute http request", e);
 				return result;
 			}
 			JsonObject photosArrayObject = photosObject.get("photos")
@@ -126,7 +102,7 @@ public class FlickrRequestHandler {
 
 		} while (requestedPage < numberPages && requestedPage < 50);
 
-		System.out.println("maximum number of views: "+ maxViewCount);
+		log.log(Level.INFO,"maximum number of views: "+ maxViewCount);
 		
 		return result;
 
