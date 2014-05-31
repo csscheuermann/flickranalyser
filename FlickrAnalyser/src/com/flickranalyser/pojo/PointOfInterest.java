@@ -7,11 +7,6 @@ public class PointOfInterest {
 	private int countOfViews;
 	private LatLng location;
 	
-	
-	
-	
-	
-	
 	public PointOfInterest(int countOfViews, LatLng location) {
 		super();
 		this.countOfViews = countOfViews;
