@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -40,7 +42,7 @@ public class FlickrRequestHandler {
 
 	private String sharedSecret = "e7992cc453964557";
 
-	public void getAllImagesForSpot(Spot spot) {
+	public Set<PointOfInterest> getAllImagesForSpot(Spot spot) {
 
 		// REST rest = new REST();
 		// Flickr flickr = new Flickr( FLICKR_API_KEY,sharedSecret, rest);
@@ -88,7 +90,7 @@ public class FlickrRequestHandler {
 			int totalNumber = Integer.valueOf(photosArrayObject.get("total").asString()).intValue();
 			int photosPerPage = photosArrayObject.get("perpage").asInt();
 			int numberPages = photosArrayObject.get("pages").asInt();
-			List<PointOfInterest> result= new ArrayList<PointOfInterest>(totalNumber);
+			Set<PointOfInterest> result= new HashSet<PointOfInterest>(totalNumber);
 
 			JsonArray photoArray = photosArrayObject.get("photo").asArray();
 			for (int i = 0; i < photosPerPage; i++) {
@@ -99,13 +101,13 @@ public class FlickrRequestHandler {
 			
 			
 			System.out.println(jsonResponse);
-		} catch (ClientProtocolException e) {
+			return result;
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return new HashSet<PointOfInterest>();
 		}
+		
 
 	}
 }
