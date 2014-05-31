@@ -2,6 +2,8 @@ package com.flickranalyser.businesslogic;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.PointOfInterest;
@@ -14,9 +16,9 @@ public class SpotCalculationHandler {
 	
 	private static final String API_KEY = "";
 
-
+	private static final Logger log = Logger.getLogger(SpotCalculationHandlerTest.class.getName());
 	
-	public Spot getSpot(){
+	public Spot getSpot(List<PointOfInterest> pointOfInterests){
 		
 		//Munich 
 		// Long: 	11.5667
@@ -27,23 +29,37 @@ public class SpotCalculationHandler {
 		//Cluster List of Spot - Empty at first
 		List<Cluster> clusterList = hardcodedSpot.getClusterList();
 		
-		//Receives a List of PointOfInterests
-		List<PointOfInterest> PointOfInterests = new LinkedList<PointOfInterest>();
 		
-		for (PointOfInterest pointOfInterest : PointOfInterests) {
-			for (Cluster currentCluster : clusterList) {
-				double distance = LatLngTool.distance(currentCluster.getCenterOfCluster(), pointOfInterest.getLocation(), LengthUnit.KILOMETER);
-				if (distance <= hardcodedSpot.getClusterRadiusInKm() ){
-					currentCluster.addPointOfInterestToList(pointOfInterest);
-				}	
+		
+		
+		
+		for (PointOfInterest pointOfInterest : pointOfInterests) {
+			if (!isPointIntrestInCluster(hardcodedSpot, clusterList, pointOfInterest)){
+				log.log(Level.INFO, "Added new Cluster");
+				//Add new Cluster, no Cluster found or List was empty
+				Cluster cluster = new Cluster(pointOfInterest.getLocation(), "", "");
+				cluster.addPointOfInterestToList(pointOfInterest);
+				hardcodedSpot.addClusterToList(cluster);
 			}
-			//Add new Cluster, no Cluster found or List was empty
-			Cluster cluster = new Cluster(pointOfInterest.getLocation(), "", "");
-			cluster.addPointOfInterestToList(pointOfInterest);
-			hardcodedSpot.addClusterToList(cluster);
+			
+			
 		}
 		return hardcodedSpot;
 		
 		
+	}
+
+	private boolean isPointIntrestInCluster(Spot hardcodedSpot, List<Cluster> clusterList,
+			PointOfInterest pointOfInterest) {
+		for (Cluster currentCluster : clusterList) {
+			double distance = LatLngTool.distance(currentCluster.getCenterOfCluster(), pointOfInterest.getLocation(), LengthUnit.KILOMETER);
+			log.log(Level.INFO, "Distance " + distance);
+			if (distance <= hardcodedSpot.getClusterRadiusInKm() ){
+				currentCluster.addPointOfInterestToList(pointOfInterest);
+				log.log(Level.INFO, "Put in existing Cluster");
+				return true;
+			}	
+		}
+		return false;
 	}
 }
