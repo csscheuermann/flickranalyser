@@ -18,12 +18,9 @@ public class SpotCalculationHandler {
 
 	private static final Logger log = Logger.getLogger(SpotCalculationHandlerTest.class.getName());
 	
-	public Spot getSpot(List<PointOfInterest> pointOfInterests){
+	public Spot getSpot(List<PointOfInterest> pointOfInterests, Spot hardcodedSpot){
 		
-		//Munich 
-		// Long: 	11.5667
-		// Lat: 	48.1333
-		Spot hardcodedSpot = new Spot(new LatLng(48.1333, 11.5667), "Munich", "This is our first try");
+	
 		//First ask FlickrRequestHandler 
 		
 		//Cluster List of Spot - Empty at first
@@ -39,6 +36,7 @@ public class SpotCalculationHandler {
 				//Add new Cluster, no Cluster found or List was empty
 				Cluster cluster = new Cluster(pointOfInterest.getLocation(), "", "");
 				cluster.addPointOfInterestToList(pointOfInterest);
+				cluster.addViewCount(pointOfInterest.getCountOfViews());
 				hardcodedSpot.addClusterToList(cluster);
 			}
 			
@@ -56,6 +54,7 @@ public class SpotCalculationHandler {
 			log.log(Level.INFO, "Distance " + distance);
 			if (distance <= hardcodedSpot.getClusterRadiusInKm() ){
 				currentCluster.addPointOfInterestToList(pointOfInterest);
+				currentCluster.addViewCount(pointOfInterest.getCountOfViews());
 				log.log(Level.INFO, "Put in existing Cluster");
 				return true;
 			}	

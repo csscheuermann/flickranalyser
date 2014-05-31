@@ -13,6 +13,7 @@ public class Cluster {
 	private String name;
 	private String description;
 	private List<PointOfInterest> pointsOfInterest;
+	private int overallViews;
 
 	
 	
@@ -21,6 +22,19 @@ public class Cluster {
 		this.name = name;
 		this.description = description;
 		this.pointsOfInterest = new LinkedList<PointOfInterest>();
+	}
+
+	public void addViewCount(int viewCount){
+		overallViews = overallViews + viewCount;
+	}
+
+	public int getOverallViews() {
+		return overallViews;
+	}
+
+
+	public void setOverallViews(int overallViews) {
+		this.overallViews = overallViews;
 	}
 
 
