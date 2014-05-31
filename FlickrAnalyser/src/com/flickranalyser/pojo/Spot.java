@@ -13,6 +13,7 @@ public class Spot {
 	private String name;
 	private String description;
 	private static final int RADIUS_IN_KM = 35;
+	private static final double CLUSTER_RADIUS_IN_KM = 0.25;
 	private List<Cluster> clusterList;
 	
 	
@@ -24,7 +25,11 @@ public class Spot {
 		this.clusterList = new LinkedList<Cluster>();
 	}
 
-
+	
+	public static double getClusterRadiusInKm() {
+		return CLUSTER_RADIUS_IN_KM;
+	}
+	
 	public List<Cluster> getClusterList() {
 		return Collections.unmodifiableList(clusterList);
 	}

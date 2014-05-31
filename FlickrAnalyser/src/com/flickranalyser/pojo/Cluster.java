@@ -13,6 +13,7 @@ public class Cluster {
 	private String name;
 	private String description;
 	private List<PointOfInterest> pointsOfInterest;
+
 	
 	
 	public Cluster(LatLng centerOfCluster, String name, String description) {
@@ -23,7 +24,6 @@ public class Cluster {
 	}
 
 
-	
 	public List<PointOfInterest> getPointOfInterestList() {
 		return Collections.unmodifiableList(pointsOfInterest);
 	}
