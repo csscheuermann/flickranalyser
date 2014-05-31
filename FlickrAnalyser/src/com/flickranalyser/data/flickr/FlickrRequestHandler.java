@@ -33,6 +33,7 @@ import com.google.appengine.api.urlfetch.HTTPRequest;
 import com.google.appengine.api.urlfetch.HTTPResponse;
 import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
+import com.javadocmd.simplelatlng.LatLng;
 
 public class FlickrRequestHandler {
 
@@ -73,41 +74,61 @@ public class FlickrRequestHandler {
 		// e.printStackTrace();
 		// }
 
-		StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
-		urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST)
-				.append("&api_key=").append(FLICKR_API_KEY).append("&")
-				.append("lat=").append(spot.getLatLngPoint().getLatitude())
-				.append("&").append("lon=")
-				.append(spot.getLatLngPoint().getLongitude()).append("&extras=views%2Cgeo")
-				.append("&format=json&nojsoncallback=1");
+		Set<PointOfInterest> result = new HashSet<PointOfInterest>();
 
-		try {
-			String jsonResponse = Request.Get(urlForRequest.toString()).execute()
-					.returnContent().asString();
+		int requestedPage = 1;
+		int numberPages = 1;
+		int maxViewCount = 0;
+
+		do {
+			StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
+			urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST)
+					.append("&api_key=").append(FLICKR_API_KEY).append("&")
+					.append("lat=").append(spot.getLatLngPoint().getLatitude())
+					.append("&").append("lon=")
+					.append(spot.getLatLngPoint().getLongitude())
+					.append("&extras=views%2Cgeo").append("&per_page=1000")
+					.append("&page=").append(requestedPage)
+					.append("&format=json&nojsoncallback=1");
+
+			JsonObject photosObject;
 			
-			JsonObject photosObject = JsonObject.readFrom(jsonResponse);
-			JsonObject photosArrayObject = photosObject.get("photos").asObject();
-			int totalNumber = Integer.valueOf(photosArrayObject.get("total").asString()).intValue();
+			try {
+				System.out.println("Retrieving all images for spot "+spot+" (page="+requestedPage+",numberPages="+numberPages+")");
+				String jsonResponse = Request.Get(urlForRequest.toString())
+						.execute().returnContent().asString();
+				requestedPage++;
+				photosObject = JsonObject.readFrom(jsonResponse);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return result;
+			}
+			JsonObject photosArrayObject = photosObject.get("photos")
+					.asObject();
+			int totalNumber = Integer.valueOf(
+					photosArrayObject.get("total").asString()).intValue();
 			int photosPerPage = photosArrayObject.get("perpage").asInt();
-			int numberPages = photosArrayObject.get("pages").asInt();
-			Set<PointOfInterest> result= new HashSet<PointOfInterest>(totalNumber);
+			numberPages = photosArrayObject.get("pages").asInt();
 
 			JsonArray photoArray = photosArrayObject.get("photo").asArray();
-			for (int i = 0; i < photosPerPage; i++) {
-				System.out.println(photoArray.get(i).asObject().get("views").asString());	
+			for (int j = 0; j < photosPerPage; j++) {
+				JsonObject photo = photoArray.get(j).asObject();
+				int numberViews = Integer
+						.valueOf(photo.get("views").asString()).intValue();
+				if(numberViews > maxViewCount){
+					maxViewCount = numberViews;
+				}
+				double latitude = photo.get("latitude").asDouble();
+				double longitude = photo.get("longitude").asDouble();
+				LatLng location = new LatLng(latitude, longitude);
+				result.add(new PointOfInterest(numberViews, location));
 			}
-			
-			
-			
-			
-			System.out.println(jsonResponse);
-			return result;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return new HashSet<PointOfInterest>();
-		}
+
+		} while (requestedPage < numberPages && requestedPage < 50);
+
+		System.out.println("maximum number of views: "+ maxViewCount);
 		
+		return result;
 
 	}
 }
