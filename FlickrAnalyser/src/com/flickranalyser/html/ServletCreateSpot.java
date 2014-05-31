@@ -2,6 +2,8 @@ package com.flickranalyser.html;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.flickranalyser.businesslogic.SpotCalculationHandler;
+import com.flickranalyser.businesslogic.SpotCalculationHandlerTest;
 import com.flickranalyser.data.flickr.FlickrRequestHandler;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
@@ -20,6 +23,8 @@ public class ServletCreateSpot extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
+	private static final Logger log = Logger.getLogger(ServletCreateSpot.class.getName());
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 
@@ -40,6 +45,7 @@ public class ServletCreateSpot extends HttpServlet{
 		Spot spotAttribute = spotCalculationHandler.getSpot(flickrRequestHandler.getAllImagesForSpot(hardcodedSpot),hardcodedSpot );
 		//Call Logic
 		
+		log.log(Level.INFO,"Cluster Size: "+ spotAttribute.getClusterList().size() );
 		//Set the Attributes (POJOS) for the JSP
 		req.setAttribute("spot", spotAttribute );
 		
