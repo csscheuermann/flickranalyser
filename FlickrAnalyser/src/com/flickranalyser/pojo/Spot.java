@@ -17,6 +17,7 @@ public class Spot {
 	private List<Cluster> clusterList;
 	
 	
+	
 	public Spot(LatLng latLngPoint, String name, String description) {
 
 		this.latLngPoint = latLngPoint;
@@ -25,6 +26,15 @@ public class Spot {
 		this.clusterList = new LinkedList<Cluster>();
 	}
 
+	public int getMaxClusterViews(){
+		int max = Integer.MIN_VALUE;
+		for (Cluster Cluster : clusterList) {
+			if (Cluster.getOverallViews() > max){
+				max = Cluster.getOverallViews();
+			}
+		}
+		return max;
+	}
 	
 	public static double getClusterRadiusInKm() {
 		return CLUSTER_RADIUS_IN_KM;
