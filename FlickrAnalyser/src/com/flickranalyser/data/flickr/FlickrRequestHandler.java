@@ -77,7 +77,7 @@ public class FlickrRequestHandler {
 				result.add(new PointOfInterest(numberViews, location));
 			}
 
-		} while (requestedPage < numberPages && requestedPage < 15);
+		} while (requestedPage < numberPages && requestedPage < 5);
 
 		log.log(Level.INFO,"maximum number of views: "+ maxViewCount);
 		

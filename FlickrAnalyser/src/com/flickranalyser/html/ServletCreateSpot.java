@@ -33,10 +33,16 @@ public class ServletCreateSpot extends HttpServlet{
 		ServletContext sc = getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 		
+//		//Munich 
+//		// Long: 	11.5667
+//		// Lat: 	48.1333
+//		Spot hardcodedSpot = new Spot(new LatLng(48.1333, 11.5667), "Munich", "This is our first try");
+		
+		
 		//Munich 
 		// Long: 	11.5667
 		// Lat: 	48.1333
-		Spot hardcodedSpot = new Spot(new LatLng(48.1333, 11.5667), "Munich", "This is our first try");
+		Spot hardcodedSpot = new Spot(new LatLng(-23.944841, -46.330376), "Sanots", "This is our first try");
 		
 		//Get all Point of Interests Daniel
 		FlickrRequestHandler  flickrRequestHandler = new FlickrRequestHandler();
