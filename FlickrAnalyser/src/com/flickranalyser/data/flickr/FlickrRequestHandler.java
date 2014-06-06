@@ -1,6 +1,7 @@
 package com.flickranalyser.data.flickr;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,8 @@ public class FlickrRequestHandler {
 	public Set<PointOfInterest> getPOIsForSpot(Spot spot) {
 
 		Set<PointOfInterest> result = new HashSet<PointOfInterest>();
-
+		
+	
 		int requestedPage = 1;
 		int numberPages = 1;
 		int maxViewCount = 0;

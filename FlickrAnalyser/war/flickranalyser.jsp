@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.Set" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
@@ -7,6 +7,7 @@
 <%@ page import="com.flickranalyser.pojo.Cluster" %>
 <%@ page import="com.javadocmd.simplelatlng.LatLng" %>
 <%@ page import="java.lang.StringBuilder" %>
+<%@ page import="java.util.Iterator" %>
 
 
 
@@ -52,56 +53,44 @@ function addMarker(lgt, lat, title, url) {
 
 <%  Spot spot = (Spot) request.getAttribute("spot"); %>
 
-function initialize() {
-  	var mapOptions = {
-    zoom: 8,
-    <% out.println("center: new google.maps.LatLng("+ spot.getLatLngPoint().getLatitude()+","+  spot.getLatLngPoint().getLongitude()+")");%>
+	function initialize() {
+  		var mapOptions = {
+    	zoom: 8,
+   	 <% out.println("center: new google.maps.LatLng("+ spot.getLatLngPoint().getLatitude()+","+  spot.getLatLngPoint().getLongitude()+")");%>
  	};
   	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-<<<<<<< HEAD
  <%
  	int maxValue = spot.getMaxClusterViews();
-  	List<Cluster> clusterListe = spot.getClusterList();
+  	Set<Cluster> cluster = spot.getCluster();
   	String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
   	String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
   	String PHOTO_SEARCH_REQUEST = "flickr.photos.geo.photosForLocation";
   	
-  	for ( Cluster currentCluster : clusterListe){
-  		double opacity = ((double) currentCluster.getOverallViews()/maxValue);
-  		double currentLat = currentCluster.getCenterOfCluster().getLatitude();
-  		double currentLng = currentCluster.getCenterOfCluster().getLongitude();
-  		if (currentCluster.getOverallViews() > 500){
-  			StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
-  			urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST).append("&api_key=").append(FLICKR_API_KEY).append("&").append("lat=").append(currentLat).append("&").append("lon=").append(currentLng);
-			out.println("addMarker("+ currentLat +"," + currentLng + ", '" + currentCluster.getOverallViews() + "', '"+ urlForRequest + "');");
-  		}
-  		out.println("addCircle(" + currentLat + "," + currentLng + "," + opacity + ");");
-  	}
+  	Iterator<Cluster> iter = cluster.iterator();
+	while (iter.hasNext()) {
+		Cluster currentCluster = iter.next();
+		
+		double opacity = ((double) currentCluster.getOverallViews()/maxValue);
+    	double currentLat = currentCluster.getCenterOfCluster().getLatitude();
+    	double currentLng = currentCluster.getCenterOfCluster().getLongitude();
+    	
+    	if (currentCluster.getOverallViews() > 500){
+    		StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
+    		urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST).append("&api_key=").append(FLICKR_API_KEY).append("&").append("lat=").append(currentLat).append("&").append("lon=").append(currentLng);
+  			out.println("addMarker("+ currentLat +"," + currentLng + ", '" + currentCluster.getOverallViews() + "', '"+ urlForRequest + "');");
+    	}
+    	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacity + ");");
+	}
   	%>
-=======
- 
- 	<%Spot spot = (Spot) request.getAttribute("spot"); 
- 	int maxValue = spot.getMaxClusterViews();
-  	List<Cluster> clusterListe = spot.getCluster();
-  	for ( Cluster currentCluster : clusterListe){
-  		double opacity = ((double) currentCluster.getOverallViews()/maxValue);
-  		out.println("addCircle("+currentCluster.getCenterOfCluster().getLatitude()+","+ currentCluster.getCenterOfCluster().getLongitude()+","+opacity+");");
-  	}%>
->>>>>>> FETCH_HEAD
-
-
 }
-
   	map = new google.maps.event.addDomListener(window, 'load', initialize);
-
-
 </script>
 
 
   </head>
   <body>
   <h1> Here everything will happen</h1>
-  <p><% out.println("Max Overall Views: "+ maxValue); %> </p>
+
 
 
 

@@ -1,9 +1,9 @@
 package com.flickranalyser.pojo;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
-import com.google.gwt.dev.util.collect.HashSet;
 import com.javadocmd.simplelatlng.LatLng;
 
 public class Spot {
