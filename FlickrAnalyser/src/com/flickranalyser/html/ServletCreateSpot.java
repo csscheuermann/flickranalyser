@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.flickranalyser.businesslogic.SpotCalculationHandler;
 import com.flickranalyser.businesslogic.SpotCalculationHandlerTest;
+import com.flickranalyser.businesslogic.filter.IFilterStrategy;
+import com.flickranalyser.businesslogic.filter.impl.DoNotFilterStrategy;
+import com.flickranalyser.businesslogic.impl.SecretPlacesFacade;
+import com.flickranalyser.businesslogic.impl.SpotCalculationHandler;
 import com.flickranalyser.data.flickr.FlickrRequestHandler;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
@@ -33,19 +36,14 @@ public class ServletCreateSpot extends HttpServlet{
 		ServletContext sc = getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 		
-		//Munich 
-		// Long: 	11.5667
-		// Lat: 	48.1333
-		Spot hardcodedSpot = new Spot(new LatLng(48.1333, 11.5667), "Munich", "This is our first try");
+		IFilterStrategy filterStrategy = new DoNotFilterStrategy();
+		SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(filterStrategy);
 		
-		//Get all Point of Interests Daniel
-		FlickrRequestHandler  flickrRequestHandler = new FlickrRequestHandler();
-		
-		SpotCalculationHandler spotCalculationHandler = new SpotCalculationHandler();
-		Spot spotAttribute = spotCalculationHandler.getSpot(flickrRequestHandler.getAllImagesForSpot(hardcodedSpot),hardcodedSpot );
+		Spot spotAttribute = secretPlacesFacade.getSpotInformationForName("Munich") ;
+
 		//Call Logic
 		
-		log.log(Level.INFO,"Cluster Size: "+ spotAttribute.getClusterList().size() );
+		log.log(Level.INFO,"Cluster Size: "+ spotAttribute.getCluster().size() );
 		//Set the Attributes (POJOS) for the JSP
 		req.setAttribute("spot", spotAttribute );
 		

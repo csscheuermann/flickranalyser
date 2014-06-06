@@ -21,6 +21,6 @@ public class FlickrRequestHanderTest {
 	@Test
 	public void getAllImages_WithinMunich_MunichPictureWillGetReturned(){
 		FlickrRequestHandler flickrRequestHandler = new FlickrRequestHandler();
-		flickrRequestHandler.getAllImagesForSpot(munichSpot);
+		flickrRequestHandler.getPOIsForSpot(munichSpot);
 	}
 }

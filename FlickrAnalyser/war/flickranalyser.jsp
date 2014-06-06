@@ -42,14 +42,13 @@ function initialize() {
  	};
   	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
  
- 	<%  Spot spot = (Spot) request.getAttribute("spot"); 
+ 	<%Spot spot = (Spot) request.getAttribute("spot"); 
  	int maxValue = spot.getMaxClusterViews();
-  	List<Cluster> clusterListe = spot.getClusterList();
+  	List<Cluster> clusterListe = spot.getCluster();
   	for ( Cluster currentCluster : clusterListe){
   		double opacity = ((double) currentCluster.getOverallViews()/maxValue);
   		out.println("addCircle("+currentCluster.getCenterOfCluster().getLatitude()+","+ currentCluster.getCenterOfCluster().getLongitude()+","+opacity+");");
-  	}
-  	%>
+  	}%>
 
 
 }
