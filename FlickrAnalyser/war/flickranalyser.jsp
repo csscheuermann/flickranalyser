@@ -58,6 +58,7 @@ function initialize() {
     <% out.println("center: new google.maps.LatLng("+ spot.getLatLngPoint().getLatitude()+","+  spot.getLatLngPoint().getLongitude()+")");%>
  	};
   	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+<<<<<<< HEAD
  <%
  	int maxValue = spot.getMaxClusterViews();
   	List<Cluster> clusterListe = spot.getClusterList();
@@ -77,6 +78,16 @@ function initialize() {
   		out.println("addCircle(" + currentLat + "," + currentLng + "," + opacity + ");");
   	}
   	%>
+=======
+ 
+ 	<%Spot spot = (Spot) request.getAttribute("spot"); 
+ 	int maxValue = spot.getMaxClusterViews();
+  	List<Cluster> clusterListe = spot.getCluster();
+  	for ( Cluster currentCluster : clusterListe){
+  		double opacity = ((double) currentCluster.getOverallViews()/maxValue);
+  		out.println("addCircle("+currentCluster.getCenterOfCluster().getLatitude()+","+ currentCluster.getCenterOfCluster().getLongitude()+","+opacity+");");
+  	}%>
+>>>>>>> FETCH_HEAD
 
 
 }

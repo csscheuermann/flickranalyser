@@ -1,10 +1,11 @@
-package com.flickranalyser.businesslogic;
+package com.flickranalyser.businesslogic.impl;
 
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.flickranalyser.businesslogic.SpotCalculationHandlerTest;
 import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
@@ -23,19 +24,19 @@ public class SpotCalculationHandler {
 		//First ask FlickrRequestHandler 
 		
 		//Cluster List of Spot - Empty at first
-		List<Cluster> clusterList = hardcodedSpot.getClusterList();
+		Set<Cluster> clusters = hardcodedSpot.getCluster();
 		
 		
 		
 		
 		
 		for (PointOfInterest pointOfInterest : pointOfInterests) {
-			if (!isPointIntrestInCluster(hardcodedSpot, clusterList, pointOfInterest)){
+			if (!isPointIntrestInCluster(hardcodedSpot, clusters, pointOfInterest)){
 				//Add new Cluster, no Cluster found or List was empty
 				Cluster cluster = new Cluster(pointOfInterest.getLocation(), "", "");
 				cluster.addPointOfInterestToList(pointOfInterest);
 				cluster.addViewCount(pointOfInterest.getCountOfViews());
-				hardcodedSpot.addClusterToList(cluster);
+				hardcodedSpot.addClusterTo(cluster);
 			}
 			
 			
@@ -45,7 +46,7 @@ public class SpotCalculationHandler {
 		
 	}
 
-	private boolean isPointIntrestInCluster(Spot hardcodedSpot, List<Cluster> clusterList,
+	private boolean isPointIntrestInCluster(Spot hardcodedSpot, Set<Cluster> clusterList,
 			PointOfInterest pointOfInterest) {
 		for (Cluster currentCluster : clusterList) {
 			double distance = LatLngTool.distance(currentCluster.getCenterOfCluster(), pointOfInterest.getLocation(), LengthUnit.KILOMETER);

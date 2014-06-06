@@ -23,7 +23,7 @@ public class FlickrRequestHandler {
 
 	private String sharedSecret = "e7992cc453964557";
 
-	public Set<PointOfInterest> getAllImagesForSpot(Spot spot) {
+	public Set<PointOfInterest> getPOIsForSpot(Spot spot) {
 
 		Set<PointOfInterest> result = new HashSet<PointOfInterest>();
 
