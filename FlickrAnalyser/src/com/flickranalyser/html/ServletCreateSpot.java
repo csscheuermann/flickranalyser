@@ -35,9 +35,8 @@ public class ServletCreateSpot extends HttpServlet{
 		String url = "/flickranalyser.jsp";
 		ServletContext sc = getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
-		
-<<<<<<< HEAD
-//		//Munich 
+
+		//		//Munich 
 //		// Long: 	11.5667
 //		// Lat: 	48.1333
 //		Spot hardcodedSpot = new Spot(new LatLng(48.1333, 11.5667), "Munich", "This is our first try");
@@ -47,10 +46,10 @@ public class ServletCreateSpot extends HttpServlet{
 		// Long: 	11.5667
 		// Lat: 	48.1333
 		Spot hardcodedSpot = new Spot(new LatLng(-23.944841, -46.330376), "Sanots", "This is our first try");
-=======
+
 		IFilterStrategy filterStrategy = new DoNotFilterStrategy();
 		SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(filterStrategy);
->>>>>>> FETCH_HEAD
+
 		
 		Spot spotAttribute = secretPlacesFacade.getSpotInformationForName("Munich") ;
 

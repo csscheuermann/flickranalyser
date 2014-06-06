@@ -1,8 +1,6 @@
 package com.flickranalyser.pojo;
 
 import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import com.google.gwt.dev.util.collect.HashSet;
@@ -10,7 +8,6 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class Spot {
 
-	
 	private LatLng latLngPoint;
 	private String name;
 	private String description;
@@ -18,10 +15,7 @@ public class Spot {
 	private static final double CLUSTER_RADIUS_IN_KM = 0.25;
 	private Set<Cluster> clusters;
 	
-	
-	
 	public Spot(LatLng latLngPoint, String name, String description) {
-
 		this.latLngPoint = latLngPoint;
 		this.name = name;
 		this.description = description;

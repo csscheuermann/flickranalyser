@@ -1,8 +1,6 @@
 package com.flickranalyser.businesslogic.impl;
 
-import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.flickranalyser.businesslogic.SpotCalculationHandlerTest;
@@ -19,16 +17,9 @@ public class SpotCalculationHandler {
 	private static final Logger log = Logger.getLogger(SpotCalculationHandlerTest.class.getName());
 	
 	public Spot getSpot(Set<PointOfInterest> pointOfInterests, Spot hardcodedSpot){
-		
-	
 		//First ask FlickrRequestHandler 
-		
 		//Cluster List of Spot - Empty at first
 		Set<Cluster> clusters = hardcodedSpot.getCluster();
-		
-		
-		
-		
 		
 		for (PointOfInterest pointOfInterest : pointOfInterests) {
 			if (!isPointIntrestInCluster(hardcodedSpot, clusters, pointOfInterest)){
@@ -38,12 +29,8 @@ public class SpotCalculationHandler {
 				cluster.addViewCount(pointOfInterest.getCountOfViews());
 				hardcodedSpot.addClusterTo(cluster);
 			}
-			
-			
 		}
 		return hardcodedSpot;
-		
-		
 	}
 
 	private boolean isPointIntrestInCluster(Spot hardcodedSpot, Set<Cluster> clusterList,
