@@ -20,7 +20,7 @@ public class RelativeNumberPOIsScoreDecorator implements IClusterScoreDecorator 
 		}else if(numberPOIs > maximumNumberPOIs){
 			throw new RuntimeException("the cluster " + clusterToScore +" has more pois ("+clusterToScore.getOverallViews()+") than the maximum ("+maximumNumberPOIs+")");
 		}
-		return (double)numberPOIs / maximumNumberPOIs;
+		return 1-(double)numberPOIs / maximumNumberPOIs;
 	}
 	
 }

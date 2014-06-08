@@ -12,7 +12,7 @@ public class Cluster {
 	private LatLng centerOfCluster;
 	private String name;
 	private String description;
-	private List<PointOfInterest> pointsOfInterest;
+	private final List<PointOfInterest> pointsOfInterest;
 	private int overallViews;
 
 	
@@ -72,6 +72,13 @@ public class Cluster {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Cluster [centerOfCluster=" + centerOfCluster + ", name=" + name
+				+ ", description=" + description + ", overallViews="
+				+ overallViews + "]";
 	}
 	
 	

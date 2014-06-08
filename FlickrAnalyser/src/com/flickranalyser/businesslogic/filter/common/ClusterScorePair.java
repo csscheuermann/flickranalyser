@@ -20,4 +20,12 @@ public class ClusterScorePair {
 	public double getClusterScore() {
 		return clusterScore;
 	}
+
+	@Override
+	public String toString() {
+		return "ClusterScorePair [cluster=" + cluster.getName() + ", clusterScore="
+				+ clusterScore + "]";
+	}
+	
+	
 }
