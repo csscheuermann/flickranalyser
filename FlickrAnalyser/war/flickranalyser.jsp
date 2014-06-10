@@ -8,6 +8,7 @@
 <%@ page import="com.javadocmd.simplelatlng.LatLng" %>
 <%@ page import="java.lang.StringBuilder" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="com.flickranalyser.businesslogic.common.ParameterConstants" %>;
 
 
 
@@ -91,14 +92,16 @@ function addMarker(lgt, lat, title, url) {
   <body>
   <h1> Here everything will happen</h1>
 
-
-
-
-
-
-
-
-
+	<% 
+	String location = (String) request.getAttribute(ParameterConstants.REQUEST_PARAM_LOCATION); 
+	String strategy = (String) request.getAttribute(ParameterConstants.REQUEST_PARAM_FILTER_STRATEGY);
+	int numberOfCluster = request.getAttribute(ParameterConstants.REQUEST_PARAM_NUMBER_OF_CLUSTER);
+		
+	out.println("<h3> Location " + location + "</h3>"); 
+	out.println("<h3> Strategy "+ strategy + "</h3>");
+	out.println("<h3> Number of Clusters "+ numberOfCluster +"</h3>");
+	
+	%>
 
 
 
