@@ -1,7 +1,6 @@
 package com.flickranalyser.html;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,13 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.flickranalyser.businesslogic.SpotCalculationHandlerTest;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.businesslogic.filter.impl.DoNotFilterStrategy;
 import com.flickranalyser.businesslogic.impl.SecretPlacesFacade;
-import com.flickranalyser.businesslogic.impl.SpotCalculationHandler;
-import com.flickranalyser.data.flickr.FlickrRequestHandler;
-import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
 import com.javadocmd.simplelatlng.LatLng;
 
