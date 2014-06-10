@@ -1,11 +1,11 @@
 package com.flickranalyser.businesslogic.filter.decorator.impl;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.flickranalyser.businesslogic.filter.decorator.IClusterScoreDecorator;
 import com.flickranalyser.pojo.Cluster;
-import com.google.gwt.dev.util.collect.HashSet;
 
 public class EquallyWeightedScoreDecorator implements IClusterScoreDecorator {
 
