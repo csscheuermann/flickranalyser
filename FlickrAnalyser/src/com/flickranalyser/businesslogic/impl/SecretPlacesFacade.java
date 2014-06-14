@@ -25,21 +25,21 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 	}
 
 	@Override
-	public Spot getSpotInformationForName(String name) {
+	public Spot getSpotInformationForName(String name, int numberOfPages) {
 		Spot spotToSearchFor = munichSpotFinder.findSpotByName(name);
-		return getSpotInformation(spotToSearchFor);
+		return getSpotInformation(spotToSearchFor, numberOfPages);
 	}
 
 	@Override
-	public Spot getSpotInformationForLocation(long latitude, long longitude) {
+	public Spot getSpotInformationForLocation(long latitude, long longitude, int numberOfPages) {
 		Spot spotToSearchFor = munichSpotFinder.findSpotByLocation(latitude,
 				longitude);
-		return getSpotInformation(spotToSearchFor);
+		return getSpotInformation(spotToSearchFor, numberOfPages);
 	}
 
-	private Spot getSpotInformation(Spot spotToSearchFor) {
+	private Spot getSpotInformation(Spot spotToSearchFor, int numberOfPages) {
 		Set<PointOfInterest> allPOIsForSpot = flickrRequestHandler
-				.getPOIsForSpot(spotToSearchFor);
+				.getPOIsForSpot(spotToSearchFor, numberOfPages);
 		Spot spot = spotCalculationHandler.getSpot(allPOIsForSpot,
 				spotToSearchFor);
 		spot.setCluster(filterStrategy.filterCluster(spot.getCluster()));

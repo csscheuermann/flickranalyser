@@ -35,6 +35,8 @@ public class ServletCreateSpot extends HttpServlet{
 		String strategy = req.getParameter(ParameterConstants.REQUEST_PARAM_FILTER_STRATEGY);
 		String numberOfClusterString = req.getParameter(ParameterConstants.REQUEST_PARAM_NUMBER_OF_CLUSTER);
 		int numberOfCluster = 500;
+		
+		
 		try{
 			numberOfCluster = Integer.parseInt(numberOfClusterString);	
 		}catch(NumberFormatException e){
@@ -64,7 +66,7 @@ public class ServletCreateSpot extends HttpServlet{
 		SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(filterStrategy);
 
 		
-		Spot spotAttribute = secretPlacesFacade.getSpotInformationForName(location) ;
+		Spot spotAttribute = secretPlacesFacade.getSpotInformationForName(location, 5) ;
 
 		//Set the Attributes (POJOS) for the JSP
 		req.setAttribute("spot", spotAttribute );

@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
+encoding//src/com/flickranalyser/persistence/datastore/saver/PFSaverSpot.java=UTF-8
 encoding//test/java/com/flickranalyser/businesslogic/SpotCalculationHandlerTest.java=UTF-8

@@ -23,7 +23,7 @@ public class FlickrRequestHandler {
 
 	private String sharedSecret = "e7992cc453964557";
 
-	public Set<PointOfInterest> getPOIsForSpot(Spot spot) {
+	public Set<PointOfInterest> getPOIsForSpot(Spot spot, int numberOfPages) {
 
 		Set<PointOfInterest> result = new HashSet<PointOfInterest>();
 		
@@ -48,13 +48,13 @@ public class FlickrRequestHandler {
 			JsonObject photosObject;
 			
 			try {
-				log.log(Level.INFO,"Retrieving all images for spot "+spot+" (page="+requestedPage+",numberPages="+numberPages+") -> "+ urlForRequest);
+				//log.log(Level.INFO,"Retrieving all images for spot "+spot+" (page="+requestedPage+",numberPages="+numberPages+") -> "+ urlForRequest);
 				String jsonResponse = Request.Get(urlForRequest.toString())
 						.execute().returnContent().asString();
 				requestedPage++;
 				photosObject = JsonObject.readFrom(jsonResponse);
 			} catch (Exception e) {
-				log.log(Level.WARNING, "Could not execute http request", e);
+				//log.log(Level.WARNING, "Could not execute http request", e);
 				return result;
 			}
 			JsonObject photosArrayObject = photosObject.get("photos")
@@ -78,9 +78,9 @@ public class FlickrRequestHandler {
 				result.add(new PointOfInterest(numberViews, location));
 			}
 
-		} while (requestedPage < numberPages && requestedPage < 5);
+		} while (requestedPage < numberPages && requestedPage <numberOfPages);
 
-		log.log(Level.INFO,"maximum number of views: "+ maxViewCount);
+		//log.log(Level.INFO,"maximum number of views: "+ maxViewCount);
 		
 		return result;
 

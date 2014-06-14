@@ -32,7 +32,7 @@ public class Spot {
 		return max;
 	}
 	
-	public static double getClusterRadiusInKm() {
+	public  double getClusterRadiusInKm() {
 		return CLUSTER_RADIUS_IN_KM;
 	}
 	
@@ -50,7 +50,7 @@ public class Spot {
 	}
 
 
-	public static int getRadiusInKm() {
+	public int getRadiusInKm() {
 		return RADIUS_IN_KM;
 	}
 
