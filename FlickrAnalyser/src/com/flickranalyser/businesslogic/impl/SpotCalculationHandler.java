@@ -1,9 +1,7 @@
 package com.flickranalyser.businesslogic.impl;
 
 import java.util.Set;
-import java.util.logging.Logger;
 
-import com.flickranalyser.businesslogic.SpotCalculationHandlerTest;
 import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;

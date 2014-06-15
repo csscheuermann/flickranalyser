@@ -77,7 +77,7 @@ public class PFSaverSpot {
 			currentCluster.setProperty(PropertiesCluster.LONGITUDE.toString(), nextCluster.getCenterOfCluster().getLongitude());
 			currentCluster.setProperty(PropertiesCluster.OVERALL_VIEWS.toString(), nextCluster.getOverallViews() );
 			currentCluster.setProperty(PropertiesCluster.URL_OF_MOST_VIEWED_PICTURE.toString(), nextCluster.getUrlOfMostViewedPicture() );
-			Key clusterDatastoreKey = datastore.put(txn, currentCluster);
+			 datastore.put(txn, currentCluster);
 		}
 	}
 }

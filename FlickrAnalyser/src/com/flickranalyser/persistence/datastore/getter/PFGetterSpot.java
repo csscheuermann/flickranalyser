@@ -2,7 +2,6 @@ package com.flickranalyser.persistence.datastore.getter;
 
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpot;

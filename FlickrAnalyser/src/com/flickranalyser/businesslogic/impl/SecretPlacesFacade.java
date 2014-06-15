@@ -7,9 +7,7 @@ import java.util.logging.Logger;
 import com.flickranalyser.businesslogic.ISecretPlacesFacade;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.businesslogic.spotfinder.ISpotFinder;
-import com.flickranalyser.businesslogic.spotfinder.impl.MunichSpotFinder;
 import com.flickranalyser.data.flickr.FlickrRequestHandler;
-import com.flickranalyser.html.CrawlData;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
 

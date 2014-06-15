@@ -21,7 +21,7 @@ public class FlickrRequestHandler {
 	private static final String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
 	private static final String PHOTO_SEARCH_REQUEST = "flickr.photos.search";
 
-	private String sharedSecret = "e7992cc453964557";
+	//private String sharedSecret = "e7992cc453964557";
 
 	public Set<PointOfInterest> getPOIsForSpot(Spot spot) {
 
@@ -60,7 +60,7 @@ public class FlickrRequestHandler {
 			}
 
 			if(photosObject.get("photos") != null){
-				
+
 				JsonObject photosArrayObject = photosObject.get("photos").asObject();
 				//			int totalNumber = Integer.valueOf(
 				//					photosArrayObject.get("total").asString()).intValue();
@@ -86,7 +86,7 @@ public class FlickrRequestHandler {
 			}
 
 			//We need to make this algorithm more efficient
-		} while (requestedPage < 200);
+		} while (requestedPage < 250);
 
 		//log.log(Level.INFO,"maximum number of views: "+ maxViewCount);
 

@@ -48,7 +48,7 @@ function addMarker(lgt, lat, title, url) {
 	});
 	
 	google.maps.event.addListener(marker, 'click', function(){
-		window.location.href = marker.url;
+		window.open(marker.url);
 	});
 }
 

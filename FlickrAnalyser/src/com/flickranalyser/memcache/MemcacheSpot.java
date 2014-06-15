@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
 import com.flickranalyser.persistence.datastore.getter.PFGetterSpot;
 import com.flickranalyser.pojo.Spot;
+import com.google.appengine.api.memcache.Expiration;
 
 public class MemcacheSpot {
 
@@ -18,7 +19,7 @@ public class MemcacheSpot {
 		//First check if persistens must be asked
 		if(checkIfPersistenceMustBeAsked(location, memcachKey)){
 			 Spot spot = PFGetterSpot.getSpotByName(location);
-			 MemcacheHelperMethods.getSyncCache().put(memcachKey, spot);
+			 MemcacheHelperMethods.getSyncCache().put(memcachKey, spot, Expiration.onDate(MemCacheConstants.MEMCACH_EXPIRE_DATE));
 			 return spot;
 		}
 		return (Spot)  MemcacheHelperMethods.getSyncCache().get(memcachKey);
