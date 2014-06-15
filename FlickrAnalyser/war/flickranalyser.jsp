@@ -76,9 +76,7 @@ function addMarker(lgt, lat, title, url) {
     	double currentLng = currentCluster.getCenterOfCluster().getLongitude();
     	
     	if (currentCluster.getOverallViews() > 500){
-    		StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
-    		urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST).append("&api_key=").append(FLICKR_API_KEY).append("&").append("lat=").append(currentLat).append("&").append("lon=").append(currentLng);
-  			out.println("addMarker("+ currentLat +"," + currentLng + ", '" + currentCluster.getOverallViews() + "', '"+ urlForRequest + "');");
+  			out.println("addMarker("+ currentLat +"," + currentLng + ", '" + currentCluster.getOverallViews() + "', '"+ currentCluster.getUrlOfMostViewedPicture() + "');");
     	}
     	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacity + ");");
 	}
@@ -91,20 +89,6 @@ function addMarker(lgt, lat, title, url) {
   </head>
   <body>
   <h1> Here everything will happen</h1>
-
-	<% 
-	String location = (String) request.getAttribute(ParameterConstants.REQUEST_PARAM_LOCATION); 
-	String strategy = (String) request.getAttribute(ParameterConstants.REQUEST_PARAM_FILTER_STRATEGY);
-	int numberOfCluster = (int) request.getAttribute(ParameterConstants.REQUEST_PARAM_NUMBER_OF_CLUSTER);
-		
-	out.println("<h3> Location " + location + "</h3>"); 
-	out.println("<h3> Strategy "+ strategy + "</h3>");
-	out.println("<h3> Number of Clusters "+ numberOfCluster +"</h3>");
-	
-	%>
-
-
-
 
 <div id="map-canvas" style="height:1024px; width:1800px"></div>
 

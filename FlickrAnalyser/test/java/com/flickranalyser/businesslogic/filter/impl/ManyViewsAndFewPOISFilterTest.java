@@ -51,7 +51,7 @@ public class ManyViewsAndFewPOISFilterTest {
 	private void addPointsOfInterests(Cluster cluster,
 			int numberPointsOfInterests) {
 		for (int i = 0; i < numberPointsOfInterests; i++) {
-			PointOfInterest pointOfInterest = new PointOfInterest(0, cluster.getCenterOfCluster());
+			PointOfInterest pointOfInterest = new PointOfInterest(0, cluster.getCenterOfCluster(),"test");
 			cluster.addPointOfInterestToList(pointOfInterest);
 		}
 

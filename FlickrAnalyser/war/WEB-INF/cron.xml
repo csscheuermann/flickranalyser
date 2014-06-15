@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
-  <!--
-   <cron>
-    <url>/cron/crawl</url>
-    <description>I will crawl Munich</description>
-    <schedule>every 10 minutes</schedule>
-  </cron>
-  
-   -->
+
+	<cron>
+		<url>/cron/crawl</url>
+		<description>I will crawl Munich</description>
+		<schedule>every 10 minutes</schedule>
+	</cron>
+
 </cronentries>

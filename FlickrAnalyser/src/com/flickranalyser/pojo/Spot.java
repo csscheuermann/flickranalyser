@@ -1,25 +1,45 @@
 package com.flickranalyser.pojo;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
+import com.google.appengine.api.datastore.Key;
 import com.javadocmd.simplelatlng.LatLng;
 
-public class Spot {
+public class Spot implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private LatLng latLngPoint;
 	private String name;
 	private String description;
-	private static final int RADIUS_IN_KM = 35;
-	private static final double CLUSTER_RADIUS_IN_KM = 0.25;
+	private double spotRadiusInKm = 25;
+	private double clusterRadiusInKm = 0.25;
 	private Set<Cluster> clusters;
 	
+	private List<String> topThreePictures;
+	private Key dataStoreKey;
+	
+	
+	public Spot() {
+		//DO NOTHING
+	}
 	public Spot(LatLng latLngPoint, String name, String description) {
+		this.topThreePictures = new LinkedList<String>();
 		this.latLngPoint = latLngPoint;
 		this.name = name;
 		this.description = description;
 		this.clusters = new HashSet<Cluster>();
+	}
+	
+	public Spot(LatLng latLngPoint, String name, String description, double clusterRadiusInKm, double spotRadiusInKm, Key dataStoreKey) {
+		this( latLngPoint,  name,  description);
+		this.clusterRadiusInKm = clusterRadiusInKm;
+		this.spotRadiusInKm = spotRadiusInKm;
+		this.dataStoreKey = dataStoreKey;
 	}
 
 	public int getMaxClusterViews(){
@@ -33,7 +53,7 @@ public class Spot {
 	}
 	
 	public  double getClusterRadiusInKm() {
-		return CLUSTER_RADIUS_IN_KM;
+		return clusterRadiusInKm;
 	}
 	
 	public Set<Cluster> getCluster() {
@@ -45,13 +65,23 @@ public class Spot {
 	}
 
 
+	public List<String> getTopThreePictures() {
+		return Collections.unmodifiableList(topThreePictures);
+	}
+	public void setTopThreePictures(List<String> topThreePictures) {
+		this.topThreePictures = topThreePictures;
+	}
+	public void addTopThreePictures(String url){
+		this.topThreePictures.add(url);
+	}
+	
 	public void setCluster(Set<Cluster> newCluster) {
 		this.clusters = newCluster;
 	}
 
 
-	public int getRadiusInKm() {
-		return RADIUS_IN_KM;
+	public double getSpotRadiusInKm() {
+		return spotRadiusInKm;
 	}
 
 
@@ -84,9 +114,20 @@ public class Spot {
 		this.description = description;
 	}
 	
-	
-	
-	
+	public void setSpotRadiusInKm(int spotRadiusInKm) {
+		this.spotRadiusInKm = spotRadiusInKm;
+	}
 
+	public  void setClusterRadiusInKm(double clusterRadiusInKm) {
+		this.clusterRadiusInKm = clusterRadiusInKm;
+	}
+
+	public Key getDataStoreKey() {
+		return dataStoreKey;
+	}
+
+	public void setDataStoreKey(Key dataStoreKey) {
+		this.dataStoreKey = dataStoreKey;
+	}
 	
 }

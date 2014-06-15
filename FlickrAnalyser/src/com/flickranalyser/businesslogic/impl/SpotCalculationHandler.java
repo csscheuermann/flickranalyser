@@ -12,13 +12,7 @@ import com.javadocmd.simplelatlng.util.LengthUnit;
 
 public class SpotCalculationHandler {
 	
-	private static final String API_KEY = "";
-
-	private static final Logger log = Logger.getLogger(SpotCalculationHandlerTest.class.getName());
-	
 	public Spot getSpot(Set<PointOfInterest> pointOfInterests, Spot hardcodedSpot){
-		//First ask FlickrRequestHandler 
-		//Cluster List of Spot - Empty at first
 		Set<Cluster> clusters = hardcodedSpot.getCluster();
 		
 		for (PointOfInterest pointOfInterest : pointOfInterests) {

@@ -32,7 +32,7 @@ public class PFSaverSpot {
 			try {
 				Entity spotEntity = new Entity(EntityNameStoreEnum.SPOT.toString());
 				spotEntity.setProperty(PropertiesSpot.CLUSTER_RADIUS_IN_KM.toString(), spot.getClusterRadiusInKm());
-				spotEntity.setProperty(PropertiesSpot.CLUSTER_RADIUS_IN_KM.toString(), spot.getClusterRadiusInKm());
+				spotEntity.setProperty(PropertiesSpot.SPOT_RADIUS_IN_KM.toString(), spot.getSpotRadiusInKm());
 				spotEntity.setProperty(PropertiesSpot.DESCRIPTION.toString(), spot.getDescription());
 				spotEntity.setProperty(PropertiesSpot.LATITUDE.toString(), spot.getLatLngPoint().getLatitude());
 				spotEntity.setProperty(PropertiesSpot.LONGITUDE.toString(), spot.getLatLngPoint().getLongitude());
@@ -43,6 +43,7 @@ public class PFSaverSpot {
 				saveCluster(spot, datastore, txn, spotDatastoreKey);
 				
 				txn.commit();
+				log.log(Level.INFO, "END TRANSACTION: " + spot.getName());
 				break;
 
 			} catch (ConcurrentModificationException e) {
@@ -68,12 +69,14 @@ public class PFSaverSpot {
 		
 		while(clusterIterator.hasNext()){
 			Cluster nextCluster = clusterIterator.next();
+			log.log(Level.INFO, "SAVING CLUSTER: " + nextCluster.getOverallViews());
 			Entity currentCluster = new Entity(EntityNameStoreEnum.CLUSTER.toString(), spotDatastoreKey);
 			currentCluster.setProperty(PropertiesCluster.NAME.toString(), nextCluster.getName() );
 			currentCluster.setProperty(PropertiesCluster.DESCRIPTION.toString(), nextCluster.getDescription() );
 			currentCluster.setProperty(PropertiesCluster.LATITUDE.toString(), nextCluster.getCenterOfCluster().getLatitude() );
 			currentCluster.setProperty(PropertiesCluster.LONGITUDE.toString(), nextCluster.getCenterOfCluster().getLongitude());
 			currentCluster.setProperty(PropertiesCluster.OVERALL_VIEWS.toString(), nextCluster.getOverallViews() );
+			currentCluster.setProperty(PropertiesCluster.URL_OF_MOST_VIEWED_PICTURE.toString(), nextCluster.getUrlOfMostViewedPicture() );
 			Key clusterDatastoreKey = datastore.put(txn, currentCluster);
 		}
 	}

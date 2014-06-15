@@ -1,19 +1,29 @@
 package com.flickranalyser.pojo;
 
+import java.io.Serializable;
+
 import com.javadocmd.simplelatlng.LatLng;
 
-public class PointOfInterest {
-	
+public class PointOfInterest implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private int countOfViews;
 	private LatLng location;
-	
-	public PointOfInterest(int countOfViews, LatLng location) {
-		super();
+	private String pictureUrl;
+
+	public PointOfInterest(int countOfViews, LatLng location,String pictureUrl) {
+		this.pictureUrl = pictureUrl;
 		this.countOfViews = countOfViews;
 		this.location = location;
 	}
-	
-	
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
 	public int getCountOfViews() {
 		return countOfViews;
 	}
@@ -26,7 +36,7 @@ public class PointOfInterest {
 	public void setLocation(LatLng location) {
 		this.location = location;
 	}
-	
-	
+
+
 
 }

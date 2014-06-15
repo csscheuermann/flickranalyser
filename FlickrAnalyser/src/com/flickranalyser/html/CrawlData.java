@@ -16,6 +16,7 @@ import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.businesslogic.filter.impl.DoNotFilterStrategy;
 import com.flickranalyser.businesslogic.filter.impl.ManyViewsAndFewPOIsFilter;
 import com.flickranalyser.businesslogic.impl.SecretPlacesFacade;
+import com.flickranalyser.businesslogic.spotfinder.impl.SantosSpotFinder;
 import com.flickranalyser.persistence.datastore.saver.PFSaverSpot;
 import com.flickranalyser.pojo.Spot;
 
@@ -32,8 +33,8 @@ public class CrawlData extends HttpServlet{
 
 
 		IFilterStrategy	filterStrategy = new ManyViewsAndFewPOIsFilter(50);
-		SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(filterStrategy);
-		Spot spotAttribute = secretPlacesFacade.getSpotInformationForName("munich", 350) ;
+		SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(filterStrategy, new SantosSpotFinder());
+		Spot spotAttribute = secretPlacesFacade.getSpotInformationForName("munich") ;
 		
 		PFSaverSpot.saveSpotToDatastore(spotAttribute);
 	}

@@ -16,18 +16,18 @@ import com.javadocmd.simplelatlng.LatLng;
 public class FlickrRequestHandler {
 
 	private static final Logger log = Logger.getLogger(FlickrRequestHandler.class.getName());
-	
+
 	private static final String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
 	private static final String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
 	private static final String PHOTO_SEARCH_REQUEST = "flickr.photos.search";
 
 	private String sharedSecret = "e7992cc453964557";
 
-	public Set<PointOfInterest> getPOIsForSpot(Spot spot, int numberOfPages) {
+	public Set<PointOfInterest> getPOIsForSpot(Spot spot) {
 
 		Set<PointOfInterest> result = new HashSet<PointOfInterest>();
-		
-	
+
+
 		int requestedPage = 1;
 		int numberPages = 1;
 		int maxViewCount = 0;
@@ -35,18 +35,19 @@ public class FlickrRequestHandler {
 		do {
 			StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
 			urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST)
-					.append("&api_key=").append(FLICKR_API_KEY).append("&")
-					.append("lat=").append(spot.getLatLngPoint().getLatitude())
-					.append("&").append("lon=")
-					.append(spot.getLatLngPoint().getLongitude())
-					.append("&radius=20")
-					.append("&sort=interestingness-desc")
-					.append("&extras=views%2Cgeo").append("&per_page=1000")
-					.append("&page=").append(requestedPage)
-					.append("&format=json&nojsoncallback=1");
+			.append("&api_key=").append(FLICKR_API_KEY).append("&")
+			.append("lat=").append(spot.getLatLngPoint().getLatitude())
+			.append("&").append("lon=")
+			.append(spot.getLatLngPoint().getLongitude())
+			.append("&radius=").append(spot.getSpotRadiusInKm())
+			.append("&sort=interestingness-desc")
+			.append("&extras=views%2Cgeo%2Curl_s").append("&per_page=1000")
+			.append("&page=").append(requestedPage)
+			.append("&format=json&nojsoncallback=1");
+
 
 			JsonObject photosObject;
-			
+
 			try {
 				//log.log(Level.INFO,"Retrieving all images for spot "+spot+" (page="+requestedPage+",numberPages="+numberPages+") -> "+ urlForRequest);
 				String jsonResponse = Request.Get(urlForRequest.toString())
@@ -57,31 +58,38 @@ public class FlickrRequestHandler {
 				//log.log(Level.WARNING, "Could not execute http request", e);
 				return result;
 			}
-			JsonObject photosArrayObject = photosObject.get("photos")
-					.asObject();
-			int totalNumber = Integer.valueOf(
-					photosArrayObject.get("total").asString()).intValue();
-			int photosPerPage = photosArrayObject.get("perpage").asInt();
-			numberPages = photosArrayObject.get("pages").asInt();
 
-			JsonArray photoArray = photosArrayObject.get("photo").asArray();
-			for (int j = 0; j < photoArray.size(); j++) {
-				JsonObject photo = photoArray.get(j).asObject();
-				int numberViews = Integer
-						.valueOf(photo.get("views").asString()).intValue();
-				if(numberViews > maxViewCount){
-					maxViewCount = numberViews;
+			if(photosObject.get("photos") != null){
+				
+				JsonObject photosArrayObject = photosObject.get("photos").asObject();
+				//			int totalNumber = Integer.valueOf(
+				//					photosArrayObject.get("total").asString()).intValue();
+				//			int photosPerPage = photosArrayObject.get("perpage").asInt();
+				numberPages = photosArrayObject.get("pages").asInt();
+
+				JsonArray photoArray = photosArrayObject.get("photo").asArray();
+				for (int j = 0; j < photoArray.size(); j++) {
+					JsonObject photo = photoArray.get(j).asObject();
+					int numberViews = Integer
+							.valueOf(photo.get("views").asString()).intValue();
+					if(numberViews > maxViewCount){
+						maxViewCount = numberViews;
+					}
+					double latitude = photo.get("latitude").asDouble();
+					double longitude = photo.get("longitude").asDouble();
+					String url = photo.get("url_s").asString();
+					LatLng location = new LatLng(latitude, longitude);
+					result.add(new PointOfInterest(numberViews, location,url));
 				}
-				double latitude = photo.get("latitude").asDouble();
-				double longitude = photo.get("longitude").asDouble();
-				LatLng location = new LatLng(latitude, longitude);
-				result.add(new PointOfInterest(numberViews, location));
+			}else{
+				log.log(Level.INFO,"COULD NOT FIND PHOTOS.");
 			}
 
-		} while (requestedPage < numberPages && requestedPage <numberOfPages);
+			//We need to make this algorithm more efficient
+		} while (requestedPage < 200);
 
 		//log.log(Level.INFO,"maximum number of views: "+ maxViewCount);
-		
+
 		return result;
 
 	}

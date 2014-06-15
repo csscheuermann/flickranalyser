@@ -25,25 +25,25 @@ public class SpotCalculationHandlerTest {
 		// 48.1333° N, 11.5667
 		// 48.1334° N, 11.5668
 		pointOfInterestsToTest.add(new PointOfInterest(4, new LatLng(48.1333,
-				11.5667)));
+				11.5667),"test"));
 		pointOfInterestsToTest.add(new PointOfInterest(3, new LatLng(48.1334,
-				11.5668)));
+				11.5668),"test"));
 		pointOfInterestsToTest.add(new PointOfInterest(3, new LatLng(48.1335,
-				11.5669)));
+				11.5669),"test"));
 
 		pointOfInterestsToTest.add(new PointOfInterest(10, new LatLng(48.2333,
-				11.4667)));
+				11.4667),"test"));
 		pointOfInterestsToTest.add(new PointOfInterest(10, new LatLng(48.2334,
-				11.4668)));
+				11.4668),"test"));
 		pointOfInterestsToTest.add(new PointOfInterest(10, new LatLng(48.2335,
-				11.4669)));
+				11.4669),"test"));
 
 		pointOfInterestsToTest.add(new PointOfInterest(10, new LatLng(48.3333,
-				11.5667)));
+				11.5667),"test"));
 		pointOfInterestsToTest.add(new PointOfInterest(3, new LatLng(48.3334,
-				11.5668)));
+				11.5668),"test"));
 		pointOfInterestsToTest.add(new PointOfInterest(2, new LatLng(48.3335,
-				11.5669)));
+				11.5669),"test"));
 	}
 
 	@Test

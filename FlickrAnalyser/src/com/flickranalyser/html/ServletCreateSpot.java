@@ -16,6 +16,7 @@ import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.businesslogic.filter.impl.DoNotFilterStrategy;
 import com.flickranalyser.businesslogic.filter.impl.ManyViewsAndFewPOIsFilter;
 import com.flickranalyser.businesslogic.impl.SecretPlacesFacade;
+import com.flickranalyser.memcache.MemcacheSpot;
 import com.flickranalyser.pojo.Spot;
 
 public class ServletCreateSpot extends HttpServlet{
@@ -32,23 +33,9 @@ public class ServletCreateSpot extends HttpServlet{
 
 		//GET THE PARAMS
 		String location = req.getParameter(ParameterConstants.REQUEST_PARAM_LOCATION);
-		String strategy = req.getParameter(ParameterConstants.REQUEST_PARAM_FILTER_STRATEGY);
-		String numberOfClusterString = req.getParameter(ParameterConstants.REQUEST_PARAM_NUMBER_OF_CLUSTER);
-		int numberOfCluster = 500;
 		
+		Spot spot = MemcacheSpot.getSpotForSpotName(location);
 		
-		try{
-			numberOfCluster = Integer.parseInt(numberOfClusterString);	
-		}catch(NumberFormatException e){
-			log.log(Level.FINEST, "error while parsing number of clusters: " + numberOfCluster);
-		}
-		
-		if(location == null || location.length() == 0){
-			location = "munich";
-		}
-		if(strategy == null || strategy.length() == 0){
-			location = "noFilter";
-		}
 		
 		
 		String url = "/flickranalyser.jsp";
@@ -56,24 +43,8 @@ public class ServletCreateSpot extends HttpServlet{
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 
 		
-		IFilterStrategy filterStrategy;
-		if(strategy.equalsIgnoreCase("ManyViewsAndFewPOIs")){
-			filterStrategy = new ManyViewsAndFewPOIsFilter(numberOfCluster);
-		}else{
-			filterStrategy = new DoNotFilterStrategy();	
-		}
-
-		SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(filterStrategy);
-
-		
-		Spot spotAttribute = secretPlacesFacade.getSpotInformationForName(location, 5) ;
-
 		//Set the Attributes (POJOS) for the JSP
-		req.setAttribute("spot", spotAttribute );
-		req.setAttribute(ParameterConstants.REQUEST_PARAM_LOCATION, location );
-		req.setAttribute(ParameterConstants.REQUEST_PARAM_FILTER_STRATEGY, strategy );
-		req.setAttribute(ParameterConstants.REQUEST_PARAM_NUMBER_OF_CLUSTER, numberOfCluster );
-		
+		req.setAttribute("spot", spot );
 		
 		try {
 			rd.forward(req, resp);

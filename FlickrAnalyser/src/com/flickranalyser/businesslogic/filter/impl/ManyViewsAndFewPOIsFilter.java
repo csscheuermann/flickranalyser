@@ -15,6 +15,7 @@ import com.flickranalyser.businesslogic.filter.decorator.impl.EquallyWeightedSco
 import com.flickranalyser.businesslogic.filter.decorator.impl.RelativeNumberPOIsScoreDecorator;
 import com.flickranalyser.businesslogic.filter.decorator.impl.RelativeNumberViewsScoreDecorator;
 import com.flickranalyser.pojo.Cluster;
+import com.flickranalyser.pojo.PointOfInterest;
 
 public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 
@@ -35,12 +36,22 @@ public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 		IClusterScoreDecorator relativeNumberPOIsScoreDecorator = new RelativeNumberPOIsScoreDecorator(maximunNumberPOIs);
 		
 		
+		
 		IClusterScoreDecorator equallyWeightedScoreDecorator = new EquallyWeightedScoreDecorator(relativeNumberPOIsScoreDecorator, relativeNumberViewsScoreDecorator);
 		
 		List<ClusterScorePair> sortedListOfCluster = new ArrayList<ClusterScorePair>(clusterToFilter.size());
 		for (Cluster cluster : clusterToFilter) {
-			double clusterScore = equallyWeightedScoreDecorator.scoreCluster(cluster);
 			
+			List<PointOfInterest> pointOfInterestList = cluster.getPointOfInterestList();
+			int maxNumberOfViews = 0;
+			for (PointOfInterest pointOfInterest : pointOfInterestList) {
+				if(pointOfInterest.getCountOfViews() > maxNumberOfViews){
+					maxNumberOfViews = pointOfInterest.getCountOfViews();
+					cluster.setUrlOfMostViewedPicture(pointOfInterest.getPictureUrl());
+				}
+			}
+			
+			double clusterScore = equallyWeightedScoreDecorator.scoreCluster(cluster);
 			sortedListOfCluster.add(new ClusterScorePair(cluster, clusterScore));
 		}
 		
@@ -56,6 +67,9 @@ public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 			}
 			
 		}
+		
+		
+		
 		return topClusters;
 	}
 
