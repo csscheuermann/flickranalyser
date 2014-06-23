@@ -49,7 +49,7 @@ public class FlickrRequestHandler {
 			JsonObject photosObject;
 
 			try {
-				//log.log(Level.INFO,"Retrieving all images for spot "+spot+" (page="+requestedPage+",numberPages="+numberPages+") -> "+ urlForRequest);
+				log.log(Level.INFO,"Retrieving all images for spot "+spot+" (page="+requestedPage+",numberPages="+numberPages+") -> "+ urlForRequest);
 				String jsonResponse = Request.Get(urlForRequest.toString())
 						.execute().returnContent().asString();
 				requestedPage++;
