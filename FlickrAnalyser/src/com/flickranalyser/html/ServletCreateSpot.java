@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.flickranalyser.businesslogic.common.ParameterConstants;
+import com.flickranalyser.businesslogic.filter.IFilterStrategy;
+import com.flickranalyser.businesslogic.filter.impl.ManyViewsAndFewPOIsFilter;
+import com.flickranalyser.html.common.HelperMethods;
 import com.flickranalyser.memcache.MemcacheSpot;
 import com.flickranalyser.pojo.Spot;
 
@@ -25,10 +28,15 @@ public class ServletCreateSpot extends HttpServlet{
 
 		//GET THE PARAMS
 		String location = req.getParameter(ParameterConstants.REQUEST_PARAM_LOCATION);
+		String filterStrategy = req.getParameter(ParameterConstants.FILTER_STRATEGY);
 		
+		StringBuilder fullClassPath = new StringBuilder();
+		fullClassPath.append("com.flickranalyser.businesslogic.filter.impl.");
+		fullClassPath.append(filterStrategy);
+		
+		IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(fullClassPath.toString(), IFilterStrategy.class);
 		Spot spot = MemcacheSpot.getSpotForSpotName(location);
-		
-		
+		spot.setCluster(choosenFilterStrategy.filterCluster(spot.getCluster()));
 		
 		String url = "/flickranalyser.jsp";
 		ServletContext sc = getServletContext();

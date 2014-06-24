@@ -5,8 +5,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.flickranalyser.businesslogic.common.ClusterSetInformation;
+import com.flickranalyser.businesslogic.common.ClusterMaxValuesInformation;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.businesslogic.filter.common.ClusterScoreComparator;
 import com.flickranalyser.businesslogic.filter.common.ClusterScorePair;
@@ -15,19 +17,22 @@ import com.flickranalyser.businesslogic.filter.decorator.impl.EquallyWeightedSco
 import com.flickranalyser.businesslogic.filter.decorator.impl.RelativeNumberPOIsScoreDecorator;
 import com.flickranalyser.businesslogic.filter.decorator.impl.RelativeNumberViewsScoreDecorator;
 import com.flickranalyser.pojo.Cluster;
-import com.flickranalyser.pojo.PointOfInterest;
 
 public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 
-	private final int maxNumberOfClusters;
+	private static final int MAX_NUMBER_OF_CLUSTERS = 30;
+	private static final Logger LOGGER = Logger.getLogger(ManyViewsAndFewPOIsFilter.class.getName());
 
-	public ManyViewsAndFewPOIsFilter(int maxNumberOfClusters) {
-		this.maxNumberOfClusters = maxNumberOfClusters;
+	public ManyViewsAndFewPOIsFilter() {
+	}
+	
+	public static int getMaxNumberOfClusters() {
+		return MAX_NUMBER_OF_CLUSTERS;
 	}
 	
 	@Override
 	public Set<Cluster> filterCluster(Set<Cluster> clusterToFilter) {
-		ClusterSetInformation clusterSetInformation = new ClusterSetInformation(clusterToFilter);
+		ClusterMaxValuesInformation clusterSetInformation = new ClusterMaxValuesInformation(clusterToFilter);
 		
 		int maximunNumberViews = clusterSetInformation.getMaximumNumberViews();
 		IClusterScoreDecorator relativeNumberViewsScoreDecorator = new RelativeNumberViewsScoreDecorator(maximunNumberViews);
@@ -42,17 +47,11 @@ public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 		List<ClusterScorePair> sortedListOfCluster = new ArrayList<ClusterScorePair>(clusterToFilter.size());
 		for (Cluster cluster : clusterToFilter) {
 			
-			List<PointOfInterest> pointOfInterestList = cluster.getPointOfInterestList();
-			int maxNumberOfViews = 0;
-			for (PointOfInterest pointOfInterest : pointOfInterestList) {
-				if(pointOfInterest.getCountOfViews() > maxNumberOfViews){
-					maxNumberOfViews = pointOfInterest.getCountOfViews();
-					cluster.setUrlOfMostViewedPicture(pointOfInterest.getPictureUrl());
-				}
-			}
-			
 			double clusterScore = equallyWeightedScoreDecorator.scoreCluster(cluster);
-			sortedListOfCluster.add(new ClusterScorePair(cluster, clusterScore));
+			
+			ClusterScorePair currentClusterScorePair = new ClusterScorePair(cluster, clusterScore);
+			LOGGER.log(Level.INFO, "ClusterScore: " + currentClusterScorePair.toString());
+			sortedListOfCluster.add(currentClusterScorePair);
 		}
 		
 		Collections.sort(sortedListOfCluster, new ClusterScoreComparator());
@@ -60,7 +59,7 @@ public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 		Set<Cluster> topClusters = new HashSet<Cluster>();
 		for (ClusterScorePair clusterScorePair : sortedListOfCluster) {
 			Cluster cluster = clusterScorePair.getCluster();
-			if(topClusters.size() < maxNumberOfClusters){
+			if(topClusters.size() < MAX_NUMBER_OF_CLUSTERS){
 				topClusters.add(cluster);
 			}else{
 				break;

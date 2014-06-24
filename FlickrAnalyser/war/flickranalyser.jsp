@@ -1,12 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="java.util.List" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page import="com.flickranalyser.pojo.Spot" %>
 <%@ page import="com.flickranalyser.pojo.Cluster" %>
-<%@ page import="com.flickranalyser.pojo.PointOfInterest" %>
 <%@ page import="com.javadocmd.simplelatlng.LatLng" %>
 <%@ page import="java.lang.StringBuilder" %>
 <%@ page import="java.util.Iterator" %>
@@ -40,20 +38,7 @@ function addCircle(lgt, lat, opacity) {
   var cityCircle = new google.maps.Circle(populationOptions);
 }
 
-function addDot(lgt, lat, opacity) {
-  var populationOptions = {
-    strokeColor: '#FF0000',
-    strokeOpacity: 1,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: opacity,
-    map: map,
-    center: new google.maps.LatLng(lgt, lat),
-    radius: 0.01
-  };
-  // Add the circle for this city to the map.
-  var cityCircle = new google.maps.Circle(populationOptions);
-}
+
 
 
 function addMarker(lgt, lat, title, url) {
@@ -93,13 +78,10 @@ function addMarker(lgt, lat, title, url) {
     	double currentLat = currentCluster.getCenterOfCluster().getLatitude();
     	double currentLng = currentCluster.getCenterOfCluster().getLongitude();
     	
-		List<PointOfInterest> pois = currentCluster.getPointOfInterestList();
-		for (PointOfInterest currentPOI : pois){
-			out.println("addDot(" + currentPOI.getLocation().getLatitude() + "," + currentPOI.getLocation().getLongitude() + ",100);");
-		}
+	
 			
 		
-    	if (currentCluster.getOverallViews() > 500){
+    	if (currentCluster.getOverallViews() > 200){
   			out.println("addMarker("+ currentLat +"," + currentLng + ", '" + currentCluster.getOverallViews() + "', '"+ currentCluster.getUrlOfMostViewedPicture() + "');");
     	}
     	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacity + ");");

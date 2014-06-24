@@ -17,7 +17,7 @@ public class Spot implements Serializable{
 	private String name;
 	private String description;
 	private double spotRadiusInKm = 25;
-	private double clusterRadiusInKm = 0.05;
+	private double clusterRadiusInKm = 0.1;
 	private Set<Cluster> clusters;
 	
 	private List<String> topThreePictures;

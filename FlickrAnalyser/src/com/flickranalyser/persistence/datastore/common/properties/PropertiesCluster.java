@@ -7,6 +7,7 @@ public enum PropertiesCluster {
 	LONGITUDE("Longitude"),
 	DESCRIPTION("Description"),
 	URL_OF_MOST_VIEWED_PICTURE("PictureURL"),
+	NUMBER_OF_POIS("POICount"),
 	OVERALL_VIEWS("OverallViews");
 	
 	private final String propertieName;

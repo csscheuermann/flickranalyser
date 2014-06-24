@@ -37,11 +37,12 @@ public class PojoHelperMethods {
 			double latitude = ((Double)clusterEntity.getProperty(PropertiesCluster.LATITUDE.toString())).doubleValue();
 			double longitude = ((Double)clusterEntity.getProperty(PropertiesCluster.LONGITUDE.toString())).doubleValue();
 			int overallViews = ((Number)clusterEntity.getProperty(PropertiesCluster.OVERALL_VIEWS.toString())).intValue();
+			int numberofPOIs = ((Number)clusterEntity.getProperty(PropertiesCluster.NUMBER_OF_POIS.toString())).intValue();
 			LatLng latLongPoint = new LatLng(latitude, longitude);
 			String url = (String) clusterEntity.getProperty(PropertiesCluster.URL_OF_MOST_VIEWED_PICTURE.toString());
 		
 			
-			setOfCluster.add(new Cluster(latLongPoint, name, description,overallViews,url));
+			setOfCluster.add(new Cluster(latLongPoint, name, description,overallViews,url,numberofPOIs));
 		}
 		return setOfCluster;
 	}

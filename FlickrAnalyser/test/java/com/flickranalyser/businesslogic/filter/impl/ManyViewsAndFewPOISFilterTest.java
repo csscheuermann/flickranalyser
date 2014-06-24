@@ -13,7 +13,6 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class ManyViewsAndFewPOISFilterTest {
 
-	private static final int MAX_NUMBER_OF_CLUSTERS = 3;
 	private ManyViewsAndFewPOIsFilter filterUnderTest;
 	private Cluster cluster1;
 	private Cluster cluster2;
@@ -23,7 +22,7 @@ public class ManyViewsAndFewPOISFilterTest {
 
 	@Before
 	public void setup() {
-		filterUnderTest = new ManyViewsAndFewPOIsFilter(MAX_NUMBER_OF_CLUSTERS);
+		filterUnderTest = new ManyViewsAndFewPOIsFilter();
 
 		cluster1 = new Cluster(new LatLng(1, 1),
 				"cluster1", "cluster 1 description");
@@ -68,7 +67,7 @@ public class ManyViewsAndFewPOISFilterTest {
 		Set<Cluster> filteredSetOfClusters = filterUnderTest.filterCluster(clusterToFilter);
 		
 		
-		Assert.assertEquals(MAX_NUMBER_OF_CLUSTERS, filteredSetOfClusters.size());
+		Assert.assertEquals(ManyViewsAndFewPOIsFilter.getMaxNumberOfClusters(), filteredSetOfClusters.size());
 		
 		Assert.assertTrue(filteredSetOfClusters.contains(cluster5));
 		Assert.assertTrue(filteredSetOfClusters.contains(cluster2));

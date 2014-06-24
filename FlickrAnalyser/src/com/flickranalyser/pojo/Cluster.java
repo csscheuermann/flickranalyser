@@ -17,6 +17,8 @@ public class Cluster implements Serializable {
 	private final List<PointOfInterest> pointsOfInterest;
 	private int overallViews;
 	private String urlOfMostViewedPicture;
+	//Corresponds with the List size of POIs but we will not store this POIs
+	private int numberOfPOIs;
 
 	
 	
@@ -30,14 +32,29 @@ public class Cluster implements Serializable {
 	
 	
 	
-	public Cluster(LatLng centerOfCluster, String name, String description,int overallViews, String urlOfMostViewedPicture) {
+	public Cluster(LatLng centerOfCluster, String name, String description,int overallViews, String urlOfMostViewedPicture, int numberOfPOIs) {
 		this(centerOfCluster,name,description);
 		this.overallViews = overallViews;
 		this.urlOfMostViewedPicture = urlOfMostViewedPicture;
+		this.numberOfPOIs = numberOfPOIs;
 		
 	}
 
 	
+	public int getNumberOfPOIs() {
+		return numberOfPOIs;
+	}
+
+
+
+
+	public void setNumberOfPOIs(int numberOfPOIs) {
+		this.numberOfPOIs = numberOfPOIs;
+	}
+
+
+
+
 	public String getUrlOfMostViewedPicture() {
 		return urlOfMostViewedPicture;
 	}
@@ -56,6 +73,9 @@ public class Cluster implements Serializable {
 		overallViews = overallViews + viewCount;
 	}
 
+	private void incrementCountPOI(){
+		numberOfPOIs++;
+	}
 	public int getOverallViews() {
 		return overallViews;
 	}
@@ -72,6 +92,7 @@ public class Cluster implements Serializable {
 
 	public void addPointOfInterestToList(PointOfInterest pointOfInterest) {
 		pointsOfInterest.add(pointOfInterest);
+		incrementCountPOI();
 	}
 	public LatLng getCenterOfCluster() {
 		return centerOfCluster;

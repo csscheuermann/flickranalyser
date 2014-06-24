@@ -2,20 +2,24 @@ package com.flickranalyser.persistence.datastore.saver;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesCluster;
+import com.flickranalyser.persistence.datastore.common.properties.PropertiesPOI;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpot;
 import com.flickranalyser.pojo.Cluster;
+import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Transaction;
+import com.google.cloud.sql.jdbc.Savepoint;
 
 public class PFSaverSpot {
 
@@ -55,6 +59,7 @@ public class PFSaverSpot {
 			}finally{
 				if(txn.isActive()){
 					txn.rollback();
+					
 					log.log(Level.SEVERE, "I TRIED BUT I HAVE TO DO A ROLLBACK - SAD BUT TRUE.");
 				}
 			}
@@ -77,7 +82,8 @@ public class PFSaverSpot {
 			currentCluster.setProperty(PropertiesCluster.LONGITUDE.toString(), nextCluster.getCenterOfCluster().getLongitude());
 			currentCluster.setProperty(PropertiesCluster.OVERALL_VIEWS.toString(), nextCluster.getOverallViews() );
 			currentCluster.setProperty(PropertiesCluster.URL_OF_MOST_VIEWED_PICTURE.toString(), nextCluster.getUrlOfMostViewedPicture() );
-			 datastore.put(txn, currentCluster);
+			currentCluster.setProperty(PropertiesCluster.NUMBER_OF_POIS.toString(), nextCluster.getNumberOfPOIs() );
+			datastore.put(txn, currentCluster);
 		}
 	}
 }

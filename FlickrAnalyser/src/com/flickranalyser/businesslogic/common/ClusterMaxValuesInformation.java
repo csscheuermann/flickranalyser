@@ -4,25 +4,24 @@ import java.util.Set;
 
 import com.flickranalyser.pojo.Cluster;
 
-public class ClusterSetInformation {
+public class ClusterMaxValuesInformation {
 
 	private int maximumNumberViews = 0;
 	private int maximumNumberPOIs = 0;
 
-	public ClusterSetInformation(Set<Cluster> cluster) {
+	public ClusterMaxValuesInformation(Set<Cluster> cluster) {
 		determineMaxNumberViewsAndPOis(cluster);
 	}
 
-	private int determineMaxNumberViewsAndPOis(Set<Cluster> clusters) {
+	private void determineMaxNumberViewsAndPOis(Set<Cluster> clusters) {
 		for (Cluster cluster : clusters) {
 			if (cluster.getOverallViews() > maximumNumberViews) {
 				maximumNumberViews = cluster.getOverallViews();
 			}
-			if (cluster.getPointOfInterestList().size() > maximumNumberPOIs) {
-				maximumNumberPOIs = cluster.getPointOfInterestList().size();
+			if (cluster.getNumberOfPOIs() > maximumNumberPOIs) {
+				maximumNumberPOIs = cluster.getNumberOfPOIs();
 			}
 		}
-		return maximumNumberViews;
 	}
 
 	public int getMaximumNumberPOIs() {
