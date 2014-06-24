@@ -2,9 +2,8 @@ package com.flickranalyser.businesslogic.filter.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +30,7 @@ public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 	}
 	
 	@Override
-	public Set<Cluster> filterCluster(Set<Cluster> clusterToFilter) {
+	public List<Cluster> filterCluster(List<Cluster> clusterToFilter) {
 		ClusterMaxValuesInformation clusterSetInformation = new ClusterMaxValuesInformation(clusterToFilter);
 		
 		int maximunNumberViews = clusterSetInformation.getMaximumNumberViews();
@@ -50,16 +49,20 @@ public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 			double clusterScore = equallyWeightedScoreDecorator.scoreCluster(cluster);
 			
 			ClusterScorePair currentClusterScorePair = new ClusterScorePair(cluster, clusterScore);
-			LOGGER.log(Level.INFO, "ClusterScore: " + currentClusterScorePair.toString());
+			//LOGGER.log(Level.INFO, "ClusterScore: " + currentClusterScorePair.toString());
 			sortedListOfCluster.add(currentClusterScorePair);
 		}
 		
 		Collections.sort(sortedListOfCluster, new ClusterScoreComparator());
 		
-		Set<Cluster> topClusters = new HashSet<Cluster>();
+		List<Cluster> topClusters = new LinkedList<Cluster>();
 		for (ClusterScorePair clusterScorePair : sortedListOfCluster) {
 			Cluster cluster = clusterScorePair.getCluster();
+			
 			if(topClusters.size() < MAX_NUMBER_OF_CLUSTERS){
+				LOGGER.log(Level.SEVERE, "RANK" + clusterScorePair.toString());
+				LOGGER.log(Level.SEVERE, "LATITUDE: " + cluster.getCenterOfCluster().getLatitude());
+				LOGGER.log(Level.SEVERE, "LONGITUDE: " + cluster.getCenterOfCluster().getLongitude());
 				topClusters.add(cluster);
 			}else{
 				break;

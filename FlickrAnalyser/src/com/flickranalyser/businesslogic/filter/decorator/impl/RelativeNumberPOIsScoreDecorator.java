@@ -8,11 +8,11 @@ import com.flickranalyser.pojo.Cluster;
 
 public class RelativeNumberPOIsScoreDecorator implements IClusterScoreDecorator {
 
-	private final int maximumNumberPOIs;
-	private static final Logger log = Logger.getLogger(RelativeNumberViewsScoreDecorator.class.getName());
+	private final int MAXIMUM_NUMBER_OF_POIS;
+	private static final Logger LOGGER = Logger.getLogger(RelativeNumberViewsScoreDecorator.class.getName());
 
 	public RelativeNumberPOIsScoreDecorator(int maximumNumberPOIs) {
-		this.maximumNumberPOIs = maximumNumberPOIs;
+		this.MAXIMUM_NUMBER_OF_POIS = maximumNumberPOIs;
 	}
 	
 	@Override
@@ -21,16 +21,16 @@ public class RelativeNumberPOIsScoreDecorator implements IClusterScoreDecorator 
 		int numberPOIs = clusterToScore.getNumberOfPOIs();
 		if(numberPOIs<0){
 			throw new RuntimeException("number of pois in cluster " + clusterToScore +" is negative");
-		}else if(numberPOIs > maximumNumberPOIs){
-			throw new RuntimeException("the cluster " + clusterToScore +" has more pois ("+clusterToScore.getOverallViews()+") than the maximum ("+maximumNumberPOIs+")");
+		}else if(numberPOIs > MAXIMUM_NUMBER_OF_POIS){
+			throw new RuntimeException("the cluster " + clusterToScore +" has more pois ("+clusterToScore.getOverallViews()+") than the maximum ("+MAXIMUM_NUMBER_OF_POIS+")");
 		}
 		
-		log.log(Level.INFO, "OVERALL VIEWS: " +numberPOIs );
-		log.log(Level.INFO, "MAX_NUMBER_VIEWS: " +maximumNumberPOIs );	
+		LOGGER.log(Level.INFO, "OVERALL POIs: " +numberPOIs );
+		LOGGER.log(Level.INFO, "MAX_NUMBER_POIs: " +MAXIMUM_NUMBER_OF_POIS );	
 		
-		double result = 1-(double)numberPOIs / maximumNumberPOIs;
+		double result = 1-(double)numberPOIs / MAXIMUM_NUMBER_OF_POIS;
 		
-		log.log(Level.INFO, "RELATIVE NUMBER OF VIEWS: "+ result);
+		LOGGER.log(Level.INFO, "RELATIVE NUMBER OF VIEWS: "+ result);
 		
 		
 		return result;

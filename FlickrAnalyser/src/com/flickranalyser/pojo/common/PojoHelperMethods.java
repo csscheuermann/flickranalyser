@@ -1,8 +1,7 @@
 package com.flickranalyser.pojo.common;
 
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesCluster;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpot;
@@ -29,8 +28,8 @@ public class PojoHelperMethods {
 
 	}
 
-	public static Set<Cluster> createClusterListFromEntity(List<Entity> asList) {
-		Set<Cluster> setOfCluster = new HashSet<Cluster>();
+	public static List<Cluster> createClusterListFromEntity(List<Entity> asList) {
+		List<Cluster> setOfCluster = new LinkedList<Cluster>();
 		for (Entity clusterEntity : asList) {
 			String description = (String) clusterEntity.getProperty(PropertiesCluster.DESCRIPTION.toString());
 			String name = (String) clusterEntity.getProperty(PropertiesCluster.NAME.toString());

@@ -2,10 +2,8 @@ package com.flickranalyser.pojo;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import com.google.appengine.api.datastore.Key;
 import com.javadocmd.simplelatlng.LatLng;
@@ -18,7 +16,7 @@ public class Spot implements Serializable{
 	private String description;
 	private double spotRadiusInKm = 25;
 	private double clusterRadiusInKm = 0.1;
-	private Set<Cluster> clusters;
+	private List<Cluster> clusters;
 	
 	private List<String> topThreePictures;
 	private Key dataStoreKey;
@@ -32,7 +30,7 @@ public class Spot implements Serializable{
 		this.latLngPoint = latLngPoint;
 		this.name = name;
 		this.description = description;
-		this.clusters = new HashSet<Cluster>();
+		this.clusters = new LinkedList<Cluster>();
 	}
 	
 	public Spot(LatLng latLngPoint, String name, String description, double clusterRadiusInKm, double spotRadiusInKm, Key dataStoreKey) {
@@ -56,8 +54,8 @@ public class Spot implements Serializable{
 		return clusterRadiusInKm;
 	}
 	
-	public Set<Cluster> getCluster() {
-		return Collections.unmodifiableSet(clusters);
+	public List<Cluster> getCluster() {
+		return Collections.unmodifiableList(clusters);
 	}
 
 	public void addClusterTo(Cluster cluster) {
@@ -75,7 +73,7 @@ public class Spot implements Serializable{
 		this.topThreePictures.add(url);
 	}
 	
-	public void setCluster(Set<Cluster> newCluster) {
+	public void setCluster(List<Cluster> newCluster) {
 		this.clusters = newCluster;
 	}
 

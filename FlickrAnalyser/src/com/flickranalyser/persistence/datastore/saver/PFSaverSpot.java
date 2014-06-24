@@ -3,23 +3,19 @@ package com.flickranalyser.persistence.datastore.saver;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesCluster;
-import com.flickranalyser.persistence.datastore.common.properties.PropertiesPOI;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpot;
 import com.flickranalyser.pojo.Cluster;
-import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Transaction;
-import com.google.cloud.sql.jdbc.Savepoint;
 
 public class PFSaverSpot {
 
@@ -69,7 +65,7 @@ public class PFSaverSpot {
 	private static void saveCluster(Spot spot, DatastoreService datastore,
 			Transaction txn, Key spotDatastoreKey) {
 		//Now store all Cluster
-		Set<Cluster> cluster = spot.getCluster();
+		List<Cluster> cluster = spot.getCluster();
 		Iterator<Cluster> clusterIterator = cluster.iterator();
 		
 		while(clusterIterator.hasNext()){

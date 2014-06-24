@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.Set" %>
+<%@ page import="java.util.List" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
@@ -59,21 +59,18 @@ function addMarker(lgt, lat, title, url) {
 
 	function initialize() {
   		var mapOptions = {
-    	zoom: 8,
+    	zoom: 14,
    	 <% out.println("center: new google.maps.LatLng("+ spot.getLatLngPoint().getLatitude()+","+  spot.getLatLngPoint().getLongitude()+")");%>
  	};
   	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
  <%
  	int maxValue = spot.getMaxClusterViews();
-  	Set<Cluster> cluster = spot.getCluster();
+  	List<Cluster> cluster = spot.getCluster();
   	String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
   	String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
   	String PHOTO_SEARCH_REQUEST = "flickr.photos.geo.photosForLocation";
   	
-  	Iterator<Cluster> iter = cluster.iterator();
-	while (iter.hasNext()) {
-		Cluster currentCluster = iter.next();
-		
+	for (Cluster currentCluster : cluster){
 		double opacity = ((double) currentCluster.getOverallViews()/maxValue);
     	double currentLat = currentCluster.getCenterOfCluster().getLatitude();
     	double currentLng = currentCluster.getCenterOfCluster().getLongitude();

@@ -12,7 +12,7 @@ import com.javadocmd.simplelatlng.util.LengthUnit;
 public class SpotCalculationHandler {
 
 	public Spot getSpot(Set<PointOfInterest> pointOfInterests, Spot hardcodedSpot){
-		Set<Cluster> clusters = hardcodedSpot.getCluster();
+		List<Cluster> clusters = hardcodedSpot.getCluster();
 
 		for (PointOfInterest pointOfInterest : pointOfInterests) {
 			if (!isPointIntrestInCluster(hardcodedSpot, clusters, pointOfInterest)){
@@ -39,7 +39,7 @@ public class SpotCalculationHandler {
 		return hardcodedSpot;
 	}
 
-	private boolean isPointIntrestInCluster(Spot hardcodedSpot, Set<Cluster> clusterList,
+	private boolean isPointIntrestInCluster(Spot hardcodedSpot, List<Cluster> clusterList,
 			PointOfInterest pointOfInterest) {
 		for (Cluster currentCluster : clusterList) {
 			double distance = LatLngTool.distance(currentCluster.getCenterOfCluster(), pointOfInterest.getLocation(), LengthUnit.KILOMETER);

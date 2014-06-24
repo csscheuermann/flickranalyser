@@ -1,8 +1,8 @@
 package com.flickranalyser.businesslogic;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,8 +17,6 @@ import com.javadocmd.simplelatlng.LatLng;
 public class SpotCalculationHandlerTest {
 
 	private final Set<PointOfInterest> pointOfInterestsToTest = new HashSet<PointOfInterest>();
-	private static final Logger log = Logger
-			.getLogger(SpotCalculationHandlerTest.class.getName());
 
 	@Before
 	public void setUp() {
@@ -58,7 +56,7 @@ public class SpotCalculationHandlerTest {
 				hardcodedSpot);
 
 		Assert.assertEquals(spot.getCluster().size(), 3);
-		Set<Cluster> clusterList = spot.getCluster();
+		List<Cluster> clusterList = spot.getCluster();
 		boolean found10Views = false;
 		boolean found30Views = false;
 		boolean found15Views = false;

@@ -38,6 +38,8 @@ public class ServletCreateSpot extends HttpServlet{
 		Spot spot = MemcacheSpot.getSpotForSpotName(location);
 		spot.setCluster(choosenFilterStrategy.filterCluster(spot.getCluster()));
 		
+		
+		
 		String url = "/flickranalyser.jsp";
 		ServletContext sc = getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher(url);

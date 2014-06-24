@@ -1,10 +1,10 @@
 package com.flickranalyser.businesslogic.filter;
 
-import java.util.Set;
+import java.util.List;
 
 import com.flickranalyser.pojo.Cluster;
 
 public interface IFilterStrategy {
 
-	Set<Cluster> filterCluster(Set<Cluster> clusterToFilter);
+	List<Cluster> filterCluster(List<Cluster> clusterToFilter);
 }

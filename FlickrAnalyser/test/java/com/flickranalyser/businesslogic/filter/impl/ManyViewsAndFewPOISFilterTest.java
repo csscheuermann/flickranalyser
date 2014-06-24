@@ -1,6 +1,7 @@
 package com.flickranalyser.businesslogic.filter.impl;
 
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,7 +9,6 @@ import org.junit.Test;
 
 import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.PointOfInterest;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.javadocmd.simplelatlng.LatLng;
 
 public class ManyViewsAndFewPOISFilterTest {
@@ -58,13 +58,13 @@ public class ManyViewsAndFewPOISFilterTest {
 
 	@Test
 	public void test() {
-		Set<Cluster> clusterToFilter = new HashSet<Cluster>();
+		List<Cluster> clusterToFilter = new LinkedList<Cluster>();
 		clusterToFilter.add(cluster1);
 		clusterToFilter.add(cluster2);
 		clusterToFilter.add(cluster3);
 		clusterToFilter.add(cluster4);
 		clusterToFilter.add(cluster5);
-		Set<Cluster> filteredSetOfClusters = filterUnderTest.filterCluster(clusterToFilter);
+		List<Cluster> filteredSetOfClusters = filterUnderTest.filterCluster(clusterToFilter);
 		
 		
 		Assert.assertEquals(ManyViewsAndFewPOIsFilter.getMaxNumberOfClusters(), filteredSetOfClusters.size());
