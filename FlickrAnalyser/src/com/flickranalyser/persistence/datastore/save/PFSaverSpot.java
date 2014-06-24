@@ -1,4 +1,4 @@
-package com.flickranalyser.persistence.datastore.saver;
+package com.flickranalyser.persistence.datastore.save;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;

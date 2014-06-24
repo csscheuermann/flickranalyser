@@ -1,7 +1,10 @@
-package com.flickranalyser.persistence.datastore.getter;
+package com.flickranalyser.persistence.datastore.get;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import com.flickranalyser.data.flickr.FlickrRequestHandler;
 import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesCluster;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpot;
@@ -21,7 +24,7 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 
 public class PFGetterSpot {
 
-
+	private static final Logger LOGGER = Logger.getLogger(PFGetterSpot.class.getName());
 
 	public static Spot getSpotByName(String nameOfSpot){
 		Spot spot = new Spot();
@@ -33,8 +36,18 @@ public class PFGetterSpot {
 		getAllQuery.setFilter(teamNameFilter);
 		final PreparedQuery getAllPreparedQuery = datastore.prepare(getAllQuery);
 		singleSpotEntity = getAllPreparedQuery.asSingleEntity();
+		
+		if (singleSpotEntity == null){
+			LOGGER.log(Level.INFO, "ENTITY IS NULL.");
+			return null;
+		}
 		spot = PojoHelperMethods.createSpotFromEntity(singleSpotEntity);
 
+		if (spot == null){
+			LOGGER.log(Level.INFO, "SPOT IS NULL.");
+			return null;
+		}
+		
 		//Now get all Cluster in Spot
 		final Query getAllCluster = new Query(EntityNameStoreEnum.CLUSTER.toString()).setAncestor(spot.getDataStoreKey());
 		/*TODO COS: To discuss, it seems like not sorting the result causes diffent clustering and different results (After sort still same behavior)

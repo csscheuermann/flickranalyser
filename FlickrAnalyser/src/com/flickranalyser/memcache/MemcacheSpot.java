@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
-import com.flickranalyser.persistence.datastore.getter.PFGetterSpot;
+import com.flickranalyser.persistence.datastore.get.PFGetterSpot;
 import com.flickranalyser.pojo.Spot;
 import com.google.appengine.api.memcache.Expiration;
 

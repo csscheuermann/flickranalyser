@@ -7,6 +7,7 @@ public enum EntityNameStoreEnum {
 	
 	SPOT("Spot"),
 	CLUSTER ("Cluster"),
+	SPOT_TO_CRAWL("SpotToCrawl"),
 	POI("POI");
 	
 	/** EntityName. */

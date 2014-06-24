@@ -9,5 +9,6 @@ public class ParameterConstants {
 	
 	/** Compare {@link IFilterStrategy} for naming convention */
 	public static final String FILTER_STRATEGY = "strategy";
+
 	
 }

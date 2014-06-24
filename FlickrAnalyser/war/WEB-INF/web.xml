@@ -34,6 +34,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Crawler</servlet-name>
 		<url-pattern>/cron/crawl</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>Put In Queue</servlet-name>
+		<servlet-class>com.flickranalyser.html.SpotToQueue</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Put In Queue</servlet-name>
+		<url-pattern>/queue/put</url-pattern>
+	</servlet-mapping>
+	
+	
 
 	
 </web-app>

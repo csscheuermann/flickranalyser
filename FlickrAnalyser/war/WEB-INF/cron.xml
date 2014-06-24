@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
-	<!-- 
 	<cron>
 		<url>/cron/crawl</url>
-		<description>I will crawl Munich</description>
-		<schedule>every 3 minutes</schedule>
+		<description>This Cron Job will process the queue from Spots to Crawl in Datastore.</description>
+		<schedule>every 10 minutes</schedule>
 	</cron>
 	
-	 -->
 </cronentries>

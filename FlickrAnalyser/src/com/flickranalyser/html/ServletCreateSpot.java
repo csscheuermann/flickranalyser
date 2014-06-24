@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.flickranalyser.businesslogic.common.ParameterConstants;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
-import com.flickranalyser.businesslogic.filter.impl.ManyViewsAndFewPOIsFilter;
 import com.flickranalyser.html.common.HelperMethods;
 import com.flickranalyser.memcache.MemcacheSpot;
 import com.flickranalyser.pojo.Spot;

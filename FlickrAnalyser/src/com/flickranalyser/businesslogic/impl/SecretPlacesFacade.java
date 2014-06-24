@@ -5,36 +5,34 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.flickranalyser.businesslogic.ISecretPlacesFacade;
-import com.flickranalyser.businesslogic.spotfinder.ISpotFinder;
 import com.flickranalyser.data.flickr.FlickrRequestHandler;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
 
 public class SecretPlacesFacade implements ISecretPlacesFacade {
 
-	private ISpotFinder spotFinder;
+	private Spot spot;
 	private FlickrRequestHandler flickrRequestHandler;
 	private SpotCalculationHandler spotCalculationHandler;
 
 	private static final Logger log = Logger.getLogger(SecretPlacesFacade.class.getName());
 	
-	public SecretPlacesFacade(ISpotFinder spotFinder) {
-		this.spotFinder = spotFinder;
+	public SecretPlacesFacade(Spot spot) {
+		this.spot = spot;
 		flickrRequestHandler = new FlickrRequestHandler();
 		spotCalculationHandler = new SpotCalculationHandler();
 	}
 
+	//TODO DVV & COS: Do we really need that here? I changed it due to queue mechanism. lets talk about that
 	@Override
 	public Spot getSpotInformationForName(String name) {
-		Spot spotToSearchFor = spotFinder.findSpotByName(name);
-		return getSpotInformation(spotToSearchFor);
+		return getSpotInformation(spot);
 	}
 
+	//TODO DVV & COS: Do we really need that here? I changed it due to queue mechanism. lets talk about that
 	@Override
 	public Spot getSpotInformationForLocation(long latitude, long longitude) {
-		Spot spotToSearchFor = spotFinder.findSpotByLocation(latitude,
-				longitude);
-		return getSpotInformation(spotToSearchFor);
+		return getSpotInformation(spot);
 	}
 
 	private Spot getSpotInformation(Spot spotToSearchFor) {
