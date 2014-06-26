@@ -1,4 +1,4 @@
-package com.flickranalyser.html;
+package com.flickranalyser.html.cron;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.flickranalyser.businesslogic.filter.decorator.impl.EquallyWeightedScoreDecorator;
 import com.flickranalyser.businesslogic.impl.SecretPlacesFacade;
 import com.flickranalyser.persistence.datastore.delete.PFDeleterSpotToCrawl;
 import com.flickranalyser.persistence.datastore.get.PFGetterSpotToCrawl;

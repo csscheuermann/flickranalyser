@@ -52,11 +52,11 @@ function addMarker(lgt, lat, numberOfViews, url, numberOfPOI , overallTouristicn
 	
 	var contentString = '<div id="content">' +
 		'<h1> ClusterName </h1>' +
-		'<p>Number of POI: ' + numberOfPOI + '</p>' +
-		'<p>Number of Views: ' + numberOfViews + '</p>'+
-		'<p>Touristicness in Percent: ' + overallTouristicnessInPoints + '</p>'+
-		'<p>Vote Count: ' + overallVotes + '</p>'+
-		'<p>DataStore Key: ' + datastoreKey + '</p>'+
+		'<p>Number of POI: ' + numberOfPOI + '<br />' +
+		'Number of Views: ' + numberOfViews + '<br />'+
+		'Touristicness in Percent: ' + overallTouristicnessInPoints + '<br />'+
+		'Vote Count: ' + overallVotes + '<br />'+
+		'DataStore Key: ' + datastoreKey + '</p>'+
 		
 		
 		'<img src="' + url + '"/>';
@@ -118,7 +118,7 @@ function addMarker(lgt, lat, numberOfViews, url, numberOfPOI , overallTouristicn
   <body>
   <h1> Here everything will happen</h1>
 
-<div id="map-canvas" style="height:1024px; width:1800px"></div>
+<div id="map-canvas" style="height:800px; width:600px"></div>
 
 </body>
 </html> 
