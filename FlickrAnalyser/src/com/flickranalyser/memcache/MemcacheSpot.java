@@ -18,6 +18,7 @@ public class MemcacheSpot {
 		
 		//First check if persistens must be asked
 		if(checkIfPersistenceMustBeAsked(location, memcachKey)){
+			
 			 Spot spot = PFGetterSpot.getSpotByName(location);
 			 MemcacheHelperMethods.getSyncCache().put(memcachKey, spot, Expiration.onDate(MemCacheConstants.MEMCACH_EXPIRE_DATE));
 			 return spot;
@@ -28,6 +29,11 @@ public class MemcacheSpot {
 	private static boolean checkIfPersistenceMustBeAsked(String location, String memcacheKey) {
 		if (!MemcacheHelperMethods.getSyncCache().contains(memcacheKey)){
 			log.log(Level.INFO, "I HAVE TO ASK PERSISTENCE FOR: " + location);
+			return true;
+		}
+		
+		if (MemcacheHelperMethods.getSyncCache().contains(memcacheKey + EntityNameStoreEnum.CLUSTER.toString())){
+			MemcacheHelperMethods.getSyncCache().delete(memcacheKey + EntityNameStoreEnum.CLUSTER.toString());
 			return true;
 		}
 		log.log(Level.INFO, "STILL IN MEMCACHE: " + location);

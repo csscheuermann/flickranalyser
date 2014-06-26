@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.flickranalyser.data.flickr.FlickrRequestHandler;
 import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesCluster;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpot;

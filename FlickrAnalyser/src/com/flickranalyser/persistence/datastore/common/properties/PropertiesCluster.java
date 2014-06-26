@@ -8,6 +8,8 @@ public enum PropertiesCluster {
 	DESCRIPTION("Description"),
 	URL_OF_MOST_VIEWED_PICTURE("PictureURL"),
 	NUMBER_OF_POIS("POICount"),
+	AVARAGE_TOURISTICNESS_IN_POINTS_FROM_1_TO_10("Avarage_Touristicness"),
+	COUNT_OF_TOURISTICNESS_EVALUATION("TouristicnessEvaluationCount"),
 	OVERALL_VIEWS("OverallViews");
 	
 	private final String propertieName;

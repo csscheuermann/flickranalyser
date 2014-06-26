@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.flickranalyser.businesslogic.common.ClusterMaxValuesInformation;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
@@ -20,7 +18,6 @@ import com.flickranalyser.pojo.Cluster;
 public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 
 	private static final int MAX_NUMBER_OF_CLUSTERS = 30;
-	private static final Logger LOGGER = Logger.getLogger(ManyViewsAndFewPOIsFilter.class.getName());
 
 	public ManyViewsAndFewPOIsFilter() {
 	}
@@ -60,9 +57,9 @@ public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 			Cluster cluster = clusterScorePair.getCluster();
 			
 			if(topClusters.size() < MAX_NUMBER_OF_CLUSTERS){
-				LOGGER.log(Level.SEVERE, "RANK" + clusterScorePair.toString());
-				LOGGER.log(Level.SEVERE, "LATITUDE: " + cluster.getCenterOfCluster().getLatitude());
-				LOGGER.log(Level.SEVERE, "LONGITUDE: " + cluster.getCenterOfCluster().getLongitude());
+//				LOGGER.log(Level.SEVERE, "RANK" + clusterScorePair.toString());
+//				LOGGER.log(Level.SEVERE, "LATITUDE: " + cluster.getCenterOfCluster().getLatitude());
+//				LOGGER.log(Level.SEVERE, "LONGITUDE: " + cluster.getCenterOfCluster().getLongitude());
 				topClusters.add(cluster);
 			}else{
 				break;

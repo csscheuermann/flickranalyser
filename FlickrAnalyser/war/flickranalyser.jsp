@@ -41,19 +41,40 @@ function addCircle(lgt, lat, opacity) {
 
 
 
-function addMarker(lgt, lat, title, url) {
+function addMarker(lgt, lat, numberOfViews, url, numberOfPOI , overallTouristicnessInPoints, datastoreKey, overallVotes) {
 	// To add the marker to the map, use the 'map' property
 	var marker = new google.maps.Marker({
 	    position: new google.maps.LatLng(lgt, lat),
 	    url:  url,
 	    map: map,
-	    title: title
+	    title: numberOfViews
 	});
 	
-	google.maps.event.addListener(marker, 'click', function(){
-		window.open(marker.url);
-	});
-}
+	var contentString = '<div id="content">' +
+		'<h1> ClusterName </h1>' +
+		'<p>Number of POI: ' + numberOfPOI + '</p>' +
+		'<p>Number of Views: ' + numberOfViews + '</p>'+
+		'<p>Touristicness in Percent: ' + overallTouristicnessInPoints + '</p>'+
+		'<p>Vote Count: ' + overallVotes + '</p>'+
+		'<p>DataStore Key: ' + datastoreKey + '</p>'+
+		
+		
+		'<img src="' + url + '"/>';
+		 
+	
+		var infowindow = new google.maps.InfoWindow({
+		      content: contentString,
+			  maxWidth: 300
+		  });
+
+		
+		  google.maps.event.addListener(marker, 'click', function() {
+		    infowindow.open(map,marker);
+		  });
+	
+	
+	
+		  }
 
 <%  Spot spot = (Spot) request.getAttribute("spot"); %>
 
@@ -74,12 +95,16 @@ function addMarker(lgt, lat, title, url) {
 		double opacity = ((double) currentCluster.getOverallViews()/maxValue);
     	double currentLat = currentCluster.getCenterOfCluster().getLatitude();
     	double currentLng = currentCluster.getCenterOfCluster().getLongitude();
-    	
-	
-			
+		
+		
+		int overallViews = currentCluster.getOverallViews();
+		int pOICount = currentCluster.getNumberOfPOIs();
+		
+		double overallTouristicnessInPointsFrom1To10 = currentCluster.getOverallTouristicnessInPointsFrom1To10();	
+		int overallTouristicnessVotes = currentCluster.getOverallTouristicnessVotes();	
 		
     	if (currentCluster.getOverallViews() > 200){
-  			out.println("addMarker("+ currentLat +"," + currentLng + ", '" + currentCluster.getOverallViews() + "', '"+ currentCluster.getUrlOfMostViewedPicture() + "');");
+  			out.println("addMarker("+ currentLat +"," + currentLng + ", '" + overallViews + "', '" + currentCluster.getUrlOfMostViewedPicture() + "', '" + pOICount +  "', '" + overallTouristicnessInPointsFrom1To10 + "', '" +	currentCluster.getDatastoreClusterKey() + "', '" +	overallTouristicnessVotes + "');");
     	}
     	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacity + ");");
 	}

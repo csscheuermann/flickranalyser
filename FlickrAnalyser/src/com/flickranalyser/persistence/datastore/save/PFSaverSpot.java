@@ -79,6 +79,8 @@ public class PFSaverSpot {
 			currentCluster.setProperty(PropertiesCluster.OVERALL_VIEWS.toString(), nextCluster.getOverallViews() );
 			currentCluster.setProperty(PropertiesCluster.URL_OF_MOST_VIEWED_PICTURE.toString(), nextCluster.getUrlOfMostViewedPicture() );
 			currentCluster.setProperty(PropertiesCluster.NUMBER_OF_POIS.toString(), nextCluster.getNumberOfPOIs() );
+			currentCluster.setProperty(PropertiesCluster.AVARAGE_TOURISTICNESS_IN_POINTS_FROM_1_TO_10.toString(), nextCluster.getOverallTouristicnessInPointsFrom1To10() );
+			currentCluster.setProperty(PropertiesCluster.COUNT_OF_TOURISTICNESS_EVALUATION.toString(), nextCluster.getOverallTouristicnessVotes() );
 			datastore.put(txn, currentCluster);
 		}
 	}

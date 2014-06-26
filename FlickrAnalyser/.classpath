@@ -16,7 +16,8 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/httpcore-4.3.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/httpmime-4.3.3.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/minimal-json-0.9.1.jar"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jersey-bundle-1.18.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/appengine-java-sdk-1.9.3"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
