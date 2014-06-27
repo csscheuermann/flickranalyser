@@ -4,6 +4,8 @@ import java.util.ConcurrentModificationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.ws.rs.core.Response;
+
 import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
 import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpotToCrawl;
 import com.flickranalyser.persistence.datastore.get.PFGetterSpot;
@@ -17,7 +19,7 @@ public class PFSaverSpotToCrawl {
 
 	private static final Logger log = Logger.getLogger(PFSaverSpotToCrawl.class.getName());
 
-	public static void saveSpotToDatastore(Spot spot){
+	public static Response saveSpotToDatastore(Spot spot){
 		int retries = 3;
 
 		if (!checkIfSpotAlreadyExists(spot)){
@@ -50,14 +52,16 @@ public class PFSaverSpotToCrawl {
 				}finally{
 					if(txn.isActive()){
 						txn.rollback();
-
 						log.log(Level.SEVERE, "I TRIED BUT I HAVE TO DO A ROLLBACK - SAD BUT TRUE.");
+						return Response.status(400).entity("Rollback").build();
 					}
 				}
 			}
 		}else{
 			log.log(Level.INFO, "SPOT ALREADY EXISTS");
+			return Response.status(400).entity("Spot already exists").build();
 		}
+		return Response.status(200).build();
 	}
 
 	private static boolean checkIfSpotAlreadyExists(Spot spot) {

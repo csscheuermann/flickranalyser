@@ -31,6 +31,4 @@ public class PrepareSpotMapHandler implements IHtmlRequestHandler{
 
 		return null;
 	}
-
-
 }

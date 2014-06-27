@@ -77,10 +77,10 @@ public class HelperMethods {
 		bodyBegin.append("<div class='item active'>");
 		bodyBegin.append("<div class='carousel_img'>");
 		bodyBegin.append("<div class='carousel-caption'>");
-		bodyBegin.append("<div class='container-fluid'>");
+		bodyBegin.append("<div class='container'>");
 
 		bodyBegin.append("<div class='row'>");
-		bodyBegin.append("  <div class='col-xs-6 col-md-4'>Note: If you're viewing this page via a <code>file://</code> URL, the 'next' and 'previous' Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p></div>");
+		bodyBegin.append("  <div class='col-xs-6 col-md-4'>&nbsp;</div>");
 		bodyBegin.append(" <div class='col-xs-12 col-md-8 image-iphone'>&nbsp;</div>");
 		bodyBegin.append("</div>");
 
@@ -113,16 +113,13 @@ public class HelperMethods {
 		bodyBegin.append("<div class='item active'>");
 		bodyBegin.append("<div class='carousel_img'>");
 		bodyBegin.append("<div class='carousel-caption-map'>");
-		bodyBegin.append("<div class='container-fluid'>");
 
-		bodyBegin.append("<div class='container-fluid'>");
+		bodyBegin.append("<div class='container'>");
 		bodyBegin.append("<div class='row'>");
 		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:500px; width:100%'></div></div>");
 		bodyBegin.append("</div>");
 
 		bodyBegin.append("</div>");
-		bodyBegin.append("</div>");
-
 
 		bodyBegin.append("</div>");
 
@@ -133,8 +130,6 @@ public class HelperMethods {
 		bodyBegin.append("<a class='left carousel-control' href='#myCarousel' role='button' data-slide='prev'><span class='glyphicon glyphicon-chevron-left'></span></a>");
 		bodyBegin.append("<a class='right carousel-control' href='#myCarousel' role='button' data-slide='next'><span class='glyphicon glyphicon-chevron-right'></span></a>");
 		bodyBegin.append("</div><!-- /.carousel -->");
-
-
 		return bodyBegin.toString();
 	}
 
@@ -151,8 +146,6 @@ public class HelperMethods {
 
 	public static String createBodyEnd(){
 		StringBuilder bodyEnd = new StringBuilder();
-
-
 
 		bodyEnd.append("<!-- Bootstrap core JavaScript");
 		bodyEnd.append("================================================== -->");
