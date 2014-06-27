@@ -112,17 +112,14 @@ public class HelperMethods {
 		bodyBegin.append("<div class='carousel-inner'>");
 		bodyBegin.append("<div class='item active'>");
 		bodyBegin.append("<div class='carousel_img'>");
-		bodyBegin.append("<div class='carousel-caption'>");
+		bodyBegin.append("<div class='carousel-caption-map'>");
 		bodyBegin.append("<div class='container-fluid'>");
 
 		bodyBegin.append("<div class='container-fluid'>");
 		bodyBegin.append("<div class='row'>");
-		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:800px; width:400px'></div></div>");
+		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:500px; width:100%'></div></div>");
 		bodyBegin.append("</div>");
-		bodyBegin.append("<div class='row'>");
-		bodyBegin.append(" <div class='col-xs-12'>");
-		bodyBegin.append("	All additional Infos, in case click on map.");
-		bodyBegin.append("</div>");
+
 		bodyBegin.append("</div>");
 		bodyBegin.append("</div>");
 
@@ -188,7 +185,7 @@ public class HelperMethods {
 		navigation.append("</div>");
 		navigation.append("<div class='navbar-collapse collapse'>");
 		navigation.append("<ul class='nav navbar-nav'>");
-		navigation.append("<li class='active'><a href='#'>Home</a></li>");
+		navigation.append("<li class='active'><a href='/'>Home</a></li>");
 		navigation.append("<li><a href='#about'>About</a></li>");
 		navigation.append("<li><a href='#contact'>Contact</a></li>");
 		navigation.append("<li class='dropdown'>");

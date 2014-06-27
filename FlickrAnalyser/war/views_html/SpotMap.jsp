@@ -40,7 +40,40 @@
      // Add the circle for this city to the map.
      var cityCircle = new google.maps.Circle(populationOptions);
    }
+   
+   
+   function addElement(url, datastoreKey, idImage, idInformation, clusterInformationHtml) {
+   	var imageDiv = document.getElementById(idImage);
+    var divIdName = 'ClusterDetailPicture';
+	removeElement(divIdName, idImage);
+   
+   	var newdiv = document.createElement('img');
+   	newdiv.setAttribute('id',divIdName);
+	newdiv.setAttribute('src',url);
+  
+   	imageDiv.appendChild(newdiv);
+	
+	var inforamtionDiv = document.getElementById(idInformation);
+	var divIdNameInformation = 'ClusterDetailInforamtion';
+	removeElement(divIdNameInformation, idInformation);
+   	
+	var newdivInfo = document.createElement('div');
+   	newdivInfo.setAttribute('id',divIdNameInformation);
+	newdivInfo.innerHTML = clusterInformationHtml;
+	
+	inforamtionDiv.appendChild(newdivInfo);
+	
 
+   }
+
+   function removeElement(divNum, id) {
+   var d = document.getElementById(id);
+   var olddiv = document.getElementById(divNum);
+   if (olddiv != null){
+   	d.removeChild(olddiv);
+   }
+
+   }
 
 
 
@@ -53,26 +86,18 @@
    	    title: numberOfViews
    	});
 	
-   	var contentString = '<div id="content">' +
-   		'<h1> ClusterName </h1>' +
-   		'<p>Number of POI: ' + numberOfPOI + '<br />' +
-   		'Number of Views: ' + numberOfViews + '<br />'+
-   		'Touristicness in Percent: ' + overallTouristicnessInPoints + '<br />'+
-   		'Vote Count: ' + overallVotes + '<br />'+
-   		'DataStore Key: ' + datastoreKey + '</p>'+
-		
-		
-   		'<img src="' + url + '"/>';
-		 
-	
-   		var infowindow = new google.maps.InfoWindow({
-   		      content: contentString,
-   			  maxWidth: 300
-   		  });
+   	var clusterInformationHtml = '<table class="table table-hover">' +
+   		'<tr><td>ClusterName</td><td>Clustername STATIC YET</td></tr>' +
+		'<tr><td>Number of POI</td><td> ' + numberOfPOI + '</td></tr>' +
+		'<tr><td>overallTouristicnessInPoints</td><td>'  + overallTouristicnessInPoints + '</td></tr>' +
+		'<tr><td>Vote Count</td><td>' + overallVotes + '</td></tr>' +
+		'<tr><td>Number of Views</td><td>' + numberOfViews + '</td></tr>' +
+   	 	'<tr><td><button type="button" class="btn btn-success">SEEKRET</button></td><td><button type="button" class="btn btn-danger">TOURISTIC</button></td></tr>' +
+		'</table>';
 
 		
    		  google.maps.event.addListener(marker, 'click', function() {
-   		    infowindow.open(map,marker);
+			addElement( url, datastoreKey, 'spot-image', 'spot-information', clusterInformationHtml);
    		  });
 	
 	
@@ -128,7 +153,23 @@
 	<% out.println(HelperMethods.createNavigation()); %>
 	<% out.println(HelperMethods.createCaruselMap()); %>
 
-
+	<div class='container'>
+		<div class='row'>
+		    <div class="col-xs-6">
+				<div id="spot-image">
+					
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div id="spot-information">
+					
+				</div>
+			</div>
+		</div>
+		
+		</div>
+</div>
+	
 	
 	<% out.println(HelperMethods.createBodyEnd());%>
 	
