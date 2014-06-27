@@ -14,8 +14,7 @@ public class PrepareSpotMapHandler implements IHtmlRequestHandler{
 
 
 	@Override
-	public String performActionAndGetNextView(HttpServletRequest pRequest,
-			HttpSession pSession) {
+	public String performActionAndGetNextView(HttpServletRequest pRequest, HttpSession pSession) {
 		//GET THE PARAMS
 		String location = pRequest.getParameter(ParameterConstants.REQUEST_PARAM_LOCATION);
 		String filterStrategy = pRequest.getParameter(ParameterConstants.FILTER_STRATEGY);

@@ -9,7 +9,7 @@ public class HelperMethods {
 
 	public static final String PAGE_TITLE = "SECRET PLACES";
 	private static final Logger LOGGER = Logger.getLogger(HtmlStarterServlet.class.getName());
-	
+
 	public static <T> T instantiate(final String className, final Class<T> type){
 		try{
 			return type.cast(Class.forName(className).newInstance());
@@ -28,6 +28,16 @@ public class HelperMethods {
 
 	public static String getHTMLHeader(){
 		StringBuilder header = new StringBuilder();
+		header.append(getHTMLHeaderUnclosed());
+		header.append("</head>");
+		return header.toString();
+
+	}
+
+
+	public static String getHTMLHeaderUnclosed(){
+
+		StringBuilder header = new StringBuilder();
 
 		header.append("<head>");
 		header.append("<meta charset='utf-8'>");
@@ -37,36 +47,116 @@ public class HelperMethods {
 		header.append("<meta name='author' content=''>");
 		header.append("<link rel='icon' href='../../favicon.ico'>");
 
-		header.append("<title>"+ PAGE_TITLE + "</title>");
+		header.append("<title>SEEKRET</title>");
 
 		header.append("<!-- Bootstrap core CSS -->");
 		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/bootstrap.min.css' rel='stylesheet'>");
-
-		header.append("<!-- Custom styles for this template -->");
-		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/navbar.css' rel='stylesheet'>");
 
 		header.append("<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->");
 		header.append("<!--[if lt IE 9]>");
 		header.append("<script src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js'></script>");
 		header.append("<script src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js'></script>");
 		header.append("<![endif]-->");
-		header.append("</head>");
 
+		header.append("<!-- Custom styles for this template -->");
+		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/carousel.css' rel='stylesheet'>");
 		return header.toString();
 
 	}
+	public static String createCarusel(){
+		StringBuilder bodyBegin = new StringBuilder();
+
+		bodyBegin.append("<div id='myCarousel' class='carousel slide' data-ride='carousel'>");
+		bodyBegin.append("<!-- Indicators -->");
+		bodyBegin.append("<ol class='carousel-indicators'>");
+		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='0' class='active'></li>");
+		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='1'></li>");
+		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='2'></li>");
+		bodyBegin.append("</ol>");
+		bodyBegin.append("<div class='carousel-inner'>");
+		bodyBegin.append("<div class='item active'>");
+		bodyBegin.append("<div class='carousel_img'>");
+		bodyBegin.append("<div class='carousel-caption'>");
+		bodyBegin.append("<div class='container-fluid'>");
+
+		bodyBegin.append("<div class='row'>");
+		bodyBegin.append("  <div class='col-xs-6 col-md-4'>Note: If you're viewing this page via a <code>file://</code> URL, the 'next' and 'previous' Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p></div>");
+		bodyBegin.append(" <div class='col-xs-12 col-md-8 image-iphone'>&nbsp;</div>");
+		bodyBegin.append("</div>");
+
+		bodyBegin.append("</div>");
+
+		bodyBegin.append("</div>");
+		bodyBegin.append("</div>");
+		bodyBegin.append("</div>");
+		bodyBegin.append("</div>");
+		bodyBegin.append("<a class='left carousel-control' href='#myCarousel' role='button' data-slide='prev'><span class='glyphicon glyphicon-chevron-left'></span></a>");
+		bodyBegin.append("<a class='right carousel-control' href='#myCarousel' role='button' data-slide='next'><span class='glyphicon glyphicon-chevron-right'></span></a>");
+		bodyBegin.append("</div><!-- /.carousel -->");
+
+
+		return bodyBegin.toString();
+	}
+
+
+	public static String createCaruselMap(){
+		StringBuilder bodyBegin = new StringBuilder();
+
+		bodyBegin.append("<div id='myCarousel' class='carousel slide' data-ride='carousel'>");
+		bodyBegin.append("<!-- Indicators -->");
+		bodyBegin.append("<ol class='carousel-indicators'>");
+		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='0' class='active'></li>");
+		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='1'></li>");
+		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='2'></li>");
+		bodyBegin.append("</ol>");
+		bodyBegin.append("<div class='carousel-inner'>");
+		bodyBegin.append("<div class='item active'>");
+		bodyBegin.append("<div class='carousel_img'>");
+		bodyBegin.append("<div class='carousel-caption'>");
+		bodyBegin.append("<div class='container-fluid'>");
+
+		bodyBegin.append("<div class='container-fluid'>");
+		bodyBegin.append("<div class='row'>");
+		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:800px; width:400px'></div></div>");
+		bodyBegin.append("</div>");
+		bodyBegin.append("<div class='row'>");
+		bodyBegin.append(" <div class='col-xs-12'>");
+		bodyBegin.append("	All additional Infos, in case click on map.");
+		bodyBegin.append("</div>");
+		bodyBegin.append("</div>");
+		bodyBegin.append("</div>");
+
+
+		bodyBegin.append("</div>");
+
+		bodyBegin.append("</div>");
+		bodyBegin.append("</div>");
+		bodyBegin.append("</div>");
+		bodyBegin.append("</div>");
+		bodyBegin.append("<a class='left carousel-control' href='#myCarousel' role='button' data-slide='prev'><span class='glyphicon glyphicon-chevron-left'></span></a>");
+		bodyBegin.append("<a class='right carousel-control' href='#myCarousel' role='button' data-slide='next'><span class='glyphicon glyphicon-chevron-right'></span></a>");
+		bodyBegin.append("</div><!-- /.carousel -->");
+
+
+		return bodyBegin.toString();
+	}
+
+
+
 
 	public static String createBodyBegin(){
 		StringBuilder bodyBegin = new StringBuilder();
 		bodyBegin.append("<body>");
-		bodyBegin.append("<div class='container'>");
 		return bodyBegin.toString();
 	}
+
+
 
 	public static String createBodyEnd(){
 		StringBuilder bodyEnd = new StringBuilder();
 
-		bodyEnd.append("</div> <!-- /container -->");
+
+
 		bodyEnd.append("<!-- Bootstrap core JavaScript");
 		bodyEnd.append("================================================== -->");
 		bodyEnd.append("<!-- Placed at the end of the document so the pages load faster -->");
@@ -82,9 +172,11 @@ public class HelperMethods {
 
 		StringBuilder navigation = new StringBuilder();
 
-		navigation.append("<!-- Static navbar -->");
-		navigation.append("<div class='navbar navbar-default' role='navigation'>");
-		navigation.append("<div class='container-fluid'>");
+		navigation.append("<div class='navbar-wrapper'>");
+		navigation.append("<div class='container'>");
+
+		navigation.append("<div class='navbar navbar-inverse navbar-static-top' role='navigation'>");
+		navigation.append("<div class='container'>");
 		navigation.append("<div class='navbar-header'>");
 		navigation.append("<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>");
 		navigation.append("<span class='sr-only'>Toggle navigation</span>");
@@ -92,13 +184,13 @@ public class HelperMethods {
 		navigation.append("<span class='icon-bar'></span>");
 		navigation.append("<span class='icon-bar'></span>");
 		navigation.append("</button>");
-		navigation.append("<a class='navbar-brand' href='#'>Project name</a>");
+		navigation.append("<a class='navbar-brand' href='#'><img src='/res_html/img/banner.png' width='150px' alt='SEEKRET'/></a>");
 		navigation.append("</div>");
 		navigation.append("<div class='navbar-collapse collapse'>");
 		navigation.append("<ul class='nav navbar-nav'>");
-		navigation.append("<li class='active'><a href='#'>Link</a></li>");
-		navigation.append("<li><a href='#'>Link</a></li>");
-		navigation.append("<li><a href='#'>Link</a></li>");
+		navigation.append("<li class='active'><a href='#'>Home</a></li>");
+		navigation.append("<li><a href='#about'>About</a></li>");
+		navigation.append("<li><a href='#contact'>Contact</a></li>");
 		navigation.append("<li class='dropdown'>");
 		navigation.append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Dropdown <span class='caret'></span></a>");
 		navigation.append("<ul class='dropdown-menu' role='menu'>");
@@ -112,13 +204,11 @@ public class HelperMethods {
 		navigation.append("</ul>");
 		navigation.append("</li>");
 		navigation.append("</ul>");
-		navigation.append("<ul class='nav navbar-nav navbar-right'>");
-		navigation.append("<li class='active'><a href='./'>Default</a></li>");
-		navigation.append("<li><a href='../navbar-static-top/'>Static top</a></li>");
-		navigation.append("<li><a href='../navbar-fixed-top/'>Fixed top</a></li>");
-		navigation.append("</ul>");
-		navigation.append("</div><!--/.nav-collapse -->");
-		navigation.append("</div><!--/.container-fluid -->");
+		navigation.append("</div>");
+		navigation.append("</div>");
+		navigation.append("</div>");
+
+		navigation.append("</div>");
 		navigation.append("</div>");
 
 		return navigation.toString();
