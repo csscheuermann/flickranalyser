@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"p_qcyFV0KQVqSB1Aq3pqmPu-2MY/ztcoF4mZSsYIVdFwo7-mop4NNHg\"",
+ "etag": "\"p_qcyFV0KQVqSB1Aq3pqmPu-2MY/h96ixrIwU9IVNPmsoP4xFxgCCq0\"",
  "discoveryVersion": "v1",
  "id": "spotAPI:v1",
  "name": "spotAPI",
@@ -95,8 +95,8 @@
   }
  },
  "methods": {
-  "spotAPI.evaluateCluster": {
-   "id": "spotAPI.evaluateCluster",
+  "spotAPI.putSpotInCronQueue": {
+   "id": "spotAPI.putSpotInCronQueue",
    "parameters": {
     "clusterRadius": {
      "type": "number",
@@ -117,7 +117,7 @@
      "required": true,
      "format": "double"
     },
-    "name": {
+    "spotName": {
      "type": "string",
      "required": true
     },
@@ -128,7 +128,7 @@
     }
    },
    "parameterOrder": [
-    "name",
+    "spotName",
     "latitude",
     "longitude",
     "clusterRadius",

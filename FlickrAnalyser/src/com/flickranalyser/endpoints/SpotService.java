@@ -12,12 +12,9 @@ import com.javadocmd.simplelatlng.LatLng;
 
 @Api(name="spotAPI", version="v1", description="API for Spots.")
 public class SpotService {
-
 	
-	
-	@ApiMethod(name="evaluateCluster")
-	public Response putSpotInCronQueue(
-			@Named("name") String name, 
+	@ApiMethod(name="putSpotInCronQueue")
+	public Response putSpotInCronQueue(@Named("spotName") String spotName, 
 			@Named("latitude") double latitude,
 			@Named("longitude")double longitude,
 			@Named("clusterRadius")double clusterRadius,
@@ -25,7 +22,7 @@ public class SpotService {
 			@Named("spotRadius")double spotRadius
 			) {
 		LatLng geoPoint = new LatLng(latitude, longitude);
-		Spot spot = new Spot(geoPoint,name,description,clusterRadius,spotRadius, null);
+		Spot spot = new Spot(geoPoint, spotName, description, clusterRadius, spotRadius, null);
 		
 		return PFSaverSpotToCrawl.saveSpotToDatastore(spot);
 		

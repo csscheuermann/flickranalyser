@@ -25,8 +25,8 @@
     "maxAge" : 0
   },
   "methods" : {
-    "spotAPI.evaluateCluster" : {
-      "path" : "putSpotInCronQueue/{name}/{latitude}/{longitude}/{clusterRadius}/{description}/{spotRadius}",
+    "spotAPI.putSpotInCronQueue" : {
+      "path" : "putSpotInCronQueue/{spotName}/{latitude}/{longitude}/{clusterRadius}/{description}/{spotRadius}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -35,7 +35,7 @@
       "rosyMethod" : "com.flickranalyser.endpoints.SpotService.putSpotInCronQueue",
       "request" : {
         "parameters" : {
-          "name" : {
+          "spotName" : {
             "type" : "string",
             "required" : true
           },
