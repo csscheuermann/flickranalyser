@@ -22,7 +22,7 @@ public class SpotService {
 			@Named("spotRadius")double spotRadius
 			) {
 		LatLng geoPoint = new LatLng(latitude, longitude);
-		Spot spot = new Spot(geoPoint, spotName, description, clusterRadius, spotRadius, null);
+		Spot spot = new Spot(geoPoint, spotName, description, clusterRadius, spotRadius, null,0,0);
 		
 		return PFSaverSpotToCrawl.saveSpotToDatastore(spot);
 		

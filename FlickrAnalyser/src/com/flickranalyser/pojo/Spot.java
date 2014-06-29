@@ -17,14 +17,25 @@ public class Spot implements Serializable{
 	private double spotRadiusInKm = 25;
 	private double clusterRadiusInKm = 0.1;
 	private List<Cluster> clusters;
-	
 	private List<String> topThreePictures;
 	private Key dataStoreKey;
+	private int overallMaxPOINumberPerCluster;
+	private int overallMaxViewNumberPerCluster;
 	
 	
 	public Spot() {
 		//DO NOTHING
 	}
+	
+	public int getOverallMaxViewNumberPerCluster() {
+		return overallMaxViewNumberPerCluster;
+	}
+
+
+	public int getOverallMaxPOINumberPerCluster() {
+		return overallMaxPOINumberPerCluster;
+	}
+
 	public Spot(LatLng latLngPoint, String name, String description) {
 		this.topThreePictures = new LinkedList<String>();
 		this.latLngPoint = latLngPoint;
@@ -33,11 +44,14 @@ public class Spot implements Serializable{
 		this.clusters = new LinkedList<Cluster>();
 	}
 	
-	public Spot(LatLng latLngPoint, String name, String description, double clusterRadiusInKm, double spotRadiusInKm, Key dataStoreKey) {
+	public Spot(LatLng latLngPoint, String name, String description, double clusterRadiusInKm, double spotRadiusInKm, Key dataStoreKey, int maxPOINumberPerCluster, int maxViewNumberPerCluster) {
 		this( latLngPoint,  name,  description);
 		this.clusterRadiusInKm = clusterRadiusInKm;
 		this.spotRadiusInKm = spotRadiusInKm;
 		this.dataStoreKey = dataStoreKey;
+		this.overallMaxPOINumberPerCluster = maxPOINumberPerCluster;
+		this.overallMaxViewNumberPerCluster = maxViewNumberPerCluster;
+		
 	}
 
 	public int getMaxClusterViews(){
@@ -50,6 +64,40 @@ public class Spot implements Serializable{
 		return max;
 	}
 	
+	private void setOverallMaxValues(){
+		overallMaxPOINumberPerCluster = Integer.MIN_VALUE;
+		overallMaxViewNumberPerCluster = Integer.MIN_VALUE;
+		for (Cluster Cluster : clusters) {
+			if (Cluster.getNumberOfPOIs() > overallMaxPOINumberPerCluster){
+				overallMaxPOINumberPerCluster = Cluster.getNumberOfPOIs();
+			}
+			if (Cluster.getOverallViews() > overallMaxViewNumberPerCluster){
+				overallMaxViewNumberPerCluster = Cluster.getOverallViews();
+			}
+		}
+	}
+	
+
+	public int getMaxNumberOfPOIsPerCluster(){
+		int maxPOINumberPerCluster = Integer.MIN_VALUE;
+		for (Cluster Cluster : clusters) {
+			if (Cluster.getNumberOfPOIs() > maxPOINumberPerCluster){
+				maxPOINumberPerCluster = Cluster.getNumberOfPOIs();
+			}
+		}
+		return maxPOINumberPerCluster;
+	}
+	
+	public int getMaxNumberOfViewsPerCluster(){
+		int maxViewNumberPerCluster = Integer.MIN_VALUE;
+		for (Cluster Cluster : clusters) {
+			if (Cluster.getOverallViews() > maxViewNumberPerCluster){
+				maxViewNumberPerCluster = Cluster.getOverallViews();
+			}
+		}
+		return maxViewNumberPerCluster;
+	}
+	
 	public  double getClusterRadiusInKm() {
 		return clusterRadiusInKm;
 	}
@@ -60,6 +108,7 @@ public class Spot implements Serializable{
 
 	public void addClusterTo(Cluster cluster) {
 		clusters.add(cluster);
+		setOverallMaxValues();
 	}
 
 
@@ -119,7 +168,7 @@ public class Spot implements Serializable{
 	public  void setClusterRadiusInKm(double clusterRadiusInKm) {
 		this.clusterRadiusInKm = clusterRadiusInKm;
 	}
-
+	
 	public Key getDataStoreKey() {
 		return dataStoreKey;
 	}

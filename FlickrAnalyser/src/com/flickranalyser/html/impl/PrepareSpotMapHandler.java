@@ -25,8 +25,12 @@ public class PrepareSpotMapHandler implements IHtmlRequestHandler{
 
 		IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(fullClassPath.toString(), IFilterStrategy.class);
 		Spot spot = MemcacheSpot.getSpotForSpotName(location);
+
+		
+		
 		spot.setCluster(choosenFilterStrategy.filterCluster(spot.getCluster()));
 
+	
 		pRequest.setAttribute("spot", spot );
 
 		return null;

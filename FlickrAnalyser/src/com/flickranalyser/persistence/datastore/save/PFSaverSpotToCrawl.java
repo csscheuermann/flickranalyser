@@ -38,6 +38,8 @@ public class PFSaverSpotToCrawl {
 					spotEntity.setProperty(PropertiesSpotToCrawl.LATITUDE.toString(), spot.getLatLngPoint().getLatitude());
 					spotEntity.setProperty(PropertiesSpotToCrawl.LONGITUDE.toString(), spot.getLatLngPoint().getLongitude());
 					spotEntity.setProperty(PropertiesSpotToCrawl.NAME.toString(), spot.getName());
+					spotEntity.setProperty(PropertiesSpotToCrawl.OVERALL_MAXIMUM_POI_COUNT.toString(), spot.getOverallMaxPOINumberPerCluster());
+					spotEntity.setProperty(PropertiesSpotToCrawl.OVERALL_MAXIMUM_VIEW_COUNT.toString(), spot.getOverallMaxViewNumberPerCluster());
 					datastore.put(txn, spotEntity);
 					txn.commit();
 					log.log(Level.INFO, "END TRANSACTION: " + spot.getName());

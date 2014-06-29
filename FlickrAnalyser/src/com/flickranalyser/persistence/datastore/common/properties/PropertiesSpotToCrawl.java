@@ -8,7 +8,9 @@ public enum PropertiesSpotToCrawl {
 	LONGITUDE("Longitude"),
 	DESCRIPTION("Description"),
 	SPOT_RADIUS_IN_KM("SpotRadiusKM"),
-	CLUSTER_RADIUS_IN_KM("ClusterRadiusInKM");
+	CLUSTER_RADIUS_IN_KM("ClusterRadiusInKM"),
+	OVERALL_MAXIMUM_VIEW_COUNT("OverallMaxiumumViewCount"),
+	OVERALL_MAXIMUM_POI_COUNT("OverallMaxiumumPOICount");
 	
 	private final String propertieName;
 	

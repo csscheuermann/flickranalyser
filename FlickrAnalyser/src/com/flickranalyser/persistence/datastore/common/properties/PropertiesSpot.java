@@ -9,6 +9,8 @@ public enum PropertiesSpot {
 	DESCRIPTION("Description"),
 	SPOT_RADIUS_IN_KM("SpotRadiusKM"),
 	OVERALL_TOURISTICNESS_IN_PERCENT("OverallTouristicnessInPercent"),
+	OVERALL_MAXIMUM_POI_COUNT("OverallMaxiumumPOICount"),
+	OVERALL_MAXIMUM_VIEW_COUNT("OverallMaxiumumViewCount"),
 	CLUSTER_RADIUS_IN_KM("ClusterRadiusInKM");
 	
 	private final String propertieName;

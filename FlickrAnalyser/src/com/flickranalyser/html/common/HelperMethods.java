@@ -99,37 +99,15 @@ public class HelperMethods {
 	}
 
 
-	public static String createCaruselMap(){
+	public static String createMap(){
 		StringBuilder bodyBegin = new StringBuilder();
 
-		bodyBegin.append("<div id='myCarousel' class='carousel slide' data-ride='carousel'>");
-		bodyBegin.append("<!-- Indicators -->");
-		bodyBegin.append("<ol class='carousel-indicators'>");
-		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='0' class='active'></li>");
-		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='1'></li>");
-		bodyBegin.append("<li data-target='#myCarousel' data-slide-to='2'></li>");
-		bodyBegin.append("</ol>");
-		bodyBegin.append("<div class='carousel-inner'>");
-		bodyBegin.append("<div class='item active'>");
-		bodyBegin.append("<div class='carousel_img'>");
-		bodyBegin.append("<div class='carousel-caption-map'>");
-
 		bodyBegin.append("<div class='container'>");
-		bodyBegin.append("<div class='row'>");
-		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:500px; width:100%'></div></div>");
+			bodyBegin.append("<div class='row'>");
+				bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:500px; width:100%'></div></div>");
+			bodyBegin.append("</div>");
 		bodyBegin.append("</div>");
 
-		bodyBegin.append("</div>");
-
-		bodyBegin.append("</div>");
-
-		bodyBegin.append("</div>");
-		bodyBegin.append("</div>");
-		bodyBegin.append("</div>");
-		bodyBegin.append("</div>");
-		bodyBegin.append("<a class='left carousel-control' href='#myCarousel' role='button' data-slide='prev'><span class='glyphicon glyphicon-chevron-left'></span></a>");
-		bodyBegin.append("<a class='right carousel-control' href='#myCarousel' role='button' data-slide='next'><span class='glyphicon glyphicon-chevron-right'></span></a>");
-		bodyBegin.append("</div><!-- /.carousel -->");
 		return bodyBegin.toString();
 	}
 
@@ -158,11 +136,16 @@ public class HelperMethods {
 	}
 
 
-	public static String createNavigation(){
+	public static String createNavigation(boolean isIndexPage){
 
 		StringBuilder navigation = new StringBuilder();
 
+		if (isIndexPage){
 		navigation.append("<div class='navbar-wrapper'>");
+		}else{
+			navigation.append("<div class='navbar-wrapper-normal'>");
+		
+		}
 		navigation.append("<div class='container'>");
 
 		navigation.append("<div class='navbar navbar-inverse navbar-static-top' role='navigation'>");

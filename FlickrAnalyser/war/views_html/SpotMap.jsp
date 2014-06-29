@@ -19,10 +19,11 @@
 	<% out.println(HelperMethods.getHTMLHeaderUnclosed()); %>
 	
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-
-   <script type="text/javascript">
-   var map;
-
+	<script src="/res_html/js/Chart.js"></script>
+	<script src="/res_html/js/ClusterDetails.js"></script>
+   	<script type="text/javascript">
+		var map;
+		var lastClickedMarker = null;
 
    //Construct the circle for each value in citymap.
    // Note: We scale the area of the circle based on the population.
@@ -40,70 +41,77 @@
      // Add the circle for this city to the map.
      var cityCircle = new google.maps.Circle(populationOptions);
    }
-   
-   
-   function addElement(url, datastoreKey, idImage, idInformation, clusterInformationHtml) {
-   	var imageDiv = document.getElementById(idImage);
-    var divIdName = 'ClusterDetailPicture';
-	removeElement(divIdName, idImage);
-   
-   	var newdiv = document.createElement('img');
-   	newdiv.setAttribute('id',divIdName);
-	newdiv.setAttribute('src',url);
   
-   	imageDiv.appendChild(newdiv);
-	
-	var inforamtionDiv = document.getElementById(idInformation);
-	var divIdNameInformation = 'ClusterDetailInforamtion';
-	removeElement(divIdNameInformation, idInformation);
-   	
-	var newdivInfo = document.createElement('div');
-   	newdivInfo.setAttribute('id',divIdNameInformation);
-	newdivInfo.innerHTML = clusterInformationHtml;
-	
-	inforamtionDiv.appendChild(newdivInfo);
-	
 
-   }
-
-   function removeElement(divNum, id) {
-   var d = document.getElementById(id);
-   var olddiv = document.getElementById(divNum);
-   if (olddiv != null){
-   	d.removeChild(olddiv);
-   }
-
-   }
-
-
-
-   function addMarker(lgt, lat, numberOfViews, url, numberOfPOI , overallTouristicnessInPoints, datastoreKey, overallVotes) {
+   function addMarker(lgt, lat, numberOfViews, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl) {
    	// To add the marker to the map, use the 'map' property
    	var marker = new google.maps.Marker({
    	    position: new google.maps.LatLng(lgt, lat),
-   	    url:  url,
    	    map: map,
-   	    title: numberOfViews
+   	    title: 'CLUSTER NAME STILL TO DO',
+		icon: '/res_html/img/eye_not_watched_yet.png'
    	});
 	
-   	var clusterInformationHtml = '<table class="table table-hover">' +
-   		'<tr><td>ClusterName</td><td>Clustername STATIC YET</td></tr>' +
-		'<tr><td>Number of POI</td><td> ' + numberOfPOI + '</td></tr>' +
-		'<tr><td>overallTouristicnessInPoints</td><td>'  + overallTouristicnessInPoints + '</td></tr>' +
-		'<tr><td>Vote Count</td><td>' + overallVotes + '</td></tr>' +
-		'<tr><td>Number of Views</td><td>' + numberOfViews + '</td></tr>' +
-   	 	'<tr><td><button type="button" class="btn btn-success">SEEKRET</button></td><td><button type="button" class="btn btn-danger">TOURISTIC</button></td></tr>' +
-		'</table>';
-
+   google.maps.event.addListener(marker, 'click', function() {
+   
+   	if (lastClickedMarker != null){
+   		lastClickedMarker.setIcon('/res_html/img/eye_already_watched.png');
+		lastClickedMarker = marker;
+	}else{
+		lastClickedMarker = marker;
+	}
+	
+	marker.setIcon('/res_html/img/eye_currently_watching.png');
+	
+	
+		var clusterDetails = new ClusterDetails();
+		clusterDetails.addElementImage('spot-image', pictureUrl);
 		
-   		  google.maps.event.addListener(marker, 'click', function() {
-			addElement( url, datastoreKey, 'spot-image', 'spot-information', clusterInformationHtml);
-   		  });
-	
-	
-	
-   		  }
+		addDoughnutChart(viewCountRelativeInPercent, 'viewCountRelative', "#F7464A" , "#E2EAE9");
+		addDoughnutChart(pOICountRealativeInPercent, 'poiCountRelative', "#F7464A", "#E2EAE9");
+		addDoughnutChart(touristicnessInPercent, 'touristicness', "#FFBB33" , "#99CC00");
+		
+		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
+		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
+		
+		
+		
+		
+		
+   });
+   
+   }
+   
+   
+   function addDoughnutChart(percentage, elementId, colorPercent, colorRemainer) {
 
+   	var remainder = 100 - percentage;
+   	var data = [
+   		{
+   			value: percentage,
+   			color: colorPercent
+   		},
+   		{
+   			value : remainder,
+   			color : colorRemainer
+   		}
+   	]
+	
+   	//Get the context of the canvas element we want to select
+   	var ctx = document.getElementById(elementId).getContext("2d");
+	
+   	var options = {
+   	segmentShowStroke : true
+   	};
+	
+   	new Chart(ctx).Doughnut(data,options);
+	
+	
+	}
+
+
+
+	
    <%  Spot spot = (Spot) request.getAttribute("spot"); %>
 
    	function initialize() {
@@ -112,29 +120,54 @@
       	 <% out.println("center: new google.maps.LatLng("+ spot.getLatLngPoint().getLatitude()+","+  spot.getLatLngPoint().getLongitude()+")");%>
     	};
      	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+		
     <%
     	int maxValue = spot.getMaxClusterViews();
      	List<Cluster> cluster = spot.getCluster();
+		
+		int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
+		int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
+		
+		int maxNumberOfPOIs = spot.getMaxNumberOfPOIsPerCluster();	
+		int maxNumberOfViews = spot.getMaxNumberOfViewsPerCluster();	
+		
+		
      	String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
      	String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
      	String PHOTO_SEARCH_REQUEST = "flickr.photos.geo.photosForLocation";
-  	
+ 
    	for (Cluster currentCluster : cluster){
-   		double opacity = ((double) currentCluster.getOverallViews()/maxValue);
+		
+		int numberOfPOIsForCurrentCluster = currentCluster.getNumberOfPOIs();
+   		
        	double currentLat = currentCluster.getCenterOfCluster().getLatitude();
        	double currentLng = currentCluster.getCenterOfCluster().getLongitude();
+   		int clusterOverallViews = currentCluster.getOverallViews();
+		String imageUrl = currentCluster.getUrlOfMostViewedPicture();
 		
+		double viewCountRealativeInPercent = ((double) (100.00/maxNumberOfViews)*clusterOverallViews);
+		double pOICountRealativeInPercent = ((double) (100.00/maxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
+		double touristicnessInPercent = currentCluster.getOverallTouristicnessInPointsFrom1To10()*100;
 		
-   		int overallViews = currentCluster.getOverallViews();
-   		int pOICount = currentCluster.getNumberOfPOIs();
+		double pOICountOverallInPercent = ((double) (100.00/overallMaxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
+		double viewCountOverallInPercent = ((double) (100.00/overallMaxNumberOfViews)*clusterOverallViews);
 		
-   		double overallTouristicnessInPointsFrom1To10 = currentCluster.getOverallTouristicnessInPointsFrom1To10();	
-   		int overallTouristicnessVotes = currentCluster.getOverallTouristicnessVotes();	
-		
-       	if (currentCluster.getOverallViews() > 200){
-     			out.println("addMarker("+ currentLat +"," + currentLng + ", '" + overallViews + "', '" + currentCluster.getUrlOfMostViewedPicture() + "', '" + pOICount +  "', '" + overallTouristicnessInPointsFrom1To10 + "', '" +	currentCluster.getDatastoreClusterKey() + "', '" +	overallTouristicnessVotes + "');");
+		if (clusterOverallViews > 200){
+     			out.println("addMarker("+ 
+					currentLat 		+ "," +
+					currentLng 		+ "," +
+					clusterOverallViews 	+ "," +
+					viewCountRealativeInPercent 	+ "," +
+					pOICountRealativeInPercent 	+ "," +	
+					touristicnessInPercent 	+ "," +	
+					pOICountOverallInPercent 	+ "," +	
+					viewCountOverallInPercent 	+ ",'" +		
+					currentCluster.getUrlOfMostViewedPicture() + "');");
+				
+				
        	}
-       	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacity + ");");
+		double opacityViewCountRelative = viewCountRealativeInPercent/100.00;
+       	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + ");");
    	}
      	%>
    }
@@ -150,25 +183,97 @@
 	
 	
 	<% out.println(HelperMethods.createBodyBegin()); %>
-	<% out.println(HelperMethods.createNavigation()); %>
-	<% out.println(HelperMethods.createCaruselMap()); %>
+	<% out.println(HelperMethods.createNavigation(false)); %>
+	<% out.println(HelperMethods.createMap()); %>
+	
 
 	<div class='container'>
 		<div class='row'>
-		    <div class="col-xs-6">
-				<div id="spot-image">
-					
-				</div>
-			</div>
-			<div class="col-xs-6">
-				<div id="spot-information">
-					
-				</div>
+		    <div class="col-xs-12">
+				<h2>Cluster Information</h2>
 			</div>
 		</div>
+	</div>	
+				
+				
+	<div class='container'>
+		<div class='row'>
+		    <div class="col-xs-4">
+				<h4 class="centeralized-div" >CLUSTERNAME TO DO</h4>
+			</div>
+			
+			
+			<div class="col-xs-4">
+				<h4 class="centeralized-div" >VIEW COUNT (RELATIVE)</h4>
+			</div>
+			
+			<div class="col-xs-4">
+				<h4 class="centeralized-div" >POI COUNT (RELATIVE)</h4>
+			</div>
+			
+		</div>	
 		
-		</div>
-</div>
+		<div class='row'>
+		    <div class="col-xs-4">
+				<div class="centeralized-div" id="spot-image">	
+				</div>
+			</div>
+			
+			
+			<div class="col-xs-4">
+				<div class="centeralized-div">
+					<canvas id="viewCountRelative" width="200" height="200"></canvas>
+				</div>
+			</div>
+			
+			<div class="col-xs-4">
+				<div class="centeralized-div">
+					<canvas id="poiCountRelative" width="200" height="200"></canvas>
+				</div>
+			</div>
+			
+		</div>	
+	</div>
+
+
+		<div class='container'>
+			<div class='row'>
+			    <div class="col-xs-4">
+					<h4 class="centeralized-div" >SEEKRET-METER (USER DEFINED)</h4>
+				</div>
+			
+			
+				<div class="col-xs-4">
+					<h4 class="centeralized-div" >VIEW COUNT (ABSOLUTE)</h4>
+				</div>
+			
+				<div class="col-xs-4">
+					<h4 class="centeralized-div" >POI COUNT (ABSOLUTE)</h4>
+				</div>
+			
+			</div>	
+			
+			<div class='row'>
+			    <div class="col-xs-4">
+					<div class="centeralized-div">
+						<canvas id="touristicness" width="200" height="200"></canvas>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="centeralized-div">
+						<canvas id="poiCountOverall" width="200" height="200"></canvas>
+					</div>
+				</div>
+			
+				<div class="col-xs-4">
+					<div class="centeralized-div">
+						<canvas id="viewCountOverall" width="200" height="200"></canvas>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			
 	
 	
 	<% out.println(HelperMethods.createBodyEnd());%>

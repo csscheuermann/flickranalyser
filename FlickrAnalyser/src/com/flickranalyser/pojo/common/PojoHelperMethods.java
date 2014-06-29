@@ -22,8 +22,10 @@ public class PojoHelperMethods {
 		String name = (String) spotAsEntity.getProperty(PropertiesSpot.NAME.toString());
 		double spotRadiusInKm = ((Double)spotAsEntity.getProperty(PropertiesSpot.SPOT_RADIUS_IN_KM.toString())).doubleValue();
 		double clusterRadiusInKm = ((Double)spotAsEntity.getProperty(PropertiesSpot.CLUSTER_RADIUS_IN_KM.toString())).doubleValue();
-
-		return new Spot(latLongPoint,name, description, clusterRadiusInKm, spotRadiusInKm,datastoreKey);
+		int maxPOINumberPerCluster = ((Number)spotAsEntity.getProperty(PropertiesSpot.OVERALL_MAXIMUM_POI_COUNT.toString())).intValue();
+		int maxViewNumberPerCluster = ((Number)spotAsEntity.getProperty(PropertiesSpot.OVERALL_MAXIMUM_VIEW_COUNT.toString())).intValue();
+		
+		return new Spot(latLongPoint,name, description, clusterRadiusInKm, spotRadiusInKm,datastoreKey, maxPOINumberPerCluster, maxViewNumberPerCluster);
 	}
 
 	public static List<Cluster> createClusterListFromEntity(List<Entity> asList) {

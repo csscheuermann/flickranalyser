@@ -8,7 +8,7 @@
 	
 	<% out.println(HelperMethods.getHTMLHeader()); %>
 	<% out.println(HelperMethods.createBodyBegin()); %>
-	<% out.println(HelperMethods.createNavigation()); %>
+	<% out.println(HelperMethods.createNavigation(true)); %>
 	<% out.println(HelperMethods.createCarusel()); %>
 	
 

@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/clusterAPI/v1/20140627230844/java/1.16.0-rc/flickeranalyser_appspot_com-clusterAPI-v1-20140627230844-java-1.16.0-rc-sources.jar", 
-      "path": "flickeranalyser_appspot_com-clusterAPI-v1-20140627230844-java-1.16.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/clusterAPI/v1/20140628131501/java/1.16.0-rc/flickeranalyser_appspot_com-clusterAPI-v1-20140628131501-java-1.16.0-rc-sources.jar", 
+      "path": "flickeranalyser_appspot_com-clusterAPI-v1-20140628131501-java-1.16.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2014-06-27 23:08"
+      "timestamp": "2014-06-28 13:15"
     }, 
     {
-      "path": "flickeranalyser_appspot_com-clusterAPI-v1-20140627230844-java-1.16.0-rc.jar.properties", 
+      "path": "flickeranalyser_appspot_com-clusterAPI-v1-20140628131501-java-1.16.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -701,5 +701,5 @@
   "version": "v1", 
   "language_version": "1.16.0-rc", 
   "id": "clusterAPI:v1", 
-  "revision": 20140627230844
+  "revision": 20140628131501
 }

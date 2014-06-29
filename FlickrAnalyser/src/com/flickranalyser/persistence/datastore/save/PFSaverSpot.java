@@ -37,6 +37,10 @@ public class PFSaverSpot {
 				spotEntity.setProperty(PropertiesSpot.LATITUDE.toString(), spot.getLatLngPoint().getLatitude());
 				spotEntity.setProperty(PropertiesSpot.LONGITUDE.toString(), spot.getLatLngPoint().getLongitude());
 				spotEntity.setProperty(PropertiesSpot.NAME.toString(), spot.getName());
+				spotEntity.setProperty(PropertiesSpot.OVERALL_MAXIMUM_POI_COUNT.toString(), spot.getOverallMaxPOINumberPerCluster());
+				spotEntity.setProperty(PropertiesSpot.OVERALL_MAXIMUM_VIEW_COUNT.toString(), spot.getOverallMaxViewNumberPerCluster());
+				
+				
 				Key spotDatastoreKey = datastore.put(txn, spotEntity);
 				
 				
@@ -81,6 +85,8 @@ public class PFSaverSpot {
 			currentCluster.setProperty(PropertiesCluster.NUMBER_OF_POIS.toString(), nextCluster.getNumberOfPOIs() );
 			currentCluster.setProperty(PropertiesCluster.AVARAGE_TOURISTICNESS_IN_POINTS_FROM_1_TO_10.toString(), nextCluster.getOverallTouristicnessInPointsFrom1To10() );
 			currentCluster.setProperty(PropertiesCluster.COUNT_OF_TOURISTICNESS_EVALUATION.toString(), nextCluster.getOverallTouristicnessVotes() );
+
+			
 			datastore.put(txn, currentCluster);
 		}
 	}
