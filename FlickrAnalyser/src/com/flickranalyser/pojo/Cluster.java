@@ -5,48 +5,67 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.NotPersistent;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.javadocmd.simplelatlng.LatLng;
 
+@PersistenceCapable
 public class Cluster implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
 	
-	
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key datastoreClusterKey;
 	
-	/** Center of the Cluster */
-	private LatLng centerOfCluster;
+	@Persistent
+	private double latitude;
+	
+	@Persistent
+	private double longitude;
 	
 	/** Name of the Spot */
+	@Persistent
 	private String name;
 	
 	/** Description not implemented yet */
+	@Persistent
 	private String description;
 	
-	/** POIs, they are not stores in Datastore */
+	/** POIs, they are not stored in Datastore */
+	@NotPersistent
 	private final List<PointOfInterest> pointsOfInterest;
 	
 	/** Overall views, its the sum of every POIs views */
+	@Persistent
 	private int overallViews;
 	
 	/** URL of the most viewed picture */
-	private String urlOfMostViewedPicture;
+	@Persistent
+	private List<String> urlOfMostViewedPicture;
 	
-	/** Corresponds with the List size of POIs, but we will not store this POIs. They are too much */
+	/** Corresponds with the list size of POIs, but we will not store this POIs. They are too much */
+	@Persistent
 	private int numberOfPOIs;
 	
 	/** The avarage touristicness evaluation factor from 1 to 10 */
+	@Persistent
 	private double overallTouristicnessInPointsFrom1To10;
 	
 	/** Number of touristicness votes */
+	@Persistent
 	private int overallTouristicnessVotes;
 	
 	
-	public Cluster(LatLng centerOfCluster, String name, String description) {
-		this.centerOfCluster = centerOfCluster;
+	public Cluster(double latitude, double longitude, String name, String description) {
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.name = name;
 		this.description = description;
 		this.pointsOfInterest = new LinkedList<PointOfInterest>();
@@ -82,8 +101,8 @@ public class Cluster implements Serializable {
 	}
 
 
-	public Cluster(Key datastoreClusterKey, LatLng centerOfCluster, String name, String description,int overallViews, String urlOfMostViewedPicture, int numberOfPOIs, double overallTouristicnessInPointsFrom1To10,int overallTouristicnessVotes) {
-		this(centerOfCluster,name,description);
+	public Cluster(Key datastoreClusterKey, double latitude, double longitude, String name, String description,int overallViews, List<String> urlOfMostViewedPicture, int numberOfPOIs, double overallTouristicnessInPointsFrom1To10,int overallTouristicnessVotes) {
+		this(latitude,longitude ,name,description);
 		this.overallViews = overallViews;
 		this.urlOfMostViewedPicture = urlOfMostViewedPicture;
 		this.numberOfPOIs = numberOfPOIs;
@@ -107,7 +126,7 @@ public class Cluster implements Serializable {
 
 
 
-	public String getUrlOfMostViewedPicture() {
+	public List<String> getUrlOfMostViewedPicture() {
 		return urlOfMostViewedPicture;
 	}
 
@@ -128,7 +147,7 @@ public class Cluster implements Serializable {
 
 
 
-	public void setUrlOfMostViewedPicture(String urlOfMostViewedPicture) {
+	public void setUrlOfMostViewedPicture(List<String> urlOfMostViewedPicture) {
 		this.urlOfMostViewedPicture = urlOfMostViewedPicture;
 	}
 
@@ -153,6 +172,7 @@ public class Cluster implements Serializable {
 
 
 	public List<PointOfInterest> getPointOfInterestList() {
+		Collections.sort(pointsOfInterest);
 		return Collections.unmodifiableList(pointsOfInterest);
 	}
 
@@ -160,15 +180,6 @@ public class Cluster implements Serializable {
 		pointsOfInterest.add(pointOfInterest);
 		incrementCountPOI();
 	}
-	public LatLng getCenterOfCluster() {
-		return centerOfCluster;
-	}
-
-
-	public void setCenterOfCluster(LatLng centerOfCluster) {
-		this.centerOfCluster = centerOfCluster;
-	}
-
 
 	public String getName() {
 		return name;
@@ -191,9 +202,23 @@ public class Cluster implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cluster [centerOfCluster=" + centerOfCluster + ", name=" + name
+		return "Cluster [centerOfCluster=" + latitude + ","+longitude+ ", name=" + name
 				+ ", description=" + description + ", overallViews="
 				+ overallViews + "]";
+	}
+
+
+
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+
+
+
+	public double getLongitude() {
+		return longitude;
 	}
 	
 	

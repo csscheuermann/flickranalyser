@@ -4,22 +4,71 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
+
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
-import com.javadocmd.simplelatlng.LatLng;
 
+@PersistenceCapable
 public class Spot implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private LatLng latLngPoint;
+	
+	private static final Logger LOGGER = Logger.getLogger(Spot.class.getName());
+	
+	/** Name of the cluster */
+	@Persistent
 	private String name;
+	
+	//TODO COS: Implement automatic description
+	/** Description of the cluster */
+	@Persistent
 	private String description;
+	
+	@Persistent
+	private double latitude;
+	
+	@Persistent
+	private double longitude;
+	
+	/** Default radius of spot in kilomenters */
+	@Persistent
 	private double spotRadiusInKm = 25;
+	
+	/** Default cluster radius in kilometers */
+	@Persistent
 	private double clusterRadiusInKm = 0.1;
+	
+	/** List of all clusters */
+	@Persistent
 	private List<Cluster> clusters;
+	
+	@Persistent
 	private List<String> topThreePictures;
+	
+	/** Datastore Key */
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key dataStoreKey;
+	
+	/** Represents the overall maximum number of POIs, it is set via constructor or
+	 * by adding a new cluster. It can not be set from outside. Due to filtering
+	 * mechanisms the clusters attached to this spot can vary. Thats why, this
+	 * value is initially set and not settable.
+	 */
+	@Persistent
 	private int overallMaxPOINumberPerCluster;
+	
+	/** Represents the overall maximum number of Views, it is set via constructor or
+	 * by adding a new cluster. It can not be set from outside. Due to filtering
+	 * mechanisms the clusters attached to this spot can vary. Thats why, this
+	 * value is initially set and not settable.
+	 */
+	@Persistent
 	private int overallMaxViewNumberPerCluster;
 	
 	
@@ -36,22 +85,29 @@ public class Spot implements Serializable{
 		return overallMaxPOINumberPerCluster;
 	}
 
-	public Spot(LatLng latLngPoint, String name, String description) {
+	public Spot(double latitude, double longitude,  String name, String description) {
+		this.longitude = longitude;
+		this.latitude = latitude;
 		this.topThreePictures = new LinkedList<String>();
-		this.latLngPoint = latLngPoint;
 		this.name = name;
 		this.description = description;
 		this.clusters = new LinkedList<Cluster>();
 	}
 	
-	public Spot(LatLng latLngPoint, String name, String description, double clusterRadiusInKm, double spotRadiusInKm, Key dataStoreKey, int maxPOINumberPerCluster, int maxViewNumberPerCluster) {
-		this( latLngPoint,  name,  description);
+	public Spot(double latitude, double longitude,  String name, String description, double clusterRadiusInKm, double spotRadiusInKm, Key dataStoreKey, int maxPOINumberPerCluster, int maxViewNumberPerCluster) {
+		this( latitude, longitude,  name,  description);
 		this.clusterRadiusInKm = clusterRadiusInKm;
 		this.spotRadiusInKm = spotRadiusInKm;
 		this.dataStoreKey = dataStoreKey;
 		this.overallMaxPOINumberPerCluster = maxPOINumberPerCluster;
 		this.overallMaxViewNumberPerCluster = maxViewNumberPerCluster;
 		
+	}
+
+	public Spot(SpotToCrawl spotToCrawl) {
+		this( spotToCrawl.getLatitude(), spotToCrawl.getLongitude(),  spotToCrawl.getName(),  spotToCrawl.getDescription());
+		this.clusterRadiusInKm = spotToCrawl.getClusterRadiusInKm();
+		this.spotRadiusInKm = spotToCrawl.getSpotRadiusInKm();
 	}
 
 	public int getMaxClusterViews(){
@@ -132,23 +188,16 @@ public class Spot implements Serializable{
 	}
 
 
-	public LatLng getLatLngPoint() {
-		return latLngPoint;
+	public double getLatitude() {
+		return latitude;
 	}
 
-
-	public void setLatLngPoint(LatLng latLngPoint) {
-		this.latLngPoint = latLngPoint;
+	public double getLongitude() {
+		return longitude;
 	}
-
 
 	public String getName() {
 		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 
@@ -156,19 +205,6 @@ public class Spot implements Serializable{
 		return description;
 	}
 
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public void setSpotRadiusInKm(int spotRadiusInKm) {
-		this.spotRadiusInKm = spotRadiusInKm;
-	}
-
-	public  void setClusterRadiusInKm(double clusterRadiusInKm) {
-		this.clusterRadiusInKm = clusterRadiusInKm;
-	}
-	
 	public Key getDataStoreKey() {
 		return dataStoreKey;
 	}

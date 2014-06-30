@@ -13,6 +13,7 @@ import com.flickranalyser.persistence.datastore.delete.PFDeleterSpotToCrawl;
 import com.flickranalyser.persistence.datastore.get.PFGetterSpotToCrawl;
 import com.flickranalyser.persistence.datastore.save.PFSaverSpot;
 import com.flickranalyser.pojo.Spot;
+import com.flickranalyser.pojo.SpotToCrawl;
 
 public class CrawlData extends HttpServlet{
 
@@ -20,18 +21,21 @@ public class CrawlData extends HttpServlet{
 	private static final Logger LOGGER = Logger.getLogger(CrawlData.class.getName());
 
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 
-		Spot spotOnwSpotFromDataStore = PFGetterSpotToCrawl.getSpotOnwSpotFromDataStore();
-
-		if(spotOnwSpotFromDataStore != null){
-			SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(spotOnwSpotFromDataStore);
+		SpotToCrawl spotToCrawl = PFGetterSpotToCrawl.getOneSpotFromDataStore();
+		LOGGER.log(Level.INFO, "SPOT TO CRAWL LAT: " + spotToCrawl.getLatitude());
+		LOGGER.log(Level.INFO, "SPOT TO CRAWL LONG: " + spotToCrawl.getLongitude());
+		
+		if(spotToCrawl != null){
+			Spot spot = new Spot(spotToCrawl);
+			SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(spot);
 			Spot spotAttribute = secretPlacesFacade.getSpotInformationForName("munich") ;
-
+			LOGGER.log(Level.INFO, "spotAttribute LAT: " + spotAttribute.getLatitude());
+			LOGGER.log(Level.INFO, "spotAttribute LONG: " + spotAttribute.getLongitude());
 			PFSaverSpot.saveSpotToDatastore(spotAttribute);
-			PFDeleterSpotToCrawl.deleteSpotByKey(spotOnwSpotFromDataStore.getDataStoreKey());
+			PFDeleterSpotToCrawl.deleteSpotByKey(spotToCrawl.getDataStoreKey());
 			return;
 			
 		}

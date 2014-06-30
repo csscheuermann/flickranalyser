@@ -16,7 +16,7 @@ public class RelativeNumberViewsScoreDecoratorTest {
 	@Before
 	public void setUp(){
 		LatLng centerOfCluster = new LatLng(2, 5);
-		clusterToScore = new Cluster(centerOfCluster, "test cluster", "description");
+		clusterToScore = new Cluster(centerOfCluster.getLatitude(), centerOfCluster.getLongitude(), "test cluster", "description");
 		clusterToScore.setOverallViews(75);
 	}
 	

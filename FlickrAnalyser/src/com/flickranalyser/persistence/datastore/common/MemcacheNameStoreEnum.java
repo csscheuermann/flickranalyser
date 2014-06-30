@@ -3,7 +3,7 @@ package com.flickranalyser.persistence.datastore.common;
 /**
  * Represents Naming for our Entities.
  */
-public enum EntityNameStoreEnum {
+public enum MemcacheNameStoreEnum {
 	
 	SPOT("Spot"),
 	CLUSTER ("Cluster"),
@@ -16,7 +16,7 @@ public enum EntityNameStoreEnum {
 	/**EnumEntityNameStore Constructor.
 	 * @param pEntityName entityName.
 	 */
-	EntityNameStoreEnum(String pEntityName){
+	MemcacheNameStoreEnum(String pEntityName){
 		this.entityName = pEntityName;
 	}
 

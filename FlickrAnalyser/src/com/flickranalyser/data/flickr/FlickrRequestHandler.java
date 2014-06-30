@@ -36,9 +36,9 @@ public class FlickrRequestHandler {
 			StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
 			urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST)
 			.append("&api_key=").append(FLICKR_API_KEY).append("&")
-			.append("lat=").append(spot.getLatLngPoint().getLatitude())
+			.append("lat=").append(spot.getLatitude())
 			.append("&").append("lon=")
-			.append(spot.getLatLngPoint().getLongitude())
+			.append(spot.getLongitude())
 			.append("&radius=").append(spot.getSpotRadiusInKm())
 			.append("&sort=interestingness-desc")
 			.append("&extras=views%2Cgeo%2Curl_s").append("&per_page=1000")

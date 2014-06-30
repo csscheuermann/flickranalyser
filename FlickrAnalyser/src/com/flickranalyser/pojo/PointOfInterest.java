@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.javadocmd.simplelatlng.LatLng;
 
-public class PointOfInterest implements Serializable {
+public class PointOfInterest implements Serializable, Comparable<PointOfInterest> {
 
 	private static final long serialVersionUID = 1L;
 	private int countOfViews;
@@ -35,6 +35,16 @@ public class PointOfInterest implements Serializable {
 	}
 	public void setLocation(LatLng location) {
 		this.location = location;
+	}
+
+	@Override
+	public int compareTo(PointOfInterest comparePOI) {
+		
+		int compareCountOfViews = comparePOI.getCountOfViews();
+		
+		
+		// TODO Auto-generated method stub
+		return compareCountOfViews - this.countOfViews;
 	}
 
 

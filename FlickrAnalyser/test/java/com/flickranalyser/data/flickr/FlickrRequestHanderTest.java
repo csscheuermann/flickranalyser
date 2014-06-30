@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.flickranalyser.pojo.Spot;
-import com.javadocmd.simplelatlng.LatLng;
 
 public class FlickrRequestHanderTest {
 
@@ -13,8 +12,7 @@ public class FlickrRequestHanderTest {
 	
 	@Before
 	public void setUp(){
-		LatLng point = new LatLng(48.1333, 11.5667);
-		munichSpot = new Spot(point, "Munich", "Munich");
+		munichSpot = new Spot(48.1333, 11.5667, "Munich", "Munich");
 	}
 	
 

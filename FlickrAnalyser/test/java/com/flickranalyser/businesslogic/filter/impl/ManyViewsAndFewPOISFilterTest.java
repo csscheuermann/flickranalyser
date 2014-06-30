@@ -24,24 +24,24 @@ public class ManyViewsAndFewPOISFilterTest {
 	public void setup() {
 		filterUnderTest = new ManyViewsAndFewPOIsFilter();
 
-		cluster1 = new Cluster(new LatLng(1, 1),
+		cluster1 = new Cluster(1, 1,
 				"cluster1", "cluster 1 description");
 		cluster1.setOverallViews(10000);
 		addPointsOfInterests(cluster1, 500);
-		cluster2 = new Cluster(new LatLng(2, 2), "cluster2",
+		cluster2 = new Cluster(2, 2, "cluster2",
 				"cluster 2 description");
 		cluster2.setOverallViews(100);
 		addPointsOfInterests(cluster2, 3);
-		cluster3 = new Cluster(new LatLng(3, 3), "cluster3",
+		cluster3 = new Cluster(3, 3, "cluster3",
 				"cluster 3 description");
 		cluster3.setOverallViews(10000);
 		addPointsOfInterests(cluster3, 300);
 		
-		cluster4 = new Cluster(new LatLng(4, 4), "cluster4",
+		cluster4 = new Cluster(4, 4, "cluster4",
 				"cluster 4 description");
 		cluster4.setOverallViews(100);
 		addPointsOfInterests(cluster4, 500);
-		cluster5 = new Cluster(new LatLng(5, 5), "cluster5",
+		cluster5 = new Cluster(5, 5, "cluster5",
 				"cluster 5 description");
 		cluster5.setOverallViews(10000);
 		addPointsOfInterests(cluster5, 2);
@@ -50,7 +50,7 @@ public class ManyViewsAndFewPOISFilterTest {
 	private void addPointsOfInterests(Cluster cluster,
 			int numberPointsOfInterests) {
 		for (int i = 0; i < numberPointsOfInterests; i++) {
-			PointOfInterest pointOfInterest = new PointOfInterest(0, cluster.getCenterOfCluster(),"test");
+			PointOfInterest pointOfInterest = new PointOfInterest(0, new LatLng(cluster.getLatitude(), cluster.getLongitude()),"test");
 			cluster.addPointOfInterestToList(pointOfInterest);
 		}
 

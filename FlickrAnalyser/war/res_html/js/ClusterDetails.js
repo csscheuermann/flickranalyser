@@ -7,14 +7,19 @@ function ClusterDetails() {
 	//Do nothing
 }
 //Add Image 
-ClusterDetails.prototype.addElementImage = function(elementForImageId, url ) {
+ClusterDetails.prototype.addElementImage = function(elementForImageId,imageId, url) {
 	var elementForImage = document.getElementById(elementForImageId);
-	var idForImageTag = 'ClusterDetailPicture';
+	var idForImageTag = imageId;
+	
 	this.removeElementById(idForImageTag, elementForImageId);
+	
 	var newImageTag = document.createElement('img');
 	newImageTag.setAttribute('id', idForImageTag);
 	newImageTag.setAttribute('src', url);
 	elementForImage.appendChild(newImageTag);
+	
+	
+	
 };
 
 //Remove element

@@ -84,7 +84,10 @@ public class HtmlRequestProcessor{
 		if( !doesViewExist(pViewName) ){
 			throw new RuntimeException("View does not exist: " + pViewName);
 		}
+		LOGGER.info("View exists " + pViewName);
 		RequestDispatcher rd = mServletContext.getRequestDispatcher("/views_html/" + pViewName + ".jsp");
+		LOGGER.info("mRequest " + mRequest.toString());
+		LOGGER.info("mResponse " + mResponse.toString());
 		rd.forward(mRequest, mResponse);
 	}
 
@@ -97,11 +100,12 @@ public class HtmlRequestProcessor{
 
 		viewsDirectory = new File(viewsDirectory.getAbsolutePath() + "/views_html/");
 		for( File currentFile : viewsDirectory.listFiles() ){
-			LOGGER.log(Level.INFO,currentFile.getName());
+			LOGGER.log(Level.INFO,"CURRENT FILE: " +currentFile.getName());
 			if( currentFile.isDirectory() ){
 				continue;
 			}
 			if( currentFile.getName().equals(pViewName + ".jsp") ){
+				LOGGER.log(Level.INFO,"FOUND JSP");
 				return true;
 			}
 		}

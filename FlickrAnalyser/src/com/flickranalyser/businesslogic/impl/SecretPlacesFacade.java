@@ -15,7 +15,7 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 	private FlickrRequestHandler flickrRequestHandler;
 	private SpotCalculationHandler spotCalculationHandler;
 
-	private static final Logger log = Logger.getLogger(SecretPlacesFacade.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(SecretPlacesFacade.class.getName());
 	
 	public SecretPlacesFacade(Spot spot) {
 		this.spot = spot;
@@ -38,7 +38,7 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 	private Spot getSpotInformation(Spot spotToSearchFor) {
 		
 		Set<PointOfInterest> allPOIsForSpot = flickrRequestHandler.getPOIsForSpot(spotToSearchFor);
-		log.log(Level.INFO, " Number of POIs: " + allPOIsForSpot.size());
+		LOGGER.log(Level.INFO, " Number of POIs: " + allPOIsForSpot.size());
 		Spot spot = spotCalculationHandler.getSpot(allPOIsForSpot,spotToSearchFor);
 		return spot;
 	}

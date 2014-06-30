@@ -1,63 +1,36 @@
 package com.flickranalyser.persistence.datastore.save;
 
-import java.util.ConcurrentModificationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.jdo.PersistenceManager;
 import javax.ws.rs.core.Response;
 
-import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
-import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpotToCrawl;
+import com.flickranalyser.persistence.datastore.common.PMF;
 import com.flickranalyser.persistence.datastore.get.PFGetterSpot;
+import com.flickranalyser.persistence.datastore.get.PFGetterSpotToCrawl;
 import com.flickranalyser.pojo.Spot;
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.Transaction;
+import com.flickranalyser.pojo.SpotToCrawl;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 public class PFSaverSpotToCrawl {
 
 	private static final Logger log = Logger.getLogger(PFSaverSpotToCrawl.class.getName());
 
-	public static Response saveSpotToDatastore(Spot spot){
-		int retries = 3;
+	public static Response saveSpotToDatastore(SpotToCrawl spot){
 
 		if (!checkIfSpotAlreadyExists(spot)){
 			log.log(Level.INFO, "SPOT DOES NOT EXIST IN SPOTS DATASTORE " + spot.getName());
-
-			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			PersistenceManager pm = PMF.get().getPersistenceManager();
 			log.log(Level.INFO, "BEGINNING TRANSACTION TO SAVE IN DATASTORE FOR SPOT: " + spot.getName());
 
-			while (true) {
-				Transaction txn = datastore.beginTransaction();
-				try {
-					Entity spotEntity = new Entity(EntityNameStoreEnum.SPOT_TO_CRAWL.toString());
-					spotEntity.setProperty(PropertiesSpotToCrawl.CLUSTER_RADIUS_IN_KM.toString(), spot.getClusterRadiusInKm());
-					spotEntity.setProperty(PropertiesSpotToCrawl.SPOT_RADIUS_IN_KM.toString(), spot.getSpotRadiusInKm());
-					spotEntity.setProperty(PropertiesSpotToCrawl.DESCRIPTION.toString(), spot.getDescription());
-					spotEntity.setProperty(PropertiesSpotToCrawl.LATITUDE.toString(), spot.getLatLngPoint().getLatitude());
-					spotEntity.setProperty(PropertiesSpotToCrawl.LONGITUDE.toString(), spot.getLatLngPoint().getLongitude());
-					spotEntity.setProperty(PropertiesSpotToCrawl.NAME.toString(), spot.getName());
-					spotEntity.setProperty(PropertiesSpotToCrawl.OVERALL_MAXIMUM_POI_COUNT.toString(), spot.getOverallMaxPOINumberPerCluster());
-					spotEntity.setProperty(PropertiesSpotToCrawl.OVERALL_MAXIMUM_VIEW_COUNT.toString(), spot.getOverallMaxViewNumberPerCluster());
-					datastore.put(txn, spotEntity);
-					txn.commit();
-					log.log(Level.INFO, "END TRANSACTION: " + spot.getName());
-					break;
-
-				} catch (ConcurrentModificationException e) {
-					if (retries == 0) {
-						throw e;
-					}
-					// Allow retry to occur
-					--retries;
-				}finally{
-					if(txn.isActive()){
-						txn.rollback();
-						log.log(Level.SEVERE, "I TRIED BUT I HAVE TO DO A ROLLBACK - SAD BUT TRUE.");
-						return Response.status(400).entity("Rollback").build();
-					}
-				}
+			try{
+				Key dataStoreKey = KeyFactory.createKey(SpotToCrawl.class.getSimpleName(), spot.getName());
+				spot.setDataStoreKey(dataStoreKey);
+				pm.makePersistent(spot);
+			} finally {
+				pm.close();
 			}
 		}else{
 			log.log(Level.INFO, "SPOT ALREADY EXISTS");
@@ -66,9 +39,10 @@ public class PFSaverSpotToCrawl {
 		return Response.status(200).build();
 	}
 
-	private static boolean checkIfSpotAlreadyExists(Spot spot) {
+	private static boolean checkIfSpotAlreadyExists(SpotToCrawl spot) {
 		Spot spotByName = PFGetterSpot.getSpotByName(spot.getName());
-		if (spotByName != null){
+		SpotToCrawl spotToCrawlByName = PFGetterSpotToCrawl.getSpotToCrawlByName(spot.getName());
+		if ((spotByName != null) || (spotToCrawlByName != null)){
 			return true;
 		}
 		return false;

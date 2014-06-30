@@ -1,21 +1,19 @@
-package com.flickranalyser.persistence.datastore.common.properties;
+package com.flickranalyser.persistence.datastore.common;
 
-
-public enum PropertiesSpot {
+public enum PropertiesSpotToCrawl {
 
 	NAME("Name"),
 	LATITUDE("Latitude"),
 	LONGITUDE("Longitude"),
 	DESCRIPTION("Description"),
 	SPOT_RADIUS_IN_KM("SpotRadiusKM"),
-	OVERALL_TOURISTICNESS_IN_PERCENT("OverallTouristicnessInPercent"),
-	OVERALL_MAXIMUM_POI_COUNT("OverallMaxiumumPOICount"),
+	CLUSTER_RADIUS_IN_KM("ClusterRadiusInKM"),
 	OVERALL_MAXIMUM_VIEW_COUNT("OverallMaxiumumViewCount"),
-	CLUSTER_RADIUS_IN_KM("ClusterRadiusInKM");
+	OVERALL_MAXIMUM_POI_COUNT("OverallMaxiumumPOICount");
 	
 	private final String propertieName;
 	
-	PropertiesSpot(String propertieName){
+	PropertiesSpotToCrawl(String propertieName){
 		this.propertieName = propertieName;
 	}
 	

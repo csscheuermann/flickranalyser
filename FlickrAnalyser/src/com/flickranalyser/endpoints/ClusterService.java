@@ -2,11 +2,9 @@ package com.flickranalyser.endpoints;
 
 import javax.ws.rs.core.Response;
 
-import com.flickranalyser.persistence.datastore.save.PFSaverCluster;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.Named;
-import com.google.appengine.api.datastore.KeyFactory;
 
 @Api(name="clusterAPI", version="v1", description="This API serves everything needed to update a cluster.")
 public class ClusterService {
@@ -18,6 +16,7 @@ public class ClusterService {
 			@Named("touristicnessRatingFrom1To10") int touristicnessRatingFrom1To10,
 			@Named("spotName") String spotName
 			) {
-		return PFSaverCluster.evaluateTouristicness(KeyFactory.stringToKey(datastoreKeyOfCluster), touristicnessRatingFrom1To10, spotName);
+		return Response.ok().build();
+		//return PFSaverCluster.evaluateTouristicness(KeyFactory.stringToKey(datastoreKeyOfCluster), touristicnessRatingFrom1To10, spotName);
 	}
 }

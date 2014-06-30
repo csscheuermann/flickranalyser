@@ -1,33 +1,76 @@
 package com.flickranalyser.persistence.datastore.get;
 
-import com.flickranalyser.persistence.datastore.common.EntityNameStoreEnum;
-import com.flickranalyser.pojo.Spot;
-import com.flickranalyser.pojo.common.PojoHelperMethods;
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
+import com.flickranalyser.persistence.datastore.common.PMF;
+import com.flickranalyser.pojo.SpotToCrawl;
 
 public class PFGetterSpotToCrawl {
 
-/**
- * Gets one spot from the Datastore. In case there is nothing in the datastore it will return null.
- * It serves like a queue. Users are able to put a spot in the datastore and the cron job
- * will handle this queue until there is nothing inside anymore.
- * @return Spot or null in case nothing is inside Datastore
- */
+	/**
+	 * Gets one spot from the Datastore. In case there is nothing in the datastore it will return null.
+	 * It serves like a queue. Users are able to put a spot in the datastore and the cron job
+	 * will handle this queue until there is nothing inside anymore.
+	 * @return Spot or null in case nothing is inside Datastore
+	 */
+	private static final Logger LOGGER = Logger.getLogger(PFGetterSpotToCrawl.class.getName());
 
-	public static Spot getSpotOnwSpotFromDataStore(){
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Entity singleSpotEntity = null;
-		final Query getAllQuery = new Query(EntityNameStoreEnum.SPOT_TO_CRAWL.toString());
-		final PreparedQuery getAllPreparedQuery = datastore.prepare(getAllQuery);
-		singleSpotEntity = getAllPreparedQuery.asSingleEntity();
+	/**
+	 * Returns one spot to crawl from Queue
+	 * @return
+	 */
+	public static SpotToCrawl getOneSpotFromDataStore(){
 
-		if (singleSpotEntity != null){
-			return PojoHelperMethods.createSpotFromEntity(singleSpotEntity);
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+
+		Query q = pm.newQuery(SpotToCrawl.class);
+		q.setOrdering("name desc");
+
+		try{
+			@SuppressWarnings("unchecked")
+			List<SpotToCrawl> results = (List<SpotToCrawl>) q.execute();
+			if (!results.isEmpty()){
+				return results.get(0);
+			}else{
+				LOGGER.log(Level.INFO, "COULD NOT FIND SPOTS TO CRAWL, WILL RELAX :)");
+				return null;
+			}
+
+		}finally{
+			q.closeAll();
+			pm.close();
 		}
-		return null;
+	
 	}
+	
+	public static SpotToCrawl getSpotToCrawlByName(String nameOfSpot){
+
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+
+		Query q = pm.newQuery(SpotToCrawl.class);
+		q.setFilter("name == nameParam");
+		q.setOrdering("name desc");
+		q.declareParameters("String nameParam");
+
+		try{
+			@SuppressWarnings("unchecked")
+			List<SpotToCrawl> results = (List<SpotToCrawl>) q.execute(nameOfSpot);
+			if (!results.isEmpty()){
+				return results.get(0);
+			}else{
+				LOGGER.log(Level.INFO, "SPOTTOCRAWL DOES NOT EXIST IN DATASTORE (CRAWLQUEUE) YET");
+				return null;
+			}
+
+		}finally{
+			q.closeAll();
+		}
+	}
+
+
 }

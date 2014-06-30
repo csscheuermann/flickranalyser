@@ -43,7 +43,7 @@
    }
   
 
-   function addMarker(lgt, lat, numberOfViews, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl) {
+   function addMarker(lgt, lat, numberOfViews, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
    	// To add the marker to the map, use the 'map' property
    	var marker = new google.maps.Marker({
    	    position: new google.maps.LatLng(lgt, lat),
@@ -65,7 +65,9 @@
 	
 	
 		var clusterDetails = new ClusterDetails();
-		clusterDetails.addElementImage('spot-image', pictureUrl);
+		clusterDetails.addElementImage('spot-image1', 'ClusterDetailPicture1', pictureUrl1);
+		clusterDetails.addElementImage('spot-image2', 'ClusterDetailPicture2', pictureUrl2);
+		clusterDetails.addElementImage('spot-image3', 'ClusterDetailPicture3', pictureUrl3);
 		
 		addDoughnutChart(viewCountRelativeInPercent, 'viewCountRelative', "#F7464A" , "#E2EAE9");
 		addDoughnutChart(pOICountRealativeInPercent, 'poiCountRelative', "#F7464A", "#E2EAE9");
@@ -117,15 +119,19 @@
    	function initialize() {
      		var mapOptions = {
        	zoom: 14,
-      	 <% out.println("center: new google.maps.LatLng("+ spot.getLatLngPoint().getLatitude()+","+  spot.getLatLngPoint().getLongitude()+")");%>
+      	 <% out.println("center: new google.maps.LatLng("+ spot.getLatitude()+","+  spot.getLongitude()+")");%>
     	};
      	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 		
     <%
-    	int maxValue = spot.getMaxClusterViews();
-     	List<Cluster> cluster = spot.getCluster();
 		
+		
+    	int maxValue = spot.getMaxClusterViews();
+
+		List<Cluster> cluster = spot.getCluster();
+	
 		int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
+		
 		int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
 		
 		int maxNumberOfPOIs = spot.getMaxNumberOfPOIsPerCluster();	
@@ -140,10 +146,12 @@
 		
 		int numberOfPOIsForCurrentCluster = currentCluster.getNumberOfPOIs();
    		
-       	double currentLat = currentCluster.getCenterOfCluster().getLatitude();
-       	double currentLng = currentCluster.getCenterOfCluster().getLongitude();
+       	double currentLat = currentCluster.getLatitude();
+       	double currentLng = currentCluster.getLongitude();
    		int clusterOverallViews = currentCluster.getOverallViews();
-		String imageUrl = currentCluster.getUrlOfMostViewedPicture();
+		String imageUrl1 = currentCluster.getUrlOfMostViewedPicture().get(0);
+		String imageUrl2 = currentCluster.getUrlOfMostViewedPicture().get(1);
+		String imageUrl3 = currentCluster.getUrlOfMostViewedPicture().get(2);
 		
 		double viewCountRealativeInPercent = ((double) (100.00/maxNumberOfViews)*clusterOverallViews);
 		double pOICountRealativeInPercent = ((double) (100.00/maxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
@@ -162,7 +170,9 @@
 					touristicnessInPercent 	+ "," +	
 					pOICountOverallInPercent 	+ "," +	
 					viewCountOverallInPercent 	+ ",'" +		
-					currentCluster.getUrlOfMostViewedPicture() + "');");
+					 imageUrl1 + "' , '" +		
+					 imageUrl2 + "' , '" +
+					 imageUrl3 + "');");
 				
 				
        	}
@@ -197,6 +207,28 @@
 				
 				
 	<div class='container'>
+		
+		<div class='row'>
+		    <div class="col-xs-4">
+				<div class="centeralized-div" id="spot-image1">	
+				</div>
+			</div>
+			
+			
+			<div class="col-xs-4">
+				<div class="centeralized-div" id="spot-image2">	
+				</div>
+			</div>
+			
+			<div class="col-xs-4">
+				<div class="centeralized-div" id="spot-image3">	
+				</div>
+			</div>
+			
+		</div>	
+		
+		
+		
 		<div class='row'>
 		    <div class="col-xs-4">
 				<h4 class="centeralized-div" >CLUSTERNAME TO DO</h4>
@@ -215,8 +247,7 @@
 		
 		<div class='row'>
 		    <div class="col-xs-4">
-				<div class="centeralized-div" id="spot-image">	
-				</div>
+				<p> Some Cluster Infos </p>
 			</div>
 			
 			

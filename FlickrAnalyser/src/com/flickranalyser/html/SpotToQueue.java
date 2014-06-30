@@ -6,10 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.flickranalyser.persistence.datastore.common.properties.PropertiesSpotToCrawl;
+import com.flickranalyser.persistence.datastore.common.PropertiesSpotToCrawl;
 import com.flickranalyser.persistence.datastore.save.PFSaverSpotToCrawl;
-import com.flickranalyser.pojo.Spot;
-import com.javadocmd.simplelatlng.LatLng;
+import com.flickranalyser.pojo.SpotToCrawl;
 
 public class SpotToQueue extends HttpServlet{
 
@@ -28,9 +27,7 @@ public class SpotToQueue extends HttpServlet{
 		double spotRadius =  Double.parseDouble(req.getParameter(PropertiesSpotToCrawl.SPOT_RADIUS_IN_KM.toString()));
 		double clusterRadius =  Double.parseDouble(req.getParameter(PropertiesSpotToCrawl.CLUSTER_RADIUS_IN_KM.toString()));
 
-		
-		LatLng geoPoint = new LatLng(latitude, longitude);
-		Spot spot = new Spot(geoPoint,name,description,clusterRadius,spotRadius, null,0,0);
+		SpotToCrawl spot = new SpotToCrawl(latitude, longitude,name,description,clusterRadius,spotRadius, null,0,0);
 		
 		PFSaverSpotToCrawl.saveSpotToDatastore(spot);
 
