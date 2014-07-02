@@ -22,6 +22,21 @@ ClusterDetails.prototype.addElementImage = function(elementForImageId,imageId, u
 	
 };
 
+ClusterDetails.prototype.addElementDiv = function(elementForImageId,imageId, text) {
+	var elementForImage = document.getElementById(elementForImageId);
+	var idForImageTag = imageId;
+	
+	this.removeElementById(idForImageTag, elementForImageId);
+	
+	var newImageTag = document.createElement('div');
+	newImageTag.setAttribute('id', idForImageTag);
+	newImageTag.innerHTML= text;
+	elementForImage.appendChild(newImageTag);
+	
+	
+	
+};
+
 //Remove element
 ClusterDetails.prototype.removeElementById = function (elementToRemoveId,parentElementId) {
 	var parentElement = document.getElementById(parentElementId);

@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -24,6 +23,7 @@
    	<script type="text/javascript">
 		var map;
 		var lastClickedMarker = null;
+		  var geo = new google.maps.Geocoder;
 
    //Construct the circle for each value in citymap.
    // Note: We scale the area of the circle based on the population.
@@ -43,10 +43,10 @@
    }
   
 
-   function addMarker(lgt, lat, numberOfViews, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
+   function addMarker(spotName, lat,lgt , numberOfViews, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
    	// To add the marker to the map, use the 'map' property
    	var marker = new google.maps.Marker({
-   	    position: new google.maps.LatLng(lgt, lat),
+   	    position: new google.maps.LatLng(lat, lgt),
    	    map: map,
    	    title: 'CLUSTER NAME STILL TO DO',
 		icon: '/res_html/img/eye_not_watched_yet.png'
@@ -76,6 +76,10 @@
 		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
 		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
 		
+	    clusterDetails.addElementDiv('spotInfo', 'spotName',  '<h4>' + spotName + '</h4>');
+		
+		getLatLong(spotName);
+		codeLatLng(lat,lgt);
 		
 		
 		
@@ -83,6 +87,41 @@
    });
    
    }
+   
+   function codeLatLng(lat, lng) {
+     var latlng = new google.maps.LatLng(lat, lng);
+     geo.geocode({'latLng': latlng}, function(results, status) {
+       	var clusterDetails = new ClusterDetails();
+		 var locationString = '<p>Latitude ' + lat + '<br /> Longitude ' + lng + '</p>';
+		clusterDetails.addElementDiv('spotInfo', 'clusterGeoCoordinates',  locationString);
+	   if (status == google.maps.GeocoderStatus.OK) {
+         if (results[1]) {
+		 clusterDetails.addElementDiv('spotInfo', 'clusterAdress1',  results[0].formatted_address);
+         }
+       } else {
+         alert("Geocoder failed due to: " + status);
+       }
+     });
+   }
+   
+   function getLatLong(address){
+         geo.geocode({'address':address},function(results, status){
+                 if (status == google.maps.GeocoderStatus.OK) {
+				 
+				 var clusterDetails = new ClusterDetails();
+				 var latlngString = results[0].geometry.location;
+				 var locationString = '<p>Latitude ' + latlngString.lat() + '<br /> Longitude ' + latlngString.lng() + '</p>';
+				 clusterDetails.addElementDiv('spotInfo', 'spot_location', locationString);
+				   
+                 } else {
+                   alert("Geocode was not successful for the following reason: " + status);
+                 }
+
+          });
+
+     }
+	 
+	 
    
    
    function addDoughnutChart(percentage, elementId, colorPercent, colorRemainer) {
@@ -119,67 +158,81 @@
    	function initialize() {
      		var mapOptions = {
        	zoom: 14,
-      	 <% out.println("center: new google.maps.LatLng("+ spot.getLatitude()+","+  spot.getLongitude()+")");%>
+      	 <% 
+			 if (spot != null){
+			 	out.println("center: new google.maps.LatLng("+ spot.getLatitude()+","+  spot.getLongitude()+")");
+		 	}else{
+		 		out.println("center: new google.maps.LatLng('43','11')");
+		 	}
+			%>
     	};
      	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 		
-    <%
-		
-		
-    	int maxValue = spot.getMaxClusterViews();
+	    <%
+			if (spot != null){
+			String spotName = spot.getName();
+	    	int maxValue = spot.getMaxClusterViews();
 
-		List<Cluster> cluster = spot.getCluster();
+			List<Cluster> cluster = spot.getCluster();
 	
-		int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
+			int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
 		
-		int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
+			int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
 		
-		int maxNumberOfPOIs = spot.getMaxNumberOfPOIsPerCluster();	
-		int maxNumberOfViews = spot.getMaxNumberOfViewsPerCluster();	
+			int maxNumberOfPOIs = spot.getMaxNumberOfPOIsPerCluster();	
+			int maxNumberOfViews = spot.getMaxNumberOfViewsPerCluster();	
 		
 		
-     	String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
-     	String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
-     	String PHOTO_SEARCH_REQUEST = "flickr.photos.geo.photosForLocation";
+	     	String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
+	     	String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
+	     	String PHOTO_SEARCH_REQUEST = "flickr.photos.geo.photosForLocation";
  
-   	for (Cluster currentCluster : cluster){
+	   	for (Cluster currentCluster : cluster){
 		
-		int numberOfPOIsForCurrentCluster = currentCluster.getNumberOfPOIs();
+			int numberOfPOIsForCurrentCluster = currentCluster.getNumberOfPOIs();
    		
-       	double currentLat = currentCluster.getLatitude();
-       	double currentLng = currentCluster.getLongitude();
-   		int clusterOverallViews = currentCluster.getOverallViews();
-		String imageUrl1 = currentCluster.getUrlOfMostViewedPicture().get(0);
-		String imageUrl2 = currentCluster.getUrlOfMostViewedPicture().get(1);
-		String imageUrl3 = currentCluster.getUrlOfMostViewedPicture().get(2);
+	       	double currentLat = currentCluster.getLatitude();
+	       	double currentLng = currentCluster.getLongitude();
+	   		int clusterOverallViews = currentCluster.getOverallViews();
+			
+			List<String> urlOfMostViewedPicture = currentCluster.getUrlOfMostViewedPicture();
 		
-		double viewCountRealativeInPercent = ((double) (100.00/maxNumberOfViews)*clusterOverallViews);
-		double pOICountRealativeInPercent = ((double) (100.00/maxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
-		double touristicnessInPercent = currentCluster.getOverallTouristicnessInPointsFrom1To10()*100;
+			String[] urls = new String[]{"","",""};	
+			if (urlOfMostViewedPicture != null){
+				for(int i = 0; i < urlOfMostViewedPicture.size(); i++){
+					urls[i] = urlOfMostViewedPicture.get(i);
+				}
+			}
 		
-		double pOICountOverallInPercent = ((double) (100.00/overallMaxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
-		double viewCountOverallInPercent = ((double) (100.00/overallMaxNumberOfViews)*clusterOverallViews);
+			double viewCountRealativeInPercent = ((double) (100.00/maxNumberOfViews)*clusterOverallViews);
+			double pOICountRealativeInPercent = ((double) (100.00/maxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
+			double touristicnessInPercent = currentCluster.getOverallTouristicnessInPointsFrom1To10()*100;
 		
-		if (clusterOverallViews > 200){
-     			out.println("addMarker("+ 
-					currentLat 		+ "," +
-					currentLng 		+ "," +
-					clusterOverallViews 	+ "," +
-					viewCountRealativeInPercent 	+ "," +
-					pOICountRealativeInPercent 	+ "," +	
-					touristicnessInPercent 	+ "," +	
-					pOICountOverallInPercent 	+ "," +	
-					viewCountOverallInPercent 	+ ",'" +		
-					 imageUrl1 + "' , '" +		
-					 imageUrl2 + "' , '" +
-					 imageUrl3 + "');");
+			double pOICountOverallInPercent = ((double) (100.00/overallMaxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
+			double viewCountOverallInPercent = ((double) (100.00/overallMaxNumberOfViews)*clusterOverallViews);
+		
+			if (clusterOverallViews > 200){
+	     			out.println("addMarker('"+ 
+						spotName 		+ "'," +
+						currentLat 		+ "," +
+						currentLng 		+ "," +
+						clusterOverallViews 	+ "," +
+						viewCountRealativeInPercent 	+ "," +
+						pOICountRealativeInPercent 	+ "," +	
+						touristicnessInPercent 	+ "," +	
+						pOICountOverallInPercent 	+ "," +	
+						viewCountOverallInPercent 	+ ",'" +		
+						 urls[0] + "' , '" +		
+						 urls[1] + "' , '" +
+						 urls[2] + "');");
 				
 				
-       	}
-		double opacityViewCountRelative = viewCountRealativeInPercent/100.00;
-       	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + ");");
-   	}
-     	%>
+	       	}
+			double opacityViewCountRelative = viewCountRealativeInPercent/100.00;
+	       	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + ");");
+		}	
+	   	}
+	     	%>
    }
      	map = new google.maps.event.addDomListener(window, 'load', initialize);
    </script>
@@ -208,30 +261,36 @@
 				
 	<div class='container'>
 		
+		
+			
 		<div class='row'>
-		    <div class="col-xs-4">
+		    <div class="col-xs-3">
+				<div id="spotInfo"> </div>
+			</div>
+			
+		    <div class="col-xs-3">
 				<div class="centeralized-div" id="spot-image1">	
 				</div>
 			</div>
 			
 			
-			<div class="col-xs-4">
+			<div class="col-xs-3">
 				<div class="centeralized-div" id="spot-image2">	
 				</div>
 			</div>
 			
-			<div class="col-xs-4">
+			<div class="col-xs-3">
 				<div class="centeralized-div" id="spot-image3">	
 				</div>
 			</div>
 			
 		</div>	
-		
-		
+		<div class='row'>
+		</div>	
 		
 		<div class='row'>
 		    <div class="col-xs-4">
-				<h4 class="centeralized-div" >CLUSTERNAME TO DO</h4>
+				<h4 class="centeralized-div" >SEEKRET-METER (USER DEFINED)</h4>
 			</div>
 			
 			
@@ -247,7 +306,9 @@
 		
 		<div class='row'>
 		    <div class="col-xs-4">
-				<p> Some Cluster Infos </p>
+					<div class="centeralized-div">
+						<canvas id="touristicness" width="200" height="200"></canvas>
+					</div>	
 			</div>
 			
 			
@@ -270,7 +331,7 @@
 		<div class='container'>
 			<div class='row'>
 			    <div class="col-xs-4">
-					<h4 class="centeralized-div" >SEEKRET-METER (USER DEFINED)</h4>
+					<h4 class="centeralized-div" ></h4>
 				</div>
 			
 			
@@ -287,7 +348,7 @@
 			<div class='row'>
 			    <div class="col-xs-4">
 					<div class="centeralized-div">
-						<canvas id="touristicness" width="200" height="200"></canvas>
+						
 					</div>
 				</div>
 				<div class="col-xs-4">

@@ -28,6 +28,9 @@ public class PFGetterSpotToCrawl {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
+		
+
+        
 		Query q = pm.newQuery(SpotToCrawl.class);
 		q.setOrdering("name desc");
 

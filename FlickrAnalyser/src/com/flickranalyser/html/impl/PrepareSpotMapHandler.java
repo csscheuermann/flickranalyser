@@ -24,7 +24,7 @@ public class PrepareSpotMapHandler implements IHtmlRequestHandler{
 
 		LOGGER.log(Level.INFO, location);
 		LOGGER.log(Level.INFO, filterStrategy);
-		
+
 		StringBuilder fullClassPath = new StringBuilder();
 		fullClassPath.append("com.flickranalyser.businesslogic.filter.impl.");
 		fullClassPath.append(filterStrategy);
@@ -33,16 +33,26 @@ public class PrepareSpotMapHandler implements IHtmlRequestHandler{
 		LOGGER.log(Level.INFO, choosenFilterStrategy.getClass().getName());
 		LOGGER.log(Level.INFO, "NAME: " + location);
 		Spot spot = MemcacheSpot.getSpotForSpotName(location);
+		if(spot != null){
+			
+		
 		LOGGER.log(Level.INFO, "CLUSTER SIZE " + spot.getCluster().size());
 		LOGGER.log(Level.INFO, "LAT LONG " + spot.getLatitude() + ", " +spot.getLongitude());
+		if (spot.getCluster().size() > 1){
+			LOGGER.log(Level.INFO, "BEFORE FIRST CLUSTER " + spot.getCluster().get(0).toString());
+		}
 
-		
 		spot.setCluster(choosenFilterStrategy.filterCluster(spot.getCluster()));
-	
+
 		pRequest.setAttribute("spot", spot );
 		LOGGER.log(Level.INFO, "AFTER CLUSTER SIZE " + spot.getCluster().size());
+		if (spot.getCluster().size() > 1){
+			LOGGER.log(Level.INFO, " AFTER FIRST CLUSTER " + spot.getCluster().get(0).toString());
+		}
 		LOGGER.log(Level.INFO, "AFTER LAT LONG " + spot.getLatitude() + ", " +spot.getLongitude());
+		}
 		
+			
 		return null;
 	}
 }

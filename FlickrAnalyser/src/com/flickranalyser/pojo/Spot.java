@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -17,8 +16,6 @@ import com.google.appengine.api.datastore.Key;
 public class Spot implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
-	private static final Logger LOGGER = Logger.getLogger(Spot.class.getName());
 	
 	/** Name of the cluster */
 	@Persistent
@@ -174,6 +171,7 @@ public class Spot implements Serializable{
 	public void setTopThreePictures(List<String> topThreePictures) {
 		this.topThreePictures = topThreePictures;
 	}
+	
 	public void addTopThreePictures(String url){
 		this.topThreePictures.add(url);
 	}

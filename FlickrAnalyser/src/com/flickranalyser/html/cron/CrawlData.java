@@ -25,15 +25,11 @@ public class CrawlData extends HttpServlet{
 
 
 		SpotToCrawl spotToCrawl = PFGetterSpotToCrawl.getOneSpotFromDataStore();
-		LOGGER.log(Level.INFO, "SPOT TO CRAWL LAT: " + spotToCrawl.getLatitude());
-		LOGGER.log(Level.INFO, "SPOT TO CRAWL LONG: " + spotToCrawl.getLongitude());
 		
 		if(spotToCrawl != null){
 			Spot spot = new Spot(spotToCrawl);
 			SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(spot);
 			Spot spotAttribute = secretPlacesFacade.getSpotInformationForName("munich") ;
-			LOGGER.log(Level.INFO, "spotAttribute LAT: " + spotAttribute.getLatitude());
-			LOGGER.log(Level.INFO, "spotAttribute LONG: " + spotAttribute.getLongitude());
 			PFSaverSpot.saveSpotToDatastore(spotAttribute);
 			PFDeleterSpotToCrawl.deleteSpotByKey(spotToCrawl.getDataStoreKey());
 			return;
