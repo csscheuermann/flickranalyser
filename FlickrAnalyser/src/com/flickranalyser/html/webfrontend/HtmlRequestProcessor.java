@@ -12,17 +12,22 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.html.IHtmlRequestHandler;
 import com.flickranalyser.html.common.HelperMethods;
+import com.flickranalyser.pojo.User;
 
 
 public class HtmlRequestProcessor{
+	public static final String CURRENT_USER = "currentUser";
 	private HttpServletRequest mRequest;
 	private HttpServletResponse mResponse;
 	private ServletContext mServletContext;
 	private static final Logger LOGGER = Logger.getLogger(HtmlStarterServlet.class.getName());
 
+	public static final User GUEST_USER = new User("guest@guest.com","guestuser","guest","not link", "no picture");
+	
 	public HtmlRequestProcessor(final HttpServletRequest pRequest, final HttpServletResponse pResponse, final ServletContext pServletContext) {
 		mRequest = pRequest;
 		mResponse = pResponse;
@@ -53,6 +58,14 @@ public class HtmlRequestProcessor{
 	}
 
 	private void doHandleClientRequest() throws Exception{
+		
+		//Lets check who is logged in
+		checkUserLogin();
+		
+		//Now set the HelperMethods knowing which User is logged in.
+		makeHelperMethodsClassAvailableToViews();
+		
+		
 		// the view, which is to be shown
 		String nextViewName = mRequest.getParameter("showView");
 
@@ -64,7 +77,11 @@ public class HtmlRequestProcessor{
 
 		IHtmlRequestHandler viewPreparationHandler = loadHandlerForPreparingView(nextViewName);
 		if( viewPreparationHandler != null ){
-			viewPreparationHandler.performActionAndGetNextView(mRequest, mRequest.getSession());
+			
+			String performActionAndGetNextView = viewPreparationHandler.performActionAndGetNextView(mRequest, mRequest.getSession());
+			if (performActionAndGetNextView != null){
+				nextViewName = performActionAndGetNextView;
+			}
 		}
 
 		showView(nextViewName);
@@ -112,6 +129,30 @@ public class HtmlRequestProcessor{
 		return false;
 	}
 
+	 private void makeHelperMethodsClassAvailableToViews()
+	    {
+	        HelperMethods helperMethods = new HelperMethods(mRequest.getSession());
+	        mRequest.setAttribute("helperMethods", helperMethods);
+	    }
+	
+	 /**
+     * Check if the user is logged in. If the user is not logged in, then he
+     * will be set to the guest-user.
+     */
+    private void checkUserLogin(){
+        HttpSession session = mRequest.getSession();
+        User currentUser = (User) session.getAttribute(CURRENT_USER);
+
+        // user is not logged in => set him to guest
+        if( currentUser == null ){
+            currentUser = GUEST_USER;
+            session.setAttribute(CURRENT_USER, currentUser);
+        }
+
+        // make user known to view
+        mRequest.setAttribute(CURRENT_USER, currentUser);
+    }
+	
 
 	private IHtmlRequestHandler loadRequestHandlerByName( final String prepareViewName ) throws Exception{
 		String expectedName = "com.flickranalyser.html.impl." + prepareViewName + "Handler";

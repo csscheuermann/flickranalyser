@@ -7,10 +7,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	
-	
-	<% out.println(HelperMethods.getHTMLHeader()); %>
-	<% out.println(HelperMethods.createBodyBegin()); %>
-	<% out.println(HelperMethods.createNavigation(false)); %>
+	<%  HelperMethods helperMethods = (HelperMethods) request.getAttribute("helperMethods"); %>
+	<% out.println(helperMethods.getHTMLHeader()); %>
+	<% out.println(helperMethods.createBodyBegin()); %>
+	<% out.println(helperMethods.createNavigation(false)); %>
 
 
    	<%  TopTenSpots topTenSpots = (TopTenSpots) request.getAttribute("topTenSpots"); %>
@@ -40,7 +40,7 @@
 	</div>
 	
 	
-	<% out.println(HelperMethods.createBodyEnd());%>
+	<% out.println(helperMethods.createBodyEnd());%>
 	
 	
 	

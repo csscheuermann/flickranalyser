@@ -14,8 +14,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	
-	<% out.println(HelperMethods.getHTMLHeaderUnclosed()); %>
+	<%  HelperMethods helperMethods = (HelperMethods) request.getAttribute("helperMethods"); %>
+	<% out.println(helperMethods.getHTMLHeaderUnclosed()); %>
 	
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="/res_html/js/Chart.js"></script>
@@ -245,9 +245,9 @@
 	
 	
 	
-	<% out.println(HelperMethods.createBodyBegin()); %>
-	<% out.println(HelperMethods.createNavigation(false)); %>
-	<% out.println(HelperMethods.createMap()); %>
+	<% out.println(helperMethods.createBodyBegin()); %>
+	<% out.println(helperMethods.createNavigation(false)); %>
+	<% out.println(helperMethods.createMap()); %>
 	
 
 	<div class='container'>
@@ -368,7 +368,7 @@
 			
 	
 	
-	<% out.println(HelperMethods.createBodyEnd());%>
+	<% out.println(helperMethods.createBodyEnd());%>
 	
 	</html>
 	

@@ -19,6 +19,16 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+		<servlet>
+		<servlet-name>CallBack</servlet-name>
+		<servlet-class>com.flickranalyser.html.webfrontend.HtmlStarterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CallBack</servlet-name>
+		<url-pattern>/oauth2callback</url-pattern>
+	</servlet-mapping>
+	
+	
 
 	<servlet>
 		<servlet-name>Crawler</servlet-name>

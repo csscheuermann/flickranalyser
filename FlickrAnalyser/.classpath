@@ -18,6 +18,29 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/minimal-json-0.9.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jersey-bundle-1.18.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-all-1.9.2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-android-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-appengine-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-gson-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-jackson2-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-java6-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-protobuf-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-servlet-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-xml-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-android-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-appengine-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-gson-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-jackson-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-jackson2-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-jdo-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-protobuf-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-xml-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-appengine-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-java6-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-jetty-1.18.0-rc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-servlet-1.18.0-rc.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/appengine-java-sdk-1.9.3"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>

@@ -3,12 +3,25 @@ package com.flickranalyser.html.common;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpSession;
+
+import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.html.webfrontend.HtmlStarterServlet;
+import com.flickranalyser.pojo.User;
 
 public class HelperMethods {
 
 	public static final String PAGE_TITLE = "SECRET PLACES";
 	private static final Logger LOGGER = Logger.getLogger(HtmlStarterServlet.class.getName());
+	private HttpSession session;
+
+
+
+
+	public HelperMethods(final HttpSession session){
+		this.session = session;
+
+	}
 
 	public static <T> T instantiate(final String className, final Class<T> type){
 		try{
@@ -26,7 +39,7 @@ public class HelperMethods {
 
 
 
-	public static String getHTMLHeader(){
+	public String getHTMLHeader(){
 		StringBuilder header = new StringBuilder();
 		header.append(getHTMLHeaderUnclosed());
 		header.append("</head>");
@@ -35,7 +48,7 @@ public class HelperMethods {
 	}
 
 
-	public static String getHTMLHeaderUnclosed(){
+	public String getHTMLHeaderUnclosed(){
 
 		StringBuilder header = new StringBuilder();
 
@@ -63,7 +76,7 @@ public class HelperMethods {
 		return header.toString();
 
 	}
-	public static String createCarusel(){
+	public String createCarusel(){
 		StringBuilder bodyBegin = new StringBuilder();
 
 		bodyBegin.append("<div id='myCarousel' class='carousel slide' data-ride='carousel'>");
@@ -99,13 +112,13 @@ public class HelperMethods {
 	}
 
 
-	public static String createMap(){
+	public String createMap(){
 		StringBuilder bodyBegin = new StringBuilder();
 
 		bodyBegin.append("<div class='container'>");
-			bodyBegin.append("<div class='row'>");
-				bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:500px; width:100%'></div></div>");
-			bodyBegin.append("</div>");
+		bodyBegin.append("<div class='row'>");
+		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:500px; width:100%'></div></div>");
+		bodyBegin.append("</div>");
 		bodyBegin.append("</div>");
 
 		return bodyBegin.toString();
@@ -114,7 +127,7 @@ public class HelperMethods {
 
 
 
-	public static String createBodyBegin(){
+	public  String createBodyBegin(){
 		StringBuilder bodyBegin = new StringBuilder();
 		bodyBegin.append("<body>");
 		return bodyBegin.toString();
@@ -122,7 +135,7 @@ public class HelperMethods {
 
 
 
-	public static String createBodyEnd(){
+	public  String createBodyEnd(){
 		StringBuilder bodyEnd = new StringBuilder();
 
 		bodyEnd.append("<!-- Bootstrap core JavaScript");
@@ -136,15 +149,18 @@ public class HelperMethods {
 	}
 
 
-	public static String createNavigation(boolean isIndexPage){
+	public  String createNavigation(boolean isIndexPage){
 
+
+
+		User currentUser = (User) session.getAttribute(HtmlRequestProcessor.CURRENT_USER);
 		StringBuilder navigation = new StringBuilder();
 
 		if (isIndexPage){
-		navigation.append("<div class='navbar-wrapper'>");
+			navigation.append("<div class='navbar-wrapper'>");
 		}else{
 			navigation.append("<div class='navbar-wrapper-normal'>");
-		
+
 		}
 		navigation.append("<div class='container'>");
 
@@ -162,7 +178,15 @@ public class HelperMethods {
 		navigation.append("<div class='navbar-collapse collapse'>");
 		navigation.append("<ul class='nav navbar-nav'>");
 		navigation.append("<li class='active'><a href='/'>Home</a></li>");
-		navigation.append("<li><a href='?showView=TopTenSpots'>Top Ten Spots</a></li>");
+
+		if(currentUser.getEmail().equals(HtmlRequestProcessor.GUEST_USER.getEmail())){
+			navigation.append("<li><a href='?showView=Login'>Login</a></li>");
+		}else{
+			navigation.append("<li><a href='?showView=TopTenSpots'>Top Ten Spots</a></li>");
+			navigation.append("<li><a href='?showView=Logout'>Logout</a></li>");
+		}
+
+
 		navigation.append("</li>");
 		navigation.append("</ul>");
 		navigation.append("</div>");
