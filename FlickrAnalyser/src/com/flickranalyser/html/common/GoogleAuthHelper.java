@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.eclipsesource.json.JsonObject;
-import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.pojo.User;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -50,7 +49,6 @@ public class GoogleAuthHelper {
 
 	private String stateToken;
 
-	private User user = HtmlRequestProcessor.GUEST_USER;
 	private final GoogleAuthorizationCodeFlow flow;
 
 
