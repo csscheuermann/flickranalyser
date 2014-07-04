@@ -52,7 +52,7 @@ public class PFGetterSpot {
 
 		Query q = pm.newQuery(Spot.class);
 		q.setOrdering("overallMaxViewNumberPerCluster desc");
-		q.setRange(0, 10);
+		q.setRange(0, 20);
 
 		try{
 			@SuppressWarnings("unchecked")
