@@ -27,6 +27,8 @@
 	<% out.println(helperMethods.createBodyBegin()); %>
 	<% out.println(helperMethods.createNavigation(true)); %>
 	<% out.println(helperMethods.createCarusel()); %>
+	<% out.println(helperMethods.getMarketingForMainPage()); %>
+	<% out.println(helperMethods.getFooter()); %>
 	
 
 	

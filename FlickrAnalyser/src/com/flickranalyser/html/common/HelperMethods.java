@@ -201,7 +201,55 @@ public class HelperMethods {
 
 
 
+	public String getMarketingForMainPage(){
 
+		StringBuilder marketing = new StringBuilder();
+
+		marketing.append("  <!-- Marketing messaging and featurettes");
+		marketing.append("================================================== -->");
+
+		marketing.append("<!-- Wrap the rest of the page in another container to center all the content. -->");
+
+		marketing.append("<div class='container marketing'>");
+
+		marketing.append("<!-- Three columns of text below the carousel -->");
+		marketing.append("<div class='row'>");
+		marketing.append("<div class='col-lg-4'>");
+		marketing.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
+		marketing.append("<h2>Heading</h2>");
+		marketing.append("<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>");
+		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
+		marketing.append("</div><!-- /.col-lg-4 -->");
+		marketing.append("<div class='col-lg-4'>");
+		marketing.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
+		marketing.append("<h2>Heading</h2>");
+		marketing.append("<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>");
+		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
+		marketing.append("</div><!-- /.col-lg-4 -->");
+		marketing.append("<div class='col-lg-4'>");
+		marketing.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
+		marketing.append("<h2>Heading</h2>");
+		marketing.append("<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>");
+		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
+		marketing.append("</div><!-- /.col-lg-4 -->");
+		marketing.append("  </div><!-- /.row -->");
+		
+		return marketing.toString();
+	}
+
+
+	public String getFooter(){
+		StringBuilder footerBuilder = new StringBuilder();
+		footerBuilder.append("<!-- FOOTER -->");
+		footerBuilder.append("  <footer>");
+		footerBuilder.append("   <p class='pull-right'><a href='#'>Back to top</a></p>");
+		footerBuilder.append("   <p>DVCS 2014 <a href='#'>Privacy</a> &middot; <a href='#'>Terms</a></p>");
+		footerBuilder.append(" </footer>");
+		
+		footerBuilder.append(" </div><!-- /.container -->");
+		
+		return footerBuilder.toString();
+	}
 
 
 
