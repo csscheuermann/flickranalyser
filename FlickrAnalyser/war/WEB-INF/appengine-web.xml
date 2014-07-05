@@ -2,12 +2,12 @@
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
   <application>flickeranalyser</application>
   <version>10</version>
-
+  <module>default</module>
   <!--
     Allows App Engine to send multiple requests to one instance in parallel:
   -->
   <threadsafe>true</threadsafe>
-
+  <instance-class>B1</instance-class>
   <!-- Configure serving/caching of GWT files -->
   <static-files>
     <include path="**" />
@@ -23,7 +23,10 @@
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
   </system-properties>
-
+ <basic-scaling>
+    <max-instances>1</max-instances>
+    <idle-timeout>30m</idle-timeout>
+  </basic-scaling>
   
   <sessions-enabled>true</sessions-enabled>
         

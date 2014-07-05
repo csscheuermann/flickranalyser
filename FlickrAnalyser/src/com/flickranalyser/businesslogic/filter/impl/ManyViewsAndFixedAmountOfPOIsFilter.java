@@ -16,7 +16,7 @@ public class ManyViewsAndFixedAmountOfPOIsFilter implements IFilterStrategy{
 		
 		
 		for(Cluster currentCluster : clusterToFilter){
-			if((currentCluster.getOverallViews() > 5000) && currentCluster.getNumberOfPOIs() < 50 && currentCluster.getNumberOfPOIs() > 10){
+			if((currentCluster.getOverallViews() > 2500) && currentCluster.getNumberOfPOIs() < 100 && currentCluster.getNumberOfPOIs() > 10){
 				topClusters.add(currentCluster);
 			}
 		}

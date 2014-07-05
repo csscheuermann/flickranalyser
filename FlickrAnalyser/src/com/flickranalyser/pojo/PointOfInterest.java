@@ -1,6 +1,7 @@
 package com.flickranalyser.pojo;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import com.javadocmd.simplelatlng.LatLng;
 
@@ -10,11 +11,13 @@ public class PointOfInterest implements Serializable, Comparable<PointOfInterest
 	private int countOfViews;
 	private LatLng location;
 	private String pictureUrl;
+	private Set<String> tags;
 
-	public PointOfInterest(int countOfViews, LatLng location,String pictureUrl) {
+	public PointOfInterest(int countOfViews, LatLng location,String pictureUrl,Set<String> tags) {
 		this.pictureUrl = pictureUrl;
 		this.countOfViews = countOfViews;
 		this.location = location;
+		this.tags = tags;
 	}
 
 	public String getPictureUrl() {
@@ -45,6 +48,11 @@ public class PointOfInterest implements Serializable, Comparable<PointOfInterest
 		
 		// TODO Auto-generated method stub
 		return compareCountOfViews - this.countOfViews;
+	}
+
+	public Set<String> getTags() {
+		return tags;
+		
 	}
 
 

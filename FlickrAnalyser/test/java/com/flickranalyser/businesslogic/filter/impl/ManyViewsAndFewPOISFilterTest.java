@@ -1,5 +1,6 @@
 package com.flickranalyser.businesslogic.filter.impl;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class ManyViewsAndFewPOISFilterTest {
 	private void addPointsOfInterests(Cluster cluster,
 			int numberPointsOfInterests) {
 		for (int i = 0; i < numberPointsOfInterests; i++) {
-			PointOfInterest pointOfInterest = new PointOfInterest(0, new LatLng(cluster.getLatitude(), cluster.getLongitude()),"test");
+			PointOfInterest pointOfInterest = new PointOfInterest(0, new LatLng(cluster.getLatitude(), cluster.getLongitude()),"test", new HashSet<String>());
 			cluster.addPointOfInterestToList(pointOfInterest);
 		}
 
