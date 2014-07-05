@@ -249,14 +249,31 @@
 	<% out.println(helperMethods.createNavigation(false)); %>
 	<% out.println(helperMethods.createMap()); %>
 	
-
 	<div class='container'>
 		<div class='row'>
 		    <div class="col-xs-12">
-				<h2>Cluster Information</h2>
+				<h2>Spot Info</h2>
+				 <% 
+				if (spot != null){	
+					int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
+					int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
+			   	 	out.println("Overall POI Count: " + overallMaxNumberOfPOIs); 
+			     	out.println("Overall View Count: " + overallMaxNumberOfViews); 
+				}	
+				%>
 			</div>
 		</div>
 	</div>	
+	
+
+<div class='container'>
+	<div class='row'>
+	    <div class="col-xs-12">
+			<h2>Cluster Information</h2>
+		
+		</div>
+	</div>
+</div>	
 				
 				
 	<div class='container'>
@@ -353,13 +370,13 @@
 				</div>
 				<div class="col-xs-4">
 					<div class="centeralized-div">
-						<canvas id="poiCountOverall" width="200" height="200"></canvas>
+						<canvas id="viewCountOverall" width="200" height="200"></canvas>
 					</div>
 				</div>
 			
 				<div class="col-xs-4">
 					<div class="centeralized-div">
-						<canvas id="viewCountOverall" width="200" height="200"></canvas>
+						<canvas id="poiCountOverall" width="200" height="200"></canvas>
 					</div>
 				</div>
 			</div>
