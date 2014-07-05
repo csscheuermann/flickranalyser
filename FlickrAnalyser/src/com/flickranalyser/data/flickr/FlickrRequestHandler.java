@@ -1,9 +1,6 @@
 package com.flickranalyser.data.flickr;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +42,7 @@ public class FlickrRequestHandler {
 					.append("lon=").append(spot.getLongitude())
 					.append("&radius=").append(spot.getSpotRadiusInKm())
 					.append("&sort=interestingness-desc")
-					.append("&extras=views%2Cgeo%2Curl_s%2Ctags")
+					.append("&extras=views%2Cgeo%2Curl_s")
 					.append("&per_page=1000").append("&page=")
 					.append(requestedPage)
 					.append("&format=json&nojsoncallback=1");
@@ -85,16 +82,16 @@ public class FlickrRequestHandler {
 					double latitude = photo.get("latitude").asDouble();
 					double longitude = photo.get("longitude").asDouble();
 					String url = photo.get("url_s").asString();
-					String[] tagsArray = photo.get("tags").asString()
-							.split(" ");
-					Set<String> tags = new HashSet<String>();
-					for (String tag : Arrays.asList(tagsArray)) {
-						tags.add(tag.toUpperCase());
-					}
+//					String[] tagsArray = photo.get("tags").asString()
+//							.split(" ");
+//					Set<String> tags = new HashSet<String>();
+//					for (String tag : Arrays.asList(tagsArray)) {
+//						tags.add(tag.toUpperCase());
+//					}
 
 					LatLng location = new LatLng(latitude, longitude);
-					result.add(new PointOfInterest(numberViews, location, url,
-							tags));
+					result.add(new PointOfInterest(numberViews, location, url,new HashSet<String>()
+							));
 				}
 			} else {
 				log.log(Level.INFO, "COULD NOT FIND PHOTOS.");

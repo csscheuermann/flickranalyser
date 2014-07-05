@@ -44,7 +44,7 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
 			LOGGER.log(Level.INFO, "BEFORE FIRST CLUSTER " + spot.getCluster().get(0).toString());
 		}
 
-		spot.setCluster(choosenFilterStrategy.filterCluster(spot.getCluster()));
+		spot.setCluster(choosenFilterStrategy.filterCluster(spot.getCluster(),spot));
 
 		pRequest.setAttribute("spot", spot );
 		LOGGER.log(Level.INFO, "AFTER CLUSTER SIZE " + spot.getCluster().size());

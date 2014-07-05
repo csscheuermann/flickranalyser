@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.PointOfInterest;
+import com.flickranalyser.pojo.Spot;
 import com.javadocmd.simplelatlng.LatLng;
 
 public class ManyViewsAndFewPOISFilterTest {
@@ -65,7 +66,7 @@ public class ManyViewsAndFewPOISFilterTest {
 		clusterToFilter.add(cluster3);
 		clusterToFilter.add(cluster4);
 		clusterToFilter.add(cluster5);
-		List<Cluster> filteredSetOfClusters = filterUnderTest.filterCluster(clusterToFilter);
+		List<Cluster> filteredSetOfClusters = filterUnderTest.filterCluster(clusterToFilter, new Spot());
 		
 		
 		Assert.assertEquals(ManyViewsAndFewPOIsFilter.getMaxNumberOfClusters(), filteredSetOfClusters.size());

@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.pojo.Cluster;
+import com.flickranalyser.pojo.Spot;
 
 public class ManyViewsAndFixedAmountOfPOIsFilter implements IFilterStrategy{
 
+
 	@Override
-	public List<Cluster> filterCluster(List<Cluster> clusterToFilter) {
+	public List<Cluster> filterCluster(List<Cluster> clusterToFilter,Spot spot) {
 		
 		
 		List<Cluster> topClusters = new LinkedList<Cluster>();
@@ -22,5 +24,6 @@ public class ManyViewsAndFixedAmountOfPOIsFilter implements IFilterStrategy{
 		}
 		return topClusters;
 	}
+
 
 }

@@ -14,6 +14,7 @@ import com.flickranalyser.businesslogic.filter.decorator.impl.EquallyWeightedSco
 import com.flickranalyser.businesslogic.filter.decorator.impl.RelativeNumberPOIsScoreDecorator;
 import com.flickranalyser.businesslogic.filter.decorator.impl.RelativeNumberViewsScoreDecorator;
 import com.flickranalyser.pojo.Cluster;
+import com.flickranalyser.pojo.Spot;
 
 public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 
@@ -27,7 +28,7 @@ public class ManyViewsAndFewPOIsFilter implements IFilterStrategy {
 	}
 	
 	@Override
-	public List<Cluster> filterCluster(List<Cluster> clusterToFilter) {
+	public List<Cluster> filterCluster(List<Cluster> clusterToFilter, Spot spot) {
 		ClusterMaxValuesInformation clusterSetInformation = new ClusterMaxValuesInformation(clusterToFilter);
 		
 		int maximunNumberViews = clusterSetInformation.getMaximumNumberViews();

@@ -32,7 +32,9 @@
 				"<div class='col-xs-3'> " + spot.getOverallMaxViewNumberPerCluster() + "</div>" +
 				"<div class='col-xs-3'> " +
 					"<a href='http://flickeranalyser.appspot.com/?showView=SpotMap&location=" +spot.getName()+ "&strategy=ManyViewsAndFewPOIsFilter'>1</a> | " +
-			 		"<a href='http://flickeranalyser.appspot.com/?showView=SpotMap&location=" +spot.getName()+ "&strategy=ManyViewsAndFixedAmountOfPOIsFilter'>2</a>" +
+						"<a href='http://flickeranalyser.appspot.com/?showView=SpotMap&location=" +spot.getName()+ "&strategy=DoNotFilterStrategy'>2</a> | " +
+						"<a href='http://flickeranalyser.appspot.com/?showView=SpotMap&location=" +spot.getName()+ "&strategy=RelativeRatioViewsAndPOIsFilter'>3</a> | " +
+			 		"<a href='http://flickeranalyser.appspot.com/?showView=SpotMap&location=" +spot.getName()+ "&strategy=ManyViewsAndFixedAmountOfPOIsFilter'>4</a>" +
 				"</div></div>");
 		} 
 		%>
