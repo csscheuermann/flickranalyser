@@ -27,7 +27,7 @@
 
    //Construct the circle for each value in citymap.
    // Note: We scale the area of the circle based on the population.
-   function addCircle(lgt, lat, opacity) {
+   function addCircle(lgt, lat, opacity,radius ) {
      var populationOptions = {
        strokeColor: '#FF0000',
        strokeOpacity: 1,
@@ -36,7 +36,7 @@
        fillOpacity: opacity,
        map: map,
        center: new google.maps.LatLng(lgt, lat),
-       radius: 250
+       radius: radius
      };
      // Add the circle for this city to the map.
      var cityCircle = new google.maps.Circle(populationOptions);
@@ -167,14 +167,18 @@
 			%>
     	};
      	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-		
+
 	    <%
+
 			if (spot != null){
+			double spotRadiusInMeter = spot.getSpotRadiusInKm()*1000;
+			out.println("addCircle(" + spot.getLatitude() + "," + spot.getLongitude() + ",0.1," + spotRadiusInMeter + ");");
 			String spotName = spot.getName();
 	    	int maxValue = spot.getMaxClusterViews();
 
 			List<Cluster> cluster = spot.getCluster();
-	
+	  		
+			double clusterRadiusInMeter = spot.getClusterRadiusInKm()*1000;
 			int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
 		
 			int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
@@ -190,7 +194,7 @@
 	   	for (Cluster currentCluster : cluster){
 		
 			int numberOfPOIsForCurrentCluster = currentCluster.getNumberOfPOIs();
-   		
+ 
 	       	double currentLat = currentCluster.getLatitude();
 	       	double currentLng = currentCluster.getLongitude();
 	   		int clusterOverallViews = currentCluster.getOverallViews();
@@ -229,7 +233,7 @@
 				
 	       	}
 			double opacityViewCountRelative = viewCountRealativeInPercent/100.00;
-	       	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + ");");
+	       	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + "," + clusterRadiusInMeter + ");");
 		}	
 	   	}
 	     	%>

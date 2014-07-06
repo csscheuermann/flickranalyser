@@ -45,8 +45,8 @@ public class PFGetterSpot {
 			}
 
 		} catch (Exception ex) {
+			//TODO COS DVV: Exception Handling
 			LOGGER.log(Level.SEVERE, "Exception");
-			ex.printStackTrace();
 			return null;
 		}
 		finally{

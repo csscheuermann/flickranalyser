@@ -16,7 +16,7 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class FlickrRequestHandler {
 
-	private static final int MAX_NUMBER_PAGES_TO_CRAWL = 300;
+	private static final int MAX_NUMBER_PAGES_TO_CRAWL = 17;
 
 	private static final Logger log = Logger
 			.getLogger(FlickrRequestHandler.class.getName());
@@ -28,7 +28,7 @@ public class FlickrRequestHandler {
 	// private String sharedSecret = "e7992cc453964557";
 
 	public Set<PointOfInterest> getPOIsForSpot(Spot spot) {
-
+		
 		Set<PointOfInterest> result = new HashSet<PointOfInterest>();
 
 		int requestedPage = 1;
@@ -44,7 +44,7 @@ public class FlickrRequestHandler {
 					.append("&radius=").append(spot.getSpotRadiusInKm())
 					.append("&sort=interestingness-desc")
 					.append("&extras=views%2Cgeo%2Curl_s%2Ctags")
-					.append("&per_page=750").append("&page=")
+					.append("&per_page=250").append("&page=")
 					.append(requestedPage)
 					.append("&format=json&nojsoncallback=1");
 
@@ -120,4 +120,6 @@ public class FlickrRequestHandler {
 		return result;
 
 	}
+
+	
 }
