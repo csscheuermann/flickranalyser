@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.PointOfInterest;
@@ -16,7 +14,7 @@ import com.javadocmd.simplelatlng.util.LengthUnit;
 
 public class SpotCalculationHandler {
 
-	private static final Logger LOGGER = Logger.getLogger(SpotCalculationHandler.class.getName());
+	//private static final Logger LOGGER = Logger.getLogger(SpotCalculationHandler.class.getName());
 	public Spot getSpot(Set<PointOfInterest> pointOfInterests, Spot hardcodedSpot){
 		List<Cluster> clusters = hardcodedSpot.getCluster();
 
@@ -41,7 +39,6 @@ public class SpotCalculationHandler {
 			Iterator<PointOfInterest> iterator = pointOfInterestList.iterator();
 			int counter = 0;
 			while ((iterator.hasNext()) && (counter < 3)){
-				LOGGER.log(Level.INFO, "ADDED URL");
 				urls.add(iterator.next().getPictureUrl());
 				counter++;
 			}

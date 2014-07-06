@@ -1,6 +1,7 @@
 package com.flickranalyser.pojo;
 
 import java.io.Serializable;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +15,8 @@ import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
-@PersistenceCapable
+
+@PersistenceCapable(detachable = "true")
 public class Cluster implements Serializable {
 
 	

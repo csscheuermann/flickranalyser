@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
-import com.flickranalyser.businesslogic.impl.SecretPlacesFacade;
 import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.Spot;
 

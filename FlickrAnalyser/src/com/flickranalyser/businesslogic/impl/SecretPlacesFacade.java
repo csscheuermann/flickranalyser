@@ -43,9 +43,8 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 		Set<PointOfInterest> allPOIsForSpot = flickrRequestHandler.getPOIsForSpot(spotToSearchFor);
 		LOGGER.log(Level.INFO, " Number of POIs: " + allPOIsForSpot.size());
 		
-		//TODO COS DVV: We get heapspace Problems
-		//Set<PointOfInterest> reduceResult = tagBasedRequestReducer.reduceResult(allPOIsForSpot);
-		Spot spot = spotCalculationHandler.getSpot(allPOIsForSpot,spotToSearchFor);
+		Set<PointOfInterest> reduceResult = tagBasedRequestReducer.reduceResult(allPOIsForSpot);
+		Spot spot = spotCalculationHandler.getSpot(reduceResult,spotToSearchFor);
 		return spot;
 	}
 

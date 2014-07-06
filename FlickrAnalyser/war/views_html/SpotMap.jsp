@@ -114,7 +114,7 @@
 				 clusterDetails.addElementDiv('spotInfo', 'spot_location', locationString);
 				   
                  } else {
-                   alert("Geocode was not successful for the following reason: " + status);
+                   //alert("Geocode was not successful for the following reason: " + status);
                  }
 
           });

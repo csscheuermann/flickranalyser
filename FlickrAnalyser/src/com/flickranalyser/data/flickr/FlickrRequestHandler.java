@@ -1,5 +1,6 @@
 package com.flickranalyser.data.flickr;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -15,7 +16,7 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class FlickrRequestHandler {
 
-	private static final int MAX_NUMBER_PAGES_TO_CRAWL = 1000;
+	private static final int MAX_NUMBER_PAGES_TO_CRAWL = 300;
 
 	private static final Logger log = Logger
 			.getLogger(FlickrRequestHandler.class.getName());
@@ -42,8 +43,8 @@ public class FlickrRequestHandler {
 					.append("lon=").append(spot.getLongitude())
 					.append("&radius=").append(spot.getSpotRadiusInKm())
 					.append("&sort=interestingness-desc")
-					.append("&extras=views%2Cgeo%2Curl_s")
-					.append("&per_page=1000").append("&page=")
+					.append("&extras=views%2Cgeo%2Curl_s%2Ctags")
+					.append("&per_page=750").append("&page=")
 					.append(requestedPage)
 					.append("&format=json&nojsoncallback=1");
 
@@ -79,19 +80,32 @@ public class FlickrRequestHandler {
 					if (numberViews > maxViewCount) {
 						maxViewCount = numberViews;
 					}
-					double latitude = photo.get("latitude").asDouble();
-					double longitude = photo.get("longitude").asDouble();
-					String url = photo.get("url_s").asString();
-//					String[] tagsArray = photo.get("tags").asString()
-//							.split(" ");
-//					Set<String> tags = new HashSet<String>();
-//					for (String tag : Arrays.asList(tagsArray)) {
-//						tags.add(tag.toUpperCase());
-//					}
+					double latitude;
+					double longitude;
+					try {
+						String[] tagsArray = photo.get("tags").asString()
+								.split(" ");
+						Set<String> tags = new HashSet<String>();
+						int size = Arrays.asList(tagsArray).size();
+						
+						for (int i = 0; i < 7; i++ ) {
+							if (i < size){
+								tags.add(Arrays.asList(tagsArray).get(i).toUpperCase());
+							}
+							
+						}
+						latitude = photo.get("latitude").asDouble();
+						longitude = photo.get("longitude").asDouble();
+						String url = photo.get("url_s").asString();
+						LatLng location = new LatLng(latitude, longitude);
+						result.add(new PointOfInterest(numberViews, location, url,tags));
+					} catch (Exception e) {
+						// TODO COS DVV: Here sometimes it can happen that he can not parse
+						log.log(Level.SEVERE, "COULD NOT PARSE THIS HERE.");
+						e.printStackTrace();
+					}
+					
 
-					LatLng location = new LatLng(latitude, longitude);
-					result.add(new PointOfInterest(numberViews, location, url,new HashSet<String>()
-							));
 				}
 			} else {
 				log.log(Level.INFO, "COULD NOT FIND PHOTOS.");

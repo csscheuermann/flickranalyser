@@ -27,11 +27,11 @@ public class HelperMethods {
 		try{
 			return type.cast(Class.forName(className).newInstance());
 		} catch(final InstantiationException e){
-			LOGGER.log(Level.SEVERE, e.getMessage());
+			LOGGER.log(Level.INFO, "COULD NOT INITIATE " + e.getMessage());
 		} catch(final IllegalAccessException e){
-			LOGGER.log(Level.SEVERE, e.getMessage());
+			LOGGER.log(Level.INFO, "ILLEGALACCESSEXCEPTION" + e.getMessage());
 		} catch(final ClassNotFoundException e){
-			LOGGER.log(Level.SEVERE, e.getMessage());
+			LOGGER.log(Level.INFO, "CLASSNOTFOUNDEXCEPTION" + e.getMessage());
 		}
 		return null;
 	}

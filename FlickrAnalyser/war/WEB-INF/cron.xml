@@ -3,7 +3,7 @@
 	<cron>
 		<url>/cron/crawl</url>
 		<description>This Cron Job will process the queue from Spots to Crawl in Datastore.</description>
-		<schedule>every 30 minutes</schedule>
+		<schedule>every 10 minutes</schedule>
 	</cron>
 	
 </cronentries>
