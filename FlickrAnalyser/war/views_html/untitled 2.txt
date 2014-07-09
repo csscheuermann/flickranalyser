@@ -1,0 +1,37 @@
+
+	
+	
+	
+	
+   	<%  
+	  	out.println("<div class='container'>");
+	  	if (spot == null){
+			 out.println("<div class='row'> " +
+				"<div class='col-xs-12'>" +  error + "</div></div>"); 
+	  	}else{
+		 	out.println("<div class='row'> " +
+				"<div class='col-xs-12'>" +  successfull + "</div></div>");			
+	  	}
+	  
+		out.println("</div>");
+	  %>
+	  
+	  
+	  
+	<% 
+	String error = (String) request.getAttribute("error");
+  	String successfull = (String) request.getAttribute("successful"); 
+	Spot spot = (Spot) request.getAttribute("spot"); 
+	
+	
+	if (spot == null){
+		String spotName = (String) request.getAttribute("address");
+		double spotResultLatitude = (double) request.getAttribute("latitude");
+		double spotResultLongitude = (double) request.getAttribute("logitude");
+		addSpotResult(spotName,spotResultLatitude ,spotResultLongitude);
+		
+	}else{
+		
+		
+	}
+	%>

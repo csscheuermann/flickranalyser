@@ -182,7 +182,8 @@ public class HelperMethods {
 		if(currentUser.getEmail().equals(HtmlRequestProcessor.GUEST_USER.getEmail())){
 			navigation.append("<li><a href='?showView=Login'>Login</a></li>");
 		}else{
-			navigation.append("<li><a href='?showView=TopTenSpots'>Top Ten Spots</a></li>");
+			navigation.append("<li><a href='?showView=TopSpots'>Top Spots</a></li>");
+			navigation.append("<li><a href='?showView=SearchSpots'>Search Spot</a></li>");
 			navigation.append("<li><a href='?showView=Logout'>Logout</a></li>");
 		}
 

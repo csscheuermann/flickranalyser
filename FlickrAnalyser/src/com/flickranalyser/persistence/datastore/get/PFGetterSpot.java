@@ -10,7 +10,7 @@ import javax.jdo.Query;
 
 import com.flickranalyser.persistence.datastore.common.PMF;
 import com.flickranalyser.pojo.Spot;
-import com.flickranalyser.pojo.TopTenSpots;
+import com.flickranalyser.pojo.SpotResultList;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
@@ -27,12 +27,12 @@ public class PFGetterSpot {
 			Key k = KeyFactory.createKey(Spot.class.getSimpleName(), nameOfSpot);
 			Spot spot = pm.getObjectById(Spot.class, k);
 			if (spot != null){
-				
+
 				//TODO COS DVV: Strange here normal detach shoudl work, but only thing that works is that
 				//Solves the Problem with the empty spots while loading
 				Spot spotToReturn = new Spot(spot.getLatitude(), spot.getLongitude(),  spot.getName(), spot.getDescription(),spot.getClusterRadiusInKm(), spot.getSpotRadiusInKm(), k, spot.getMaxNumberOfPOIsPerCluster(), spot.getMaxNumberOfViewsPerCluster());
 				spotToReturn.setCluster(spot.getCluster());
-				
+
 				LOGGER.log(Level.INFO, "NAME OF SPOT: " + spotToReturn.getName() );
 				LOGGER.log(Level.INFO, "NUMBER OF CLUSTER: " + spotToReturn.getCluster().size() );
 				if (spotToReturn.getCluster().size() > 1){
@@ -54,29 +54,28 @@ public class PFGetterSpot {
 		}
 	}
 
-	public static TopTenSpots getTopTenSpots(){
+	public static SpotResultList getTopTenSpots(){
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		Query q = pm.newQuery(Spot.class);
-		q.setOrdering("overallMaxViewNumberPerCluster desc");
-		q.setRange(0, 20);
-
 		try{
+			q.setOrdering("overallMaxViewNumberPerCluster desc");
+			q.setRange(0, 20);
 			@SuppressWarnings("unchecked")
 			List<Spot> results = (List<Spot>) q.execute();
 			//TODO COS: Discuss with Daniel
 			//Needed to be done due to serializable issues, returning the result
 			// itself it is not serializable
-			
+
 			LinkedList<Spot> resultList = new LinkedList<Spot>();
 			if (!results.isEmpty()){
-				 for (Spot spot : results) {
-					 resultList.add(spot);
+				for (Spot spot : results) {
+					resultList.add(spot);
 				}
-				return new TopTenSpots(resultList);
+				return new SpotResultList(resultList);
 			}else{
 				LOGGER.log(Level.INFO, "NO TOP TEN SPOTS FOUND.");
-				return new TopTenSpots(resultList);
+				return new SpotResultList(resultList);
 			}
 
 		}finally{
@@ -86,5 +85,45 @@ public class PFGetterSpot {
 		}
 
 
+	}
+	
+	/**
+	 * This Q
+	 * @return
+	 */
+	public static SpotResultList getSpotByCoordinates(double latitude, double longitude){
+		
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+
+		Query q = pm.newQuery(Spot.class);
+		try{
+			q.setFilter("latitude == " + latitude);
+			q.setFilter("longitude == " + longitude);
+			q.setRange(0, 5);
+			@SuppressWarnings("unchecked")
+			List<Spot> results = (List<Spot>) q.execute();
+			
+			
+			//TODO COS: Discuss with Daniel
+			//Needed to be done due to serializable issues, returning the result
+			// itself it is not serializable
+
+			LinkedList<Spot> resultList = new LinkedList<Spot>();
+			if (!results.isEmpty()){
+				for (Spot spot : results) {
+					resultList.add(spot);
+				}
+				return new SpotResultList(resultList);
+			}else{
+				LOGGER.log(Level.INFO, "NO SPOTS FOUND.");
+				return new SpotResultList(resultList);
+			}
+
+		}finally{
+			q.closeAll();
+			pm.close();
+			LOGGER.log(Level.INFO, "CLOSED QUERY AND PM.");
+		}
+		
 	}
 }

@@ -25,6 +25,27 @@
     "maxAge" : 0
   },
   "methods" : {
+    "spotAPI.getSpotByName" : {
+      "path" : "spot/{spotName}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.SpotService.getSpotByName",
+      "request" : {
+        "parameters" : {
+          "spotName" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "spotAPI.putSpotInCronQueue" : {
       "path" : "putSpotInCronQueue/{spotName}/{latitude}/{longitude}/{clusterRadius}/{description}/{spotRadius}",
       "httpMethod" : "POST",
@@ -69,6 +90,177 @@
   },
   "descriptor" : {
     "schemas" : {
+      "Spot" : {
+        "id" : "Spot",
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "latitude" : {
+            "type" : "number"
+          },
+          "longitude" : {
+            "type" : "number"
+          },
+          "spotRadiusInKm" : {
+            "type" : "number"
+          },
+          "clusterRadiusInKm" : {
+            "type" : "number"
+          },
+          "topThreePictures" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "dataStoreKey" : {
+            "$ref" : "Key"
+          },
+          "overallMaxPOINumberPerCluster" : {
+            "type" : "integer"
+          },
+          "overallMaxViewNumberPerCluster" : {
+            "type" : "integer"
+          },
+          "maxNumberOfPOIsPerCluster" : {
+            "type" : "integer"
+          },
+          "maxNumberOfViewsPerCluster" : {
+            "type" : "integer"
+          },
+          "cluster" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Cluster"
+            }
+          },
+          "maxClusterViews" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "Key" : {
+        "id" : "Key",
+        "type" : "object",
+        "properties" : {
+          "kind" : {
+            "type" : "string"
+          },
+          "appId" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "parent" : {
+            "$ref" : "Key"
+          },
+          "namespace" : {
+            "type" : "string"
+          },
+          "complete" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Cluster" : {
+        "id" : "Cluster",
+        "type" : "object",
+        "properties" : {
+          "datastoreClusterKey" : {
+            "type" : "string"
+          },
+          "latitude" : {
+            "type" : "number"
+          },
+          "longitude" : {
+            "type" : "number"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "overallViews" : {
+            "type" : "integer"
+          },
+          "urlOfMostViewedPicture" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "numberOfPOIs" : {
+            "type" : "integer"
+          },
+          "overallTouristicnessInPointsFrom1To10" : {
+            "type" : "number"
+          },
+          "overallTouristicnessVotes" : {
+            "type" : "integer"
+          },
+          "pointOfInterestList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "PointOfInterest"
+            }
+          }
+        }
+      },
+      "PointOfInterest" : {
+        "id" : "PointOfInterest",
+        "type" : "object",
+        "properties" : {
+          "countOfViews" : {
+            "type" : "integer"
+          },
+          "location" : {
+            "$ref" : "LatLng"
+          },
+          "pictureUrl" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "LatLng" : {
+        "id" : "LatLng",
+        "type" : "object",
+        "properties" : {
+          "latitude" : {
+            "type" : "number"
+          },
+          "longitude" : {
+            "type" : "number"
+          },
+          "polar" : {
+            "type" : "boolean"
+          },
+          "latitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "longitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
       "Response" : {
         "id" : "Response",
         "type" : "object",
@@ -94,6 +286,11 @@
       }
     },
     "methods" : {
+      "com.flickranalyser.endpoints.SpotService.getSpotByName" : {
+        "response" : {
+          "$ref" : "Spot"
+        }
+      },
       "com.flickranalyser.endpoints.SpotService.putSpotInCronQueue" : {
         "response" : {
           "$ref" : "Response"

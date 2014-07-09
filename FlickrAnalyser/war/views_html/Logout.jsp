@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.flickranalyser.html.common.HelperMethods" %>
-<%@ page import="com.flickranalyser.pojo.Spot" %>
-<%@ page import="com.flickranalyser.pojo.TopTenSpots" %>
 <%@ page import="java.util.List" %>
 
 

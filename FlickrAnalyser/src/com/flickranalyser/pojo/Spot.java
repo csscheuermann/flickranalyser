@@ -9,12 +9,10 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-import javax.persistence.Basic;
-import javax.persistence.FetchType;
 
 import com.google.appengine.api.datastore.Key;
 
-@PersistenceCapable(detachable = "true")
+@PersistenceCapable
 public class Spot implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -44,7 +42,6 @@ public class Spot implements Serializable{
 	
 	/** List of all clusters */
 	@Persistent
-	@Basic(fetch = FetchType.EAGER)
 	private List<Cluster> clusters;
 	
 	@Persistent

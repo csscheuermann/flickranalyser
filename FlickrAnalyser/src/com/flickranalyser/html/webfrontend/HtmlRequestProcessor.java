@@ -19,7 +19,11 @@ import com.flickranalyser.html.common.HelperMethods;
 import com.flickranalyser.pojo.User;
 
 
+
 public class HtmlRequestProcessor{
+	private static final String PREFIX_ACTION_HANDLER_CLASS = "Action";
+	private static final String ACTION = "action";
+	private static final String SHOW_VIEW = "showView";
 	public static final String CURRENT_USER = "currentUser";
 	private HttpServletRequest mRequest;
 	private HttpServletResponse mResponse;
@@ -40,6 +44,7 @@ public class HtmlRequestProcessor{
 			doHandleClientRequest();
 		}
 		catch( Exception e ){
+			//TODO COS DVV EXCEPTION HANDLING
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
@@ -53,29 +58,49 @@ public class HtmlRequestProcessor{
 
 	private void checkPreconditions() throws Exception{
 		// this is the view which is to be shown
-		String nextView = mRequest.getParameter("showView");
-		LOGGER.info("showView: " + nextView);
+		String nextView = mRequest.getParameter(SHOW_VIEW);
+		LOGGER.info("SHOW VIEW PARAM " + nextView);
+		
+		String action = mRequest.getParameter(ACTION);
+		LOGGER.info("ACTION PARAM " + action);	
+		
+		if ( (action != null) && (nextView != null) ){
+			throw new RuntimeException("Action and viewparameter have been set, that is nor allowed");
+		}
+		
+		
 	}
 
 	private void doHandleClientRequest() throws Exception{
 		
-		//Lets check who is logged in
+		// lets check who is logged in
 		checkUserLogin();
 		
-		//Now set the HelperMethods knowing which User is logged in.
+		// now set the HelperMethods knowing which User is logged in.
 		makeHelperMethodsClassAvailableToViews();
 		
 		
 		// the view, which is to be shown
-		String nextViewName = mRequest.getParameter("showView");
+		String nextViewName = mRequest.getParameter(SHOW_VIEW);
 
+		// get the action that should be performed
+		String action = mRequest.getParameter(ACTION);
+		
+		IHtmlRequestHandler requestHandler = loadHandlerForAction(action);
+		
+	
 		// if there is neither action nor showView, then show the main view
-		if((nextViewName == null) ){
+		if((nextViewName == null) && (action == null) ){
 			nextViewName = "01_index";
 		}
 
-
+		if (requestHandler !=null){
+			nextViewName = requestHandler.performActionAndGetNextView(mRequest, mRequest.getSession());
+		}
+		
+		
 		IHtmlRequestHandler viewPreparationHandler = loadHandlerForPreparingView(nextViewName);
+		
 		if( viewPreparationHandler != null ){
 			
 			String performActionAndGetNextView = viewPreparationHandler.performActionAndGetNextView(mRequest, mRequest.getSession());
@@ -87,6 +112,21 @@ public class HtmlRequestProcessor{
 		showView(nextViewName);
 	}
 
+
+	private IHtmlRequestHandler loadHandlerForAction(String action) throws Exception {
+		
+			if(action == null){
+				return null;
+			}
+			
+			IHtmlRequestHandler requestHandler = loadRequestHandlerByName(PREFIX_ACTION_HANDLER_CLASS + action);
+			
+			if (requestHandler != null){
+				return requestHandler;
+			}
+	
+			throw new RuntimeException("No action requestHandler has been found.");
+	}
 
 	private IHtmlRequestHandler loadHandlerForPreparingView( final String pNextViewName ) throws Exception {
 		final String nameForHandlerWhichPreparesView = "Prepare" + pNextViewName;

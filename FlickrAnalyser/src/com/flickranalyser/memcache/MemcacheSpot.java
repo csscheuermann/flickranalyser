@@ -9,7 +9,7 @@ import com.flickranalyser.memcache.checker.SpotPersistenceChecker;
 import com.flickranalyser.persistence.datastore.common.MemcacheNameStoreEnum;
 import com.flickranalyser.persistence.datastore.get.PFGetterSpot;
 import com.flickranalyser.pojo.Spot;
-import com.flickranalyser.pojo.TopTenSpots;
+import com.flickranalyser.pojo.SpotResultList;
 import com.google.appengine.api.memcache.Expiration;
 
 public class MemcacheSpot implements Serializable {
@@ -45,21 +45,21 @@ public class MemcacheSpot implements Serializable {
 
 
 	
-	public static TopTenSpots getTopTenSpots(){
+	public static SpotResultList getTopSpots(){
 		//First ask Memcache if there are already top ten spots contained
 		//Make sure that they are reloaded every 10 Minutes
 		String memcachKey = MemCacheConstants.TOP_TEN_SPOT_LIST;
 		String memcachKeyTimestamp = MemCacheConstants.SPOT_LIST_REFRESH_TIME;
 
 		if(SpotPersistenceChecker.checkIfPersistenceMustBeAskedForTop10Spots(memcachKey, memcachKeyTimestamp)){
-			TopTenSpots topTenSpotsFromPersistence = PFGetterSpot.getTopTenSpots();
+			SpotResultList topTenSpotsFromPersistence = PFGetterSpot.getTopTenSpots();
 			
 			MemcacheHelperMethods.getSyncCache().put(memcachKeyTimestamp,new Date().getTime() );
 			LOGGER.log(Level.INFO, "PUT TIMESTAMP IN CACHE: " +memcachKeyTimestamp);
 			MemcacheHelperMethods.getSyncCache().put(memcachKey, topTenSpotsFromPersistence, Expiration.onDate(MemCacheConstants.MEMCACH_EXPIRE_DATE));
 			return topTenSpotsFromPersistence;
 		}
-		return (TopTenSpots) MemcacheHelperMethods.getSyncCache().get(memcachKey);
+		return (SpotResultList) MemcacheHelperMethods.getSyncCache().get(memcachKey);
 	}
 
 }

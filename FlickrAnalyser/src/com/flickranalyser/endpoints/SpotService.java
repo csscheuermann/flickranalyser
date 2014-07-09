@@ -2,7 +2,9 @@ package com.flickranalyser.endpoints;
 
 import javax.ws.rs.core.Response;
 
+import com.flickranalyser.memcache.MemcacheSpot;
 import com.flickranalyser.persistence.datastore.save.PFSaverSpotToCrawl;
+import com.flickranalyser.pojo.Spot;
 import com.flickranalyser.pojo.SpotToCrawl;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -23,6 +25,13 @@ public class SpotService {
 		SpotToCrawl spotToCrawl = new SpotToCrawl(latitude, longitude, spotName, description, clusterRadius, spotRadius, null,0,0);
 		
 		return PFSaverSpotToCrawl.saveSpotToDatastore(spotToCrawl);
+		
+	}
+	
+	
+	@ApiMethod(name="getSpotByName")
+	public Spot getSpotByName(@Named("spotName") String spotName) {
+		return MemcacheSpot.getSpotForSpotName(spotName);
 		
 	}
 	

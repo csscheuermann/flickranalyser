@@ -16,7 +16,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 
-@PersistenceCapable(detachable = "true")
+@PersistenceCapable
 public class Cluster implements Serializable {
 
 	

@@ -6,13 +6,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class TopTenSpots implements Serializable {
+public class SpotResultList implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private LinkedList<Spot> topTenSpots;
 
-	public TopTenSpots(LinkedList<Spot> topTenSpots){
+	public SpotResultList(LinkedList<Spot> topTenSpots){
 		this.topTenSpots = topTenSpots;
 	}
 

@@ -4,16 +4,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.memcache.MemcacheSpot;
-import com.flickranalyser.pojo.TopTenSpots;
+import com.flickranalyser.pojo.SpotResultList;
 
-public class PrepareTopTenSpotsHandler extends AbstractHtmlRequestHandler{
+public class PrepareTopSpotsHandler extends AbstractHtmlRequestHandler{
 
-	private TopTenSpots topTenSpots;
+	private SpotResultList topSpots;
 	@Override
 	public String performActionAndGetNextViewConcrete(
 			HttpServletRequest pRequest, HttpSession pSession) {
-		topTenSpots = MemcacheSpot.getTopTenSpots();
-		pRequest.setAttribute("topTenSpots", topTenSpots );
+		topSpots = MemcacheSpot.getTopSpots();
+		pRequest.setAttribute("topSpots", topSpots );
 		return null;
 	}
 }
