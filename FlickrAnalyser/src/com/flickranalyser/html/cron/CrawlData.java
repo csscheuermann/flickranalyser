@@ -22,21 +22,19 @@ public class CrawlData extends HttpServlet{
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-
-		SpotToCrawl spotToCrawl = PFGetterSpotToCrawl.getOneSpotFromDataStore();
+		SpotToCrawl resultSpotToCrawlFromDatastore = PFGetterSpotToCrawl.getOneSpotFromDataStore();
 		
-		if(spotToCrawl != null){
-			Spot spot = new Spot(spotToCrawl);
+		if(resultSpotToCrawlFromDatastore != null){
+			Spot spot = new Spot(resultSpotToCrawlFromDatastore);
 			SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(spot);
+			//TODO COS DVV: We can remove the parameter I think
 			Spot spotAttribute = secretPlacesFacade.getSpotInformationForName("munich") ;
 			PFSaverSpot.saveSpotToDatastore(spotAttribute);
-			PFDeleterSpotToCrawl.deleteSpotByKey(spotToCrawl.getDataStoreKey());
+			PFDeleterSpotToCrawl.deleteSpotByKey(resultSpotToCrawlFromDatastore.getDataStoreKey());
 			return;
-			
 		}
-		LOGGER.log(Level.INFO, "SPOT WAS NULL - I WON'T DO ANYTHING :) ");
-
+		
+		LOGGER.log(Level.INFO, "NO SPOTS TO CRAWL IN QUEUE - I WON'T DO ANYTHING.");
 	}
 
 

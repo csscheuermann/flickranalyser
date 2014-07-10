@@ -15,5 +15,7 @@ public class PrepareTopSpotsHandler extends AbstractHtmlRequestHandler{
 		topSpots = MemcacheSpot.getTopSpots();
 		pRequest.setAttribute("topSpots", topSpots );
 		return null;
+		
+		
 	}
 }

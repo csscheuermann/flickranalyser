@@ -22,9 +22,8 @@ import com.javadocmd.simplelatlng.util.LengthUnit;
 
 public class FlickrRequestHandler {
 
-	//COULD BE MAXIMAL 17 But we are running out of the ten Minutes with 17 ...
-	//TODO COS DVV DISCUSS
-	private static final int MAX_NUMBER_PAGES_TO_CRAWL = 15;
+	//Maximal 16 pages a 250 pictures results in 4000 pictures (max result from flickr).
+	private static final int MAX_NUMBER_PAGES_TO_CRAWL = 17;
 
 	private static final Logger log = Logger
 			.getLogger(FlickrRequestHandler.class.getName());
@@ -134,22 +133,30 @@ public class FlickrRequestHandler {
 
 				// We need to make this algorithm more efficient
 			} while ((requestedPage < numberPages)
-					&& (requestedPage < MAX_NUMBER_PAGES_TO_CRAWL));
+					&& (requestedPage < MAX_NUMBER_PAGES_TO_CRAWL) && result.size() < 10000);
 			log.log(Level.INFO,"NUMBER OF PICTURES " + picture_ids.size());
 		}
-
 		return result;
-
 	}
 
 	public HashMap<LatLng, Double> calculateNewPoint(Spot spot){
-
 		HashMap<LatLng, Double> allPoints = new HashMap<LatLng, Double>();
 		LatLng latLng = new LatLng(spot.getLatitude(), spot.getLongitude());
 		Double radius = Double.valueOf(spot.getSpotRadiusInKm());
 		allPoints.put(latLng, radius);
+		return allPoints;
+	}
 
-		for (int degree = 0; degree < 361; degree += 45){
+	/**
+	 * This method generates satelites arround a given spot. 
+	 * Attention, using this method for requests to flickr, we can get problems with write/read operations
+	 * and problems with the spot size ( > 1MB) concerning memcache.
+	 * @param spot given Spot.
+	 * @param allPoints Map of Points with spotradius.
+	 */
+	@SuppressWarnings("unused")
+	private void createSatelitesArroundGivenSpot(Spot spot, HashMap<LatLng, Double> allPoints) {
+		for (int degree = 0; degree < 316; degree += 45){
 			double d = spot.getSpotRadiusInKm()+ (spot.getSpotRadiusInKm()/2.0);
 			System.out.println("Distance = " +  d);
 			double dist = d /6371.0;
@@ -175,7 +182,6 @@ public class FlickrRequestHandler {
 			log.log(Level.INFO, "DISTANCE TO CENTER " + (LatLngTool.distance(origin, newPoint, LengthUnit.KILOMETER)));
 			allPoints.put(newPoint,Double.valueOf(spot.getSpotRadiusInKm()/2.0));
 		}
-		return allPoints;
 	}
 
 }

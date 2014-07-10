@@ -16,33 +16,37 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 public class PFSaverSpotToCrawl {
 
-	private static final Logger log = Logger.getLogger(PFSaverSpotToCrawl.class.getName());
-
+	private static final Logger LOGGER = Logger.getLogger(PFSaverSpotToCrawl.class.getName());
+	private static String errorMessage;
+	private static String successMessage;
+	
 	public static Response saveSpotToDatastore(SpotToCrawl spot){
-
 		if (!checkIfSpotAlreadyExists(spot)){
-			log.log(Level.INFO, "SPOT DOES NOT EXIST IN SPOTS DATASTORE " + spot.getName());
 			PersistenceManager pm = PMF.get().getPersistenceManager();
-			log.log(Level.INFO, "BEGINNING TRANSACTION TO SAVE IN DATASTORE FOR SPOT: " + spot.getName());
-
 			try{
 				Key dataStoreKey = KeyFactory.createKey(SpotToCrawl.class.getSimpleName(), spot.getName());
 				spot.setDataStoreKey(dataStoreKey);
 				pm.makePersistent(spot);
+				successMessage = "SPOT SUCCESSFULLY ADDED TO CRAWLQUEUE.";
 			} finally {
 				pm.close();
 			}
 		}else{
-			log.log(Level.INFO, "SPOT ALREADY EXISTS");
-			return Response.status(400).entity("Spot already exists").build();
+			LOGGER.log(Level.INFO, errorMessage);
+			return Response.status(400).entity(errorMessage).build();
 		}
-		return Response.status(200).build();
+		
+		return Response.status(200).entity(successMessage).build();
 	}
 
 	private static boolean checkIfSpotAlreadyExists(SpotToCrawl spot) {
 		Spot spotByName = PFGetterSpot.getSpotByName(spot.getName());
 		SpotToCrawl spotToCrawlByName = PFGetterSpotToCrawl.getSpotToCrawlByName(spot.getName());
-		if ((spotByName != null) || (spotToCrawlByName != null)){
+		if ((spotByName != null)){
+			errorMessage = "SPOT ALREADY EXISTS IN DATASTORE.";
+			return true;
+		}else if((spotToCrawlByName != null)){
+			errorMessage = "SPOT ALREADY IS IN THE SEEKRET QUEUE.";
 			return true;
 		}
 		return false;

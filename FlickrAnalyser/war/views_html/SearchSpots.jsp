@@ -128,16 +128,18 @@
 		function resultChecker(){
 		<% 
 			
-		String error = (String) request.getAttribute("error");
-	  	String successfull = (String) request.getAttribute("successful"); 
-		String successfullCron = (String) request.getAttribute("successfulCron");
-		Spot spot = (Spot) request.getAttribute("spot"); 
+		String error = (String) request.getAttribute(HelperMethods.MESSAGE_ERROR);
+	  	String successfull = (String) request.getAttribute(HelperMethods.MESSAGE_SUCCESSFUL); 
+		String successfullCron = (String) request.getAttribute(HelperMethods.MESSAGE_SUCCESSFUL_CRON);
+		String errorCron = (String) request.getAttribute(HelperMethods.MESSAGE_ERROR_CRON);
+		
+		Spot spot = (Spot) request.getAttribute(HelperMethods.SPOT); 
 	
 		
 		if (error != null){
-			String spotName = (String) request.getAttribute("address");
-			double spotResultLatitude = (double) request.getAttribute("latitude");
-			double spotResultLongitude = (double) request.getAttribute("longitude");
+			String spotName = (String) request.getAttribute(HelperMethods.ADDRESS_PARAM);
+			double spotResultLatitude = (double) request.getAttribute(HelperMethods.LATITUDE_PARAM);
+			double spotResultLongitude = (double) request.getAttribute(HelperMethods.LONGITUDE_PARAM);
 			out.println("addCrawlQueueRequest('"+ 
 				spotName + "' , " +
 				spotResultLatitude + " , " +
@@ -181,6 +183,9 @@
 	  	}else if (successfullCron != null){
 		 	out.println("<div class='row'> " +
 				"<div class='col-xs-12'><p class='bg-success'>" +  successfullCron + "</p></div></div>");			
+	  	}else if (errorCron != null){
+		 	out.println("<div class='row'> " +
+				"<div class='col-xs-12'><p class='bg-success'>" +  errorCron + "</p></div></div>");			
 	  	}
 	  
 		out.println("</div>");

@@ -31,15 +31,22 @@
 		 * initial visit to the page
 		 */
 			out.println("<div class='container'> " +
-					"<div class='row'>" +
-					    "<div class='col-xs-6'>" +
-							"<h2>You need to login first</h2>" +
-						"</div>" +
-							
-					 		   "<div class='col-xs-6'>" +
-									"<h2><a href='" + helper.buildLoginUrl() + "'>log in with google</a></h2>" +
-								"</div>" +
-										
+				"<div class='row'>" +
+					"<div class='col-xs-12'>" +
+						"<h2>LOGIN WHY?</h2>" +
+					"</div>" +		
+				"</div>" +
+				
+				"<div class='row'>" +
+					"<div class='col-xs-12'>" +
+						"<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.</p>" +
+					"</div>" +		
+				"</div>" +
+																
+				"<div class='row'>" +
+						"<div class='col-xs-12'>" +
+							"<p><a href='" + helper.buildLoginUrl() + "'>log in with google</a></p>" +
+						"</div>" +					
 					"</div>" +
 				"</div>");
 

@@ -15,7 +15,18 @@ public class HelperMethods {
 	private static final Logger LOGGER = Logger.getLogger(HtmlStarterServlet.class.getName());
 	private HttpSession session;
 
-
+	
+	public static final String MESSAGE_SUCCESSFUL_CRON = "successfulCron";
+	public static final String MESSAGE_ERROR_CRON = "errorCron";
+	public static final String MESSAGE_SUCCESSFUL = "successful";
+	public static final String MESSAGE_ERROR = "error";
+	public static final String CRAWL_LONGITUDE = "crawlLongitude";
+	public static final String CRAWL_LATITUDE = "crawlLatitude";
+	public static final String CRAWL_ADDRESS = "crawlAddress";
+	public static final String ADDRESS_PARAM = "address";
+	public static final String LONGITUDE_PARAM = "longitude";
+	public static final String LATITUDE_PARAM = "latitude";
+	public static final String SPOT = "spot";
 
 
 	public HelperMethods(final HttpSession session){
@@ -150,9 +161,6 @@ public class HelperMethods {
 
 
 	public  String createNavigation(boolean isIndexPage){
-
-
-
 		User currentUser = (User) session.getAttribute(HtmlRequestProcessor.CURRENT_USER);
 		StringBuilder navigation = new StringBuilder();
 
@@ -186,14 +194,11 @@ public class HelperMethods {
 			navigation.append("<li><a href='?showView=SearchSpots'>Search Spot</a></li>");
 			navigation.append("<li><a href='?showView=Logout'>Logout</a></li>");
 		}
-
-
 		navigation.append("</li>");
 		navigation.append("</ul>");
 		navigation.append("</div>");
 		navigation.append("</div>");
 		navigation.append("</div>");
-
 		navigation.append("</div>");
 		navigation.append("</div>");
 
@@ -208,11 +213,8 @@ public class HelperMethods {
 
 		marketing.append("  <!-- Marketing messaging and featurettes");
 		marketing.append("================================================== -->");
-
 		marketing.append("<!-- Wrap the rest of the page in another container to center all the content. -->");
-
 		marketing.append("<div class='container marketing'>");
-
 		marketing.append("<!-- Three columns of text below the carousel -->");
 		marketing.append("<div class='row'>");
 		marketing.append("<div class='col-lg-4'>");
@@ -246,7 +248,6 @@ public class HelperMethods {
 		footerBuilder.append("   <p class='pull-right'><a href='#'>Back to top</a></p>");
 		footerBuilder.append("   <p>DVCS 2014 <a href='#'>Privacy</a> &middot; <a href='#'>Terms</a></p>");
 		footerBuilder.append(" </footer>");
-		
 		footerBuilder.append(" </div><!-- /.container -->");
 		
 		return footerBuilder.toString();
