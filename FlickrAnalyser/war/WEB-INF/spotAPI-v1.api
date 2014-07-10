@@ -127,6 +127,12 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
+          "cluster" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Cluster"
+            }
+          },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
@@ -135,12 +141,6 @@
           },
           "maxClusterViews" : {
             "type" : "integer"
-          },
-          "cluster" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Cluster"
-            }
           }
         }
       },
@@ -248,16 +248,16 @@
           "longitude" : {
             "type" : "number"
           },
+          "latitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
+          },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },
           "polar" : {
             "type" : "boolean"
-          },
-          "latitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
           }
         }
       },

@@ -33,10 +33,10 @@
 					'</div> ' + 
 					'<div class="row"> ' +
 					
-						'<div class="col-xs-3"><a href="'+ linkManyViewsAndViewPOIsFilter + '">ManyViewsAndFewPOIsFilter</a> </div> '+
-						'<div class="col-xs-3"><a href="'+ linkDoNotFilterStrategy + '">DoNotFilterStrategy</a> </div> '+
-						'<div class="col-xs-3"><a href="'+ linkRelativeRatioViewsAndPOIsFilter + '">RelativeRatioViewsAndPOIsFilter</a> </div> '+
-						'<div class="col-xs-3"><a href="'+ linkManyViewsAndFixedAmountOfPOIsFilter + '">ManyViewsAndFixedAmountOfPOIsFilter</a> </div> '+
+						'<div class="col-md-3"><a href="'+ linkManyViewsAndViewPOIsFilter + '">ManyViewsAndFewPOIsFilter</a> </div> '+
+						'<div class="col-md-3"><a href="'+ linkDoNotFilterStrategy + '">DoNotFilterStrategy</a> </div> '+
+						'<div class="col-md-3"><a href="'+ linkRelativeRatioViewsAndPOIsFilter + '">RelativeRatioViewsAndPOIsFilter</a> </div> '+
+						'<div class="col-md-3"><a href="'+ linkManyViewsAndFixedAmountOfPOIsFilter + '">ManyViewsAndFixedAmountOfPOIsFilter</a> </div> '+
 
 					'</div> ' + 
 				'</div> ' ;
@@ -50,10 +50,10 @@
 			
 			var clickString = "addToCrawlQueue(" + spotResultLatitude + "," + spotResultLongitude + ",'" + spotName + "')";
 			
-			var htmlToShow = '<div class="container"> ' + 
-			'<div class="row"> ' +
-				'<div class="col-xs-3"><h4>SpotToCrawl: ' + spotName + '</h4></div> ' + 
-				'<div class="col-xs-9"><button type="submit" class="btn btn-default" onClick="' + clickString + '">Submit</button></div> ' + 
+			  
+			var htmlToShow = '<div class="row"> ' +
+				'<div class="col-xs-9"><h4>' + spotName + '</h4></div> ' + 
+				'<div class="col-xs-3"><button type="submit" class="btn btn-default" onClick="' + clickString + '">Crawl</button></div> ' + 
 			'</div> ' + 
 			
 			'<div class="row"> ' +
@@ -63,8 +63,7 @@
 					'<input type="hidden" name="crawlLongitude" value="default" id="spotCrawlLongitude" >' + 
 					'<input type="hidden" name="crawlAddress" value="default" id="spotCrawlAddress" >' + 	
 				'</form> ' + 
-			'</div> ' + 
-		'</div> ' ;
+			'</div> ';
 						clusterDetails.addElementDiv('spotResult', 'spotResultInfo',  htmlToShow);
 		}
 		
@@ -176,16 +175,16 @@
 	  	out.println("<div class='container'>");
 	  	if (error != null){
 			 out.println("<div class='row'> " +
-				"<div class='col-xs-12'><p class='bg-danger'>" +  error + "</p></div></div>"); 
+				"<div class='col-xs-12'><p class='alert alert-danger'>" +  error + "</p></div></div>"); 
 	  	}else if (successfull != null){
 		 	out.println("<div class='row'> " +
-				"<div class='col-xs-12'><p class='bg-success'>" +  successfull + "</p></div></div>");			
+				"<div class='col-xs-12'><p class='alert alert-success'>" +  successfull + "</p></div></div>");			
 	  	}else if (successfullCron != null){
 		 	out.println("<div class='row'> " +
-				"<div class='col-xs-12'><p class='bg-success'>" +  successfullCron + "</p></div></div>");			
+				"<div class='col-xs-12'><p class='alert alert-success'>" +  successfullCron + "</p></div></div>");			
 	  	}else if (errorCron != null){
 		 	out.println("<div class='row'> " +
-				"<div class='col-xs-12'><p class='bg-success'>" +  errorCron + "</p></div></div>");			
+				"<div class='col-xs-12'><p class='alert alert-danger'>" +  errorCron + "</p></div></div>");			
 	  	}
 	  
 		out.println("</div>");
@@ -193,8 +192,8 @@
 	
 	<div class='container'>
 		<div class='row'>
-	  	<div class='col-xs-8'><input type="text" class="form-control" id="spotName" placeholder="Munich"></div>
-		<div class='col-xs-4'><button type="submit" class="btn btn-default" onClick="handleClick()">Submit</button></div>
+	  	<div class='col-xs-9'><input type="text" class="form-control" id="spotName" placeholder="Munich"></div>
+		<div class='col-xs-3'><button type="submit" class="btn btn-default" onClick="handleClick()">Search</button></div>
 		</div>
   	</div>
 		
@@ -209,7 +208,7 @@
 		
 	</div>
 	
-	<div class='container' id="spotResult">
+	<div class='container top-buffer' id="spotResult">
 	
 	</div>
 	

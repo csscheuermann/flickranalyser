@@ -148,6 +148,8 @@ body {
 	margin-left: 10px;
 }
 
+.top-buffer { margin-top:20px; }
+
 /* Featurettes
 ------------------------- */
 .featurette-divider {

@@ -45,7 +45,7 @@ public class PFSaverSpotToCrawl {
 		if ((spotByName != null)){
 			errorMessage = "SPOT ALREADY EXISTS IN DATASTORE.";
 			return true;
-		}else if((spotToCrawlByName != null)){
+		}else if(spotToCrawlByName != null){
 			errorMessage = "SPOT ALREADY IS IN THE SEEKRET QUEUE.";
 			return true;
 		}

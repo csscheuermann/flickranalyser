@@ -285,22 +285,22 @@
 		
 			
 		<div class='row'>
-		    <div class="col-xs-3">
+		    <div class="col-md-3">
 				<div id="spotInfo"> </div>
 			</div>
 			
-		    <div class="col-xs-3">
+		    <div class="col-md-3">
 				<div class="centeralized-div" id="spot-image1">	
 				</div>
 			</div>
 			
 			
-			<div class="col-xs-3">
+			<div class="col-md-3">
 				<div class="centeralized-div" id="spot-image2">	
 				</div>
 			</div>
 			
-			<div class="col-xs-3">
+			<div class="col-md-3">
 				<div class="centeralized-div" id="spot-image3">	
 				</div>
 			</div>
@@ -310,36 +310,36 @@
 		</div>	
 		
 		<div class='row'>
-		    <div class="col-xs-4">
+		    <div class="col-md-4">
 				<h4 class="centeralized-div" >SEEKRET-METER (USER DEFINED)</h4>
 			</div>
 			
 			
-			<div class="col-xs-4">
+			<div class="col-md-4">
 				<h4 class="centeralized-div" >VIEW COUNT (RELATIVE)</h4>
 			</div>
 			
-			<div class="col-xs-4">
+			<div class="col-md-4">
 				<h4 class="centeralized-div" >POI COUNT (RELATIVE)</h4>
 			</div>
 			
 		</div>	
 		
 		<div class='row'>
-		    <div class="col-xs-4">
+		    <div class="col-md-4">
 					<div class="centeralized-div">
 						<canvas id="touristicness" width="200" height="200"></canvas>
 					</div>	
 			</div>
 			
 			
-			<div class="col-xs-4">
+			<div class="col-md-4">
 				<div class="centeralized-div">
 					<canvas id="viewCountRelative" width="200" height="200"></canvas>
 				</div>
 			</div>
 			
-			<div class="col-xs-4">
+			<div class="col-md-4">
 				<div class="centeralized-div">
 					<canvas id="poiCountRelative" width="200" height="200"></canvas>
 				</div>
@@ -351,34 +351,34 @@
 
 		<div class='container'>
 			<div class='row'>
-			    <div class="col-xs-4">
+			    <div class="col-md-4">
 					<h4 class="centeralized-div" ></h4>
 				</div>
 			
 			
-				<div class="col-xs-4">
+				<div class="col-md-4">
 					<h4 class="centeralized-div" >VIEW COUNT (ABSOLUTE)</h4>
 				</div>
 			
-				<div class="col-xs-4">
+				<div class="col-md-4">
 					<h4 class="centeralized-div" >POI COUNT (ABSOLUTE)</h4>
 				</div>
 			
 			</div>	
 			
 			<div class='row'>
-			    <div class="col-xs-4">
+			    <div class="col-md-4">
 					<div class="centeralized-div">
 						
 					</div>
 				</div>
-				<div class="col-xs-4">
+				<div class="col-md-4">
 					<div class="centeralized-div">
 						<canvas id="viewCountOverall" width="200" height="200"></canvas>
 					</div>
 				</div>
 			
-				<div class="col-xs-4">
+				<div class="col-md-4">
 					<div class="centeralized-div">
 						<canvas id="poiCountOverall" width="200" height="200"></canvas>
 					</div>

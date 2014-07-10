@@ -2979,6 +2979,7 @@ textarea.input-lg,select[multiple].input-lg {
 }
 
 .btn-default {
+	width: 100%;
 	color: #333;
 	background-color: #fff;
 	border-color: #ccc
@@ -4459,7 +4460,7 @@ textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon
 }
 
 .navbar-inverse .navbar-nav>li>a {
-	color: #fff
+	color: #000
 }
 
 .navbar-inverse .navbar-nav>li>a:hover,.navbar-inverse .navbar-nav>li>a:focus
