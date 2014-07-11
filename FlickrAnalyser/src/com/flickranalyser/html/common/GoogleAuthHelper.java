@@ -108,11 +108,32 @@ public class GoogleAuthHelper {
 
 		JsonObject userObject = JsonObject.readFrom(jsonIdentity); 
 		
-		String email = 	userObject.get("email").asString();
-		String fullName = 	userObject.get("name").asString();
-		String givenName = 	userObject.get("given_name").asString();
-		String profileLink = 	userObject.get("link").asString();
-		String picture = 	userObject.get("picture").asString();
+		String email = "NOT AVAILABLE";
+		String fullName =  "NOT AVAILABLE";
+		String givenName =  "NOT AVAILABLE";
+		String profileLink = "NOT AVAILABLE";
+		String picture = "NOT AVAILABLE";
+		
+		if (userObject.get("email") != null){
+			email =	userObject.get("email").asString();			
+		}
+		
+		if (userObject.get("name") != null){
+			fullName =	userObject.get("name").asString();			
+		}
+		
+		if (userObject.get("given_name") != null){
+			givenName =	userObject.get("given_name").asString();			
+		}
+		
+		if (userObject.get("link") != null){
+			profileLink =	userObject.get("link").asString();			
+		}
+	
+		if (userObject.get("picture") != null){
+			picture =	userObject.get("picture").asString();			
+		}
+		
 		
 		LOGGER.log(Level.INFO, "Email: " + email );
 		LOGGER.log(Level.INFO, "Full Name: " + fullName );
