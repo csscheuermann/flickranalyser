@@ -16,6 +16,11 @@ public class Prepare01_indexHandler extends AbstractHtmlRequestHandler{
 	private static final Logger LOGGER = Logger.getLogger(Prepare01_indexHandler.class.getName());
 	
 	@Override
+	protected boolean isLoginRequired() {
+		return false;
+	}
+	
+	@Override
 	public String performActionAndGetNextViewConcrete(
 			HttpServletRequest pRequest, HttpSession pSession) {
 		
