@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.flickranalyser.businesslogic.common.ParameterConstants;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.businesslogic.spotfinder.impl.NearestSpotFinder;
+import com.flickranalyser.endpoints.SpotService;
 import com.flickranalyser.html.common.HelperMethods;
 import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.Spot;
@@ -18,10 +19,10 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler {
 
 	private static final Logger LOGGER = Logger
 			.getLogger(PrepareSpotMapHandler.class.getName());
-	private final NearestSpotFinder spotFinder;
+	private final SpotService spotService;
 
 	public PrepareSpotMapHandler() {
-		spotFinder = new NearestSpotFinder();
+		spotService = new SpotService();
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler {
 		LOGGER.log(Level.INFO, "INITIALIZED FILTER STRATEGY:"
 				+ choosenFilterStrategy.getClass().getName());
 
-		Spot spot = spotFinder.findSpotByName(location);
+		Spot spot = spotService.getSpotByName(location);
 		if (spot != null) {
 
 			List<Cluster> cluster = spot.getCluster();
