@@ -27,7 +27,7 @@ public class PFSaverSpotToCrawl {
 				Key dataStoreKey = KeyFactory.createKey(SpotToCrawl.class.getSimpleName(), spot.getName());
 				spot.setDataStoreKey(dataStoreKey);
 				pm.makePersistent(spot);
-				successMessage = "SPOT SUCCESSFULLY ADDED TO CRAWLQUEUE.";
+				successMessage = "SPOT " + spot.getName() + " SUCCESSFULLY ADDED TO CRAWLQUEUE.";
 			} finally {
 				pm.close();
 			}

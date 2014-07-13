@@ -25,6 +25,27 @@
     "maxAge" : 0
   },
   "methods" : {
+    "spotAPI.getSpotByNamePutToCrawlQueue" : {
+      "path" : "response/{spotName}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.SpotService.getSpotByNamePutToCrawlQueue",
+      "request" : {
+        "parameters" : {
+          "spotName" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "spotAPI.getSpotByName" : {
       "path" : "spot/{spotName}",
       "httpMethod" : "GET",
@@ -45,51 +66,33 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
-    },
-    "spotAPI.putSpotInCronQueue" : {
-      "path" : "putSpotInCronQueue/{spotName}/{latitude}/{longitude}/{clusterRadius}/{description}/{spotRadius}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.flickranalyser.endpoints.SpotService.putSpotInCronQueue",
-      "request" : {
-        "parameters" : {
-          "spotName" : {
-            "type" : "string",
-            "required" : true
-          },
-          "latitude" : {
-            "type" : "double",
-            "required" : true
-          },
-          "longitude" : {
-            "type" : "double",
-            "required" : true
-          },
-          "clusterRadius" : {
-            "type" : "double",
-            "required" : true
-          },
-          "description" : {
-            "type" : "string",
-            "required" : true
-          },
-          "spotRadius" : {
-            "type" : "double",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
     }
   },
   "descriptor" : {
     "schemas" : {
+      "Response" : {
+        "id" : "Response",
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer"
+          },
+          "entity" : {
+            "$ref" : "_any"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
+          }
+        }
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
+      },
+      "JsonMap" : {
+        "id" : "JsonMap",
+        "type" : "object"
+      },
       "Spot" : {
         "id" : "Spot",
         "type" : "object",
@@ -133,14 +136,14 @@
           "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
           },
-          "maxClusterViews" : {
-            "type" : "integer"
-          },
           "cluster" : {
             "type" : "array",
             "items" : {
               "$ref" : "Cluster"
             }
+          },
+          "maxClusterViews" : {
+            "type" : "integer"
           }
         }
       },
@@ -248,52 +251,29 @@
           "longitude" : {
             "type" : "number"
           },
-          "longitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
-          },
           "latitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },
           "polar" : {
             "type" : "boolean"
+          },
+          "longitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
           }
         }
-      },
-      "Response" : {
-        "id" : "Response",
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "integer"
-          },
-          "entity" : {
-            "$ref" : "_any"
-          },
-          "metadata" : {
-            "$ref" : "JsonMap"
-          }
-        }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
-      },
-      "JsonMap" : {
-        "id" : "JsonMap",
-        "type" : "object"
       }
     },
     "methods" : {
+      "com.flickranalyser.endpoints.SpotService.getSpotByNamePutToCrawlQueue" : {
+        "response" : {
+          "$ref" : "Response"
+        }
+      },
       "com.flickranalyser.endpoints.SpotService.getSpotByName" : {
         "response" : {
           "$ref" : "Spot"
-        }
-      },
-      "com.flickranalyser.endpoints.SpotService.putSpotInCronQueue" : {
-        "response" : {
-          "$ref" : "Response"
         }
       }
     }

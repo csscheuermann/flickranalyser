@@ -16,8 +16,8 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler{
 	private static final String VIEW_SEARCH_SPOTS = "SearchSpots";
 	private static final String MESSAGE_CRAWLQUEUE_SPOT_NAME = "CRAWL QUEUE, FULL SPOT NAME: ";
 	private static final Logger LOGGER = Logger.getLogger(ActionSearchSpotsHandler.class.getName());
-	
-	
+
+
 	@Override
 	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpSession pSession) {
 		SpotService spotService = new SpotService();
@@ -25,10 +25,21 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler{
 		String crawlSpotName = pRequest.getParameter(HelperMethods.CRAWL_ADDRESS);
 		LOGGER.log(Level.INFO,MESSAGE_CRAWLQUEUE_SPOT_NAME + crawlSpotName );
 
+		//In case crawl Parameter was set, it should end up in the crawl queue
 		if (crawlSpotName != null){
-			return handleCrawlQueueBehavior(pRequest, spotService, crawlSpotName);
+			LOGGER.log(Level.INFO,MESSAGE_CRAWLQUEUE_SPOT_NAME + "SPOT TO CRAWL." );
+			Response findSpotByNamePutToCrawlQueue = spotService.getSpotByNamePutToCrawlQueue(crawlSpotName);
+			
+
+			if (findSpotByNamePutToCrawlQueue.getStatus() == 400){
+				pRequest.setAttribute(HelperMethods.MESSAGE_ERROR_CRON, findSpotByNamePutToCrawlQueue.getEntity().toString());	
+			}else{
+				pRequest.setAttribute(HelperMethods.MESSAGE_SUCCESSFUL_CRON, findSpotByNamePutToCrawlQueue.getEntity().toString());	
+			}
+			
+			return VIEW_SEARCH_SPOTS;			
 		}
-		
+
 		return handleSpotBehavior(pRequest, spotService);
 	}
 
@@ -38,37 +49,13 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler{
 		Spot spotByName = spotService.getSpotByName(spotName);
 
 		if(spotByName == null){
-			//double latitude = Double.parseDouble(pRequest.getParameter(HelperMethods.LATITUDE_PARAM));
-			//double longitude = Double.parseDouble(pRequest.getParameter(HelperMethods.LONGITUDE_PARAM));
-
 			pRequest.setAttribute(HelperMethods.MESSAGE_ERROR, "Spot was not found in Database" );
-			pRequest.setAttribute(HelperMethods.ADDRESS_PARAM,spotName);
-			//pRequest.setAttribute(HelperMethods.LATITUDE_PARAM,latitude);
-			//pRequest.setAttribute(HelperMethods.LONGITUDE_PARAM,longitude);
+			pRequest.setAttribute(HelperMethods.ADDRESS_PARAM, spotName);
 		}else{
 			pRequest.setAttribute(HelperMethods.MESSAGE_SUCCESSFUL, "Spot was found in Database" );
 			pRequest.setAttribute(HelperMethods.SPOT, spotByName);
 		}
 
-		return VIEW_SEARCH_SPOTS;
-	}
-
-
-	private String handleCrawlQueueBehavior(HttpServletRequest pRequest,
-			SpotService spotService, String crawlSpotName) {
-		
-		LOGGER.log(Level.INFO, "HANDLE CRAWL QUEUE BEHAVIOR." );
-		
-		double crawlLatitude = Double.parseDouble(pRequest.getParameter(HelperMethods.CRAWL_LATITUDE));
-		double crawlLogitude = Double.parseDouble(pRequest.getParameter(HelperMethods.CRAWL_LONGITUDE));
-
-		Response putSpotInCronQueue = spotService.putSpotInCronQueue(crawlSpotName, crawlLatitude, crawlLogitude, 0.1, "YET EMPTY TO DO", 25.0);
-		
-		if (putSpotInCronQueue.getStatus() == 400){
-			pRequest.setAttribute(HelperMethods.MESSAGE_ERROR_CRON, putSpotInCronQueue.getEntity().toString());	
-		}else{
-			pRequest.setAttribute(HelperMethods.MESSAGE_SUCCESSFUL_CRON, putSpotInCronQueue.getEntity().toString());	
-		}
 		return VIEW_SEARCH_SPOTS;
 	}
 }

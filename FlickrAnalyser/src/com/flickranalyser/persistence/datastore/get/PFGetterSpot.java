@@ -45,7 +45,7 @@ public class PFGetterSpot {
 
 		} catch (Exception ex) {
 			//TODO COS DVV: Exception Handling
-			LOGGER.log(Level.SEVERE, "Exception");
+			LOGGER.log(Level.INFO, "COULD NOT FIND SPOT WITH NAME " + nameOfSpot);
 			return null;
 		}
 		finally{

@@ -45,10 +45,10 @@
 			clusterDetails.addElementDiv('spotResult', 'spotResultInfo',  htmlToShow);
 		}
 		
-		function addCrawlQueueRequest(spotName,spotResultLatitude ,spotResultLongitude){
+		function addCrawlQueueRequest(spotName){
 			var clusterDetails = new ClusterDetails();
 			
-			var clickString = "addToCrawlQueue(" + spotResultLatitude + "," + spotResultLongitude + ",'" + spotName + "')";
+			var clickString = "addToCrawlQueue('" + spotName + "')";
 			
 			  
 			var htmlToShow = '<div class="row"> ' +
@@ -68,13 +68,7 @@
 		}
 		
 		
-		function addToCrawlQueue(spotResultLatitude, spotResultLongitude, spotCrawlName){
-			var inputSpotLatitude = document.getElementById("spotCrawlLatitude");
-			inputSpotLatitude.setAttribute('value', spotResultLatitude);
-
-			var inputspotLongitude = document.getElementById("spotCrawlLongitude");
-			inputspotLongitude.setAttribute('value', spotResultLongitude);
-		
+		function addToCrawlQueue(spotCrawlName){
 			var spotName = document.getElementById("spotCrawlAddress");
 			spotName.setAttribute('value', spotCrawlName);
 			document.forms["crawlForm"].submit();
@@ -110,12 +104,9 @@
 		
 		if (error != null){
 			String spotName = (String) request.getAttribute(HelperMethods.ADDRESS_PARAM);
-			double spotResultLatitude = (double) request.getAttribute(HelperMethods.LATITUDE_PARAM);
-			double spotResultLongitude = (double) request.getAttribute(HelperMethods.LONGITUDE_PARAM);
+			
 			out.println("addCrawlQueueRequest('"+ 
-				spotName + "' , " +
-				spotResultLatitude + " , " +
-				spotResultLongitude + ");");
+				spotName + "');");
 		
 		}else if (successfull != null){
 

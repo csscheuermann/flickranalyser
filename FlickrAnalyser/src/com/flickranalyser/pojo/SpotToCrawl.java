@@ -54,6 +54,13 @@ public class SpotToCrawl implements Serializable{
 		this.dataStoreKey = dataStoreKey;
 		
 	}
+	
+	public SpotToCrawl(Spot spot) {
+		this.description = spot.getDescription();
+		this.name = spot.getName();
+		this.latitude = spot.getLatitude();
+		this.longitude = spot.getLongitude();
+	}
 
 	public  double getClusterRadiusInKm() {
 		return clusterRadiusInKm;

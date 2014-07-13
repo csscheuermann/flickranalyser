@@ -26,13 +26,11 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 		spotCalculationHandler = new SpotCalculationHandler();
 	}
 
-	//TODO DVV & COS: Do we really need that here? I changed it due to queue mechanism. lets talk about that
 	@Override
 	public Spot getSpotInformationForName(String name) {
 		return getSpotInformation(spot);
 	}
 
-	//TODO DVV & COS: Do we really need that here? I changed it due to queue mechanism. lets talk about that
 	@Override
 	public Spot getSpotInformationForLocation(long latitude, long longitude) {
 		return getSpotInformation(spot);
