@@ -64,21 +64,21 @@
           "status" : {
             "type" : "integer"
           },
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "entity" : {
             "$ref" : "_any"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           }
         }
-      },
-      "JsonMap" : {
-        "id" : "JsonMap",
-        "type" : "object"
       },
       "_any" : {
         "id" : "_any",
         "type" : "any"
+      },
+      "JsonMap" : {
+        "id" : "JsonMap",
+        "type" : "object"
       }
     },
     "methods" : {

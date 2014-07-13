@@ -127,8 +127,11 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "maxClusterViews" : {
-            "type" : "integer"
+          "cluster" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Cluster"
+            }
           },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
@@ -136,11 +139,8 @@
           "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
           },
-          "cluster" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Cluster"
-            }
+          "maxClusterViews" : {
+            "type" : "integer"
           }
         }
       },
@@ -161,11 +161,11 @@
           "name" : {
             "type" : "string"
           },
-          "complete" : {
-            "type" : "boolean"
-          },
           "parent" : {
             "$ref" : "Key"
+          },
+          "complete" : {
+            "type" : "boolean"
           },
           "namespace" : {
             "type" : "string"
@@ -248,16 +248,16 @@
           "longitude" : {
             "type" : "number"
           },
-          "latitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
+          "polar" : {
+            "type" : "boolean"
           },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },
-          "polar" : {
-            "type" : "boolean"
+          "latitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
           }
         }
       },
@@ -268,21 +268,21 @@
           "status" : {
             "type" : "integer"
           },
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "entity" : {
             "$ref" : "_any"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           }
         }
-      },
-      "JsonMap" : {
-        "id" : "JsonMap",
-        "type" : "object"
       },
       "_any" : {
         "id" : "_any",
         "type" : "any"
+      },
+      "JsonMap" : {
+        "id" : "JsonMap",
+        "type" : "object"
       }
     },
     "methods" : {
