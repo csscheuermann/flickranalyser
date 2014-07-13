@@ -38,13 +38,13 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler{
 		Spot spotByName = spotService.getSpotByName(spotName);
 
 		if(spotByName == null){
-			double latitude = Double.parseDouble(pRequest.getParameter(HelperMethods.LATITUDE_PARAM));
-			double longitude = Double.parseDouble(pRequest.getParameter(HelperMethods.LONGITUDE_PARAM));
+			//double latitude = Double.parseDouble(pRequest.getParameter(HelperMethods.LATITUDE_PARAM));
+			//double longitude = Double.parseDouble(pRequest.getParameter(HelperMethods.LONGITUDE_PARAM));
 
 			pRequest.setAttribute(HelperMethods.MESSAGE_ERROR, "Spot was not found in Database" );
 			pRequest.setAttribute(HelperMethods.ADDRESS_PARAM,spotName);
-			pRequest.setAttribute(HelperMethods.LATITUDE_PARAM,latitude);
-			pRequest.setAttribute(HelperMethods.LONGITUDE_PARAM,longitude);
+			//pRequest.setAttribute(HelperMethods.LATITUDE_PARAM,latitude);
+			//pRequest.setAttribute(HelperMethods.LONGITUDE_PARAM,longitude);
 		}else{
 			pRequest.setAttribute(HelperMethods.MESSAGE_SUCCESSFUL, "Spot was found in Database" );
 			pRequest.setAttribute(HelperMethods.SPOT, spotByName);
