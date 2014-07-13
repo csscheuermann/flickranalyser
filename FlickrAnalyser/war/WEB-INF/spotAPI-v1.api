@@ -133,12 +133,6 @@
           "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
           },
-          "cluster" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Cluster"
-            }
-          },
           "maxClusterViews" : {
             "type" : "integer"
           },

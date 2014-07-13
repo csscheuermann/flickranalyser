@@ -21,6 +21,8 @@ public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler 
 	private static final Logger LOGGER = Logger
 			.getLogger(AbstractHtmlRequestHandler.class.getName());
 
+	
+	
 	@Override
 	public String performActionAndGetNextView(HttpServletRequest pRequest,
 			HttpSession pSession) {
