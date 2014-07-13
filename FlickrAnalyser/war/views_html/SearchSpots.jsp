@@ -82,45 +82,18 @@
 		
 		}
 		
-		function getLongitudeAndLatitudeByName(searchString){
-			var geocoder = new google.maps.Geocoder();
-			
-			geocoder.geocode( { 'address': searchString}, function(results, status) {
-
-		  	if (status == google.maps.GeocoderStatus.OK) {
-		    	var latitude = results[0].geometry.location.lat();
-		    	var longitude = results[0].geometry.location.lng();
-			
-		       	var latlng = new google.maps.LatLng(latitude, longitude);
-		        geocoder.geocode({'latLng': latlng}, function(results, status) {
-		       
-		   	   	if (status == google.maps.GeocoderStatus.OK) {
-		            if (results[0]) {	
-						var inputSpotLatitude = document.getElementById("spotLatitude");
-						inputSpotLatitude.setAttribute('value', latlng.lat());
-			
-						var inputspotLongitude = document.getElementById("spotLongitude");
-						inputspotLongitude.setAttribute('value', latlng.lng());
-						
-						var spotName = document.getElementById("spotAddress");
-						spotName.setAttribute('value', results[0].formatted_address);
-				
-						document.forms["searchForm"].submit();
-		            }
-		        } else {
-		            alert("Geocoder failed due to: " + status);
-		        }
-		        });
 	
-				
-		  	} 
-			}); 
-		}
 		
 		
 		function handleClick(event){
 			var searchString = document.getElementById("spotName").value;
-			getLongitudeAndLatitudeByName(searchString);
+			
+			var spotName = document.getElementById("spotAddress");
+			spotName.setAttribute('value', searchString);
+	
+			document.forms["searchForm"].submit();
+			
+			
 			
 		}
 		
@@ -201,8 +174,6 @@
 	<div class='container'>
 		<form role="form" name="searchForm" action="/" method="post">
 			<input type="hidden" name="action" value="SearchSpots" id="spotParameters" >
-			<input type="hidden" name="latitude" value="default" id="spotLatitude" >
-			<input type="hidden" name="longitude" value="default" id="spotLongitude" >
 			<input type="hidden" name="address" value="default" id="spotAddress" >
 		</form>
 		
