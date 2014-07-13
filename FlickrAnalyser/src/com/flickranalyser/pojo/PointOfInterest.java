@@ -42,11 +42,7 @@ public class PointOfInterest implements Serializable, Comparable<PointOfInterest
 
 	@Override
 	public int compareTo(PointOfInterest comparePOI) {
-		
 		int compareCountOfViews = comparePOI.getCountOfViews();
-		
-		
-		// TODO Auto-generated method stub
 		return compareCountOfViews - this.countOfViews;
 	}
 

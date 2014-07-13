@@ -21,24 +21,23 @@ public class PFGetterSpot {
 	public static Spot getSpotByName(String nameOfSpot){
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-
+		
+		// the cluster of the spot should be loaded eager 
+		pm.getFetchPlan().addGroup("eagerClusterLoading");
+		
 		LOGGER.log(Level.INFO, "NAME OF SPOT TO SEARCH: " + nameOfSpot );
 		try{
 			Key k = KeyFactory.createKey(Spot.class.getSimpleName(), nameOfSpot);
 			Spot spot = pm.getObjectById(Spot.class, k);
 			if (spot != null){
 
-				//TODO COS DVV: Strange here normal detach shoudl work, but only thing that works is that
-				//Solves the Problem with the empty spots while loading
-				Spot spotToReturn = new Spot(spot.getLatitude(), spot.getLongitude(),  spot.getName(), spot.getDescription(),spot.getClusterRadiusInKm(), spot.getSpotRadiusInKm(), k, spot.getMaxNumberOfPOIsPerCluster(), spot.getMaxNumberOfViewsPerCluster());
-				spotToReturn.setCluster(spot.getCluster());
-
-				LOGGER.log(Level.INFO, "NAME OF SPOT: " + spotToReturn.getName() );
-				LOGGER.log(Level.INFO, "NUMBER OF CLUSTER: " + spotToReturn.getCluster().size() );
-				if (spotToReturn.getCluster().size() > 1){
+				
+				LOGGER.log(Level.INFO, "NAME OF SPOT: " + spot.getName() );
+				LOGGER.log(Level.INFO, "NUMBER OF CLUSTER: " + spot.getCluster().size() );
+				if (spot.getCluster().size() > 1){
 					LOGGER.log(Level.INFO, " FIRST CLUSTER " + spot.getCluster().get(0).toString());
 				}
-				return spotToReturn;
+				return spot;
 			}else{
 				LOGGER.log(Level.INFO, "SPOT DOES NOT EXIST IN DATASTORE YET");
 				return null;

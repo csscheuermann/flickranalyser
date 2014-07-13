@@ -20,6 +20,7 @@ public class HtmlStarterServlet extends HttpServlet
 		startRequestHandling(pRequest, pResponse);
 	}
 
+	
 	private void startRequestHandling( final HttpServletRequest pRequest, final HttpServletResponse pResponse ) throws IOException
 	{
 		HtmlRequestProcessor applicationLogic = new HtmlRequestProcessor(pRequest, pResponse, getServletContext());

@@ -122,7 +122,6 @@ public class FlickrRequestHandler {
 								result.add(new PointOfInterest(numberViews, location, url,tags));
 							}
 						} catch (Exception e) {
-							// TODO COS DVV: Here sometimes it can happen that he can not parse
 							log.log(Level.SEVERE, "COULD NOT PARSE THIS HERE.");
 							e.printStackTrace();
 						}

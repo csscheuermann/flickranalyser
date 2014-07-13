@@ -194,7 +194,6 @@ public class HtmlRequestProcessor{
 	
 
 	private IHtmlRequestHandler loadRequestHandlerByName( final String prepareViewName ) throws Exception{
-		//TODO COS Discuss if we should do it like this
 		String expectedName = "com.flickranalyser.html.impl." + prepareViewName + "Handler";
 		IHtmlRequestHandler htmlRequestHandler =  HelperMethods.instantiate(expectedName, IHtmlRequestHandler.class);
 		return htmlRequestHandler;
