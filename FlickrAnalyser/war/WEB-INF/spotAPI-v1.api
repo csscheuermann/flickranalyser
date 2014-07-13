@@ -127,6 +127,9 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
+          "maxClusterViews" : {
+            "type" : "integer"
+          },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
@@ -138,9 +141,6 @@
             "items" : {
               "$ref" : "Cluster"
             }
-          },
-          "maxClusterViews" : {
-            "type" : "integer"
           }
         }
       },
@@ -161,14 +161,14 @@
           "name" : {
             "type" : "string"
           },
+          "complete" : {
+            "type" : "boolean"
+          },
           "parent" : {
             "$ref" : "Key"
           },
           "namespace" : {
             "type" : "string"
-          },
-          "complete" : {
-            "type" : "boolean"
           }
         }
       },
@@ -248,16 +248,16 @@
           "longitude" : {
             "type" : "number"
           },
-          "polar" : {
-            "type" : "boolean"
+          "latitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
           },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },
-          "latitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
+          "polar" : {
+            "type" : "boolean"
           }
         }
       },
@@ -265,11 +265,11 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "status" : {
             "type" : "integer"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           },
           "entity" : {
             "$ref" : "_any"

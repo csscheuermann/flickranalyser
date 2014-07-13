@@ -61,11 +61,11 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "status" : {
             "type" : "integer"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           },
           "entity" : {
             "$ref" : "_any"
