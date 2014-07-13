@@ -40,6 +40,6 @@ public class Prepare01_indexHandler extends AbstractHtmlRequestHandler{
 					LOGGER.log(Level.SEVERE, "COULD NOT GET USER INFO FROM GOOGLE. " + pRequest);
 				}
 			}
-		return null;
+		return "01_index";
 	}
 }
