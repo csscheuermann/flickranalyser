@@ -148,7 +148,7 @@ public class FlickrRequestHandler {
 	}
 
 	/**
-	 * This method generates satelites arround a given spot. 
+	 * This method generates satelites around a given spot. 
 	 * Attention, using this method for requests to flickr, we can get problems with write/read operations
 	 * and problems with the spot size ( > 1MB) concerning memcache.
 	 * @param spot given Spot.

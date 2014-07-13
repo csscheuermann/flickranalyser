@@ -13,6 +13,7 @@ public class PrepareTopSpotsHandler extends AbstractHtmlRequestHandler{
 	public String performActionAndGetNextViewConcrete(
 			HttpServletRequest pRequest, HttpSession pSession) {
 		topSpots = MemcacheSpot.getTopSpots();
+		//TODO COS DVV: Extract this strings to a common class used also for the JSPs
 		pRequest.setAttribute("topSpots", topSpots );
 		return null;
 		

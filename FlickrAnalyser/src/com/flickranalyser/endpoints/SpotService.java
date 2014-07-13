@@ -32,7 +32,6 @@ public class SpotService {
 	@ApiMethod(name="getSpotByName")
 	public Spot getSpotByName(@Named("spotName") String spotName) {
 		return MemcacheSpot.getSpotForSpotName(spotName);
-		
 	}
 	
 	

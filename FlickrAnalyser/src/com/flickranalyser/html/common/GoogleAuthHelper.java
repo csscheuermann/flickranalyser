@@ -23,6 +23,7 @@ import com.google.api.client.json.jackson.JacksonFactory;
 
 public class GoogleAuthHelper {
 
+	private static final String NOT_AVAILABLE = "NOT AVAILABLE";
 	private static final Logger LOGGER = Logger.getLogger(GoogleAuthHelper.class.getName());
 	/**
 	 * Please provide a value for the CLIENT_ID constant before proceeding, set this up at https://code.google.com/apis/console/
@@ -95,7 +96,7 @@ public class GoogleAuthHelper {
 	 * @return JSON formatted user profile information
 	 * @param authCode authentication code provided by google
 	 */
-	public User getUserInfoJson(final String authCode) throws IOException {
+	public User getGoogleUserInfo(final String authCode) throws IOException {
 
 		final GoogleTokenResponse response = flow.newTokenRequest(authCode).setRedirectUri(CALLBACK_URI).execute();
 		final Credential credential = flow.createAndStoreCredential(response, null);
@@ -108,11 +109,11 @@ public class GoogleAuthHelper {
 
 		JsonObject userObject = JsonObject.readFrom(jsonIdentity); 
 		
-		String email = "NOT AVAILABLE";
-		String fullName =  "NOT AVAILABLE";
-		String givenName =  "NOT AVAILABLE";
-		String profileLink = "NOT AVAILABLE";
-		String picture = "NOT AVAILABLE";
+		String email = NOT_AVAILABLE;
+		String fullName =  NOT_AVAILABLE;
+		String givenName =  NOT_AVAILABLE;
+		String profileLink = NOT_AVAILABLE;
+		String picture = NOT_AVAILABLE;
 		
 		if (userObject.get("email") != null){
 			email =	userObject.get("email").asString();			

@@ -6,20 +6,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	
-	<%
-		
-	/*
-	* In case we got redirected from Login Page
-	*/
-	if (request.getParameter("code") != null && request.getParameter("state") != null && request.getParameter("state").equals(session.getAttribute("state"))) {
-			final GoogleAuthHelper helper = new GoogleAuthHelper();
-			session.removeAttribute("state");
-			User user = helper.getUserInfoJson(request.getParameter("code"));
-			PFSaverUser.saveUserToDatastore(user);
-			session.setAttribute("currentUser", user);
-		}
-	%>
 
 	<%  HelperMethods helperMethods = (HelperMethods) request.getAttribute("helperMethods"); %>
 	
