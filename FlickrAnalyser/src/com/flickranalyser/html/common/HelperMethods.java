@@ -23,11 +23,13 @@ public class HelperMethods {
 	public static final String CRAWL_LONGITUDE = "crawlLongitude";
 	public static final String CRAWL_LATITUDE = "crawlLatitude";
 	public static final String CRAWL_ADDRESS = "crawlAddress";
+	public static final String CLUSTER_KEY = "clusterKey";
+	public static final String CLUSTER_RATING_VALUE = "clusterRating";
 	public static final String ADDRESS_PARAM = "address";
 	public static final String LONGITUDE_PARAM = "longitude";
 	public static final String LATITUDE_PARAM = "latitude";
 	public static final String SPOT = "spot";
-
+	public static final String SPOT_NAME = "spotName";
 
 	public HelperMethods(final HttpSession session){
 		this.session = session;

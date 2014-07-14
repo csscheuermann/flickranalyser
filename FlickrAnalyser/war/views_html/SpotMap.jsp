@@ -10,6 +10,9 @@
 <%@ page import="com.flickranalyser.businesslogic.common.ParameterConstants" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.flickranalyser.html.common.HelperMethods" %>
+<%@ page import="com.google.appengine.api.datastore.Key" %>
+<%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +23,44 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="/res_html/js/Chart.js"></script>
 	<script src="/res_html/js/ClusterDetails.js"></script>
+	
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function() {
+             $('#btnTouristic').click(function ()
+             {	 
+                 $.ajax({
+                     type: "post",
+                     url: "?action=EvaluateSpot", //this is my servlet
+                     data: "clusterKey=" +$('#btnTouristic').val()+"&clusterRating=" + 10+"&spotName="+$('#spotName').html(),
+                     success: function(msg){      
+					   		window.location.reload();
+                      		$('#voteResultMessage').append(msg);
+                     }
+                 });
+             });
+
+         });
+		 
+         $(document).ready(function() {
+             $('#btnSeekret').click(function ()
+             {
+                 $.ajax({
+                     type: "post",
+                     url: "?action=EvaluateSpot", //this is my servlet
+                     data: "clusterKey=" +$('#btnTouristic').val()+"&clusterRating=" + 0+"&spotName="+$('#spotName').html(),
+                     success: function(msg){ 
+					 		window.location.reload();     
+                            $('#voteResultMessage').append(msg);
+                     }
+                 });
+             });
+
+         });
+     </script>
+	
+	
+	
    	<script type="text/javascript">
 		var map;
 		var lastClickedMarker = null;
@@ -42,8 +83,15 @@
      var cityCircle = new google.maps.Circle(populationOptions);
    }
   
+   function handleTouristicVote(key){
+   		alert(key);
+   }
+   
+   function handleSeekretVote(key){
+   		alert ('seekret' + key);
+   }
 
-   function addMarker(spotName, lat,lgt , numberOfViews, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
+   function addMarker(datastoreClusterKey, spotName, lat,lgt , numberOfViews, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
    	// To add the marker to the map, use the 'map' property
    	var marker = new google.maps.Marker({
    	    position: new google.maps.LatLng(lat, lgt),
@@ -76,7 +124,14 @@
 		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
 		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
 		
-	    clusterDetails.addElementDiv('spotInfo', 'spotName',  '<h4>' + spotName + '</h4>');
+		var btnTouristicness = document.getElementById("btnTouristic");
+		btnTouristicness.setAttribute('value', datastoreClusterKey);
+		
+		var btnSeekret = document.getElementById("btnSeekret");
+		btnSeekret.setAttribute('value', datastoreClusterKey);
+
+		
+	    clusterDetails.addElementDiv('spotInfo', 'spotName',  spotName);
 		
 		getLatLong(spotName);
 		codeLatLng(lat,lgt);
@@ -171,14 +226,14 @@
 	    <%
 
 			if (spot != null){
-			double spotRadiusInMeter = spot.getSpotRadiusInKm()*1000;
+			double spotRadiusInMeter = spot.getSpotRadiusInMeter();
 			out.println("addCircle(" + spot.getLatitude() + "," + spot.getLongitude() + ",0.1," + spotRadiusInMeter + ");");
 			String spotName = spot.getName();
 	    	int maxValue = spot.getMaxClusterViews();
 
 			List<Cluster> cluster = spot.getCluster();
 	  		
-			double clusterRadiusInMeter = spot.getClusterRadiusInKm()*1000;
+			double clusterRadiusInMeter = spot.getClusterRadiusInMeter();
 			int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
 		
 			int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
@@ -210,13 +265,16 @@
 		
 			double viewCountRealativeInPercent = ((double) (100.00/maxNumberOfViews)*clusterOverallViews);
 			double pOICountRealativeInPercent = ((double) (100.00/maxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
-			double touristicnessInPercent = currentCluster.getOverallTouristicnessInPointsFrom1To10()*100;
+			double touristicnessInPercent = currentCluster.getOverallTouristicnessInPointsFrom1To10()*10;
 		
 			double pOICountOverallInPercent = ((double) (100.00/overallMaxNumberOfPOIs)*numberOfPOIsForCurrentCluster);
 			double viewCountOverallInPercent = ((double) (100.00/overallMaxNumberOfViews)*clusterOverallViews);
 		
+		 	String datastoreClusterKey = currentCluster.getDatastoreClusterKey();
+				
 			if (clusterOverallViews > 200){
-	     			out.println("addMarker('"+ 
+	     			out.println("addMarker('"+
+						datastoreClusterKey  + "','" +
 						spotName 		+ "'," +
 						currentLat 		+ "," +
 						currentLng 		+ "," +
@@ -270,6 +328,16 @@
 	</div>	
 	
 
+	<div class='container'>
+		<div class='row'>
+		    <div class="col-xs-12">
+				<p id='voteResultMessage'> </p>
+		
+			</div>
+		</div>
+	</div>	
+	
+	
 <div class='container'>
 	<div class='row'>
 	    <div class="col-xs-12">
@@ -385,7 +453,15 @@
 				</div>
 			</div>
 			</div>
+	
+			<div class='container'>
+				<div class='row'>
+			  	<div class='col-md-6'><button type="submit" id="btnTouristic"  class="btn btn-default btn-danger" >Touristic</button></div>
+				<div class='col-md-6'><button type="submit" id="btnSeekret"  class="btn btn-default btn-success" >Seekret</button></div>
+				</div>
+		  	</div>
 			
+				
 			
 	
 	

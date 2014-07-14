@@ -157,6 +157,12 @@ public class Spot implements Serializable{
 		return clusterRadiusInKm;
 	}
 	
+	public  double getClusterRadiusInMeter() {
+		return getClusterRadiusInKm()*1000;
+	}
+	
+	
+	
 	public List<Cluster> getCluster() {
 		return Collections.unmodifiableList(clusters);
 	}
@@ -186,6 +192,12 @@ public class Spot implements Serializable{
 	public double getSpotRadiusInKm() {
 		return spotRadiusInKm;
 	}
+	
+	public double getSpotRadiusInMeter() {
+		return getSpotRadiusInKm()*1000;
+	}
+	
+	
 
 
 	public double getLatitude() {

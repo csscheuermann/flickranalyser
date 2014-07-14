@@ -18,6 +18,5 @@ public class PFSaverSpot {
 		} finally {
 			pm.close();
 		}
-		
 	}
 }
