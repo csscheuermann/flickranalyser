@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 
@@ -19,7 +20,7 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler{
 
 
 	@Override
-	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpSession pSession) {
+	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession) {
 		SpotService spotService = new SpotService();
 
 		String crawlSpotName = pRequest.getParameter(HelperMethods.CRAWL_ADDRESS);

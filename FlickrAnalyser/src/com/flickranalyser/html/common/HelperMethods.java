@@ -77,6 +77,7 @@ public class HelperMethods {
 		header.append("<title>SEEKRET</title>");
 
 		header.append("<!-- Bootstrap core CSS -->");
+		header.append("<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'></script>");
 		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/bootstrap.min.css' rel='stylesheet'>");
 		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/custom.css' rel='stylesheet'>");
 		header.append("<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->");
@@ -131,7 +132,7 @@ public class HelperMethods {
 
 		bodyBegin.append("<div class='container'>");
 		bodyBegin.append("<div class='row'>");
-		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='height:500px; width:100%'></div></div>");
+		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='margin-bottom: 20px; height:500px; width:100%'></div></div>");
 		bodyBegin.append("</div>");
 		bodyBegin.append("</div>");
 
@@ -403,7 +404,7 @@ public class HelperMethods {
 		
 		createVoteResultField.append("<div id='voteResultField' class='container'>");
 			createVoteResultField.append("<div class='row'>");
-				createVoteResultField.append("<div class='col-md-12'><p id='voteResultMessage'>Danke für Deinen Vote.</p></div>");
+				createVoteResultField.append("<div class='col-md-12'><div class='alert alert-info' id='voteResultMessage'></div></div>");
 			createVoteResultField.append(" </div>");
 		createVoteResultField.append(" </div>");
 		

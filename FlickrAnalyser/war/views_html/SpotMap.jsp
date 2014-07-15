@@ -24,13 +24,10 @@
 	<script src="/res_html/js/Chart.js"></script>
 	<script src="/res_html/js/ClusterDetails.js"></script>
 	
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
      <script type="text/javascript">
 	
-	$(document).ready(function() { 	 
-	     // Setup the ajax indicator
-	     $('body').append('<div id="ajaxBusy"><p><img src="/res_html/img/loading.gif"></p></div>');
-		 
+	$(document).ready(function() { 	 	 
          $('#btnTouristic').click(function ()
          {	 
             vote('#btnTouristic', 10);
@@ -42,24 +39,43 @@
 	   });
 		 
 	function vote(buttonId, clusterRatingValue){
-         $.ajax({
+        
+		
+    	// Set a variable that is set to the div containing the overlay (created on page load)
+           var page_overlay = jQuery('<div id="overlay"><div id="loadingImage"><img  src="/res_html/img/loading.gif"></div> </div>');
+
+           // Function to Add the overlay to the page
+           function showOverlay(){
+               page_overlay.appendTo(document.body);
+           }
+           // Function to Remove the overlay from the page
+           function hideOverlay(){
+               page_overlay.remove();
+           }
+		
+			
+		 $.ajax({
              type: "post",
              url: "?action=EvaluateSpot", //this is my servlet
              data: "clusterKey=" +$(buttonId).val()+"&clusterRating=" + clusterRatingValue +"&spotName="+$('#spotaddress').html(),
-			  beforeSend: function(){
-			  		$(window).scrollTop(0);
-			   		$('#voteButtonContainer').hide(); 
-			  		$('#ajaxBusy').show(); 
-					},
-             success: function(){ 
-			 		$('#ajaxBusy').hide();
+			 beforeSend: function() { 
+ 					$('html, body').animate({ scrollTop: 0 }, 'slow');
+					showOverlay();
+ 					
+			 },  
+			 
+			 success: function(data){ 
+			
+			 		hideOverlay()
 					$(buttonId).attr("disabled", false);      
               		$('#voteResultField').show();
+					$('#voteResultMessage').html(data);
 					$('#voteResultMessage').show();
 					}
 					
 			 });
 	}
+	
      
      </script>
 	
@@ -114,9 +130,6 @@
 	}
 	
 	marker.setIcon('/res_html/img/eye_currently_watching.png');
-		
-		
-	
 			
 		var clusterDetails = new ClusterDetails();
 		
@@ -165,10 +178,7 @@
    
    }
    
-   
-	 
-	 
-   
+
    
    function addDoughnutChart(percentage, elementId, colorPercent, colorRemainer) {
 
@@ -314,6 +324,7 @@
 	<% out.println(helperMethods.createBodyBegin()); %>
 	<% out.println(helperMethods.createNavigation(false)); %>
 	<% out.println(helperMethods.createMap()); %>
+	<% out.println(helperMethods.createVoteResultField()); %>
 	
 	<% out.println(helperMethods.createSpotInfo()); %>
 	<% out.println(helperMethods.createSeekretSpotInformation()); %>
@@ -321,7 +332,7 @@
 	<% out.println(helperMethods.createTopPicturesContainer()); %>		
 	<% out.println(helperMethods.createRatingInformationContainer()); %>
 	<% out.println(helperMethods.createVoteButtons()); %>
-	<% out.println(helperMethods.createVoteResultField()); %>
+
 
 
 

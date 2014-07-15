@@ -2,9 +2,9 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://flickeranalyser.appspot.com/_ah/api",
-  "name" : "clusterAPI",
+  "name" : "ratingAPI",
   "version" : "v1",
-  "description" : "This API serves everything needed to update a cluster.",
+  "description" : "This API serves everything needed for Ratings",
   "defaultVersion" : false,
   "adapter" : {
     "bns" : "https://flickeranalyser.appspot.com/_ah/spi",
@@ -25,25 +25,46 @@
     "maxAge" : 0
   },
   "methods" : {
-    "clusterAPI.evaluateCluster" : {
-      "path" : "evaluateCluster/{datastoreKeyOfCluster}/{touristicnessRatingFrom1To10}/{spotName}",
+    "ratingAPI.addNewRating" : {
+      "path" : "addNewRating/{userPrimaryKey}/{clusterPrimaryKey}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.flickranalyser.endpoints.ClusterService.evaluateCluster",
+      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.addNewRating",
       "request" : {
         "parameters" : {
-          "datastoreKeyOfCluster" : {
+          "userPrimaryKey" : {
             "type" : "string",
             "required" : true
           },
-          "touristicnessRatingFrom1To10" : {
-            "type" : "int32",
+          "clusterPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "ratingAPI.hasUserAlreadyVoted" : {
+      "path" : "hasUserAlreadyVoted/{userPrimaryKey}/{clusterPrimaryKey}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted",
+      "request" : {
+        "parameters" : {
+          "userPrimaryKey" : {
+            "type" : "string",
             "required" : true
           },
-          "spotName" : {
+          "clusterPrimaryKey" : {
             "type" : "string",
             "required" : true
           }
@@ -82,7 +103,12 @@
       }
     },
     "methods" : {
-      "com.flickranalyser.endpoints.ClusterService.evaluateCluster" : {
+      "com.flickranalyser.endpoints.RatingService.addNewRating" : {
+        "response" : {
+          "$ref" : "Response"
+        }
+      },
+      "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted" : {
         "response" : {
           "$ref" : "Response"
         }

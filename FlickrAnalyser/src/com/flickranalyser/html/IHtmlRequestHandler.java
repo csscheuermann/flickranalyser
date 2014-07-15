@@ -2,6 +2,7 @@ package com.flickranalyser.html;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
@@ -9,5 +10,5 @@ import javax.servlet.http.HttpSession;
 public interface IHtmlRequestHandler {
   
 	
-	public String performActionAndGetNextView( final HttpServletRequest pRequest, final HttpSession pSession);
+	public String performActionAndGetNextView( final HttpServletRequest pRequest, HttpServletResponse pResponse, final HttpSession pSession);
 }

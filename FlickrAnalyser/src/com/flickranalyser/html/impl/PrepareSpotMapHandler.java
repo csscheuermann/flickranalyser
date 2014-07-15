@@ -5,11 +5,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.businesslogic.common.ParameterConstants;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
-import com.flickranalyser.businesslogic.spotfinder.impl.NearestSpotFinder;
 import com.flickranalyser.endpoints.SpotService;
 import com.flickranalyser.html.common.HelperMethods;
 import com.flickranalyser.pojo.Cluster;
@@ -27,7 +27,7 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler {
 
 	@Override
 	public String performActionAndGetNextViewConcrete(
-			HttpServletRequest pRequest, HttpSession pSession) {
+			HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession) {
 
 		String location = pRequest
 				.getParameter(ParameterConstants.REQUEST_PARAM_LOCATION);

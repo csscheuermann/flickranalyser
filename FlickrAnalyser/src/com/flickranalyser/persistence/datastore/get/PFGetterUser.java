@@ -12,9 +12,9 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 public class PFGetterUser {
 
-	
+
 	private static final Logger LOGGER = Logger.getLogger(PFGetterUser.class.getName());
-	
+
 	public static User getUserByEmail(String eMail){
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();

@@ -70,7 +70,7 @@
     <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
     <init-param>
       <param-name>services</param-name>
-      <param-value>com.flickranalyser.endpoints.ClusterService,com.flickranalyser.endpoints.SpotService</param-value>
+      <param-value>com.flickranalyser.endpoints.ClusterService,com.flickranalyser.endpoints.RatingService,com.flickranalyser.endpoints.SpotService</param-value>
     </init-param>
   </servlet>
 

@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.html.IHtmlRequestHandler;
@@ -25,7 +26,7 @@ public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler 
 	
 	@Override
 	public String performActionAndGetNextView(HttpServletRequest pRequest,
-			HttpSession pSession) {
+			HttpServletResponse pResponse, HttpSession pSession) {
 		if (isLoginRequired()) {
 			User currentUser = (User) pSession
 					.getAttribute(HtmlRequestProcessor.CURRENT_USER);
@@ -37,7 +38,7 @@ public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler 
 				return VIEW_LOGIN;
 			}
 		}
-		return performActionAndGetNextViewConcrete(pRequest, pSession);
+		return performActionAndGetNextViewConcrete(pRequest, pResponse, pSession);
 	}
 
 	protected boolean isLoginRequired() {
@@ -45,6 +46,6 @@ public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler 
 	}
 
 	public abstract String performActionAndGetNextViewConcrete(
-			HttpServletRequest pRequest, HttpSession pSession);
+			HttpServletRequest pRequest,HttpServletResponse pResponse, HttpSession pSession);
 
 }

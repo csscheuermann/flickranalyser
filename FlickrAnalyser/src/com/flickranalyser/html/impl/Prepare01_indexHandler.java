@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.html.common.GoogleAuthHelper;
@@ -22,7 +23,7 @@ public class Prepare01_indexHandler extends AbstractHtmlRequestHandler{
 	
 	@Override
 	public String performActionAndGetNextViewConcrete(
-			HttpServletRequest pRequest, HttpSession pSession) {
+			HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession) {
 		
 	
 		/*

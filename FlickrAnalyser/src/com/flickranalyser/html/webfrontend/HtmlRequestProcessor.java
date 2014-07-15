@@ -95,7 +95,7 @@ public class HtmlRequestProcessor{
 		}
 
 		if (requestHandler !=null){
-			nextViewName = requestHandler.performActionAndGetNextView(mRequest, mRequest.getSession());
+			nextViewName = requestHandler.performActionAndGetNextView(mRequest,  mResponse, mRequest.getSession());
 		}
 		
 		
@@ -103,7 +103,7 @@ public class HtmlRequestProcessor{
 		
 		if( viewPreparationHandler != null ){
 			
-			String performActionAndGetNextView = viewPreparationHandler.performActionAndGetNextView(mRequest, mRequest.getSession());
+			String performActionAndGetNextView = viewPreparationHandler.performActionAndGetNextView(mRequest,mResponse, mRequest.getSession());
 			if (performActionAndGetNextView != null){
 				nextViewName = performActionAndGetNextView;
 			}

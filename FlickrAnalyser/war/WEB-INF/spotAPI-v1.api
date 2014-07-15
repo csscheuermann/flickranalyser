@@ -74,24 +74,24 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
+          "metadata" : {
+            "$ref" : "JsonMap"
+          },
           "status" : {
             "type" : "integer"
           },
           "entity" : {
             "$ref" : "_any"
-          },
-          "metadata" : {
-            "$ref" : "JsonMap"
           }
         }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
       },
       "JsonMap" : {
         "id" : "JsonMap",
         "type" : "object"
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
       },
       "Spot" : {
         "id" : "Spot",
@@ -130,12 +130,6 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "clusterRadiusInMeter" : {
-            "type" : "number"
-          },
-          "maxClusterViews" : {
-            "type" : "integer"
-          },
           "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
           },
@@ -145,8 +139,14 @@
               "$ref" : "Cluster"
             }
           },
+          "maxClusterViews" : {
+            "type" : "integer"
+          },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
+          },
+          "clusterRadiusInMeter" : {
+            "type" : "number"
           },
           "spotRadiusInMeter" : {
             "type" : "number"
@@ -257,16 +257,16 @@
           "longitude" : {
             "type" : "number"
           },
-          "polar" : {
-            "type" : "boolean"
+          "latitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
           },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },
-          "latitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
+          "polar" : {
+            "type" : "boolean"
           }
         }
       }
