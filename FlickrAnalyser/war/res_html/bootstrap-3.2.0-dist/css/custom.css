@@ -1,0 +1,45 @@
+#ajaxBusy {
+	display: none;
+	margin: 0px;
+	paddingLeft: 0px;
+	paddingRight: 0px;
+	paddingTop: 0px;
+	paddingBottom: 0px;
+	position: absolute;
+	right: 3px;
+	top: 3px;
+	width: auto;
+}
+
+#spotInfoContainer{
+	display: none;
+}
+
+#seekretSpotInfoContainer{
+	display: none;
+}
+
+#ratingInformationContainer{
+	display: none;
+}
+
+#topPicturesContainer{
+	display: none;
+}
+
+
+#voteButtonContainer{
+	display: none;
+}
+
+#voteResultField{
+	display: none;
+}
+
+.bottom-sapce{
+	margin-bottom: 10px;
+}
+
+#seekretSpotInfoContainer{
+	display: none;
+}

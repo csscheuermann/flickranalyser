@@ -12,7 +12,7 @@
 <%@ page import="com.flickranalyser.html.common.HelperMethods" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
-<%@ page import="com.flickranalyser.businesslogic.spotfinder.impl.NearestSpotFinder" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,37 +30,50 @@
 	$(document).ready(function() { 	 
 	     // Setup the ajax indicator
 	     $('body').append('<div id="ajaxBusy"><p><img src="/res_html/img/loading.gif"></p></div>');
-		 
-         $('#btnTouristic').click(function ()
-         {	 
-            vote('#btnTouristic', 10);
-         });
-        
-         $('#btnSeekret').click(function (){	 
-            vote('#btnSeekret', 0);
-         });
 	   });
+		
+		
+		
+         $(document).ready(function() {
+             $('#btnTouristic').click(function ()
+             {	 
+                 $.ajax({
+                     type: "post",
+                     url: "?action=EvaluateSpot", //this is my servlet
+                     data: "clusterKey=" +$('#btnTouristic').val()+"&clusterRating=" + 10+"&spotName="+$('#spotName').html(),
+					  beforeSend: function(){ 
+					  		$('#ajaxBusy').show(); 
+							},
+                     success: function(msg){ 
+					 		$('#ajaxBusy').hide();      
+					   		window.location.reload();
+                      		$('#voteResultMessage').append(msg);
+                     }
+                 });
+             });
+
+         });
 		 
-	function vote(buttonId, clusterRatingValue){
-         $.ajax({
-             type: "post",
-             url: "?action=EvaluateSpot", //this is my servlet
-             data: "clusterKey=" +$(buttonId).val()+"&clusterRating=" + clusterRatingValue +"&spotName="+$('#spotaddress').html(),
-			  beforeSend: function(){
-			  		$(window).scrollTop(0);
-			   		$('#voteButtonContainer').hide(); 
-			  		$('#ajaxBusy').show(); 
-					},
-             success: function(){ 
-			 		$('#ajaxBusy').hide();
-					$(buttonId).attr("disabled", false);      
-              		$('#voteResultField').show();
-					$('#voteResultMessage').show();
-					}
-					
-			 });
-	}
-     
+         $(document).ready(function() {
+			 $('#btnSeekret').click(function ()
+             {
+                 $.ajax({
+                     type: "post",
+                     url: "?action=EvaluateSpot", //this is my servlet
+                     data: "clusterKey=" +$('#btnTouristic').val()+"&clusterRating=" + 0+"&spotName="+$('#spotName').html(),
+					 beforeSend: function(){
+					 	 	$('#ajaxBusy').show();
+							},
+                     success: function(msg){ 
+					 		$('#ajaxBusy').hide(); 
+							window.location.reload();     
+                            $('#voteResultMessage').append(msg);
+							
+                     }
+                 });
+             });
+
+         });
      </script>
 	
 	
@@ -95,7 +108,7 @@
    		alert ('seekret' + key);
    }
 
-   function addMarker(datastoreClusterKey,clusterAdressFromGoogle, spotName,overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat,lgt , numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
+   function addMarker(datastoreClusterKey, spotName, lat,lgt , numberOfViews, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
    	// To add the marker to the map, use the 'map' property
    	var marker = new google.maps.Marker({
    	    position: new google.maps.LatLng(lat, lgt),
@@ -114,58 +127,71 @@
 	}
 	
 	marker.setIcon('/res_html/img/eye_currently_watching.png');
-		
-		
 	
-			
+	
 		var clusterDetails = new ClusterDetails();
+		clusterDetails.addElementImage('spot-image1', 'ClusterDetailPicture1', pictureUrl1);
+		clusterDetails.addElementImage('spot-image2', 'ClusterDetailPicture2', pictureUrl2);
+		clusterDetails.addElementImage('spot-image3', 'ClusterDetailPicture3', pictureUrl3);
+		
+		addDoughnutChart(viewCountRelativeInPercent, 'viewCountRelative', "#F7464A" , "#E2EAE9");
+		addDoughnutChart(pOICountRealativeInPercent, 'poiCountRelative', "#F7464A", "#E2EAE9");
+		addDoughnutChart(touristicnessInPercent, 'touristicness', "#FFBB33" , "#99CC00");
+		
+		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
+		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
 		
 		var btnTouristicness = document.getElementById("btnTouristic");
 		btnTouristicness.setAttribute('value', datastoreClusterKey);
 		
 		var btnSeekret = document.getElementById("btnSeekret");
 		btnSeekret.setAttribute('value', datastoreClusterKey);
-	
-		//Now set up the Spot Info Container
-		$('#spotInfoContainer').show();
-		$('#spotaddress').html(spotName);
-		$('#poiCount').html(overallMaxNumberOfPOIs);
-		$('#spotOverallview').html(overallMaxNumberOfViews);
-		
-		//Now set up the Cluster Info Container
-		$('#seekretSpotInfoContainer').show();
-		$('#clusterAddress').html(clusterAdressFromGoogle);
-		$('#clusterViews').html(numberOfViews);
-		$('#clusterPOIs').html(numberOfPOIsForCurrentCluster);
-		$('#maxClusterViews').html(maxNumberOfViews);
-		$('#maxClusterPOIs').html(maxNumberOfPOIs);
-		 
-		//Now set up the Image Container
-		$('#topPicturesContainer').show();
-		$('#picture1').html('<img src=' + pictureUrl1 +' />');
-		$('#picture2').html('<img src=' + pictureUrl2 +' />');
-		$('#picture3').html('<img src=' + pictureUrl3 +' />');
 
-		//Now set up the Charts
-		$('#ratingInformationContainer').show();
-		addDoughnutChart(viewCountRelativeInPercent, 'viewCountRelative', "#F7464A" , "#E2EAE9");
-		addDoughnutChart(pOICountRealativeInPercent, 'poiCountRelative', "#F7464A", "#E2EAE9");
-		addDoughnutChart(touristicnessInPercent, 'touristicness', "#FFBB33" , "#99CC00");
-		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
-		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
-	
-		//Now set up the buttons
-		$('#voteButtonContainer').show();
 		
-		//Always Hide voteresult after click
-		$('#voteResultField').hide();
+	    clusterDetails.addElementDiv('spotInfo', 'spotName',  spotName);
+		
+		getLatLong(spotName);
+		codeLatLng(lat,lgt);
+		
+		
 		
 		
    });
    
    }
    
+   function codeLatLng(lat, lng) {
+     var latlng = new google.maps.LatLng(lat, lng);
+     geo.geocode({'latLng': latlng}, function(results, status) {
+       	var clusterDetails = new ClusterDetails();
+		 var locationString = '<p>Latitude ' + lat + '<br /> Longitude ' + lng + '</p>';
+		clusterDetails.addElementDiv('spotInfo', 'clusterGeoCoordinates',  locationString);
+	   if (status == google.maps.GeocoderStatus.OK) {
+         if (results[1]) {
+		 clusterDetails.addElementDiv('spotInfo', 'clusterAdress1',  results[0].formatted_address);
+         }
+       } else {
+         alert("Geocoder failed due to: " + status);
+       }
+     });
+   }
    
+   function getLatLong(address){
+         geo.geocode({'address':address},function(results, status){
+                 if (status == google.maps.GeocoderStatus.OK) {
+				 
+				 var clusterDetails = new ClusterDetails();
+				 var latlngString = results[0].geometry.location;
+				 var locationString = '<p>Latitude ' + latlngString.lat() + '<br /> Longitude ' + latlngString.lng() + '</p>';
+				 clusterDetails.addElementDiv('spotInfo', 'spot_location', locationString);
+				   
+                 } else {
+                   //alert("Geocode was not successful for the following reason: " + status);
+                 }
+
+          });
+
+     }
 	 
 	 
    
@@ -226,6 +252,7 @@
 	  		
 			double clusterRadiusInMeter = spot.getClusterRadiusInMeter();
 			int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
+		
 			int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
 		
 			int maxNumberOfPOIs = spot.getMaxNumberOfPOIsPerCluster();	
@@ -261,24 +288,14 @@
 			double viewCountOverallInPercent = ((double) (100.00/overallMaxNumberOfViews)*clusterOverallViews);
 		
 		 	String datastoreClusterKey = currentCluster.getDatastoreClusterKey();
-			
-	   		NearestSpotFinder  nearestSpotFinder = new NearestSpotFinder();
-			String clusterAdressFromGoogle = nearestSpotFinder.findAddressByLatLng(currentLat,currentLng);
-			
-			
+				
 			if (clusterOverallViews > 200){
 	     			out.println("addMarker('"+
-						datastoreClusterKey  + "','" +		
-						clusterAdressFromGoogle  + "','" +
+						datastoreClusterKey  + "','" +
 						spotName 		+ "'," +
-						overallMaxNumberOfPOIs+ "," +
-						overallMaxNumberOfViews	+ "," +
-						maxNumberOfPOIs + "," +
-						maxNumberOfViews + "," +
 						currentLat 		+ "," +
 						currentLng 		+ "," +
 						clusterOverallViews 	+ "," +
-						numberOfPOIsForCurrentCluster 	+ "," +	
 						viewCountRealativeInPercent 	+ "," +
 						pOICountRealativeInPercent 	+ "," +	
 						touristicnessInPercent 	+ "," +	
@@ -290,10 +307,6 @@
 				
 				
 	       	}
-			
-			
-			
-			
 			double opacityViewCountRelative = viewCountRealativeInPercent/100.00;
 	       	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + "," + clusterRadiusInMeter + ");");
 		}	
@@ -315,16 +328,155 @@
 	<% out.println(helperMethods.createNavigation(false)); %>
 	<% out.println(helperMethods.createMap()); %>
 	
-	<% out.println(helperMethods.createSpotInfo()); %>
-	<% out.println(helperMethods.createSeekretSpotInformation()); %>
+	<div class='container'>
+		<div class='row'>
+		    <div class="col-xs-12">
+				<h2>Spot Info</h2>
+				 <% 
+				if (spot != null){	
+					int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
+					int overallMaxNumberOfViews = spot.getOverallMaxViewNumberPerCluster();
+			   	 	out.println("Overall POI Count: " + overallMaxNumberOfPOIs); 
+			     	out.println("Overall View Count: " + overallMaxNumberOfViews); 
+				}	
+				%>
+			</div>
+		</div>
+	</div>	
 	
-	<% out.println(helperMethods.createTopPicturesContainer()); %>		
-	<% out.println(helperMethods.createRatingInformationContainer()); %>
-	<% out.println(helperMethods.createVoteButtons()); %>
-	<% out.println(helperMethods.createVoteResultField()); %>
+
+	<div class='container'>
+		<div class='row'>
+		    <div class="col-xs-12">
+				<p id='voteResultMessage'> </p>
+		
+			</div>
+		</div>
+	</div>	
+	
+	
+<div class='container'>
+	<div class='row'>
+	    <div class="col-xs-12">
+			<h2>Cluster Information</h2>
+		
+		</div>
+	</div>
+</div>	
+				
+				
+	<div class='container'>
+		
+		
+			
+		<div class='row'>
+		    <div class="col-md-3">
+				<div id="spotInfo"> </div>
+			</div>
+			
+		    <div class="col-md-3">
+				<div class="centeralized-div" id="spot-image1">	
+				</div>
+			</div>
+			
+			
+			<div class="col-md-3">
+				<div class="centeralized-div" id="spot-image2">	
+				</div>
+			</div>
+			
+			<div class="col-md-3">
+				<div class="centeralized-div" id="spot-image3">	
+				</div>
+			</div>
+			
+		</div>	
+		<div class='row'>
+		</div>	
+		
+		<div class='row'>
+		    <div class="col-md-4">
+				<h4 class="centeralized-div" >SEEKRET-METER (USER DEFINED)</h4>
+			</div>
+			
+			
+			<div class="col-md-4">
+				<h4 class="centeralized-div" >VIEW COUNT (RELATIVE)</h4>
+			</div>
+			
+			<div class="col-md-4">
+				<h4 class="centeralized-div" >POI COUNT (RELATIVE)</h4>
+			</div>
+			
+		</div>	
+		
+		<div class='row'>
+		    <div class="col-md-4">
+					<div class="centeralized-div">
+						<canvas id="touristicness" width="200" height="200"></canvas>
+					</div>	
+			</div>
+			
+			
+			<div class="col-md-4">
+				<div class="centeralized-div">
+					<canvas id="viewCountRelative" width="200" height="200"></canvas>
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div class="centeralized-div">
+					<canvas id="poiCountRelative" width="200" height="200"></canvas>
+				</div>
+			</div>
+			
+		</div>	
+	</div>
 
 
-
+		<div class='container'>
+			<div class='row'>
+			    <div class="col-md-4">
+					<h4 class="centeralized-div" ></h4>
+				</div>
+			
+			
+				<div class="col-md-4">
+					<h4 class="centeralized-div" >VIEW COUNT (ABSOLUTE)</h4>
+				</div>
+			
+				<div class="col-md-4">
+					<h4 class="centeralized-div" >POI COUNT (ABSOLUTE)</h4>
+				</div>
+			
+			</div>	
+			
+			<div class='row'>
+			    <div class="col-md-4">
+					<div class="centeralized-div">
+						
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="centeralized-div">
+						<canvas id="viewCountOverall" width="200" height="200"></canvas>
+					</div>
+				</div>
+			
+				<div class="col-md-4">
+					<div class="centeralized-div">
+						<canvas id="poiCountOverall" width="200" height="200"></canvas>
+					</div>
+				</div>
+			</div>
+			</div>
+	
+			<div class='container'>
+				<div class='row'>
+			  	<div class='col-md-6'><button type="submit" id="btnTouristic"  class="btn btn-default btn-danger" >Touristic</button></div>
+				<div class='col-md-6'><button type="submit" id="btnSeekret"  class="btn btn-default btn-success" >Seekret</button></div>
+				</div>
+		  	</div>
 			
 				
 			

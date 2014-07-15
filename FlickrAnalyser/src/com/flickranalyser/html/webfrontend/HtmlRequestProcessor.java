@@ -108,8 +108,9 @@ public class HtmlRequestProcessor{
 				nextViewName = performActionAndGetNextView;
 			}
 		}
-
-		showView(nextViewName);
+		if(nextViewName != null){
+			showView(nextViewName);			
+		}
 	}
 
 

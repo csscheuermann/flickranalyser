@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.html.webfrontend.HtmlStarterServlet;
+import com.flickranalyser.pojo.Spot;
 import com.flickranalyser.pojo.User;
 
 public class HelperMethods {
@@ -77,7 +78,7 @@ public class HelperMethods {
 
 		header.append("<!-- Bootstrap core CSS -->");
 		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/bootstrap.min.css' rel='stylesheet'>");
-
+		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/custom.css' rel='stylesheet'>");
 		header.append("<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->");
 		header.append("<!--[if lt IE 9]>");
 		header.append("<script src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js'></script>");
@@ -255,12 +256,158 @@ public class HelperMethods {
 		return footerBuilder.toString();
 	}
 
+	
+	public String createSpotInfo(){
+		StringBuilder spotInfo = new StringBuilder();
+		
+		spotInfo.append("<div id='spotInfoContainer' class='container'>");
+			spotInfo.append("<div class='row'>");
+				spotInfo.append("<div class='col-xs-12'>");
+					spotInfo.append("<h2>INFORMATION ABOUT LOCATION</h2>");
+				spotInfo.append(" </div>");
+			spotInfo.append(" </div>");
+			
+			spotInfo.append("<div class='row'>");
+				spotInfo.append("<div class='col-md-6'>	<div><h4>Address</h4></div> 			<div id='spotaddress'> 		</div> </div>");
+				spotInfo.append("<div class='col-md-3'>	<div><h4>Overall Max #POIs</h4></div> 			<div id='poiCount'>			</div> </div>");
+				spotInfo.append("<div class='col-md-3'>	<div><h4>Overall Max #Views</h4></div> 			<div id='spotOverallview'>	</div> </div>");
+			
+		
+				spotInfo.append(" </div>");
+		spotInfo.append(" </div>");
+		
+		return spotInfo.toString();
+	}
+
+	
+	
+	
+	
+	public String createSeekretSpotInformation(){
+		StringBuilder seekretSpotInformation= new StringBuilder();
+		
+		seekretSpotInformation.append("<div id='seekretSpotInfoContainer' class='container'>");
+			seekretSpotInformation.append("<div class='row'>");
+				seekretSpotInformation.append("<div class='col-xs-12'>");
+					seekretSpotInformation.append("<h2>SEEKRET SPOT INFORMATION</h2>");
+				seekretSpotInformation.append(" </div>");
+			seekretSpotInformation.append(" </div>");
+			
+			seekretSpotInformation.append("<div class='row'>");
+				seekretSpotInformation.append("<div class='col-md-6'>	<div><h4>Address</h4></div> 			<div id='clusterAddress'> 		</div> </div>");
+				seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>Max #POIs</h4></div> 			<div id='maxClusterPOIs'> 		</div> </div>");
+				seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>Max #Views</h4></div> 			<div id='maxClusterViews'> 		</div> </div>");
+			seekretSpotInformation.append(" </div>");
+			
+			seekretSpotInformation.append("<div class='row bottom-sapce'>");
+				seekretSpotInformation.append("<div class='col-md-6'>	&nbsp; </div>");
+				seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>#POIs</h4></div> 			<div id='clusterPOIs'> 		</div> </div>");
+				seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>#Views</h4></div> 			<div id='clusterViews'> 		</div> </div>");
+			seekretSpotInformation.append(" </div>");
+			
+			
+			seekretSpotInformation.append("<div class='row'>");
+				seekretSpotInformation.append("<div class='col-md-4'><h4>Download</h4></div>");
+				seekretSpotInformation.append("<div class='col-md-2'><button type='button' class='btn btn-default'>KML</button></div>");
+				seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
+				seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
+			
+				
+			seekretSpotInformation.append(" </div>");
+		seekretSpotInformation.append(" </div>");
+		
+		return seekretSpotInformation.toString();
+	}
+	
+	public String createTopPicturesContainer(){
+		StringBuilder topPicturesContainer= new StringBuilder();
+		
+		topPicturesContainer.append("<div id='topPicturesContainer' class='container'>");
+			
+		
+		topPicturesContainer.append("<div class='row'>");
+			topPicturesContainer.append("<div class='col-xs-12'>");
+				topPicturesContainer.append("<h2>TOP THREE PICTURES</h2>");
+			topPicturesContainer.append(" </div>");
+		topPicturesContainer.append(" </div>");
+	
+		
+		topPicturesContainer.append("<div class='row'>");
+			topPicturesContainer.append("<div class='col-md-4'>	<div id='picture1'> </div> </div>");
+			topPicturesContainer.append("<div class='col-md-4'>	<div id='picture2'> </div> </div>");
+			topPicturesContainer.append("<div class='col-md-4'>	<div id='picture3'> </div> </div>");
+		topPicturesContainer.append(" </div>");
+			
+		topPicturesContainer.append(" </div>");
+		
+		return topPicturesContainer.toString();
+	}
+	
+	
+	public String createRatingInformationContainer(){
+		StringBuilder ratingInformationContainer= new StringBuilder();
+		
+		ratingInformationContainer.append("<div id='ratingInformationContainer' class='container'>");
+			
+		
+		ratingInformationContainer.append("<div class='row'>");
+			ratingInformationContainer.append("<div class='col-xs-12'>");
+				ratingInformationContainer.append("<h2>RATING INFORMATION</h2>");
+			ratingInformationContainer.append(" </div>");
+		ratingInformationContainer.append(" </div>");
+	
+		
+		ratingInformationContainer.append("<div class='row'>");
+			ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Seekretmeter</h4></div>  		<div id='seekretMeter'>					<canvas id='touristicness' width='200' height='200'></canvas> 		</div> 				</div>");
+			ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Relative POI Count</h4></div> 	<div id='relativePOICountChart'> 		<canvas id='poiCountRelative' width='200' height='200'></canvas>	</div>  	</div>");
+			ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Realtive View Count</h4></div> <div id='relativeViewCountChart'>		<canvas id='viewCountRelative' width='200' height='200'></canvas> 	</div> 	</div>");
+		ratingInformationContainer.append(" </div>");
+		
+		
 
 
+		
+		ratingInformationContainer.append("<div class='row'>");
+		ratingInformationContainer.append("<div class='col-md-4'>	&nbsp; 				</div>");
+		ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Absolute POI Count</h4></div> 	<div id='absolutePOICountChart'><canvas id='poiCountOverall' width='200' height='200'></canvas> </div>  	</div>");
+		ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Absolute View Count</h4></div> <div id='absoluteViewCountChart'><canvas id='viewCountOverall' width='200' height='200'></canvas> </div> 	</div>");
+		
+		
+		ratingInformationContainer.append(" </div>");
+			
+		ratingInformationContainer.append(" </div>");
+		
+		return ratingInformationContainer.toString();
+	}
 
-
-
-
-
-
+	
+	
+	
+	
+	public String createVoteButtons(){
+		StringBuilder createVoteButtons = new StringBuilder();
+		
+		createVoteButtons.append("<div id='voteButtonContainer' class='container'>");
+			createVoteButtons.append("<div class='row'>");
+				createVoteButtons.append("<div class='col-md-4'>		<button type='submit' id='btnDismiss'  class='btn btn-default'>Dismiss (TODO)</button></div>");
+				createVoteButtons.append("<div class='col-md-4'> 		<button type='submit' id='btnTouristic'  class='btn btn-default btn-danger' >Touristic</button>	</div>");
+				createVoteButtons.append("<div class='col-md-4'>		<button type='submit' id='btnSeekret'  class='btn btn-default btn-success' >Seekret</button>	</div>");
+			createVoteButtons.append(" </div>");
+		createVoteButtons.append(" </div>");
+		
+		return createVoteButtons.toString();
+	}
+	
+	public String createVoteResultField(){
+		StringBuilder createVoteResultField = new StringBuilder();
+		
+		createVoteResultField.append("<div id='voteResultField' class='container'>");
+			createVoteResultField.append("<div class='row'>");
+				createVoteResultField.append("<div class='col-md-12'><p id='voteResultMessage'>Danke für Deinen Vote.</p></div>");
+			createVoteResultField.append(" </div>");
+		createVoteResultField.append(" </div>");
+		
+		return createVoteResultField.toString();
+	}
+	
 }

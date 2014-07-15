@@ -1,5 +1,8 @@
 package com.flickranalyser.persistence.datastore.save;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.jdo.PersistenceManager;
 import javax.ws.rs.core.Response;
 
@@ -17,25 +20,35 @@ import com.google.appengine.api.memcache.Expiration;
 
 public class PFSaverCluster {
 
-
+	private static final Logger LOGGER = Logger.getLogger(PFSaverCluster.class.getName());
 
 	public static Response evaluateTouristicness(Key datasoreKeyForCluster, int touristicnessRatingFrom1To10, String spotName){
-
+		LOGGER.log(Level.INFO, "SPOT NAME: " + spotName);
+		LOGGER.log(Level.INFO, "VOTE FROM USER: " + touristicnessRatingFrom1To10);
 		Cluster cluster = PFGetterCluster.getClusterByDatastoreKey(datasoreKeyForCluster);
 
 		if(cluster != null){
 			double overallTouristicnessInPointsFrom1To10 = cluster.getOverallTouristicnessInPointsFrom1To10();
 			int overallTouristicnessVotes = cluster.getOverallTouristicnessVotes();
 
+			
+			LOGGER.log(Level.INFO, "OVERALL TOURISTICNESS FROM DATASTORE: "+ overallTouristicnessInPointsFrom1To10);
+			LOGGER.log(Level.INFO, "OVERALL VOTES :" + overallTouristicnessVotes);
 			//Increase the overall rating
-			overallTouristicnessVotes++;
+			
 			double newOverallTouristicnessInPointsFrom1To10;
-			if(overallTouristicnessVotes == 1){
+			if(overallTouristicnessVotes == 0){
 				newOverallTouristicnessInPointsFrom1To10 = (overallTouristicnessInPointsFrom1To10 + touristicnessRatingFrom1To10);
+				overallTouristicnessVotes++;
 			}else{
-				//Rating from now + new Rating, divided by 2 to get the average
-				newOverallTouristicnessInPointsFrom1To10 = (overallTouristicnessInPointsFrom1To10 + touristicnessRatingFrom1To10)/2.0;				
+				double touristicnessUntilNow = overallTouristicnessInPointsFrom1To10 * overallTouristicnessVotes;
+				LOGGER.log(Level.INFO, "TOURISTICNESS UNTIL NOW :" + touristicnessUntilNow);
+				//Important to increament here!
+				overallTouristicnessVotes++;
+				newOverallTouristicnessInPointsFrom1To10 = (touristicnessUntilNow +  touristicnessRatingFrom1To10)/overallTouristicnessVotes;				
 			}
+			LOGGER.log(Level.INFO, "NEW TOURISTICNESS :" + newOverallTouristicnessInPointsFrom1To10);
+		
 			cluster.setOverallTouristicnessInPointsFrom1To10(newOverallTouristicnessInPointsFrom1To10);
 			cluster.setOverallTouristicnessVotes(overallTouristicnessVotes);
 			

@@ -1,5 +1,9 @@
 package com.flickranalyser.businesslogic.spotfinder.impl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -12,6 +16,10 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -36,15 +44,11 @@ public class NearestSpotFinder implements ISpotFinder {
 		if(addressBySearchString != null){
 			return  MemcacheSpot.getSpotForSpotName(addressBySearchString);			
 		}
-	
+
 		return null;
 	}
 
-	@Override
-	public Spot findSpotByLocation(long latitude, long longitude) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 
@@ -152,6 +156,62 @@ public class NearestSpotFinder implements ISpotFinder {
 		} 
 
 		return null;
+	}
+
+
+
+
+
+	@Override
+	public Spot findSpotByLocation(long latitude, long longitude) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
+	@Override
+	public String findAddressByLatLng(double lat, double lng) {
+
+		// prepare a URL to the geocoder
+				try {
+					URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?latlng="
+							+ lat + "," + lng + "&sensor=true");
+					// prepare an HTTP connection to the geocoder
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+					Document geocoderResultDocument = null;
+					try {
+						// open the connection and get results as InputSource.
+						conn.connect();
+						InputSource geocoderResultInputSource = new InputSource(conn.getInputStream());
+
+						// read result and parse into XML Document
+						geocoderResultDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(geocoderResultInputSource);
+					} finally {
+						conn.disconnect();
+					}
+
+					// prepare XPath
+					XPath xpath = XPathFactory.newInstance().newXPath();
+
+
+					// a) obtain the formatted_address field for every result
+					NodeList resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result/formatted_address", geocoderResultDocument, XPathConstants.NODESET);
+					for(int i=0; i < resultNodeList.getLength(); i++) {
+					//	LOGGER.log(Level.INFO, resultNodeList.item(i).getTextContent());
+						return resultNodeList.item(i).getTextContent();
+					}
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					LOGGER.log(Level.SEVERE, "error while retrieving location information", e);
+				} 
+
+				return null;
 	}
 
 }

@@ -14,4 +14,6 @@ public interface ISpotFinder {
 	Response getSpotByNamePutToCrawlQueue(String name);
 	
 	String findAddressBySearchString(String searchAdress);
+	
+	String findAddressByLatLng(double lat, double lng);
 }

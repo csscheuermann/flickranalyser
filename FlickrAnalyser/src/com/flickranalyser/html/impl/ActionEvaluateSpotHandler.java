@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.Response;
 
 import com.flickranalyser.endpoints.ClusterService;
 import com.flickranalyser.html.common.HelperMethods;
@@ -28,8 +29,8 @@ public class ActionEvaluateSpotHandler extends AbstractHtmlRequestHandler{
 		LOGGER.log(Level.INFO, "CLUSTERKEY: " + clusterKey );
 		LOGGER.log(Level.INFO, "CLUSTERRATINGVALUE: " + clusterRatingValue );
 		LOGGER.log(Level.INFO, "SPOTNAME: " + spotName );
-		
-		clusterService.evaluateCluster(clusterKey, clusterRatingValue, spotName);
+		Response evaluateCluster = clusterService.evaluateCluster(clusterKey, clusterRatingValue, spotName);
+		pRequest.setAttribute("message", evaluateCluster.getEntity().toString());
 		
 		return null;
 
