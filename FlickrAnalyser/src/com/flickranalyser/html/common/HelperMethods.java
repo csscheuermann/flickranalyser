@@ -334,9 +334,9 @@ public class HelperMethods {
 	
 		
 		topPicturesContainer.append("<div class='row'>");
-			topPicturesContainer.append("<div class='col-md-4'>	<div id='picture1'> </div> </div>");
-			topPicturesContainer.append("<div class='col-md-4'>	<div id='picture2'> </div> </div>");
-			topPicturesContainer.append("<div class='col-md-4'>	<div id='picture3'> </div> </div>");
+			topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture1'> </div> </div>");
+			topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture2'> </div> </div>");
+			topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture3'> </div> </div>");
 		topPicturesContainer.append(" </div>");
 			
 		topPicturesContainer.append(" </div>");
@@ -359,9 +359,9 @@ public class HelperMethods {
 	
 		
 		ratingInformationContainer.append("<div class='row'>");
-			ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Seekretmeter</h4></div>  		<div id='seekretMeter'>					<canvas id='touristicness' width='200' height='200'></canvas> 		</div> 				</div>");
-			ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Relative POI Count</h4></div> 	<div id='relativePOICountChart'> 		<canvas id='poiCountRelative' width='200' height='200'></canvas>	</div>  	</div>");
-			ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Realtive View Count</h4></div> <div id='relativeViewCountChart'>		<canvas id='viewCountRelative' width='200' height='200'></canvas> 	</div> 	</div>");
+			ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Seekretmeter</h4></div>  		<div id='seekretMeter'>					<canvas id='touristicness' width='200' height='200'></canvas> 		</div> 				</div>");
+			ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Relative POI Count</h4></div> 	<div id='relativePOICountChart'> 		<canvas id='poiCountRelative' width='200' height='200'></canvas>	</div>  	</div>");
+			ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Realtive View Count</h4></div> <div id='relativeViewCountChart'>		<canvas id='viewCountRelative' width='200' height='200'></canvas> 	</div> 	</div>");
 		ratingInformationContainer.append(" </div>");
 		
 		
@@ -369,9 +369,9 @@ public class HelperMethods {
 
 		
 		ratingInformationContainer.append("<div class='row'>");
-		ratingInformationContainer.append("<div class='col-md-4'>	&nbsp; 				</div>");
-		ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Absolute POI Count</h4></div> 	<div id='absolutePOICountChart'><canvas id='poiCountOverall' width='200' height='200'></canvas> </div>  	</div>");
-		ratingInformationContainer.append("<div class='col-md-4'>	<div><h4>Absolute View Count</h4></div> <div id='absoluteViewCountChart'><canvas id='viewCountOverall' width='200' height='200'></canvas> </div> 	</div>");
+		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	&nbsp; 				</div>");
+		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Absolute POI Count</h4></div> 	<div id='absolutePOICountChart'><canvas id='poiCountOverall' width='200' height='200'></canvas> </div>  	</div>");
+		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Absolute View Count</h4></div> <div id='absoluteViewCountChart'><canvas id='viewCountOverall' width='200' height='200'></canvas> </div> 	</div>");
 		
 		
 		ratingInformationContainer.append(" </div>");

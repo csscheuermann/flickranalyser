@@ -59,7 +59,7 @@
              url: "?action=EvaluateSpot", //this is my servlet
              data: "clusterKey=" +$(buttonId).val()+"&clusterRating=" + clusterRatingValue +"&spotName="+$('#spotaddress').html(),
 			 beforeSend: function() { 
- 					$('html, body').animate({ scrollTop: 0 }, 'slow');
+ 					$('html, body').animate({ scrollTop: 0 }, 0);
 					showOverlay();
  					
 			 },  
@@ -67,7 +67,7 @@
 			 success: function(data){ 
 			
 			 		hideOverlay()
-					$(buttonId).attr("disabled", false);      
+					$(buttonId).attr("disabled", true);      
               		$('#voteResultField').show();
 					$('#voteResultMessage').html(data);
 					$('#voteResultMessage').show();
@@ -161,6 +161,8 @@
 
 		//Now set up the Charts
 		$('#ratingInformationContainer').show();
+		
+		
 		addDoughnutChart(viewCountRelativeInPercent, 'viewCountRelative', "#F7464A" , "#E2EAE9");
 		addDoughnutChart(pOICountRealativeInPercent, 'poiCountRelative', "#F7464A", "#E2EAE9");
 		addDoughnutChart(touristicnessInPercent, 'touristicness', "#FFBB33" , "#99CC00");
@@ -169,7 +171,8 @@
 	
 		//Now set up the buttons
 		$('#voteButtonContainer').show();
-		
+		$('#voteButtonContainer').attr("disabled", true);
+		  
 		//Always Hide voteresult after click
 		$('#voteResultField').hide();
 		
@@ -196,6 +199,12 @@
 	
    	//Get the context of the canvas element we want to select
    	var ctx = document.getElementById(elementId).getContext("2d");
+	ctx.clearRect(0, 0, 200, 200);
+	ctx.width = 200;
+	ctx.height = 200;
+	
+	ctx.canvas.width = 200;
+	ctx.canvas.height = 200;
 	
    	var options = {
    	segmentShowStroke : true
