@@ -77,7 +77,7 @@ public class HelperMethods {
 		header.append("<title>SEEKRET</title>");
 
 		header.append("<!-- Bootstrap core CSS -->");
-		header.append("<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'></script>");
+		header.append("<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'></script>");
 		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/bootstrap.min.css' rel='stylesheet'>");
 		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/custom.css' rel='stylesheet'>");
 		header.append("<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->");

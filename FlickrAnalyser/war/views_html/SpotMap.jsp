@@ -23,25 +23,49 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="/res_html/js/Chart.js"></script>
 	<script src="/res_html/js/ClusterDetails.js"></script>
+	<script src="/res_html/js/CustomCloudEndpoints.js"></script>
 	
-
+	<script type="text/javascript">
+			
+				
+	        function init() {
+					var customCloudEndpoints = new CustomCloudEndpoints();	
+	        }
+			
+			
+			function setSpotAddress(lat, lng){
+					var requestParam = {'latitude': lat,'longitude': lng };
+					var request = gapi.client.clusterAPI.getAddressFromLatLng(requestParam);
+					request.execute(setAddressField);	
+			}
+			
+			function setAddressField(resp){
+					if (!resp.code){
+						$('#clusterAddress').html(resp.address);
+					}else{
+						$('#clusterAddress').html('Address not available');
+						console.log ( 'Something went wrong with getting the address.' );
+					}
+			}
+			 	
+		</script>
+		
+		
      <script type="text/javascript">
 	
-	$(document).ready(function() { 	 	 
-         $('#btnTouristic').click(function ()
-         {	 
-            vote('#btnTouristic', 10);
-         });
+		 $(document).ready(function() { 	 	 
+         	$('#btnTouristic').click(function (){	 
+            	vote('#btnTouristic', 10);
+         	});
         
          $('#btnSeekret').click(function (){	 
             vote('#btnSeekret', 0);
          });
-	   });
+	   	});
 		 
 	function vote(buttonId, clusterRatingValue){
-        
-		
-    	// Set a variable that is set to the div containing the overlay (created on page load)
+    		
+			// Set a variable that is set to the div containing the overlay (created on page load)
            var page_overlay = jQuery('<div id="overlay"><div id="loadingImage"><img  src="/res_html/img/loading.gif"></div> </div>');
 
            // Function to Add the overlay to the page
@@ -82,6 +106,13 @@
 	
 	
    	<script type="text/javascript">
+		
+		
+		
+		
+		
+		
+		
 		var map;
 		var lastClickedMarker = null;
 		  var geo = new google.maps.Geocoder;
@@ -110,8 +141,36 @@
    function handleSeekretVote(key){
    		alert ('seekret' + key);
    }
+   
+   
+   function getAdressByLatLng(lat, lng){
+   
+ 	$.ajax({
+       type: "get",
+       url: "?action=EvaluateSpot", //this is my servlet
+       data: "clusterKey=" +$(buttonId).val()+"&clusterRating=" + clusterRatingValue +"&spotName="+$('#spotaddress').html(),
+	 beforeSend: function() { 
+			$('html, body').animate({ scrollTop: 0 }, 0);
+			showOverlay();
+			
+	 },  
+	 
+	 success: function(data){ 
+	
+	 		hideOverlay()
+			$(buttonId).attr("disabled", true);      
+        		$('#voteResultField').show();
+			$('#voteResultMessage').html(data);
+			$('#voteResultMessage').show();
+			}
+			
+	 });
+   
+   
+   
+   }
 
-   function addMarker(datastoreClusterKey,clusterAdressFromGoogle, spotName,overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat,lgt , numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
+   function addMarker(datastoreClusterKey, spotName,overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat,lgt , numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
    	// To add the marker to the map, use the 'map' property
    	var marker = new google.maps.Marker({
    	    position: new google.maps.LatLng(lat, lgt),
@@ -145,9 +204,14 @@
 		$('#poiCount').html(overallMaxNumberOfPOIs);
 		$('#spotOverallview').html(overallMaxNumberOfViews);
 		
+		
+		
+		
+		
+		
 		//Now set up the Cluster Info Container
 		$('#seekretSpotInfoContainer').show();
-		$('#clusterAddress').html(clusterAdressFromGoogle);
+		setSpotAddress(lat,lgt); 
 		$('#clusterViews').html(numberOfViews);
 		$('#clusterPOIs').html(numberOfPOIsForCurrentCluster);
 		$('#maxClusterViews').html(maxNumberOfViews);
@@ -216,7 +280,7 @@
 	}
 
 
-
+	
 	
    <%  Spot spot = (Spot) request.getAttribute("spot"); %>
 
@@ -288,7 +352,6 @@
 			if (clusterOverallViews > 200){
 	     			out.println("addMarker('"+
 						datastoreClusterKey  + "','" +		
-						clusterAdressFromGoogle  + "','" +
 						spotName 		+ "'," +
 						overallMaxNumberOfPOIs+ "," +
 						overallMaxNumberOfViews	+ "," +
@@ -333,6 +396,14 @@
 	<% out.println(helperMethods.createBodyBegin()); %>
 	<% out.println(helperMethods.createNavigation(false)); %>
 	<% out.println(helperMethods.createMap()); %>
+	
+
+	
+	
+	
+	
+	<script src="https://apis.google.com/js/client.js?onload=init"></script>
+	
 	<% out.println(helperMethods.createVoteResultField()); %>
 	
 	<% out.println(helperMethods.createSpotInfo()); %>

@@ -42,6 +42,9 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-jetty-1.18.0-rc.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-servlet-1.18.0-rc.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/json-simple.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gson-2.2.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gson-2.2.4-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gson-2.2.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>

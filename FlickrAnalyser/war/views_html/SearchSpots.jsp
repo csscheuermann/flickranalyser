@@ -20,10 +20,10 @@
 		function addSpotResult(spotName){
 			var clusterDetails = new ClusterDetails();
 			
-			var linkManyViewsAndViewPOIsFilter = "http://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=ManyViewsAndFewPOIsFilter"
-			var linkDoNotFilterStrategy = "http://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=DoNotFilterStrategy"
-			var linkRelativeRatioViewsAndPOIsFilter = "http://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=RelativeRatioViewsAndPOIsFilter"
-			var linkManyViewsAndFixedAmountOfPOIsFilter = "http://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=ManyViewsAndFixedAmountOfPOIsFilter"
+			var linkManyViewsAndViewPOIsFilter = "https://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=ManyViewsAndFewPOIsFilter"
+			var linkDoNotFilterStrategy = "https://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=DoNotFilterStrategy"
+			var linkRelativeRatioViewsAndPOIsFilter = "https://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=RelativeRatioViewsAndPOIsFilter"
+			var linkManyViewsAndFixedAmountOfPOIsFilter = "https://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=ManyViewsAndFixedAmountOfPOIsFilter"
 			
 			
 				var htmlToShow = '<div class="container"> ' + 

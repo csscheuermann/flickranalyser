@@ -25,6 +25,31 @@
     "maxAge" : 0
   },
   "methods" : {
+    "clusterAPI.getAddressFromLatLng" : {
+      "path" : "address/{latitude}/{longitude}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.ClusterService.getAddressFromLatLng",
+      "request" : {
+        "parameters" : {
+          "latitude" : {
+            "type" : "double",
+            "required" : true
+          },
+          "longitude" : {
+            "type" : "double",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "clusterAPI.evaluateCluster" : {
       "path" : "evaluateCluster/{datastoreKeyOfCluster}/{touristicnessRatingFrom1To10}/{spotName}",
       "httpMethod" : "POST",
@@ -57,6 +82,15 @@
   },
   "descriptor" : {
     "schemas" : {
+      "Address" : {
+        "id" : "Address",
+        "type" : "object",
+        "properties" : {
+          "address" : {
+            "type" : "string"
+          }
+        }
+      },
       "Response" : {
         "id" : "Response",
         "type" : "object",
@@ -82,6 +116,11 @@
       }
     },
     "methods" : {
+      "com.flickranalyser.endpoints.ClusterService.getAddressFromLatLng" : {
+        "response" : {
+          "$ref" : "Address"
+        }
+      },
       "com.flickranalyser.endpoints.ClusterService.evaluateCluster" : {
         "response" : {
           "$ref" : "Response"
