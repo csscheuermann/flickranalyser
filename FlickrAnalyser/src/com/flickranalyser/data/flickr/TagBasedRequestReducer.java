@@ -110,6 +110,12 @@ public class TagBasedRequestReducer {
 		unwantedTags.add("BABYS");
 		unwantedTags.add("BABIES");
 		
+		unwantedTags.add("HIGHHEEL");
+		unwantedTags.add("HIGHHEELS");
+		unwantedTags.add("CAMERA");
+		
+		
+		
 		
 		
 		

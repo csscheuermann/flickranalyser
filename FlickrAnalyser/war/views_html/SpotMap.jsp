@@ -190,7 +190,6 @@
 	
 	marker.setIcon('/res_html/img/eye_currently_watching.png');
 			
-		var clusterDetails = new ClusterDetails();
 		
 		var btnTouristicness = document.getElementById("btnTouristic");
 		btnTouristicness.setAttribute('value', datastoreClusterKey);
@@ -204,11 +203,6 @@
 		$('#poiCount').html(overallMaxNumberOfPOIs);
 		$('#spotOverallview').html(overallMaxNumberOfViews);
 		
-		
-		
-		
-		
-		
 		//Now set up the Cluster Info Container
 		$('#seekretSpotInfoContainer').show();
 		setSpotAddress(lat,lgt); 
@@ -219,10 +213,11 @@
 		 
 		//Now set up the Image Container
 		$('#topPicturesContainer').show();
-		$('#picture1').html('<img src=' + pictureUrl1 +' />');
-		$('#picture2').html('<img src=' + pictureUrl2 +' />');
-		$('#picture3').html('<img src=' + pictureUrl3 +' />');
-
+		
+		addPictureConcideringEmptyURL('#picture1', pictureUrl1);
+		addPictureConcideringEmptyURL('#picture2', pictureUrl2);
+		addPictureConcideringEmptyURL('#picture3', pictureUrl3);
+		
 		//Now set up the Charts
 		$('#ratingInformationContainer').show();
 		
@@ -245,7 +240,13 @@
    
    }
    
-
+   function addPictureConcideringEmptyURL(idOfTag, url){
+   		if (url === ""){
+   			$(idOfTag).html('');
+			return;
+   		}
+		$(idOfTag).html('<img src=' + url +' />');   		
+   }
    
    function addDoughnutChart(percentage, elementId, colorPercent, colorRemainer) {
 
@@ -314,10 +315,6 @@
 			int maxNumberOfPOIs = spot.getMaxNumberOfPOIsPerCluster();	
 			int maxNumberOfViews = spot.getMaxNumberOfViewsPerCluster();	
 		
-		
-	     	String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
-	     	String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
-	     	String PHOTO_SEARCH_REQUEST = "flickr.photos.geo.photosForLocation";
  
 	   	for (Cluster currentCluster : cluster){
 		
@@ -344,10 +341,6 @@
 			double viewCountOverallInPercent = ((double) (100.00/overallMaxNumberOfViews)*clusterOverallViews);
 		
 		 	String datastoreClusterKey = currentCluster.getDatastoreClusterKey();
-			
-	   		NearestSpotFinder  nearestSpotFinder = new NearestSpotFinder();
-			String clusterAdressFromGoogle = nearestSpotFinder.findAddressByLatLng(currentLat,currentLng);
-			
 			
 			if (clusterOverallViews > 200){
 	     			out.println("addMarker('"+
@@ -405,11 +398,9 @@
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>
 	
 	<% out.println(helperMethods.createVoteResultField()); %>
-	
+	<% out.println(helperMethods.createTopPicturesContainer()); %>	
 	<% out.println(helperMethods.createSpotInfo()); %>
 	<% out.println(helperMethods.createSeekretSpotInformation()); %>
-	
-	<% out.println(helperMethods.createTopPicturesContainer()); %>		
 	<% out.println(helperMethods.createRatingInformationContainer()); %>
 	<% out.println(helperMethods.createVoteButtons()); %>
 

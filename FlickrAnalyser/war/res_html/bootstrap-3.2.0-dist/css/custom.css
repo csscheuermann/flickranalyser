@@ -1,71 +1,72 @@
-
-#spotInfoContainer{
+#spotInfoContainer {
 	display: none;
 }
 
-#seekretSpotInfoContainer{
+#seekretSpotInfoContainer {
 	display: none;
 }
 
-#ratingInformationContainer{
+#ratingInformationContainer {
 	display: none;
 }
 
-#topPicturesContainer{
+#topPicturesContainer {
 	display: none;
 }
 
-
-#voteButtonContainer{
+#voteButtonContainer {
 	display: none;
 }
 
-#voteResultField{
+#voteResultField {
 	display: none;
 }
 
-.bottom-sapce{
+.bottom-sapce {
 	margin-bottom: 10px;
 }
 
-#seekretSpotInfoContainer{
+#seekretSpotInfoContainer {
 	display: none;
 }
 
-#loadingImage{
-	top:50%;
+#loadingImage {
+	top: 50%;
 	left: 50%;
 	position: absolute;
-	margin-left: -250px; 
-    margin-top: -250px;
-    width: 250px;
-    height: 250px; 
+	margin-left: -250px;
+	margin-top: -250px;
+	width: 250px;
+	height: 250px;
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width:
 	568px) {
-	
-	#loadingImage{
-	top:50%;
-	left: 50%;
-	position: absolute;
-	margin-left: -100px; 
-    margin-top: -100px;
-    width: 100px;
-    height: 100px; 
-}
+	#loadingImage {
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		margin-left: -100px;
+		margin-top: -100px;
+		width: 100px;
+		height: 100px;
+	}
+	#loadingImage img {
+		width: 100px;
+		height: 100px;
+	}
 }
 
 #overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height:100% !important; /*change to YOUR page height*/
-        background-color: #FFF;
-        filter:alpha(opacity=50);
-        -moz-opacity:0.5;
-        -khtml-opacity: 0.5;
-        opacity: 0.5;
-        z-index: 998;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100% !important; /*change to YOUR page height*/
+	background-color: #FFF;
+	filter: alpha(opacity = 50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+	z-index: 998;
 }
