@@ -3,7 +3,9 @@ package com.flickranalyser.endpoints;
 import javax.ws.rs.core.Response;
 
 import com.flickranalyser.businesslogic.spotfinder.impl.NearestSpotFinder;
+import com.flickranalyser.persistence.datastore.get.PFGetterRatingDismissCounter;
 import com.flickranalyser.persistence.datastore.save.PFSaverCluster;
+import com.flickranalyser.persistence.datastore.save.PFSaverRatingDismissCounter;
 import com.flickranalyser.pojo.responses.Address;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -31,11 +33,31 @@ public class ClusterService {
 			com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID})
 			public Address getAddressFromLatLng( User user, @Named("latitude") double latitude, 
 					@Named("longitude") double longitude) throws UnauthorizedException {
-				if (user == null) throw new UnauthorizedException("User is Not Valid");
+				if (user == null){
+					throw new UnauthorizedException("USER IS NOT VALID");
+				}
 				
 				NearestSpotFinder nsf = new NearestSpotFinder();
 				String findAddressByLatLng = nsf.findAddressByLatLng(latitude, longitude);
 				return new Address(findAddressByLatLng);
 			}
+	
+	@ApiMethod(name="incrementDismissCount",
+			scopes = {Constants.EMAIL_SCOPE},
+			clientIds = {Constants.WEB_CLIENT_ID,  
+			com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID})
+			public Response incrementDismissCount( User user, @Named("datastoreKeyOfCluster") String datastoreKeyOfCluster) throws UnauthorizedException {
+				if (user == null){
+					throw new UnauthorizedException("USER IS NOT VALID");
+				}
+				
+				String userKey = user.getEmail();
+				if (PFGetterRatingDismissCounter.hasUserAlreadyDissmissedCluster(userKey, datastoreKeyOfCluster)){
+					return Response.status(200).entity("YOU HAVE ALREADY DISMISSED THIS SPOT.").build();
+				}
+				
+				return PFSaverRatingDismissCounter.saveRatingToDatastore(userKey, datastoreKeyOfCluster);
+			}
+	
 
 }

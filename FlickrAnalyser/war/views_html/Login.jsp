@@ -45,7 +45,7 @@
 																
 				"<div class='row'>" +
 						"<div class='col-xs-12'>" +
-							"<p><a href='" + helper.buildLoginUrl() + "'>log in with google</a></p>" +
+							"<button type='submit' id='signinButton' class='btn btn-default'>Log In</button>" +
 						"</div>" +					
 					"</div>" +
 				"</div>");
@@ -61,7 +61,7 @@
 	%>
 
 	
-	<% out.println(helperMethods.createBodyEnd());%>
+	<% out.println(helperMethods.createBodyEnd(true));%>
 	
 	
 	

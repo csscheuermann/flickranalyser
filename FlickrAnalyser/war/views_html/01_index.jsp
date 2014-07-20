@@ -17,13 +17,11 @@
 	
 
 	
-	
-	
 	<% out.println(helperMethods.getFooter()); %>
 	
 
 
 	
-	<% out.println(helperMethods.createBodyEnd());%>
+	<% out.println(helperMethods.createBodyEnd(true));%>
 	
 	</html>

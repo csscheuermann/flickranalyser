@@ -1,9 +1,6 @@
 package com.flickranalyser.pojo.responses;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.google.gson.Gson;
 
 public class Address {
 

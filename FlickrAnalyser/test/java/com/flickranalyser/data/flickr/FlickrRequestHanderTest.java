@@ -4,9 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.flickranalyser.pojo.Spot;
-import com.javadocmd.simplelatlng.LatLng;
-import com.javadocmd.simplelatlng.LatLngTool;
-import com.javadocmd.simplelatlng.util.LengthUnit;
 
 public class FlickrRequestHanderTest {
 

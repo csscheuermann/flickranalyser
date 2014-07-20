@@ -66,6 +66,21 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "spotAPI.getTopSpots" : {
+      "path" : "stringcollection",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.SpotService.getTopSpots",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
@@ -74,24 +89,24 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "status" : {
             "type" : "integer"
           },
           "entity" : {
             "$ref" : "_any"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           }
         }
-      },
-      "JsonMap" : {
-        "id" : "JsonMap",
-        "type" : "object"
       },
       "_any" : {
         "id" : "_any",
         "type" : "any"
+      },
+      "JsonMap" : {
+        "id" : "JsonMap",
+        "type" : "object"
       },
       "Spot" : {
         "id" : "Spot",
@@ -130,17 +145,14 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "maxNumberOfPOIsPerCluster" : {
+          "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
           },
-          "maxNumberOfViewsPerCluster" : {
+          "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
           "clusterRadiusInMeter" : {
             "type" : "number"
-          },
-          "maxClusterViews" : {
-            "type" : "integer"
           },
           "cluster" : {
             "type" : "array",
@@ -150,6 +162,9 @@
           },
           "spotRadiusInMeter" : {
             "type" : "number"
+          },
+          "maxClusterViews" : {
+            "type" : "integer"
           }
         }
       },
@@ -170,14 +185,14 @@
           "name" : {
             "type" : "string"
           },
+          "complete" : {
+            "type" : "boolean"
+          },
           "namespace" : {
             "type" : "string"
           },
           "parent" : {
             "$ref" : "Key"
-          },
-          "complete" : {
-            "type" : "boolean"
           }
         }
       },
@@ -269,6 +284,18 @@
             "type" : "boolean"
           }
         }
+      },
+      "StringCollection" : {
+        "id" : "StringCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
       }
     },
     "methods" : {
@@ -280,6 +307,11 @@
       "com.flickranalyser.endpoints.SpotService.getSpotByName" : {
         "response" : {
           "$ref" : "Spot"
+        }
+      },
+      "com.flickranalyser.endpoints.SpotService.getTopSpots" : {
+        "response" : {
+          "$ref" : "StringCollection"
         }
       }
     }

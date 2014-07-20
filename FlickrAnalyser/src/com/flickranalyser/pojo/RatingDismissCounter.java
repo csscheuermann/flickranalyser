@@ -8,7 +8,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class Rating {
+public class RatingDismissCounter {
 
 	
 	/** Compound ClusterKey + UserKey */
@@ -19,7 +19,7 @@ public class Rating {
 	@Persistent
 	private long created;
 	
-	public Rating(String datastoreRatingKey){
+	public RatingDismissCounter(String datastoreRatingKey){
 		this.datastoreRatingKey = datastoreRatingKey;
 		this.created =  new Date().getTime();
 	}

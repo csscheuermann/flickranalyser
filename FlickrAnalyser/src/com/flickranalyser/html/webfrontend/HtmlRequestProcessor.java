@@ -12,11 +12,9 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.html.IHtmlRequestHandler;
 import com.flickranalyser.html.common.HelperMethods;
-import com.flickranalyser.pojo.User;
 
 
 
@@ -29,8 +27,6 @@ public class HtmlRequestProcessor{
 	private HttpServletResponse mResponse;
 	private ServletContext mServletContext;
 	private static final Logger LOGGER = Logger.getLogger(HtmlStarterServlet.class.getName());
-
-	public static final User GUEST_USER = new User("guest@guest.com","guestuser","guest","not link", "no picture");
 	
 	public HtmlRequestProcessor(final HttpServletRequest pRequest, final HttpServletResponse pResponse, final ServletContext pServletContext) {
 		mRequest = pRequest;
@@ -72,9 +68,6 @@ public class HtmlRequestProcessor{
 	}
 
 	private void doHandleClientRequest() throws Exception{
-		
-		// lets check who is logged in
-		checkUserLogin();
 		
 		// now set the HelperMethods knowing which User is logged in.
 		makeHelperMethodsClassAvailableToViews();
@@ -171,27 +164,9 @@ public class HtmlRequestProcessor{
 	}
 
 	 private void makeHelperMethodsClassAvailableToViews(){
-	        HelperMethods helperMethods = new HelperMethods(mRequest.getSession());
+	        HelperMethods helperMethods = new HelperMethods();
 	        mRequest.setAttribute("helperMethods", helperMethods);
 	    }
-	
-	 /**
-     * Check if the user is logged in. If the user is not logged in, then he
-     * will be set to the guest-user.
-     */
-    private void checkUserLogin(){
-        HttpSession session = mRequest.getSession();
-        User currentUser = (User) session.getAttribute(CURRENT_USER);
-
-        // user is not logged in => set him to guest
-        if( currentUser == null ){
-            currentUser = GUEST_USER;
-            session.setAttribute(CURRENT_USER, currentUser);
-        }
-
-        // make user known to view
-        mRequest.setAttribute(CURRENT_USER, currentUser);
-    }
 	
 
 	private IHtmlRequestHandler loadRequestHandlerByName( final String prepareViewName ) throws Exception{

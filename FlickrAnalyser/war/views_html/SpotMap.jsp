@@ -26,57 +26,72 @@
 	<script src="/res_html/js/CustomCloudEndpoints.js"></script>
 	
 	<script type="text/javascript">
-			
-				
-	        function init() {
-					var customCloudEndpoints = new CustomCloudEndpoints();	
-	        }
-			
-			
-			function setSpotAddress(lat, lng){
-					var requestParam = {'latitude': lat,'longitude': lng };
-					var request = gapi.client.clusterAPI.getAddressFromLatLng(requestParam);
-					request.execute(setAddressField);	
-			}
-			
-			function setAddressField(resp){
-					if (!resp.code){
-						$('#clusterAddress').html(resp.address);
-					}else{
-						$('#clusterAddress').html('Address not available');
-						console.log ( 'Something went wrong with getting the address.' );
-					}
-			}
-			 	
-		</script>
-		
-		
-     <script type="text/javascript">
 	
-		 $(document).ready(function() { 	 	 
-         	$('#btnTouristic').click(function (){	 
-            	vote('#btnTouristic', 10);
-         	});
+	
+	var page_overlay = jQuery('<div id="overlay"><div id="loadingImage"><img  src="/res_html/img/loading.gif"></div> </div>');		
+    
+	
+	function init() {
+	    var customCloudEndpoints = new CustomCloudEndpoints();	
+    }
+		
+    function setSpotAddress(lat, lng){
+        var requestParam = {'latitude': lat,'longitude': lng };
+        var request = gapi.client.clusterAPI.getAddressFromLatLng(requestParam);
+            request.execute(setAddressField);	
+    }
+			
+    function setAddressField(resp){
+        if (!resp.code){
+            $('#clusterAddress').html(resp.address);
+        }else{
+            $('#clusterAddress').html('Address not available');
+            console.log ( 'Something went wrong with getting the address.' );
+		}
+	}
+			
+    $(document).ready(function() { 	 	 
+        $('#btnTouristic').click(function (){	 
+             vote('#btnTouristic', 10);
+        });
         
-         $('#btnSeekret').click(function (){	 
-            vote('#btnSeekret', 0);
-         });
-	   	});
+        $('#btnSeekret').click(function (){	 
+             vote('#btnSeekret', 0);
+        });
+		
+        $('#btnDismiss').click(function (){	 
+				var clusterKey = $('#btnDismiss').val();
+				var requestParam = {'datastoreKeyOfCluster': clusterKey};
+				var request = gapi.client.clusterAPI.incrementDismissCount(requestParam);
+				showOverlay();
+				$('html, body').animate({ scrollTop: 0 }, 0);
+				request.execute(handleResult);
+        });
+		
+	 });
+
+    function handleResult(resp){
+		hideOverlay();
+	    $('#btnDismiss').attr("disabled", true);      
+	    $('#voteResultField').show();
+	    $('#voteResultMessage').html(resp.entity);
+	    $('#voteResultMessage').show();
+	}
+		
+	 
+    // Function to Add the overlay to the page
+    function showOverlay(){
+        page_overlay.appendTo(document.body);
+    }
+	
+    // Function to Remove the overlay from the page
+    function hideOverlay(){   	
+        page_overlay.remove();
+    }	
 		 
 	function vote(buttonId, clusterRatingValue){
     		
-			// Set a variable that is set to the div containing the overlay (created on page load)
-           var page_overlay = jQuery('<div id="overlay"><div id="loadingImage"><img  src="/res_html/img/loading.gif"></div> </div>');
-
-           // Function to Add the overlay to the page
-           function showOverlay(){
-               page_overlay.appendTo(document.body);
-           }
-           // Function to Remove the overlay from the page
-           function hideOverlay(){
-               page_overlay.remove();
-           }
-		
+			
 			
 		 $.ajax({
              type: "post",
@@ -89,37 +104,24 @@
 			 },  
 			 
 			 success: function(data){ 
-			
 			 		hideOverlay()
-					$(buttonId).attr("disabled", true);      
-              		$('#voteResultField').show();
-					$('#voteResultMessage').html(data);
-					$('#voteResultMessage').show();
+				    $(buttonId).attr("disabled", true);      
+				    $('#voteResultField').show();
+				    $('#voteResultMessage').html(data);
+				    $('#voteResultMessage').show();
 					}
 					
 			 });
 	}
 	
-     
-     </script>
+   		
+	var map;
+	var lastClickedMarker = null;
+	var geo = new google.maps.Geocoder;
 	
-	
-	
-   	<script type="text/javascript">
-		
-		
-		
-		
-		
-		
-		
-		var map;
-		var lastClickedMarker = null;
-		  var geo = new google.maps.Geocoder;
-
-   //Construct the circle for each value in citymap.
-   // Note: We scale the area of the circle based on the population.
-   function addCircle(lgt, lat, opacity,radius ) {
+	//Construct the circle for each value in citymap.
+    // Note: We scale the area of the circle based on the population.
+    function addCircle(lgt, lat, opacity,radius ) {
      var populationOptions = {
        strokeColor: '#FF0000',
        strokeOpacity: 1,
@@ -157,9 +159,9 @@
 	 
 	 success: function(data){ 
 	
-	 		hideOverlay()
+	 		hideOverlay();
 			$(buttonId).attr("disabled", true);      
-        		$('#voteResultField').show();
+        	$('#voteResultField').show();
 			$('#voteResultMessage').html(data);
 			$('#voteResultMessage').show();
 			}
@@ -193,6 +195,9 @@
 		
 		var btnTouristicness = document.getElementById("btnTouristic");
 		btnTouristicness.setAttribute('value', datastoreClusterKey);
+		
+		var btnDismissElement = document.getElementById("btnDismiss");
+		btnDismissElement.setAttribute('value', datastoreClusterKey);
 		
 		var btnSeekret = document.getElementById("btnSeekret");
 		btnSeekret.setAttribute('value', datastoreClusterKey);
@@ -230,7 +235,10 @@
 	
 		//Now set up the buttons
 		$('#voteButtonContainer').show();
-		$('#voteButtonContainer').attr("disabled", true);
+		
+		enableAllButtons();
+		 
+		
 		  
 		//Always Hide voteresult after click
 		$('#voteResultField').hide();
@@ -240,6 +248,11 @@
    
    }
    
+   function enableAllButtons(){
+       $('#btnDismiss').attr("disabled", false);  
+       $('#btnTouristic').attr("disabled", false);  
+       $('#btnSeekret').attr("disabled", false);  
+   }
    function addPictureConcideringEmptyURL(idOfTag, url){
    		if (url === ""){
    			$(idOfTag).html('');

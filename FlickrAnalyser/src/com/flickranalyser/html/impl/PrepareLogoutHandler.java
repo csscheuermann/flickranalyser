@@ -13,8 +13,6 @@ public class PrepareLogoutHandler extends AbstractHtmlRequestHandler{
 	public String performActionAndGetNextViewConcrete(
 			HttpServletRequest pRequest,  HttpServletResponse pResponse,HttpSession pSession) {
 		
-		User user = HtmlRequestProcessor.GUEST_USER;
-		pSession.setAttribute(HtmlRequestProcessor.CURRENT_USER, user);
 
 		return null;
 	}

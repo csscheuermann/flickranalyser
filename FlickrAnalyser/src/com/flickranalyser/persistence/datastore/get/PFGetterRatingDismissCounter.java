@@ -8,46 +8,40 @@ import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import javax.ws.rs.core.Response;
 
 import com.flickranalyser.persistence.datastore.common.PMF;
-import com.flickranalyser.pojo.Rating;
+import com.flickranalyser.pojo.RatingDismissCounter;
 
-public class PFGetterRating {
-
-	
-	private static final Logger LOGGER = Logger.getLogger(PFGetterRating.class.getName());
-	
+public class PFGetterRatingDismissCounter {
 
 	
-	public static Response hasUserAlreadyRated(String userPrimaryKey, String clusterPrimaryKey){
+	private static final Logger LOGGER = Logger.getLogger(PFGetterRatingDismissCounter.class.getName());
+	
+	public static boolean hasUserAlreadyDissmissedCluster(String userPrimaryKey, String clusterPrimaryKey){
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		try{
-
 			String datastoreKey = userPrimaryKey + clusterPrimaryKey;
 
-			Query newQuery = pm.newQuery("select datastoreRatingKey from " + Rating.class.getName());
+			Query newQuery = pm.newQuery("select datastoreRatingKey from " + RatingDismissCounter.class.getName());
 			newQuery.setFilter("datastoreRatingKey == datastoreKey");
 			newQuery.declareParameters("String datastoreKey");
 			
 			List<?> resultList = (List<?>) newQuery.execute(datastoreKey);
 			
 			if(resultList.size() >0){
-				
-				//already voted
-				LOGGER.log(Level.INFO, "USER ALREADY VOTED FOR THIS CLUSTER.");
-				return Response.status(200).entity(true).build();
+				LOGGER.log(Level.INFO, "USER ALREADY DISMISSED THIS CLUSTER.");
+				return true;
 			}else{
-				LOGGER.log(Level.INFO, "USER CAN VOTE.");
-				return Response.status(200).entity(false).build();
+				LOGGER.log(Level.INFO, "USER CAN DISMISS CLUSTER.");
+				return false;
 			}
 
 
 		} catch (Exception ex) {
 			//TODO COS: EXCEPTION HANDLING talk to daniel
-			LOGGER.log(Level.SEVERE, "EXCEPTION WHILE FETCHING RATING.");
+			LOGGER.log(Level.SEVERE, "EXCEPTION WHILE FETCHING DISMISS COUNTER.");
 		
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
@@ -56,7 +50,7 @@ public class PFGetterRating {
 
 			final String errorMsg = "An error occured: \n" + ex.getMessage() + "\n\nStacktrace: \n" + stacktrace;
 			LOGGER.log(Level.SEVERE, errorMsg);
-			return Response.status(200).entity(false).build();
+			return false;
 		
 		}
 		finally{

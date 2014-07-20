@@ -3,20 +3,13 @@ package com.flickranalyser.html.common;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.servlet.http.HttpSession;
-
-import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.html.webfrontend.HtmlStarterServlet;
-import com.flickranalyser.pojo.Spot;
-import com.flickranalyser.pojo.User;
 
 public class HelperMethods {
 
 	public static final String PAGE_TITLE = "SECRET PLACES";
 	private static final Logger LOGGER = Logger.getLogger(HtmlStarterServlet.class.getName());
-	private HttpSession session;
 
-	
 	public static final String MESSAGE_SUCCESSFUL_CRON = "successfulCron";
 	public static final String MESSAGE_ERROR_CRON = "errorCron";
 	public static final String MESSAGE_SUCCESSFUL = "successful";
@@ -32,9 +25,7 @@ public class HelperMethods {
 	public static final String SPOT = "spot";
 	public static final String SPOT_NAME = "spotName";
 
-	public HelperMethods(final HttpSession session){
-		this.session = session;
-
+	public HelperMethods(){
 	}
 
 	public static <T> T instantiate(final String className, final Class<T> type){
@@ -88,6 +79,7 @@ public class HelperMethods {
 
 		header.append("<!-- Custom styles for this template -->");
 		header.append("<link href='/res_html/bootstrap-3.2.0-dist/css/carousel.css' rel='stylesheet'>");
+		header.append("<script async src='/res_html/js/SpotEndPointsAPI.js'></script>");
 		return header.toString();
 
 	}
@@ -149,9 +141,31 @@ public class HelperMethods {
 	}
 
 
-
 	public  String createBodyEnd(){
+		return createBodyEnd(false);
+	}
+
+
+	public String createBodyEnd(boolean isIndexPage){
 		StringBuilder bodyEnd = new StringBuilder();
+
+		if(!isIndexPage){
+			bodyEnd.append("<script>");
+			bodyEnd.append("function init() {");
+			bodyEnd.append(" google.appengine.seekret.init();");
+			bodyEnd.append(" }");
+			bodyEnd.append("</script>");
+			bodyEnd.append("<script src='https://apis.google.com/js/client.js?onload=init'></script>");
+		}else{
+			bodyEnd.append("<script>");
+			bodyEnd.append("function init() {");
+			bodyEnd.append("var signinButton = document.querySelector('#signinButton');");
+			bodyEnd.append(" if (signinButton !== null ){ signinButton.addEventListener('click', google.appengine.seekret.init);}");
+			bodyEnd.append("   $('#seekretNavigation').html(google.appengine.seekret.addNavigation());");
+			bodyEnd.append(" }");
+			bodyEnd.append("</script>");
+			bodyEnd.append("<script src='https://apis.google.com/js/client.js?onload=init'></script>");
+		}
 
 		bodyEnd.append("<!-- Bootstrap core JavaScript");
 		bodyEnd.append("================================================== -->");
@@ -165,7 +179,6 @@ public class HelperMethods {
 
 
 	public  String createNavigation(boolean isIndexPage){
-		User currentUser = (User) session.getAttribute(HtmlRequestProcessor.CURRENT_USER);
 		StringBuilder navigation = new StringBuilder();
 
 		if (isIndexPage){
@@ -175,7 +188,6 @@ public class HelperMethods {
 
 		}
 		navigation.append("<div class='container'>");
-
 		navigation.append("<div class='navbar navbar-inverse navbar-static-top' role='navigation'>");
 		navigation.append("<div class='container'>");
 		navigation.append("<div class='navbar-header'>");
@@ -188,21 +200,16 @@ public class HelperMethods {
 		navigation.append("<a class='navbar-brand' href='#'><img src='/res_html/img/banner.png' width='150px' alt='SEEKRET'/></a>");
 		navigation.append("</div>");
 		navigation.append("<div class='navbar-collapse collapse'>");
-		navigation.append("<ul class='nav navbar-nav'>");
-		navigation.append("<li class='active'><a href='/'>Home</a></li>");
-
-		if(currentUser.getEmail().equals(HtmlRequestProcessor.GUEST_USER.getEmail())){
-			navigation.append("<li><a href='?showView=Login'>Login</a></li>");
-		}else{
-			navigation.append("<li><a href='?showView=TopSpots'>Top Spots</a></li>");
-			navigation.append("<li><a href='?showView=SearchSpots'>Search Spot</a></li>");
-			navigation.append("<li><a href='?showView=Logout'>Logout</a></li>");
-		}
-		navigation.append("</li>");
+		navigation.append("<ul class='nav navbar-nav'  id='seekretNavigation'>");
+		
 		navigation.append("</ul>");
 		navigation.append("</div>");
 		navigation.append("</div>");
 		navigation.append("</div>");
+		navigation.append("</div>");
+		navigation.append("</div>");	
+		
+
 		navigation.append("</div>");
 		navigation.append("</div>");
 
@@ -240,7 +247,7 @@ public class HelperMethods {
 		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
 		marketing.append("</div><!-- /.col-lg-4 -->");
 		marketing.append("  </div><!-- /.row -->");
-		
+
 		return marketing.toString();
 	}
 
@@ -253,162 +260,154 @@ public class HelperMethods {
 		footerBuilder.append("   <p>DVCS 2014 <a href='#'>Privacy</a> &middot; <a href='#'>Terms</a></p>");
 		footerBuilder.append(" </footer>");
 		footerBuilder.append(" </div><!-- /.container -->");
-		
+
 		return footerBuilder.toString();
 	}
 
-	
+
 	public String createSpotInfo(){
 		StringBuilder spotInfo = new StringBuilder();
-		
+
 		spotInfo.append("<div id='spotInfoContainer' class='container'>");
-			spotInfo.append("<div class='row'>");
-				spotInfo.append("<div class='col-xs-12'>");
-					spotInfo.append("<h2>INFORMATION ABOUT LOCATION</h2>");
-				spotInfo.append(" </div>");
-			spotInfo.append(" </div>");
-			
-			spotInfo.append("<div class='row'>");
-				spotInfo.append("<div class='col-md-6'>	<div><h4>Address</h4></div> 			<div id='spotaddress'> 		</div> </div>");
-				spotInfo.append("<div class='col-md-3'>	<div><h4>Overall Max #POIs</h4></div> 			<div id='poiCount'>			</div> </div>");
-				spotInfo.append("<div class='col-md-3'>	<div><h4>Overall Max #Views</h4></div> 			<div id='spotOverallview'>	</div> </div>");
-			
-		
-				spotInfo.append(" </div>");
+		spotInfo.append("<div class='row'>");
+		spotInfo.append("<div class='col-xs-12'>");
+		spotInfo.append("<h2>INFORMATION ABOUT LOCATION</h2>");
 		spotInfo.append(" </div>");
-		
+		spotInfo.append(" </div>");
+
+		spotInfo.append("<div class='row'>");
+		spotInfo.append("<div class='col-md-6'>	<div><h4>Address</h4></div> 			<div id='spotaddress'> 		</div> </div>");
+		spotInfo.append("<div class='col-md-3'>	<div><h4>Overall Max #POIs</h4></div> 			<div id='poiCount'>			</div> </div>");
+		spotInfo.append("<div class='col-md-3'>	<div><h4>Overall Max #Views</h4></div> 			<div id='spotOverallview'>	</div> </div>");
+
+
+		spotInfo.append(" </div>");
+		spotInfo.append(" </div>");
+
 		return spotInfo.toString();
 	}
 
-	
-	
-	
-	
+
+
+
+
 	public String createSeekretSpotInformation(){
 		StringBuilder seekretSpotInformation= new StringBuilder();
-		
+
 		seekretSpotInformation.append("<div id='seekretSpotInfoContainer' class='container'>");
-			seekretSpotInformation.append("<div class='row'>");
-				seekretSpotInformation.append("<div class='col-xs-12'>");
-					seekretSpotInformation.append("<h2>SEEKRET SPOT INFORMATION</h2>");
-				seekretSpotInformation.append(" </div>");
-			seekretSpotInformation.append(" </div>");
-			
-			seekretSpotInformation.append("<div class='row'>");
-				seekretSpotInformation.append("<div class='col-md-6'>	<div><h4>Address</h4></div> 			<div id='clusterAddress'> 		</div> </div>");
-				seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>Max #POIs</h4></div> 			<div id='maxClusterPOIs'> 		</div> </div>");
-				seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>Max #Views</h4></div> 			<div id='maxClusterViews'> 		</div> </div>");
-			seekretSpotInformation.append(" </div>");
-			
-			seekretSpotInformation.append("<div class='row bottom-sapce'>");
-				seekretSpotInformation.append("<div class='col-md-6'>	&nbsp; </div>");
-				seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>#POIs</h4></div> 			<div id='clusterPOIs'> 		</div> </div>");
-				seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>#Views</h4></div> 			<div id='clusterViews'> 		</div> </div>");
-			seekretSpotInformation.append(" </div>");
-			
-			
-			seekretSpotInformation.append("<div class='row'>");
-				seekretSpotInformation.append("<div class='col-md-4'><h4>Download</h4></div>");
-				seekretSpotInformation.append("<div class='col-md-2'><button type='button' class='btn btn-default'>KML</button></div>");
-				seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
-				seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
-			
-				
-			seekretSpotInformation.append(" </div>");
+		seekretSpotInformation.append("<div class='row'>");
+		seekretSpotInformation.append("<div class='col-xs-12'>");
+		seekretSpotInformation.append("<h2>SEEKRET SPOT INFORMATION</h2>");
 		seekretSpotInformation.append(" </div>");
-		
+		seekretSpotInformation.append(" </div>");
+
+		seekretSpotInformation.append("<div class='row'>");
+		seekretSpotInformation.append("<div class='col-md-6'>	<div><h4>Address</h4></div> 			<div id='clusterAddress'> 		</div> </div>");
+		seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>Max #POIs</h4></div> 			<div id='maxClusterPOIs'> 		</div> </div>");
+		seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>Max #Views</h4></div> 			<div id='maxClusterViews'> 		</div> </div>");
+		seekretSpotInformation.append(" </div>");
+
+		seekretSpotInformation.append("<div class='row bottom-sapce'>");
+		seekretSpotInformation.append("<div class='col-md-6'>	&nbsp; </div>");
+		seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>#POIs</h4></div> 			<div id='clusterPOIs'> 		</div> </div>");
+		seekretSpotInformation.append("<div class='col-md-3'>	<div><h4>#Views</h4></div> 			<div id='clusterViews'> 		</div> </div>");
+		seekretSpotInformation.append(" </div>");
+
+
+		seekretSpotInformation.append("<div class='row'>");
+		seekretSpotInformation.append("<div class='col-md-4'><h4>Download</h4></div>");
+		seekretSpotInformation.append("<div class='col-md-2'><button type='button' class='btn btn-default'>KML</button></div>");
+		seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
+		seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
+
+
+		seekretSpotInformation.append(" </div>");
+		seekretSpotInformation.append(" </div>");
+
 		return seekretSpotInformation.toString();
 	}
-	
+
 	public String createTopPicturesContainer(){
 		StringBuilder topPicturesContainer= new StringBuilder();
-		
+
 		topPicturesContainer.append("<div id='topPicturesContainer' class='container'>");
-			
-		
+
+
 		topPicturesContainer.append("<div class='row'>");
-			topPicturesContainer.append("<div class='col-xs-12'>");
-				topPicturesContainer.append("<h2>TOP THREE PICTURES</h2>");
-			topPicturesContainer.append(" </div>");
+		topPicturesContainer.append("<div class='col-xs-12'>");
+		topPicturesContainer.append("<h2>TOP THREE PICTURES</h2>");
 		topPicturesContainer.append(" </div>");
-	
-		
+		topPicturesContainer.append(" </div>");
+
+
 		topPicturesContainer.append("<div class='row'>");
-			topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture1'> </div> </div>");
-			topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture2'> </div> </div>");
-			topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture3'> </div> </div>");
+		topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture1'> </div> </div>");
+		topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture2'> </div> </div>");
+		topPicturesContainer.append("<div class='col-md-4 centeralized-div'>	<div id='picture3'> </div> </div>");
 		topPicturesContainer.append(" </div>");
-			
+
 		topPicturesContainer.append(" </div>");
-		
+
 		return topPicturesContainer.toString();
 	}
-	
-	
+
+
 	public String createRatingInformationContainer(){
 		StringBuilder ratingInformationContainer= new StringBuilder();
-		
+
 		ratingInformationContainer.append("<div id='ratingInformationContainer' class='container'>");
-			
-		
-		ratingInformationContainer.append("<div class='row'>");
-			ratingInformationContainer.append("<div class='col-xs-12'>");
-				ratingInformationContainer.append("<h2>RATING INFORMATION</h2>");
-			ratingInformationContainer.append(" </div>");
-		ratingInformationContainer.append(" </div>");
-	
-		
-		ratingInformationContainer.append("<div class='row'>");
-			ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Seekretmeter</h4></div>  		<div id='seekretMeter'>					<canvas id='touristicness' width='200' height='200'></canvas> 		</div> 				</div>");
-			ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Relative POI Count</h4></div> 	<div id='relativePOICountChart'> 		<canvas id='poiCountRelative' width='200' height='200'></canvas>	</div>  	</div>");
-			ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Realtive View Count</h4></div> <div id='relativeViewCountChart'>		<canvas id='viewCountRelative' width='200' height='200'></canvas> 	</div> 	</div>");
-		ratingInformationContainer.append(" </div>");
-		
-		
 
+		ratingInformationContainer.append("<div class='row'>");
+		ratingInformationContainer.append("<div class='col-xs-12'>");
+		ratingInformationContainer.append("<h2>RATING INFORMATION</h2>");
+		ratingInformationContainer.append(" </div>");
+		ratingInformationContainer.append(" </div>");
 
-		
+		ratingInformationContainer.append("<div class='row'>");
+		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Seekretmeter</h4></div>  		<div id='seekretMeter'>					<canvas id='touristicness' width='200' height='200'></canvas> 		</div> 				</div>");
+		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Relative POI Count</h4></div> 	<div id='relativePOICountChart'> 		<canvas id='poiCountRelative' width='200' height='200'></canvas>	</div>  	</div>");
+		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Realtive View Count</h4></div> <div id='relativeViewCountChart'>		<canvas id='viewCountRelative' width='200' height='200'></canvas> 	</div> 	</div>");
+		ratingInformationContainer.append(" </div>");
+
 		ratingInformationContainer.append("<div class='row'>");
 		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	&nbsp; 				</div>");
 		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Absolute POI Count</h4></div> 	<div id='absolutePOICountChart'><canvas id='poiCountOverall' width='200' height='200'></canvas> </div>  	</div>");
 		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>	<div><h4>Absolute View Count</h4></div> <div id='absoluteViewCountChart'><canvas id='viewCountOverall' width='200' height='200'></canvas> </div> 	</div>");
-		
-		
+
 		ratingInformationContainer.append(" </div>");
-			
 		ratingInformationContainer.append(" </div>");
-		
+
 		return ratingInformationContainer.toString();
 	}
 
-	
-	
-	
-	
+
+
+
+
 	public String createVoteButtons(){
 		StringBuilder createVoteButtons = new StringBuilder();
-		
+
 		createVoteButtons.append("<div id='voteButtonContainer' class='container'>");
-			createVoteButtons.append("<div class='row'>");
-				createVoteButtons.append("<div class='col-md-4'>		<button type='submit' id='btnDismiss'  class='btn btn-default'>Dismiss (TODO)</button></div>");
-				createVoteButtons.append("<div class='col-md-4'> 		<button type='submit' id='btnTouristic'  class='btn btn-default btn-danger' >Touristic</button>	</div>");
-				createVoteButtons.append("<div class='col-md-4'>		<button type='submit' id='btnSeekret'  class='btn btn-default btn-success' >Seekret</button>	</div>");
-			createVoteButtons.append(" </div>");
+		createVoteButtons.append("<div class='row'>");
+		createVoteButtons.append("<div class='col-md-4'>		<button type='submit' id='btnDismiss'  class='btn btn-default'>Dismiss</button></div>");
+		createVoteButtons.append("<div class='col-md-4'> 		<button type='submit' id='btnTouristic'  class='btn btn-default btn-danger' >Touristic</button>	</div>");
+		createVoteButtons.append("<div class='col-md-4'>		<button type='submit' id='btnSeekret'  class='btn btn-default btn-success' >Seekret</button>	</div>");
 		createVoteButtons.append(" </div>");
-		
+		createVoteButtons.append(" </div>");
+
 		return createVoteButtons.toString();
 	}
-	
+
 	public String createVoteResultField(){
 		StringBuilder createVoteResultField = new StringBuilder();
-		
+
 		createVoteResultField.append("<div id='voteResultField' class='container'>");
-			createVoteResultField.append("<div class='row'>");
-				createVoteResultField.append("<div class='col-md-12'><div class='alert alert-info' id='voteResultMessage'></div></div>");
-			createVoteResultField.append(" </div>");
+		createVoteResultField.append("<div class='row'>");
+		createVoteResultField.append("<div class='col-md-12'><div class='alert alert-info' id='voteResultMessage'></div></div>");
 		createVoteResultField.append(" </div>");
-		
+		createVoteResultField.append(" </div>");
+
 		return createVoteResultField.toString();
 	}
-	
+
 }

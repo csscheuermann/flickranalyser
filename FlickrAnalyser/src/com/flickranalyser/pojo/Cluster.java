@@ -1,7 +1,6 @@
 package com.flickranalyser.pojo;
 
 import java.io.Serializable;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,6 +27,10 @@ public class Cluster implements Serializable {
 	
 	@Persistent
 	private double latitude;
+	
+	/** Counts how many people have dismissed this Cluster already */
+	@Persistent
+	private int dismissCounter;
 	
 	@Persistent
 	private double longitude;
