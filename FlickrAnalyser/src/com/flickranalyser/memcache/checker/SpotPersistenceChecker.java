@@ -6,11 +6,10 @@ import java.util.logging.Logger;
 
 import com.flickranalyser.memcache.MemcacheHelperMethods;
 import com.flickranalyser.persistence.datastore.common.MemcacheNameStoreEnum;
-import com.flickranalyser.persistence.datastore.get.PFGetterSpot;
 
 public class SpotPersistenceChecker {
 
-	private static final Logger LOGGER = Logger.getLogger(PFGetterSpot.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(SpotPersistenceChecker.class.getName());
 	
 
 	public static boolean checkIfPersistenceMustBeAsked(String memcacheKey) {

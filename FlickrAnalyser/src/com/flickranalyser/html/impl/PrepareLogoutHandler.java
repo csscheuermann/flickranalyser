@@ -7,13 +7,13 @@ import javax.servlet.http.HttpSession;
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.pojo.User;
 
-public class PrepareLogoutHandler extends AbstractHtmlRequestHandler{
+public class PrepareLogoutHandler extends AbstractHtmlRequestHandler
+{
+  public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
+  {
+    User user = HtmlRequestProcessor.GUEST_USER;
+    pSession.setAttribute("currentUser", user);
 
-	@Override
-	public String performActionAndGetNextViewConcrete(
-			HttpServletRequest pRequest,  HttpServletResponse pResponse,HttpSession pSession) {
-		
-
-		return null;
-	}
+    return null;
+  }
 }

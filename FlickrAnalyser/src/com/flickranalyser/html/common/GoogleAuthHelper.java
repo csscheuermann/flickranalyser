@@ -21,129 +21,93 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson.JacksonFactory;
 
-public class GoogleAuthHelper {
+public class GoogleAuthHelper
+{
+  private static final String NOT_AVAILABLE = "NOT AVAILABLE";
+  private static final Logger LOGGER = Logger.getLogger(GoogleAuthHelper.class.getName());
+  public static final String CLIENT_ID = "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com";
+  public static final String CLIENT_SECRET = "zoQ1ahfrdOIglvRNv210_Yy0";
+  private static final String CALLBACK_URI = "https://flickeranalyser.appspot.com/oauth2callback";
+  private static final Iterable<String> SCOPE = Arrays.asList("https://www.googleapis.com/auth/userinfo.profile;https://www.googleapis.com/auth/userinfo.email".split(";"));
+  private static final String USER_INFO_URL = "https://www.googleapis.com/oauth2/v1/userinfo";
+  private static final JsonFactory JSON_FACTORY = new JacksonFactory();
+  private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+  private String stateToken;
+  private final GoogleAuthorizationCodeFlow flow;
 
-	private static final String NOT_AVAILABLE = "NOT AVAILABLE";
-	private static final Logger LOGGER = Logger.getLogger(GoogleAuthHelper.class.getName());
-	/**
-	 * Please provide a value for the CLIENT_ID constant before proceeding, set this up at https://code.google.com/apis/console/
-	 */
-	public static final String CLIENT_ID = "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com";
+  public GoogleAuthHelper()
+  {
+    this.flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, 
+      JSON_FACTORY, "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "zoQ1ahfrdOIglvRNv210_Yy0", (Collection)SCOPE).build();
 
-	/**
-	 * Please provide a value for the CLIENT_SECRET constant before proceeding, set this up at https://code.google.com/apis/console/
-	 */
-	public static final String CLIENT_SECRET = "zoQ1ahfrdOIglvRNv210_Yy0";
+    generateStateToken();
+  }
 
+  public String buildLoginUrl()
+  {
+    GoogleAuthorizationCodeRequestUrl url = this.flow.newAuthorizationUrl();
 
-	/**
-	 * Callback URI that google will redirect to after successful authentication
-	 */
-	private static final String CALLBACK_URI = "https://flickeranalyser.appspot.com/oauth2callback";
+    return url.setRedirectUri("https://flickeranalyser.appspot.com/oauth2callback").setState(this.stateToken).build();
+  }
 
-	// start google authentication constants
-	private static final Iterable<String> SCOPE = Arrays.asList("https://www.googleapis.com/auth/userinfo.profile;https://www.googleapis.com/auth/userinfo.email".split(";"));
-	private static final String USER_INFO_URL = "https://www.googleapis.com/oauth2/v1/userinfo";
-	private static final JsonFactory JSON_FACTORY = new JacksonFactory();
-	private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-	// end google authentication constants
+  private void generateStateToken()
+  {
+    SecureRandom sr1 = new SecureRandom();
 
-	private String stateToken;
+    this.stateToken = ("google;" + sr1.nextInt());
+  }
 
-	private final GoogleAuthorizationCodeFlow flow;
+  public String getStateToken()
+  {
+    return this.stateToken;
+  }
 
+  public User getGoogleUserInfo(String authCode)
+    throws IOException
+  {
+    GoogleTokenResponse response = this.flow.newTokenRequest(authCode).setRedirectUri("https://flickeranalyser.appspot.com/oauth2callback").execute();
+    Credential credential = this.flow.createAndStoreCredential(response, null);
+    HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(credential);
 
-	/**
-	 * Constructor initializes the Google Authorization Code Flow with CLIENT ID, SECRET, and SCOPE 
-	 */
-	public GoogleAuthHelper() {
-		flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT,
-				JSON_FACTORY, CLIENT_ID, CLIENT_SECRET, (Collection<String>) SCOPE).build();
+    GenericUrl url = new GenericUrl("https://www.googleapis.com/oauth2/v1/userinfo");
+    HttpRequest request = requestFactory.buildGetRequest(url);
+    request.getHeaders().setContentType("application/json");
+    String jsonIdentity = request.execute().parseAsString();
 
-		generateStateToken();
-	}
+    JsonObject userObject = JsonObject.readFrom(jsonIdentity);
 
-	/**
-	 * Builds a login URL based on client ID, secret, callback URI, and scope 
-	 */
-	public String buildLoginUrl() {
+    String email = "NOT AVAILABLE";
+    String fullName = "NOT AVAILABLE";
+    String givenName = "NOT AVAILABLE";
+    String profileLink = "NOT AVAILABLE";
+    String picture = "NOT AVAILABLE";
 
-		final GoogleAuthorizationCodeRequestUrl url = flow.newAuthorizationUrl();
+    if (userObject.get("email") != null) {
+      email = userObject.get("email").asString();
+    }
 
-		return url.setRedirectUri(CALLBACK_URI).setState(stateToken).build();
-	}
+    if (userObject.get("name") != null) {
+      fullName = userObject.get("name").asString();
+    }
 
-	/**
-	 * Generates a secure state token 
-	 */
-	private void generateStateToken(){
+    if (userObject.get("given_name") != null) {
+      givenName = userObject.get("given_name").asString();
+    }
 
-		SecureRandom sr1 = new SecureRandom();
+    if (userObject.get("link") != null) {
+      profileLink = userObject.get("link").asString();
+    }
 
-		stateToken = "google;"+sr1.nextInt();
+    if (userObject.get("picture") != null) {
+      picture = userObject.get("picture").asString();
+    }
 
-	}
+    LOGGER.log(Level.INFO, "Email: " + email);
+    LOGGER.log(Level.INFO, "Full Name: " + fullName);
+    LOGGER.log(Level.INFO, "Given Name: " + givenName);
+    LOGGER.log(Level.INFO, "Profile Link: " + profileLink);
+    LOGGER.log(Level.INFO, "Picture: " + picture);
 
-	/**
-	 * Accessor for state token
-	 */
-	public String getStateToken(){
-		return stateToken;
-	}
-
-	/**
-	 * Expects an Authentication Code, and makes an authenticated request for the user's profile information
-	 * @return JSON formatted user profile information
-	 * @param authCode authentication code provided by google
-	 */
-	public User getGoogleUserInfo(final String authCode) throws IOException {
-
-		final GoogleTokenResponse response = flow.newTokenRequest(authCode).setRedirectUri(CALLBACK_URI).execute();
-		final Credential credential = flow.createAndStoreCredential(response, null);
-		final HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(credential);
-		// Make an authenticated request
-		final GenericUrl url = new GenericUrl(USER_INFO_URL);
-		final HttpRequest request = requestFactory.buildGetRequest(url);
-		request.getHeaders().setContentType("application/json");
-		final String jsonIdentity = request.execute().parseAsString();
-
-		JsonObject userObject = JsonObject.readFrom(jsonIdentity); 
-		
-		String email = NOT_AVAILABLE;
-		String fullName =  NOT_AVAILABLE;
-		String givenName =  NOT_AVAILABLE;
-		String profileLink = NOT_AVAILABLE;
-		String picture = NOT_AVAILABLE;
-		
-		if (userObject.get("email") != null){
-			email =	userObject.get("email").asString();			
-		}
-		
-		if (userObject.get("name") != null){
-			fullName =	userObject.get("name").asString();			
-		}
-		
-		if (userObject.get("given_name") != null){
-			givenName =	userObject.get("given_name").asString();			
-		}
-		
-		if (userObject.get("link") != null){
-			profileLink =	userObject.get("link").asString();			
-		}
-	
-		if (userObject.get("picture") != null){
-			picture =	userObject.get("picture").asString();			
-		}
-		
-		
-		LOGGER.log(Level.INFO, "Email: " + email );
-		LOGGER.log(Level.INFO, "Full Name: " + fullName );
-		LOGGER.log(Level.INFO, "Given Name: " + givenName );
-		LOGGER.log(Level.INFO, "Profile Link: " + profileLink );
-		LOGGER.log(Level.INFO, "Picture: " + picture );
-	
-		
-		return new User(email, fullName, givenName, profileLink, picture);
-
-	}
+    return new User(email, fullName, givenName, profileLink, picture);
+  }
 }

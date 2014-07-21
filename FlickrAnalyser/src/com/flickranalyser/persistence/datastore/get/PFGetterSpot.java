@@ -1,6 +1,5 @@
 package com.flickranalyser.persistence.datastore.get;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -10,76 +9,78 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.flickranalyser.persistence.datastore.common.PMF;
+import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.Spot;
+import com.flickranalyser.pojo.SpotResultList;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
-public class PFGetterSpot {
+public class PFGetterSpot
+{
+  private static final Logger LOGGER = Logger.getLogger(PFGetterSpot.class.getName());
 
-	private static final Logger LOGGER = Logger.getLogger(PFGetterSpot.class.getName());
+  public static Spot getSpotByName(String nameOfSpot)
+  {
+    PersistenceManager pm = PMF.get().getPersistenceManager();
 
-	public static Spot getSpotByName(String nameOfSpot){
+    pm.getFetchPlan().addGroup("eagerClusterLoading");
 
-		PersistenceManager pm = PMF.get().getPersistenceManager();
+    LOGGER.log(Level.INFO, "NAME OF SPOT TO SEARCH: " + nameOfSpot);
+    try {
+      Key k = KeyFactory.createKey(Spot.class.getSimpleName(), nameOfSpot);
+      Spot spot = (Spot)pm.getObjectById(Spot.class, k);
+      if (spot != null)
+      {
+        LOGGER.log(Level.INFO, "NAME OF SPOT: " + spot.getName());
+        LOGGER.log(Level.INFO, "NUMBER OF CLUSTER: " + spot.getCluster().size());
+        if (spot.getCluster().size() > 1) {
+          LOGGER.log(Level.INFO, " FIRST CLUSTER " + ((Cluster)spot.getCluster().get(0)).toString());
+          LOGGER.log(Level.INFO, " POI Size " + ((Cluster)spot.getCluster().get(0)).getPointOfInterestList().size());
+        }
+        return spot;
+      }
+      LOGGER.log(Level.INFO, "SPOT DOES NOT EXIST IN DATASTORE YET");
+      return null;
+    }
+    catch (Exception ex)
+    {
+      LOGGER.log(Level.INFO, "COULD NOT FIND SPOT WITH NAME " + nameOfSpot);
+      return null;
+    }
+    finally {
+      pm.close();
+    }
+  }
 
-		// the cluster of the spot should be loaded eager 
-		pm.getFetchPlan().addGroup("eagerClusterLoading");
+  @SuppressWarnings("unchecked")
+public static SpotResultList getTopSpots() {
+    PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		LOGGER.log(Level.INFO, "NAME OF SPOT TO SEARCH: " + nameOfSpot );
-		try{
-			Key k = KeyFactory.createKey(Spot.class.getSimpleName(), nameOfSpot);
-			Spot spot = pm.getObjectById(Spot.class, k);
-			if (spot != null){
+    Query q = pm.newQuery(Spot.class);
+    try {
+      q.setOrdering("overallMaxViewNumberPerCluster desc");
+      q.setRange(0, 20);
 
-
-				LOGGER.log(Level.INFO, "NAME OF SPOT: " + spot.getName() );
-				LOGGER.log(Level.INFO, "NUMBER OF CLUSTER: " + spot.getCluster().size() );
-				if (spot.getCluster().size() > 2){
-					LOGGER.log(Level.INFO, " FIRST CLUSTER " + spot.getCluster().get(0).toString());
-					LOGGER.log(Level.INFO, " SECOND CLUSTER " + spot.getCluster().get(1).toString());
-				}
-				return spot;
-			}else{
-				LOGGER.log(Level.INFO, "SPOT DOES NOT EXIST IN DATASTORE YET");
-				return null;
-			}
-
-		} catch (Exception ex) {
-			//TODO COS DVV: Exception Handling
-			LOGGER.log(Level.INFO, "COULD NOT FIND SPOT WITH NAME " + nameOfSpot);
-			return null;
+  	List<Spot> results = (List<Spot>) q.execute();
+	//TODO COS: Discuss with Daniel
+	//Needed to be done due to serializable issues, returning the result
+	// itself it is not serializable
+ 
+	LinkedList<String> resultList = new LinkedList<String>();
+	if (!results.isEmpty()){
+		for (Spot spot : results) {
+			resultList.add(spot.getName());
 		}
-		finally{
-			pm.close();
-		}
+		return new SpotResultList(resultList);
 	}
-
-	public static ArrayList<String> getTopSpots(){
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-
-		Query q = pm.newQuery(Spot.class);
-		try{
-			q.setOrdering("overallMaxViewNumberPerCluster desc");
-			q.setRange(0, 20);
-			@SuppressWarnings("unchecked")
-			List<Spot> results = (List<Spot>) q.execute();
-			//TODO COS: Discuss with Daniel
-			//Needed to be done due to serializable issues, returning the result
-			// itself it is not serializable
-
-			ArrayList<String> resultList = new ArrayList<String>();
-			if (!results.isEmpty()){
-				for (Spot spot : results) {
-					resultList.add(spot.getName());
-				}
-				return resultList;
-			}
-			LOGGER.log(Level.INFO, "NO TOP TEN SPOTS FOUND.");
-			return resultList;
-		}finally{
-			q.closeAll();
-			pm.close();
-			LOGGER.log(Level.INFO, "CLOSED QUERY AND PM.");
-		}
-	}
+      LOGGER.log(Level.INFO, "NO TOP TEN SPOTS FOUND.");
+      return new SpotResultList(resultList);
+    }
+    finally
+    {
+      q.closeAll();
+      pm.close();
+      LOGGER.log(Level.INFO, "CLOSED QUERY AND PM.");
+    }
+  }
 }

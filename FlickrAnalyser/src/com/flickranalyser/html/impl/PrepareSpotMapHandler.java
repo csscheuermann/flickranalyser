@@ -8,62 +8,57 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.flickranalyser.businesslogic.common.ParameterConstants;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.endpoints.SpotService;
 import com.flickranalyser.html.common.HelperMethods;
-import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.Spot;
 
-public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler {
+public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler
+{
+  private static final Logger LOGGER = Logger.getLogger(PrepareSpotMapHandler.class.getName());
+  private final SpotService spotService;
 
-	private static final Logger LOGGER = Logger
-			.getLogger(PrepareSpotMapHandler.class.getName());
-	private final SpotService spotService;
+  public PrepareSpotMapHandler()
+  {
+    this.spotService = new SpotService();
+  }
 
-	public PrepareSpotMapHandler() {
-		spotService = new SpotService();
-	}
+  public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
+  {
+    String location = pRequest
+      .getParameter("location");
+    String filterStrategy = pRequest
+      .getParameter("strategy");
 
-	@Override
-	public String performActionAndGetNextViewConcrete(
-			HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession) {
+    LOGGER.log(Level.INFO, "LOCATION: " + location);
+    LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);
 
-		String location = pRequest
-				.getParameter(ParameterConstants.REQUEST_PARAM_LOCATION);
-		String filterStrategy = pRequest
-				.getParameter(ParameterConstants.FILTER_STRATEGY);
+    StringBuilder fullClassPath = new StringBuilder();
+    fullClassPath.append("com.flickranalyser.businesslogic.filter.impl.");
+    fullClassPath.append(filterStrategy);
 
-		LOGGER.log(Level.INFO, "LOCATION: " + location);
-		LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);
+    IFilterStrategy choosenFilterStrategy = (IFilterStrategy)HelperMethods.instantiate(
+      fullClassPath.toString(), IFilterStrategy.class);
+    LOGGER.log(Level.INFO, "INITIALIZED FILTER STRATEGY:" + 
+      choosenFilterStrategy.getClass().getName());
 
-		StringBuilder fullClassPath = new StringBuilder();
-		fullClassPath.append("com.flickranalyser.businesslogic.filter.impl.");
-		fullClassPath.append(filterStrategy);
+    Spot spot = this.spotService.getSpotByName(location);
+    if (spot != null)
+    {
+      List cluster = spot.getCluster();
 
-		IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(
-				fullClassPath.toString(), IFilterStrategy.class);
-		LOGGER.log(Level.INFO, "INITIALIZED FILTER STRATEGY:"
-				+ choosenFilterStrategy.getClass().getName());
+      List filteredCluster = choosenFilterStrategy
+        .filterCluster(cluster, spot);
+      spot.setCluster(filteredCluster);
 
-		Spot spot = spotService.getSpotByName(location);
-		if (spot != null) {
+      int numberOfFilteredClusters = cluster.size() - 
+        filteredCluster.size();
+      LOGGER.log(Level.INFO, "NUMBER OF FILTERED CLUSTERS: " + 
+        numberOfFilteredClusters);
 
-			List<Cluster> cluster = spot.getCluster();
+      pRequest.setAttribute("spot", spot);
+    }
 
-			// Filter the cluster and set it to spot
-			List<Cluster> filteredCluster = choosenFilterStrategy
-					.filterCluster(cluster, spot);
-			spot.setCluster(filteredCluster);
-
-			int numberOfFilteredClusters = cluster.size()
-					- filteredCluster.size();
-			LOGGER.log(Level.INFO, "NUMBER OF FILTERED CLUSTERS: "
-					+ numberOfFilteredClusters);
-
-			pRequest.setAttribute("spot", spot);
-		}
-
-		return null;
-	}
+    return null;
+  }
 }

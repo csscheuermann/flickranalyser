@@ -68,7 +68,7 @@
       }
     },
     "spotAPI.getTopSpots" : {
-      "path" : "stringcollection",
+      "path" : "spotresultlist",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -145,13 +145,7 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "maxNumberOfViewsPerCluster" : {
-            "type" : "integer"
-          },
-          "maxNumberOfPOIsPerCluster" : {
-            "type" : "integer"
-          },
-          "clusterRadiusInMeter" : {
+          "spotRadiusInMeter" : {
             "type" : "number"
           },
           "cluster" : {
@@ -160,10 +154,16 @@
               "$ref" : "Cluster"
             }
           },
-          "spotRadiusInMeter" : {
+          "clusterRadiusInMeter" : {
             "type" : "number"
           },
           "maxClusterViews" : {
+            "type" : "integer"
+          },
+          "maxNumberOfPOIsPerCluster" : {
+            "type" : "integer"
+          },
+          "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
           }
         }
@@ -276,20 +276,20 @@
             "type" : "string",
             "format" : "int64"
           },
+          "polar" : {
+            "type" : "boolean"
+          },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
-          },
-          "polar" : {
-            "type" : "boolean"
           }
         }
       },
-      "StringCollection" : {
-        "id" : "StringCollection",
+      "SpotResultList" : {
+        "id" : "SpotResultList",
         "type" : "object",
         "properties" : {
-          "items" : {
+          "topSpots" : {
             "type" : "array",
             "items" : {
               "type" : "string"
@@ -311,7 +311,7 @@
       },
       "com.flickranalyser.endpoints.SpotService.getTopSpots" : {
         "response" : {
-          "$ref" : "StringCollection"
+          "$ref" : "SpotResultList"
         }
       }
     }

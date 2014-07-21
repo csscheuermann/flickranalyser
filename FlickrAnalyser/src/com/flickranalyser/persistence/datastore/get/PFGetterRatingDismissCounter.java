@@ -12,49 +12,46 @@ import javax.jdo.Query;
 import com.flickranalyser.persistence.datastore.common.PMF;
 import com.flickranalyser.pojo.RatingDismissCounter;
 
-public class PFGetterRatingDismissCounter {
+public class PFGetterRatingDismissCounter
+{
+  private static final Logger LOGGER = Logger.getLogger(PFGetterRatingDismissCounter.class.getName());
 
-	
-	private static final Logger LOGGER = Logger.getLogger(PFGetterRatingDismissCounter.class.getName());
-	
-	public static boolean hasUserAlreadyDissmissedCluster(String userPrimaryKey, String clusterPrimaryKey){
+  public static boolean hasUserAlreadyDissmissedCluster(String userPrimaryKey, String clusterPrimaryKey)
+  {
+    PersistenceManager pm = PMF.get().getPersistenceManager();
+    try
+    {
+      String datastoreKey = userPrimaryKey + clusterPrimaryKey;
 
-		PersistenceManager pm = PMF.get().getPersistenceManager();
+      Query newQuery = pm.newQuery("select datastoreRatingKey from " + RatingDismissCounter.class.getName());
+      newQuery.setFilter("datastoreRatingKey == datastoreKey");
+      newQuery.declareParameters("String datastoreKey");
 
-		try{
-			String datastoreKey = userPrimaryKey + clusterPrimaryKey;
+      List resultList = (List)newQuery.execute(datastoreKey);
 
-			Query newQuery = pm.newQuery("select datastoreRatingKey from " + RatingDismissCounter.class.getName());
-			newQuery.setFilter("datastoreRatingKey == datastoreKey");
-			newQuery.declareParameters("String datastoreKey");
-			
-			List<?> resultList = (List<?>) newQuery.execute(datastoreKey);
-			
-			if(resultList.size() >0){
-				LOGGER.log(Level.INFO, "USER ALREADY DISMISSED THIS CLUSTER.");
-				return true;
-			}else{
-				LOGGER.log(Level.INFO, "USER CAN DISMISS CLUSTER.");
-				return false;
-			}
+      if (resultList.size() > 0) {
+        LOGGER.log(Level.INFO, "USER ALREADY DISMISSED THIS CLUSTER.");
+        return true;
+      }
+      LOGGER.log(Level.INFO, "USER CAN DISMISS CLUSTER.");
+      return false;
+    }
+    catch (Exception ex)
+    {
+      LOGGER.log(Level.SEVERE, "EXCEPTION WHILE FETCHING DISMISS COUNTER.");
 
+      StringWriter sw = new StringWriter();
+      PrintWriter pw = new PrintWriter(sw);
+      ex.printStackTrace(pw);
+      String stacktrace = sw.toString();
 
-		} catch (Exception ex) {
-			//TODO COS: EXCEPTION HANDLING talk to daniel
-			LOGGER.log(Level.SEVERE, "EXCEPTION WHILE FETCHING DISMISS COUNTER.");
-		
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			ex.printStackTrace(pw);
-			String stacktrace = sw.toString();
-
-			final String errorMsg = "An error occured: \n" + ex.getMessage() + "\n\nStacktrace: \n" + stacktrace;
-			LOGGER.log(Level.SEVERE, errorMsg);
-			return false;
-		
-		}
-		finally{
-			pm.close();
-		}
-	}
+      String errorMsg = "An error occured: \n" + ex.getMessage() + "\n\nStacktrace: \n" + stacktrace;
+      LOGGER.log(Level.SEVERE, errorMsg);
+      return false;
+    }
+    finally
+    {
+      pm.close();
+    }
+  }
 }

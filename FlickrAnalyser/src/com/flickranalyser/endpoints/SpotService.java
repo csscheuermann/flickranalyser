@@ -1,46 +1,45 @@
 package com.flickranalyser.endpoints;
 
-import java.util.ArrayList;
-
 import javax.ws.rs.core.Response;
 
 import com.flickranalyser.businesslogic.spotfinder.ISpotFinder;
 import com.flickranalyser.businesslogic.spotfinder.impl.NearestSpotFinder;
-import com.flickranalyser.persistence.datastore.get.PFGetterSpot;
+import com.flickranalyser.memcache.MemcacheSpot;
 import com.flickranalyser.pojo.Spot;
+import com.flickranalyser.pojo.SpotResultList;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.Named;
+import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.users.User;
 
-
 @Api(name="spotAPI", version="v1", description="API for Spots.")
-public class SpotService {
-	
-	private final ISpotFinder spotFinder;
-	
-	public SpotService() {
-		spotFinder = new NearestSpotFinder();
-	}
-	
-	@ApiMethod(name="getSpotByName")
-	public Spot getSpotByName(@Named("spotName") String spotName) {
-		return spotFinder.findSpotByName(spotName);
-	}
-	
-	@ApiMethod(name="getSpotByNamePutToCrawlQueue")
-	public Response getSpotByNamePutToCrawlQueue(@Named("spotName") String spotName) {
-		return spotFinder.getSpotByNamePutToCrawlQueue(spotName);
-	}
-	
-	
-	@ApiMethod(name="getTopSpots",	
-			scopes = {Constants.EMAIL_SCOPE},
-			clientIds = {Constants.WEB_CLIENT_ID,  
-			com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID})
-	public ArrayList<String>getTopSpots(User user) {
-		return (ArrayList<String>) PFGetterSpot.getTopSpots();
-	}
-	
-	
+public class SpotService
+{
+  private final ISpotFinder spotFinder;
+
+  public SpotService()
+  {
+    this.spotFinder = new NearestSpotFinder();
+  }
+
+  @ApiMethod(name="getSpotByName")
+  public Spot getSpotByName(@Named("spotName") String spotName) {
+    return this.spotFinder.findSpotByName(spotName);
+  }
+
+  @ApiMethod(name="getSpotByNamePutToCrawlQueue")
+  public Response getSpotByNamePutToCrawlQueue(@Named("spotName") String spotName) {
+    return this.spotFinder.getSpotByNamePutToCrawlQueue(spotName);
+  }
+
+  @ApiMethod(name="getTopSpots", scopes={"https://www.googleapis.com/auth/userinfo.email"}, clientIds={"1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com"})
+  public SpotResultList getTopSpots(User user)
+    throws UnauthorizedException
+  {
+    if (user == null) {
+      throw new UnauthorizedException("User is Not Valid");
+    }
+    return MemcacheSpot.getTopSpots();
+  }
 }

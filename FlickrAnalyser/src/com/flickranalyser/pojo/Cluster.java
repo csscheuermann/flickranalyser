@@ -18,56 +18,56 @@ import com.google.appengine.api.datastore.KeyFactory;
 @PersistenceCapable
 public class Cluster implements Serializable {
 
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key datastoreClusterKey;
-	
+
 	@Persistent
 	private double latitude;
-	
+
 	/** Counts how many people have dismissed this Cluster already */
 	@Persistent
 	private int dismissCounter;
-	
+
 	@Persistent
 	private double longitude;
-	
+
 	/** Name of the Spot */
 	@Persistent
 	private String name;
-	
+
 	/** Description not implemented yet */
 	@Persistent
 	private String description;
-	
+
 	/** POIs, they are not stored in Datastore */
 	@NotPersistent
 	private final List<PointOfInterest> pointsOfInterest;
-	
+
 	/** Overall views, its the sum of every POIs views */
 	@Persistent
 	private int overallViews;
-	
+
 	/** URL of the most viewed picture */
 	@Persistent
 	private List<String> urlOfMostViewedPicture;
-	
+
 	/** Corresponds with the list size of POIs, but we will not store this POIs. They are too much */
 	@Persistent
 	private int numberOfPOIs;
-	
+
 	/** The avarage touristicness evaluation factor from 1 to 10 */
 	@Persistent
 	private double overallTouristicnessInPointsFrom1To10;
-	
+
 	/** Number of touristicness votes */
 	@Persistent
 	private int overallTouristicnessVotes;
-	
-	
+
+
 	public Cluster(double latitude, double longitude, String name, String description) {
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -77,10 +77,10 @@ public class Cluster implements Serializable {
 		overallTouristicnessInPointsFrom1To10 =0.0;
 		overallTouristicnessVotes = 0;
 	}
-	
-	
-	
-	
+
+
+
+
 	public double getOverallTouristicnessInPointsFrom1To10() {
 		return overallTouristicnessInPointsFrom1To10;
 	}
@@ -116,7 +116,7 @@ public class Cluster implements Serializable {
 		this.datastoreClusterKey = datastoreClusterKey;
 	}
 
-	
+
 	public int getNumberOfPOIs() {
 		return numberOfPOIs;
 	}
@@ -177,6 +177,9 @@ public class Cluster implements Serializable {
 
 
 	public List<PointOfInterest> getPointOfInterestList() {
+		if ((this.pointsOfInterest == null) || (this.pointsOfInterest.isEmpty())) {
+			return Collections.unmodifiableList(new LinkedList<PointOfInterest>());
+		}
 		Collections.sort(pointsOfInterest);
 		return Collections.unmodifiableList(pointsOfInterest);
 	}
@@ -225,9 +228,9 @@ public class Cluster implements Serializable {
 	public double getLongitude() {
 		return longitude;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

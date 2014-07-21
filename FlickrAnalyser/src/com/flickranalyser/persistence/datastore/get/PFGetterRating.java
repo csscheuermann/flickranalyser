@@ -13,54 +13,48 @@ import javax.ws.rs.core.Response;
 import com.flickranalyser.persistence.datastore.common.PMF;
 import com.flickranalyser.pojo.Rating;
 
-public class PFGetterRating {
+public class PFGetterRating
+{
+  private static final Logger LOGGER = Logger.getLogger(PFGetterRating.class.getName());
 
-	
-	private static final Logger LOGGER = Logger.getLogger(PFGetterRating.class.getName());
-	
+  public static Response hasUserAlreadyRated(String userPrimaryKey, String clusterPrimaryKey)
+  {
+    PersistenceManager pm = PMF.get().getPersistenceManager();
+    try
+    {
+      String datastoreKey = userPrimaryKey + clusterPrimaryKey;
 
-	
-	public static Response hasUserAlreadyRated(String userPrimaryKey, String clusterPrimaryKey){
+      Query newQuery = pm.newQuery("select datastoreRatingKey from " + Rating.class.getName());
+      newQuery.setFilter("datastoreRatingKey == datastoreKey");
+      newQuery.declareParameters("String datastoreKey");
 
-		PersistenceManager pm = PMF.get().getPersistenceManager();
+      List resultList = (List)newQuery.execute(datastoreKey);
 
-		try{
+      if (resultList.size() > 0)
+      {
+        LOGGER.log(Level.INFO, "USER ALREADY VOTED FOR THIS CLUSTER.");
+        return Response.status(200).entity(Boolean.valueOf(true)).build();
+      }
+      LOGGER.log(Level.INFO, "USER CAN VOTE.");
+      return Response.status(200).entity(Boolean.valueOf(false)).build();
+    }
+    catch (Exception ex)
+    {
+      Response localResponse;
+      LOGGER.log(Level.SEVERE, "EXCEPTION WHILE FETCHING RATING.");
 
-			String datastoreKey = userPrimaryKey + clusterPrimaryKey;
+      StringWriter sw = new StringWriter();
+      PrintWriter pw = new PrintWriter(sw);
+      ex.printStackTrace(pw);
+      String stacktrace = sw.toString();
 
-			Query newQuery = pm.newQuery("select datastoreRatingKey from " + Rating.class.getName());
-			newQuery.setFilter("datastoreRatingKey == datastoreKey");
-			newQuery.declareParameters("String datastoreKey");
-			
-			List<?> resultList = (List<?>) newQuery.execute(datastoreKey);
-			
-			if(resultList.size() >0){
-				
-				//already voted
-				LOGGER.log(Level.INFO, "USER ALREADY VOTED FOR THIS CLUSTER.");
-				return Response.status(200).entity(true).build();
-			}else{
-				LOGGER.log(Level.INFO, "USER CAN VOTE.");
-				return Response.status(200).entity(false).build();
-			}
-
-
-		} catch (Exception ex) {
-			//TODO COS: EXCEPTION HANDLING talk to daniel
-			LOGGER.log(Level.SEVERE, "EXCEPTION WHILE FETCHING RATING.");
-		
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			ex.printStackTrace(pw);
-			String stacktrace = sw.toString();
-
-			final String errorMsg = "An error occured: \n" + ex.getMessage() + "\n\nStacktrace: \n" + stacktrace;
-			LOGGER.log(Level.SEVERE, errorMsg);
-			return Response.status(200).entity(false).build();
-		
-		}
-		finally{
-			pm.close();
-		}
-	}
+      String errorMsg = "An error occured: \n" + ex.getMessage() + "\n\nStacktrace: \n" + stacktrace;
+      LOGGER.log(Level.SEVERE, errorMsg);
+      return Response.status(200).entity(Boolean.valueOf(false)).build();
+    }
+    finally
+    {
+      pm.close();
+    }
+  }
 }
