@@ -20,82 +20,28 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="/res_html/js/Chart.js"></script>
 	<script src="/res_html/js/ClusterDetails.js"></script>
-	<script src="/res_html/js/CustomCloudEndpoints.js"></script>
+	<script src="/res_html/js/RequestsToSeekret.js"></script>
 	
 	<script type="text/javascript">
-			
-				
-	        function init() {
-					var customCloudEndpoints = new CustomCloudEndpoints();	
-	        }
-			
-			
-			function setSpotAddress(lat, lng){
-					var requestParam = {'latitude': lat,'longitude': lng };
-					var request = gapi.client.clusterAPI.getAddressFromLatLng(requestParam);
-					request.execute(setAddressField);	
-			}
-			
-			function setAddressField(resp){
-					if (!resp.code){
-						$('#clusterAddress').html(resp.address);
-					}else{
-						$('#clusterAddress').html('Address not available');
-						console.log ( 'Something went wrong with getting the address.' );
-					}
-			}
-			 	
-		</script>
-		
-		
-     <script type="text/javascript">
-	
-		 $(document).ready(function() { 	 	 
-         	$('#btnTouristic').click(function (){	 
-            	vote('#btnTouristic', 10);
-         	});
-        
-         $('#btnSeekret').click(function (){	 
-            vote('#btnSeekret', 0);
-         });
-	   	});
-		 
-	function vote(buttonId, clusterRatingValue){
-    		
-			// Set a variable that is set to the div containing the overlay (created on page load)
-           var page_overlay = jQuery('<div id="overlay"><div id="loadingImage"><img  src="/res_html/img/loading.gif"></div> </div>');
 
-           // Function to Add the overlay to the page
-           function showOverlay(){
-               page_overlay.appendTo(document.body);
-           }
-           // Function to Remove the overlay from the page
-           function hideOverlay(){
-               page_overlay.remove();
-           }
+
+	//KOMMT IN DIE INIT NACHHER	 	
+    $(document).ready(function() { 	 	 
+        $('#btnTouristic').click(function (){	 
+	        google.appengine.seekret.vote('#btnTouristic', 10);
+        });
+        
+        $('#btnSeekret').click(function (){	 
+            google.appengine.seekret.vote('#btnSeekret', 0);
+        });
+	
+        $('#btnDismiss').click(function (){	 
+            google.appengine.seekret.dismissCluster($('#btnDismiss').val());
+        });
 		
-			
-		 $.ajax({
-             type: "post",
-             url: "?action=EvaluateSpot", //this is my servlet
-             data: "clusterKey=" +$(buttonId).val()+"&clusterRating=" + clusterRatingValue +"&spotName="+$('#spotaddress').html(),
-			 beforeSend: function() { 
- 					$('html, body').animate({ scrollTop: 0 }, 0);
-					showOverlay();
- 					
-			 },  
-			 
-			 success: function(data){ 
-			
-			 		hideOverlay()
-					$(buttonId).attr("disabled", true);      
-              		$('#voteResultField').show();
-					$('#voteResultMessage').html(data);
-					$('#voteResultMessage').show();
-					}
-					
-			 });
-	}
+	});
+		 
+	
 	
      
      </script>
@@ -139,33 +85,6 @@
    		alert ('seekret' + key);
    }
    
-   
-   function getAdressByLatLng(lat, lng){
-   
- 	$.ajax({
-       type: "get",
-       url: "?action=EvaluateSpot", //this is my servlet
-       data: "clusterKey=" +$(buttonId).val()+"&clusterRating=" + clusterRatingValue +"&spotName="+$('#spotaddress').html(),
-	 beforeSend: function() { 
-			$('html, body').animate({ scrollTop: 0 }, 0);
-			showOverlay();
-			
-	 },  
-	 
-	 success: function(data){ 
-	
-	 		hideOverlay()
-			$(buttonId).attr("disabled", true);      
-        		$('#voteResultField').show();
-			$('#voteResultMessage').html(data);
-			$('#voteResultMessage').show();
-			}
-			
-	 });
-   
-   
-   
-   }
 
    function addMarker(datastoreClusterKey, spotName,overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat,lgt , numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
    	// To add the marker to the map, use the 'map' property
@@ -192,6 +111,9 @@
 		var btnTouristicness = document.getElementById("btnTouristic");
 		btnTouristicness.setAttribute('value', datastoreClusterKey);
 		
+		var btnDismiss = document.getElementById("btnDismiss");
+		btnDismiss.setAttribute('value', datastoreClusterKey);
+		
 		var btnSeekret = document.getElementById("btnSeekret");
 		btnSeekret.setAttribute('value', datastoreClusterKey);
 	
@@ -208,7 +130,8 @@
 		
 		//Now set up the Cluster Info Container
 		$('#seekretSpotInfoContainer').show();
-		setSpotAddress(lat,lgt); 
+	    //Get the Custer Address
+		google.appengine.seekret.getClusterAddressByLatLong(lat, lgt);
 		$('#clusterViews').html(numberOfViews);
 		$('#clusterPOIs').html(numberOfPOIsForCurrentCluster);
 		$('#maxClusterViews').html(maxNumberOfViews);
@@ -216,9 +139,11 @@
 		 
 		//Now set up the Image Container
 		$('#topPicturesContainer').show();
-		$('#picture1').html('<img src=' + pictureUrl1 +' />');
-		$('#picture2').html('<img src=' + pictureUrl2 +' />');
-		$('#picture3').html('<img src=' + pictureUrl3 +' />');
+
+		google.appengine.seekret.addImageTagToDivId('#picture1', pictureUrl1);
+		google.appengine.seekret.addImageTagToDivId('#picture2', pictureUrl2);
+		google.appengine.seekret.addImageTagToDivId('#picture3', pictureUrl3);
+
 
 		//Now set up the Charts
 		$('#ratingInformationContainer').show();
@@ -394,21 +319,14 @@
 	<% out.println(helperMethods.createNavigation(false)); %>
 	<% out.println(helperMethods.createMap()); %>
 	
-
-	
-	
-	
-	
-	<script src="https://apis.google.com/js/client.js?onload=init"></script>
-	
 	<% out.println(helperMethods.createVoteResultField()); %>
+	<% out.println(helperMethods.createTopPicturesContainer()); %>	
+	
 	
 	<% out.println(helperMethods.createSpotInfo()); %>
 	<% out.println(helperMethods.createSeekretSpotInformation()); %>
-	
-	<% out.println(helperMethods.createTopPicturesContainer()); %>		
 	<% out.println(helperMethods.createRatingInformationContainer()); %>
-	<% out.println(helperMethods.createVoteButtons()); %>
+	
 
 
 

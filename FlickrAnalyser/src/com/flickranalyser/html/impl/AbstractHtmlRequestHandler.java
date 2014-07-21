@@ -21,6 +21,8 @@ public abstract class AbstractHtmlRequestHandler
 
   public String performActionAndGetNextView(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
   {
+	  
+	 
     if (isLoginRequired()) {
       SeekretUser currentUser = (SeekretUser)pSession.getAttribute("currentUser");
       LOGGER.log(Level.INFO, MESSAGE_USERNAME + currentUser.getEmail());

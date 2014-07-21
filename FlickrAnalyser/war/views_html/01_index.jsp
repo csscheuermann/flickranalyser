@@ -14,14 +14,7 @@
 	<% out.println(helperMethods.createCarusel()); %>
 	<% out.println(helperMethods.getMarketingForMainPage()); %>
 	
-
-	
-	
-	
 	<% out.println(helperMethods.getFooter()); %>
-	
-
-
 	
 	<% out.println(helperMethods.createBodyEnd());%>
 	
