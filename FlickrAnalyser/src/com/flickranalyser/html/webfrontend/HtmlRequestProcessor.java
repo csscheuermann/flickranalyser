@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.html.IHtmlRequestHandler;
 import com.flickranalyser.html.common.HelperMethods;
-import com.flickranalyser.pojo.User;
+import com.flickranalyser.pojo.SeekretUser;
 
 public class HtmlRequestProcessor
 {
@@ -28,7 +28,7 @@ public class HtmlRequestProcessor
   private ServletContext mServletContext;
   private static final Logger LOGGER = Logger.getLogger(HtmlStarterServlet.class.getName());
 
-  public static final User GUEST_USER = new User("guest@guest.com", "guestuser", "guest", "not link", "no picture");
+  public static final SeekretUser GUEST_USER = new SeekretUser("guest@guest.com", "guestuser", "guest", "not link", "no picture");
 
   public HtmlRequestProcessor(HttpServletRequest pRequest, HttpServletResponse pResponse, ServletContext pServletContext) {
     this.mRequest = pRequest;
@@ -56,10 +56,10 @@ public class HtmlRequestProcessor
 
   private void checkPreconditions() throws Exception
   {
-    String nextView = this.mRequest.getParameter("showView");
+    String nextView = this.mRequest.getParameter(SHOW_VIEW);
     LOGGER.info("SHOW VIEW PARAM " + nextView);
 
-    String action = this.mRequest.getParameter("action");
+    String action = this.mRequest.getParameter(ACTION);
     LOGGER.info("ACTION PARAM " + action);
 
     if ((action != null) && (nextView != null))
@@ -73,9 +73,9 @@ public class HtmlRequestProcessor
 
     makeHelperMethodsClassAvailableToViews();
 
-    String nextViewName = this.mRequest.getParameter("showView");
+    String nextViewName = this.mRequest.getParameter(SHOW_VIEW);
 
-    String action = this.mRequest.getParameter("action");
+    String action = this.mRequest.getParameter(ACTION);
 
     IHtmlRequestHandler requestHandler = loadHandlerForAction(action);
 
@@ -107,7 +107,7 @@ public class HtmlRequestProcessor
       return null;
     }
 
-    IHtmlRequestHandler requestHandler = loadRequestHandlerByName("Action" + action);
+    IHtmlRequestHandler requestHandler = loadRequestHandlerByName(PREFIX_ACTION_HANDLER_CLASS + action);
 
     if (requestHandler != null) {
       return requestHandler;
@@ -165,7 +165,7 @@ public class HtmlRequestProcessor
   private void checkUserLogin()
   {
     HttpSession session = this.mRequest.getSession();
-    User currentUser = (User)session.getAttribute("currentUser");
+    SeekretUser currentUser = (SeekretUser)session.getAttribute("currentUser");
 
     if (currentUser == null) {
       currentUser = GUEST_USER;

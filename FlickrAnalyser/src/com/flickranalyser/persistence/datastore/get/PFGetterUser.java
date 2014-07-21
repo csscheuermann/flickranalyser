@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import javax.jdo.PersistenceManager;
 
 import com.flickranalyser.persistence.datastore.common.PMF;
-import com.flickranalyser.pojo.User;
+import com.flickranalyser.pojo.SeekretUser;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
@@ -15,13 +15,13 @@ public class PFGetterUser {
 
 	private static final Logger LOGGER = Logger.getLogger(PFGetterUser.class.getName());
 
-	public static User getUserByEmail(String eMail){
+	public static SeekretUser getUserByEmail(String eMail){
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		try{
-			Key k = KeyFactory.createKey(User.class.getSimpleName(), eMail);
-			User user = pm.getObjectById(User.class, k);
+			Key k = KeyFactory.createKey(SeekretUser.class.getSimpleName(), eMail);
+			SeekretUser user = pm.getObjectById(SeekretUser.class, k);
 			if (user != null){
 				LOGGER.log(Level.INFO, "FOUND USER IN DATASTORE." );
 				return user;

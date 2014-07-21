@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.eclipsesource.json.JsonObject;
-import com.flickranalyser.pojo.User;
+import com.flickranalyser.pojo.SeekretUser;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
@@ -62,7 +62,7 @@ public class GoogleAuthHelper
     return this.stateToken;
   }
 
-  public User getGoogleUserInfo(String authCode)
+  public SeekretUser getGoogleUserInfo(String authCode)
     throws IOException
   {
     GoogleTokenResponse response = this.flow.newTokenRequest(authCode).setRedirectUri("https://flickeranalyser.appspot.com/oauth2callback").execute();
@@ -108,6 +108,6 @@ public class GoogleAuthHelper
     LOGGER.log(Level.INFO, "Profile Link: " + profileLink);
     LOGGER.log(Level.INFO, "Picture: " + picture);
 
-    return new User(email, fullName, givenName, profileLink, picture);
+    return new SeekretUser(email, fullName, givenName, profileLink, picture);
   }
 }

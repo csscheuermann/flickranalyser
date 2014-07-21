@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.html.IHtmlRequestHandler;
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
-import com.flickranalyser.pojo.User;
+import com.flickranalyser.pojo.SeekretUser;
 
 public abstract class AbstractHtmlRequestHandler
   implements IHtmlRequestHandler
@@ -22,13 +22,13 @@ public abstract class AbstractHtmlRequestHandler
   public String performActionAndGetNextView(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
   {
     if (isLoginRequired()) {
-      User currentUser = (User)pSession.getAttribute("currentUser");
-      LOGGER.log(Level.INFO, "USERNAME: " + currentUser.getEmail());
+      SeekretUser currentUser = (SeekretUser)pSession.getAttribute("currentUser");
+      LOGGER.log(Level.INFO, MESSAGE_USERNAME + currentUser.getEmail());
 
       if (currentUser.getEmail().equals(
         HtmlRequestProcessor.GUEST_USER.getEmail())) {
-        LOGGER.log(Level.INFO, "USER NOT LOGGED IN");
-        return "Login";
+        LOGGER.log(Level.INFO, MESSAGE_USER_NOT_LOGGED_IN);
+        return VIEW_LOGIN;
       }
     }
 

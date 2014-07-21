@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 
 import com.flickranalyser.endpoints.ClusterService;
 import com.flickranalyser.endpoints.RatingService;
-import com.flickranalyser.pojo.User;
+import com.flickranalyser.pojo.SeekretUser;
 
 public class ActionEvaluateSpotHandler extends AbstractHtmlRequestHandler
 {
@@ -26,7 +26,7 @@ public class ActionEvaluateSpotHandler extends AbstractHtmlRequestHandler
     int clusterRatingValue = Integer.parseInt(pRequest.getParameter("clusterRating"));
     String spotName = pRequest.getParameter("spotName");
 
-    User currentUser = (User)pSession.getAttribute("currentUser");
+    SeekretUser currentUser = (SeekretUser)pSession.getAttribute("currentUser");
 
     String email = currentUser.getEmail();
     Response hasUserAlreadyVoted = ratingService.hasUserAlreadyVoted(email, clusterKey);

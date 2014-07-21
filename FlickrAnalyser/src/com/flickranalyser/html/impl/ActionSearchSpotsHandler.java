@@ -1,15 +1,13 @@
 package com.flickranalyser.html.impl;
 
+import com.flickranalyser.endpoints.SpotService;
+import com.flickranalyser.pojo.Spot;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
-
-import com.flickranalyser.endpoints.SpotService;
-import com.flickranalyser.pojo.Spot;
 
 public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
 {
@@ -22,10 +20,10 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
     SpotService spotService = new SpotService();
 
     String crawlSpotName = pRequest.getParameter("crawlAddress");
-    LOGGER.log(Level.INFO, "CRAWL QUEUE, FULL SPOT NAME: " + crawlSpotName);
+    LOGGER.log(Level.INFO, MESSAGE_CRAWLQUEUE_SPOT_NAME + crawlSpotName);
 
     if (crawlSpotName != null) {
-      LOGGER.log(Level.INFO, "CRAWL QUEUE, FULL SPOT NAME: SPOT TO CRAWL.");
+      LOGGER.log(Level.INFO, MESSAGE_CRAWLQUEUE_SPOT_NAME+ " SPOT TO CRAWL.");
       Response findSpotByNamePutToCrawlQueue = spotService.getSpotByNamePutToCrawlQueue(crawlSpotName);
 
       if (findSpotByNamePutToCrawlQueue.getStatus() == 400)
@@ -34,7 +32,7 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
         pRequest.setAttribute("successfulCron", findSpotByNamePutToCrawlQueue.getEntity().toString());
       }
 
-      return "SearchSpots";
+      return VIEW_SEARCH_SPOTS;
     }
 
     return handleSpotBehavior(pRequest, spotService);
@@ -53,6 +51,6 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
       pRequest.setAttribute("spot", spotByName);
     }
 
-    return "SearchSpots";
+    return VIEW_SEARCH_SPOTS;
   }
 }

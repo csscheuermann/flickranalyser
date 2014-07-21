@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.html.webfrontend.HtmlStarterServlet;
-import com.flickranalyser.pojo.User;
+import com.flickranalyser.pojo.SeekretUser;
 
 public class HelperMethods
 {
@@ -155,7 +155,7 @@ public class HelperMethods
 
   public String createNavigation(boolean isIndexPage)
   {
-    User currentUser = (User)this.session.getAttribute("currentUser");
+    SeekretUser currentUser = (SeekretUser)this.session.getAttribute("currentUser");
     StringBuilder navigation = new StringBuilder();
 
     if (isIndexPage)

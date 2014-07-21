@@ -11,24 +11,20 @@ import javax.servlet.http.HttpSession;
 import com.flickranalyser.businesslogic.filter.IFilterStrategy;
 import com.flickranalyser.endpoints.SpotService;
 import com.flickranalyser.html.common.HelperMethods;
+import com.flickranalyser.pojo.Cluster;
 import com.flickranalyser.pojo.Spot;
 
-public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler
-{
+public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
   private static final Logger LOGGER = Logger.getLogger(PrepareSpotMapHandler.class.getName());
   private final SpotService spotService;
 
-  public PrepareSpotMapHandler()
-  {
+  public PrepareSpotMapHandler(){
     this.spotService = new SpotService();
   }
 
-  public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
-  {
-    String location = pRequest
-      .getParameter("location");
-    String filterStrategy = pRequest
-      .getParameter("strategy");
+  public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession){
+    String location = pRequest.getParameter("location");
+    String filterStrategy = pRequest.getParameter("strategy");
 
     LOGGER.log(Level.INFO, "LOCATION: " + location);
     LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);
@@ -43,22 +39,17 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler
       choosenFilterStrategy.getClass().getName());
 
     Spot spot = this.spotService.getSpotByName(location);
-    if (spot != null)
-    {
-      List cluster = spot.getCluster();
+    if (spot != null){
+      List<Cluster> cluster = spot.getCluster();
 
-      List filteredCluster = choosenFilterStrategy
-        .filterCluster(cluster, spot);
+      List<Cluster> filteredCluster = choosenFilterStrategy.filterCluster(cluster, spot);
       spot.setCluster(filteredCluster);
-
-      int numberOfFilteredClusters = cluster.size() - 
-        filteredCluster.size();
-      LOGGER.log(Level.INFO, "NUMBER OF FILTERED CLUSTERS: " + 
-        numberOfFilteredClusters);
+      
+      int numberOfFilteredClusters = cluster.size() - filteredCluster.size();
+      LOGGER.log(Level.INFO, "NUMBER OF FILTERED CLUSTERS: " + numberOfFilteredClusters);
 
       pRequest.setAttribute("spot", spot);
     }
-
     return null;
   }
 }

@@ -8,33 +8,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.flickranalyser.endpoints.UserService;
 import com.flickranalyser.html.common.GoogleAuthHelper;
-import com.flickranalyser.persistence.datastore.save.PFSaverUser;
-import com.flickranalyser.pojo.User;
+import com.flickranalyser.pojo.SeekretUser;
 
-public class Prepare01_indexHandler extends AbstractHtmlRequestHandler
-{
-  private static final Logger LOGGER = Logger.getLogger(Prepare01_indexHandler.class.getName());
+public class Prepare01_indexHandler extends AbstractHtmlRequestHandler {
+	private static final Logger LOGGER = Logger.getLogger(Prepare01_indexHandler.class.getName());
 
-  protected boolean isLoginRequired()
-  {
-    return false;
-  }
+	protected boolean isLoginRequired(){
+		return false;
+	}
 
-  public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
-  {
-    if ((pRequest.getParameter("code") != null) && (pRequest.getParameter("state") != null) && (pRequest.getParameter("state").equals(pSession.getAttribute("state")))) {
-      GoogleAuthHelper helper = new GoogleAuthHelper();
-      pSession.removeAttribute("state");
-      try
-      {
-        User user = helper.getGoogleUserInfo(pRequest.getParameter("code"));
-        PFSaverUser.saveUserToDatastore(user);
-        pSession.setAttribute("currentUser", user);
-      } catch (IOException e) {
-        LOGGER.log(Level.SEVERE, "COULD NOT GET USER INFO FROM GOOGLE. " + pRequest);
-      }
-    }
-    return "01_index";
-  }
+	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession) {
+		if ((pRequest.getParameter("code") != null) && (pRequest.getParameter("state") != null) && (pRequest.getParameter("state").equals(pSession.getAttribute("state")))) {
+			GoogleAuthHelper helper = new GoogleAuthHelper();
+			pSession.removeAttribute("state");
+			try{
+				SeekretUser user = helper.getGoogleUserInfo(pRequest.getParameter("code"));
+				UserService userService = new UserService();
+				userService.addUserToDatastore(user.getEmail(), user.getFullName(), user.getGivenName(), user.getProfileLink(), user.getPicture());
+				pSession.setAttribute("currentUser", user);
+			} catch (IOException e) {
+				LOGGER.log(Level.SEVERE, "COULD NOT GET USER INFO FROM GOOGLE. " + pRequest);
+			}
+		}
+		return "01_index";
+	}
 }

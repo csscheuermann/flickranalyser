@@ -8,7 +8,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class User implements Serializable{
+public class SeekretUser implements Serializable{
 	
 	
 
@@ -31,7 +31,7 @@ public class User implements Serializable{
 	@Persistent
 	private String picture;
 
-	public User(String email, String fullName, String givenName,
+	public SeekretUser(String email, String fullName, String givenName,
 			String profileLink, String picture) {
 		this.email = email;
 		this.fullName = fullName;
