@@ -249,7 +249,7 @@ public class HelperMethods
   {
     StringBuilder spotInfo = new StringBuilder();
 
-    spotInfo.append("<div id='spotInfoContainer' class='container'>");
+    spotInfo.append("<div id='spotInfoContainer' class='container showGroup background-grey'>");
 //    spotInfo.append("<div class='row'>");
 //    spotInfo.append("<div class='col-xs-12'>");
 //    spotInfo.append("<h2>INFORMATION ABOUT LOCATION</h2>");
@@ -271,7 +271,7 @@ public class HelperMethods
   {
     StringBuilder seekretSpotInformation = new StringBuilder();
 
-    seekretSpotInformation.append("<div id='seekretSpotInfoContainer' class='container'>");
+    seekretSpotInformation.append("<div id='seekretSpotInfoContainer' class='container showGroup background-grey'>");
 //    seekretSpotInformation.append("<div class='row'>");
 //    seekretSpotInformation.append("<div class='col-xs-12'>");
 //    seekretSpotInformation.append("<h2>SEEKRET SPOT INFORMATION</h2>");
@@ -305,7 +305,7 @@ public class HelperMethods
   public String createTopPicturesContainer() {
     StringBuilder topPicturesContainer = new StringBuilder();
 
-    topPicturesContainer.append("<div id='topPicturesContainer' class='container showGroup'>");
+    topPicturesContainer.append("<div id='topPicturesContainer' class='container showGroup background-grey'>");
 
 //    topPicturesContainer.append("<div class='row'>");
 //    topPicturesContainer.append("<div class='col-xs-12'>");
@@ -314,10 +314,9 @@ public class HelperMethods
 //    topPicturesContainer.append(" </div>");
 
     topPicturesContainer.append("<div class='row'>");
-    topPicturesContainer.append("<div class='col-md-3 centeralized-div'> <div id='picture1'> </div> </div>");
-    topPicturesContainer.append("<div class='col-md-3 centeralized-div'> <div id='picture2'> </div> </div>");
-    topPicturesContainer.append("<div class='col-md-3 centeralized-div'> <div id='picture3'> </div> </div>");
-    topPicturesContainer.append("<div class='col-md-3 centeralized-div'>"+ createVoteButtons() +" </div>");
+    topPicturesContainer.append("<div class='col-md-4 centeralized-div'> <div id='picture1'> </div> </div>");
+    topPicturesContainer.append("<div class='col-md-4 centeralized-div'> <div id='picture2'> </div> </div>");
+    topPicturesContainer.append("<div class='col-md-4 centeralized-div'> <div id='picture3'> </div> </div>");
     topPicturesContainer.append(" </div>");
 
     topPicturesContainer.append(" </div>");
@@ -329,7 +328,7 @@ public class HelperMethods
   {
     StringBuilder ratingInformationContainer = new StringBuilder();
 
-    ratingInformationContainer.append("<div id='ratingInformationContainer' class='container showGroup'>");
+    ratingInformationContainer.append("<div id='ratingInformationContainer' class='container showGroup background-grey'>");
 
 //    ratingInformationContainer.append("<div class='row'>");
 //    ratingInformationContainer.append("<div class='col-xs-12'>");
@@ -359,10 +358,12 @@ public class HelperMethods
   {
     StringBuilder createVoteButtons = new StringBuilder();
 
-    createVoteButtons.append("<div id='voteButtonContainer'>");
-    createVoteButtons.append("<div class='col-md-12'><button type='submit' id='btnDismiss'  class='btn btn-default'>Dismiss</button></div>");
-    createVoteButtons.append("<div class='col-md-12'><button type='submit' id='btnTouristic'  class='btn btn-default btn-danger' >Touristic</button>\t</div>");
-    createVoteButtons.append("<div class='col-md-12'><button type='submit' id='btnSeekret'  class='btn btn-default btn-success' >Seekret</button>\t</div>");
+    createVoteButtons.append("<div class='container showGroup' id='voteButtonContainer'>");
+    createVoteButtons.append("<div class='row'>");
+    createVoteButtons.append("<div class='col-md-4 centeralized-div'><button type='submit' id='btnDismiss'  class='round-button dismiss'>Dismiss</button></div>");
+    createVoteButtons.append("<div class='col-md-4 centeralized-div'><button type='submit' id='btnTouristic'  class='round-button touristic' >Touristic</button>\t</div>");
+    createVoteButtons.append("<div class='col-md-4 centeralized-div'><button type='submit' id='btnSeekret'  class='round-button seekret' >Seekret</button>\t</div>");
+    createVoteButtons.append(" </div>");
     createVoteButtons.append(" </div>");
 
     return createVoteButtons.toString();
