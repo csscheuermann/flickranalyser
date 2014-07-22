@@ -145,26 +145,26 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "maxNumberOfPOIsPerCluster" : {
-            "type" : "integer"
-          },
-          "maxNumberOfViewsPerCluster" : {
-            "type" : "integer"
-          },
           "clusterRadiusInMeter" : {
             "type" : "number"
           },
-          "cluster" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Cluster"
-            }
+          "maxNumberOfViewsPerCluster" : {
+            "type" : "integer"
           },
           "maxClusterViews" : {
             "type" : "integer"
           },
           "spotRadiusInMeter" : {
             "type" : "number"
+          },
+          "maxNumberOfPOIsPerCluster" : {
+            "type" : "integer"
+          },
+          "cluster" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Cluster"
+            }
           }
         }
       },
@@ -188,11 +188,11 @@
           "parent" : {
             "$ref" : "Key"
           },
-          "complete" : {
-            "type" : "boolean"
-          },
           "namespace" : {
             "type" : "string"
+          },
+          "complete" : {
+            "type" : "boolean"
           }
         }
       },
@@ -275,11 +275,11 @@
           "longitude" : {
             "type" : "number"
           },
-          "latitudeInternal" : {
+          "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },
-          "longitudeInternal" : {
+          "latitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },

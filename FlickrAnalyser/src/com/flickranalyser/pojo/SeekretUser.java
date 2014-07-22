@@ -8,32 +8,30 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class SeekretUser implements Serializable{
-	
-	
+public class SeekretUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/** Email address derived from oAuth */
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private final String email;
-	
-	@Persistent
-	private final String fullName;
-	
-	@Persistent
-	private final String givenName;
-	
-	@Persistent
-	private final String profileLink;
-	
-	@Persistent
-	private final String picture;
+	private String email;
 
 	@Persistent
-	private final String userGroup;
-	
+	private String fullName;
+
+	@Persistent
+	private String givenName;
+
+	@Persistent
+	private String profileLink;
+
+	@Persistent
+	private String picture;
+
+	@Persistent
+	private String userGroup;
+
 	public SeekretUser(String email, String fullName, String givenName, String profileLink, String picture) {
 		this.email = email;
 		this.fullName = fullName;
@@ -66,10 +64,9 @@ public class SeekretUser implements Serializable{
 	public String getPicture() {
 		return picture;
 	}
-	
+
 	public String getUserGroup() {
 		return userGroup;
 	}
-	
 
 }
