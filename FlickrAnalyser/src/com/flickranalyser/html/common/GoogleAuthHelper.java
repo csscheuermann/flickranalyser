@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.eclipsesource.json.JsonObject;
+import com.flickranalyser.endpoints.UserService;
 import com.flickranalyser.pojo.SeekretUser;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -34,12 +35,13 @@ public class GoogleAuthHelper
   private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
   private String stateToken;
   private final GoogleAuthorizationCodeFlow flow;
+private UserService userService;
 
   public GoogleAuthHelper()
   {
     this.flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, 
       JSON_FACTORY, "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "zoQ1ahfrdOIglvRNv210_Yy0", (Collection)SCOPE).build();
-
+		userService = new UserService();
     generateStateToken();
   }
 
