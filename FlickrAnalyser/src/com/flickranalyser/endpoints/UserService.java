@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javax.ws.rs.core.Response;
 
+import com.flickranalyser.persistence.datastore.get.PFGetterUser;
 import com.flickranalyser.persistence.datastore.save.PFSaverCluster;
 import com.flickranalyser.persistence.datastore.save.PFSaverUser;
 import com.flickranalyser.pojo.SeekretUser;
@@ -28,4 +29,11 @@ public class UserService {
 		  @Named("picture") String picture) {
     return PFSaverUser.saveUserToDatastore(new SeekretUser(email, fullName, givenName, profileLink, picture));
   }
+  
+  
+  @ApiMethod(name="doesUserExist")
+  public SeekretUser getUserByEmail(@Named("email") String email) {
+    return PFGetterUser.getUserByEmail(email);
+  }
+  
 }

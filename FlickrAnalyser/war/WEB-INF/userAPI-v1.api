@@ -25,6 +25,27 @@
     "maxAge" : 0
   },
   "methods" : {
+    "userAPI.doesUserExist" : {
+      "path" : "seekretuser/{email}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.UserService.getUserByEmail",
+      "request" : {
+        "parameters" : {
+          "email" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "userAPI.addUserToDatastore" : {
       "path" : "addUserToDatastore/{email}/{fullName}/{givenName}/{profileLink}/{picture}",
       "httpMethod" : "POST",
@@ -65,6 +86,30 @@
   },
   "descriptor" : {
     "schemas" : {
+      "SeekretUser" : {
+        "id" : "SeekretUser",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "fullName" : {
+            "type" : "string"
+          },
+          "givenName" : {
+            "type" : "string"
+          },
+          "profileLink" : {
+            "type" : "string"
+          },
+          "picture" : {
+            "type" : "string"
+          },
+          "userGroup" : {
+            "type" : "string"
+          }
+        }
+      },
       "Response" : {
         "id" : "Response",
         "type" : "object",
@@ -90,6 +135,11 @@
       }
     },
     "methods" : {
+      "com.flickranalyser.endpoints.UserService.getUserByEmail" : {
+        "response" : {
+          "$ref" : "SeekretUser"
+        }
+      },
       "com.flickranalyser.endpoints.UserService.addUserToDatastore" : {
         "response" : {
           "$ref" : "Response"
