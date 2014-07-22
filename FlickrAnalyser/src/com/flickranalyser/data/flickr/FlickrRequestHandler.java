@@ -22,7 +22,8 @@ import com.javadocmd.simplelatlng.util.LengthUnit;
 
 public class FlickrRequestHandler {
 
-	//Maximal 16 pages a 250 pictures results in 4000 pictures (max result from flickr).
+	// Maximal 16 pages a 250 pictures results in 4000 pictures (max result from
+	// flickr).
 	private static final int MAX_NUMBER_PAGES_TO_CRAWL = 17;
 
 	private static final Logger log = Logger
@@ -32,51 +33,58 @@ public class FlickrRequestHandler {
 	private static final String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
 	private static final String PHOTO_SEARCH_REQUEST = "flickr.photos.search";
 
+	private final IFotoExcluder fotoExcluder;
+
+	public FlickrRequestHandler(IFotoExcluder fotoExcluder) {
+		this.fotoExcluder = fotoExcluder;
+	}
+
 	// private String sharedSecret = "e7992cc453964557";
 
 	public Set<PointOfInterest> getPOIsForSpot(Spot spot) {
 
 		Set<PointOfInterest> result = new HashSet<PointOfInterest>();
 
-		
-
 		HashMap<LatLng, Double> calculateNewPoint = calculateNewPoint(spot);
-		
-		List<String> picture_ids = new ArrayList<String>(); 
+
+		List<String> picture_ids = new ArrayList<String>();
 
 		for (Entry<LatLng, Double> entry : calculateNewPoint.entrySet()) {
 			int requestedPage = 1;
 			int numberPages = 1;
 			int maxViewCount = 0;
-			
+
 			LatLng key = entry.getKey();
 			double radiusInKm = entry.getValue().doubleValue();
 
 			do {
-				StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
+				StringBuilder urlForRequest = new StringBuilder(
+						FLICKR_REQUEST_URL);
 				urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST)
-				.append("&api_key=").append(FLICKR_API_KEY).append("&")
-				.append("lat=").append(key.getLatitude()).append("&")
-				.append("lon=").append(key.getLongitude())
-				.append("&radius=").append(radiusInKm)
-				.append("&sort=interestingness-desc")
-				.append("&extras=views%2Cgeo%2Curl_s%2Ctags")
-				.append("&per_page=250").append("&page=")
-				.append(requestedPage)
-				.append("&format=json&nojsoncallback=1");
+						.append("&api_key=").append(FLICKR_API_KEY).append("&")
+						.append("lat=").append(key.getLatitude()).append("&")
+						.append("lon=").append(key.getLongitude())
+						.append("&radius=").append(radiusInKm)
+						.append("&sort=interestingness-desc")
+						.append("&extras=views%2Cgeo%2Curl_s%2Ctags")
+						.append("&per_page=250").append("&page=")
+						.append(requestedPage)
+						.append("&format=json&nojsoncallback=1");
 
 				JsonObject photosObject;
 
 				try {
-					log.log(Level.INFO, "Retrieving all images for spot " + spot
-							+ " (page=" + requestedPage + ",numberPages="
-							+ numberPages + ") -> " + urlForRequest);
+					log.log(Level.INFO, "Retrieving all images for spot "
+							+ spot + " (page=" + requestedPage
+							+ ",numberPages=" + numberPages + ") -> "
+							+ urlForRequest);
 					String jsonResponse = Request.Get(urlForRequest.toString())
 							.execute().returnContent().asString();
 					requestedPage++;
 					photosObject = JsonObject.readFrom(jsonResponse);
 				} catch (Exception e) {
-					// log.log(Level.WARNING, "Could not execute http request", e);
+					// log.log(Level.WARNING, "Could not execute http request",
+					// e);
 					return result;
 				}
 
@@ -86,10 +94,12 @@ public class FlickrRequestHandler {
 							.asObject();
 					// int totalNumber = Integer.valueOf(
 					// photosArrayObject.get("total").asString()).intValue();
-					// int photosPerPage = photosArrayObject.get("perpage").asInt();
+					// int photosPerPage =
+					// photosArrayObject.get("perpage").asInt();
 					numberPages = photosArrayObject.get("pages").asInt();
 
-					JsonArray photoArray = photosArrayObject.get("photo").asArray();
+					JsonArray photoArray = photosArrayObject.get("photo")
+							.asArray();
 					for (int j = 0; j < photoArray.size(); j++) {
 						JsonObject photo = photoArray.get(j).asObject();
 						int numberViews = Integer.valueOf(
@@ -105,9 +115,10 @@ public class FlickrRequestHandler {
 							Set<String> tags = new HashSet<String>();
 							int size = Arrays.asList(tagsArray).size();
 
-							for (int i = 0; i < 20; i++ ) {
-								if (i < size){
-									tags.add(Arrays.asList(tagsArray).get(i).toUpperCase());
+							for (int i = 0; i < tagsArray.length; i++) {
+								if (i < size) {
+									tags.add(Arrays.asList(tagsArray).get(i)
+											.toUpperCase());
 								}
 
 							}
@@ -117,9 +128,14 @@ public class FlickrRequestHandler {
 							String picture_id = photo.get("id").asString();
 							LatLng location = new LatLng(latitude, longitude);
 
-							if(!picture_ids.contains(picture_id)){
+							if (!picture_ids.contains(picture_id)) {
 								picture_ids.add(picture_id);
-								result.add(new PointOfInterest(numberViews, location, url,tags));
+								PointOfInterest pointOfInterest = new PointOfInterest(
+										numberViews, location, url, tags);
+								if (!fotoExcluder
+										.isFotoToExclude(pointOfInterest)) {
+									result.add(pointOfInterest);
+								}
 							}
 						} catch (Exception e) {
 							log.log(Level.SEVERE, "COULD NOT PARSE THIS HERE.");
@@ -132,13 +148,14 @@ public class FlickrRequestHandler {
 
 				// We need to make this algorithm more efficient
 			} while ((requestedPage < numberPages)
-					&& (requestedPage < MAX_NUMBER_PAGES_TO_CRAWL) && result.size() < 10000);
-			log.log(Level.INFO,"NUMBER OF PICTURES " + picture_ids.size());
+					&& (requestedPage < MAX_NUMBER_PAGES_TO_CRAWL)
+					&& result.size() < 10000);
+			log.log(Level.INFO, "NUMBER OF PICTURES " + picture_ids.size());
 		}
 		return result;
 	}
 
-	public HashMap<LatLng, Double> calculateNewPoint(Spot spot){
+	public HashMap<LatLng, Double> calculateNewPoint(Spot spot) {
 		HashMap<LatLng, Double> allPoints = new HashMap<LatLng, Double>();
 		LatLng latLng = new LatLng(spot.getLatitude(), spot.getLongitude());
 		Double radius = Double.valueOf(spot.getSpotRadiusInKm());
@@ -147,39 +164,51 @@ public class FlickrRequestHandler {
 	}
 
 	/**
-	 * This method generates satelites around a given spot. 
-	 * Attention, using this method for requests to flickr, we can get problems with write/read operations
-	 * and problems with the spot size ( > 1MB) concerning memcache.
-	 * @param spot given Spot.
-	 * @param allPoints Map of Points with spotradius.
+	 * This method generates satelites around a given spot. Attention, using
+	 * this method for requests to flickr, we can get problems with write/read
+	 * operations and problems with the spot size ( > 1MB) concerning memcache.
+	 * 
+	 * @param spot
+	 *            given Spot.
+	 * @param allPoints
+	 *            Map of Points with spotradius.
 	 */
 	@SuppressWarnings("unused")
-	private void createSatelitesArroundGivenSpot(Spot spot, HashMap<LatLng, Double> allPoints) {
-		for (int degree = 0; degree < 316; degree += 45){
-			double d = spot.getSpotRadiusInKm()+ (spot.getSpotRadiusInKm()/2.0);
-			System.out.println("Distance = " +  d);
-			double dist = d /6371.0;
+	private void createSatelitesArroundGivenSpot(Spot spot,
+			HashMap<LatLng, Double> allPoints) {
+		for (int degree = 0; degree < 316; degree += 45) {
+			double d = spot.getSpotRadiusInKm()
+					+ (spot.getSpotRadiusInKm() / 2.0);
+			System.out.println("Distance = " + d);
+			double dist = d / 6371.0;
 			double brng = Math.toRadians(degree);
 			double lat1 = Math.toRadians(spot.getLatitude());
 			double lon1 = Math.toRadians(spot.getLongitude());
 
-			double lat2 = Math.asin( Math.sin(lat1)*Math.cos(dist) + Math.cos(lat1)*Math.sin(dist)*Math.cos(brng) );
-			double a = Math.atan2(Math.sin(brng)*Math.sin(dist)*Math.cos(lat1), Math.cos(dist)-Math.sin(lat1)*Math.sin(lat2));
-			System.out.println("a = " +  a);
+			double lat2 = Math.asin(Math.sin(lat1) * Math.cos(dist)
+					+ Math.cos(lat1) * Math.sin(dist) * Math.cos(brng));
+			double a = Math.atan2(
+					Math.sin(brng) * Math.sin(dist) * Math.cos(lat1),
+					Math.cos(dist) - Math.sin(lat1) * Math.sin(lat2));
+			System.out.println("a = " + a);
 			double lon2 = lon1 + a;
 
-			lon2 = (lon2+ 3*Math.PI) % (2*Math.PI) - Math.PI;
+			lon2 = (lon2 + 3 * Math.PI) % (2 * Math.PI) - Math.PI;
 
 			double latitude2 = Math.toDegrees(lat2);
 			double longitude2 = Math.toDegrees(lon2);
-			System.out.println("Latitude = "+latitude2+"\nLongitude = "+longitude2);
+			System.out.println("Latitude = " + latitude2 + "\nLongitude = "
+					+ longitude2);
 
 			LatLng origin = new LatLng(spot.getLatitude(), spot.getLongitude());
 			LatLng newPoint = new LatLng(latitude2, longitude2);
 
-
-			log.log(Level.INFO, "DISTANCE TO CENTER " + (LatLngTool.distance(origin, newPoint, LengthUnit.KILOMETER)));
-			allPoints.put(newPoint,Double.valueOf(spot.getSpotRadiusInKm()/2.0));
+			log.log(Level.INFO,
+					"DISTANCE TO CENTER "
+							+ (LatLngTool.distance(origin, newPoint,
+									LengthUnit.KILOMETER)));
+			allPoints.put(newPoint,
+					Double.valueOf(spot.getSpotRadiusInKm() / 2.0));
 		}
 	}
 

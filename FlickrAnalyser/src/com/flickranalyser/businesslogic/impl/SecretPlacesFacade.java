@@ -6,23 +6,23 @@ import java.util.logging.Logger;
 
 import com.flickranalyser.businesslogic.ISecretPlacesFacade;
 import com.flickranalyser.data.flickr.FlickrRequestHandler;
-import com.flickranalyser.data.flickr.TagBasedRequestReducer;
+import com.flickranalyser.data.flickr.IFotoExcluder;
+import com.flickranalyser.data.flickr.TagBasedFotoExcluder;
 import com.flickranalyser.pojo.PointOfInterest;
 import com.flickranalyser.pojo.Spot;
 
 public class SecretPlacesFacade implements ISecretPlacesFacade {
 
-	private Spot spot;
-	private FlickrRequestHandler flickrRequestHandler;
-	private SpotCalculationHandler spotCalculationHandler;
+	private final Spot spot;
+	private final FlickrRequestHandler flickrRequestHandler;
+	private final SpotCalculationHandler spotCalculationHandler;
 
 	private static final Logger LOGGER = Logger.getLogger(SecretPlacesFacade.class.getName());
-	private TagBasedRequestReducer tagBasedRequestReducer;
 	
 	public SecretPlacesFacade(Spot spot) {
 		this.spot = spot;
-		flickrRequestHandler = new FlickrRequestHandler();
-		tagBasedRequestReducer = new TagBasedRequestReducer();
+		IFotoExcluder fotoExcluder = new TagBasedFotoExcluder();
+		flickrRequestHandler = new FlickrRequestHandler(fotoExcluder);
 		spotCalculationHandler = new SpotCalculationHandler();
 	}
 
@@ -41,8 +41,7 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 		Set<PointOfInterest> allPOIsForSpot = flickrRequestHandler.getPOIsForSpot(spotToSearchFor);
 		LOGGER.log(Level.INFO, " Number of POIs: " + allPOIsForSpot.size());
 		
-		Set<PointOfInterest> reduceResult = tagBasedRequestReducer.reduceResult(allPOIsForSpot);
-		Spot spot = spotCalculationHandler.getSpot(reduceResult,spotToSearchFor);
+		Spot spot = spotCalculationHandler.getSpot(allPOIsForSpot,spotToSearchFor);
 		return spot;
 	}
 
