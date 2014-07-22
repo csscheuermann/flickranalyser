@@ -2,13 +2,14 @@ var google = google || {};
 google.appengine = google.appengine || {};
 google.appengine.seekret = google.appengine.seekret || {};
 
-
 // Set a variable that is set to the div containing the overlay (created on page load)
-google.appengine.seekret.page_overlay = jQuery('<div id="overlay"><div id="loadingImage"><img  src="/res_html/img/loading.gif"></div> </div>');
+google.appengine.seekret.page_overlay = jQuery('<div id="overlay"><div id="loadingImage"> </div>');
+google.appengine.seekret.spinner = new Spinner().spin(google.appengine.seekret.page_overlay);
 
-    // Function to Add the overlay to the page
+// Function to Add the overlay to the page
 google.appengine.seekret.showOverlay = function(){
          google.appengine.seekret.page_overlay.appendTo(document.body);
+        
     }
     
     // Function to Remove the overlay from the page
@@ -61,7 +62,7 @@ google.appengine.seekret.addImageTagToDivId = function(divId, url) {
 	if (url === ""){
 		$(divId).html('');
 	}else{
-		$(divId).html("<img src='" + url +"' height='160px' />");
+		$(divId).html("<img src='" + url +"' height='200px' />");
 	}
 }
 

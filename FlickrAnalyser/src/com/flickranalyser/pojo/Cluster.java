@@ -222,13 +222,13 @@ public class Cluster implements Serializable {
 		return latitude;
 	}
 
-
-
-
 	public double getLongitude() {
 		return longitude;
 	}
 
+	public int getDismissCounter() {
+		return dismissCounter;
+	}
 
 
 

@@ -22,6 +22,8 @@
 	<script src="/res_html/js/ClusterDetails.js"></script>
 	<script src="/res_html/js/RequestsToSeekret.js"></script>
 	
+	<script src="/res_html/js/spinner.js"></script>
+	
 	<script type="text/javascript">
 
 
@@ -76,14 +78,6 @@
      // Add the circle for this city to the map.
      var cityCircle = new google.maps.Circle(populationOptions);
    }
-  
-   function handleTouristicVote(key){
-   		alert(key);
-   }
-   
-   function handleSeekretVote(key){
-   		alert ('seekret' + key);
-   }
    
 
    function addMarker(datastoreClusterKey, spotName,overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat,lgt , numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
@@ -106,8 +100,6 @@
 	
 	marker.setIcon('/res_html/img/eye_currently_watching.png');
 			
-		var clusterDetails = new ClusterDetails();
-		
 		var btnTouristicness = document.getElementById("btnTouristic");
 		btnTouristicness.setAttribute('value', datastoreClusterKey);
 		
@@ -321,20 +313,11 @@
 	
 	<% out.println(helperMethods.createVoteResultField()); %>
 	<% out.println(helperMethods.createTopPicturesContainer()); %>	
-	
+	<% out.println(helperMethods.createVoteButtons()); %>	
 	
 	<% out.println(helperMethods.createSpotInfo()); %>
 	<% out.println(helperMethods.createSeekretSpotInformation()); %>
 	<% out.println(helperMethods.createRatingInformationContainer()); %>
-	
-
-
-
-
-			
-				
-			
-	
 	
 	<% out.println(helperMethods.createBodyEnd());%>
 	
