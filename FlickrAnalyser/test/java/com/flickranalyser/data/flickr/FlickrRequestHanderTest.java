@@ -18,12 +18,12 @@ public class FlickrRequestHanderTest {
 
 	//@Test
 	public void getAllImages_WithinMunich_MunichPictureWillGetReturned(){
-		FlickrRequestHandler flickrRequestHandler = new FlickrRequestHandler();
+		FlickrRequestHandler flickrRequestHandler = new FlickrRequestHandler(new TagBasedFotoExcluder());
 		flickrRequestHandler.getPOIsForSpot(munichSpot);
 	}
 	@Test
 	public void testNewSpotcalculation(){
-		FlickrRequestHandler flickrRequestHandler = new FlickrRequestHandler();
+		FlickrRequestHandler flickrRequestHandler = new FlickrRequestHandler(new TagBasedFotoExcluder());
 		flickrRequestHandler.calculateNewPoint(munichSpot);
 	}
 	
