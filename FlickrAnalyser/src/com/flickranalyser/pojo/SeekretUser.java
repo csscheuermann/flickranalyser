@@ -17,27 +17,30 @@ public class SeekretUser implements Serializable{
 	/** Email address derived from oAuth */
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private String email;
+	private final String email;
 	
 	@Persistent
-	private String fullName;
+	private final String fullName;
 	
 	@Persistent
-	private String givenName;
+	private final String givenName;
 	
 	@Persistent
-	private String profileLink;
+	private final String profileLink;
 	
 	@Persistent
-	private String picture;
+	private final String picture;
 
-	public SeekretUser(String email, String fullName, String givenName,
-			String profileLink, String picture) {
+	@Persistent
+	private final String userGroup;
+	
+	public SeekretUser(String email, String fullName, String givenName, String profileLink, String picture) {
 		this.email = email;
 		this.fullName = fullName;
 		this.givenName = givenName;
 		this.profileLink = profileLink;
 		this.picture = picture;
+		this.userGroup = "default";
 	}
 
 	public static long getSerialversionuid() {
@@ -64,9 +67,9 @@ public class SeekretUser implements Serializable{
 		return picture;
 	}
 	
-	
-	
-	
+	public String getUserGroup() {
+		return userGroup;
+	}
 	
 
 }
