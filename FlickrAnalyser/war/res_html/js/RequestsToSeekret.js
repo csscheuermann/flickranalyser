@@ -3,18 +3,20 @@ google.appengine = google.appengine || {};
 google.appengine.seekret = google.appengine.seekret || {};
 
 // Set a variable that is set to the div containing the overlay (created on page load)
-google.appengine.seekret.page_overlay = jQuery('<div id="overlay"><div id="loadingImage"> </div>');
-google.appengine.seekret.spinner = new Spinner().spin(google.appengine.seekret.page_overlay);
+google.appengine.seekret.page_overlay = jQuery('<div id="overlay"></div>');
+google.appengine.seekret.spinner;
 
 // Function to Add the overlay to the page
 google.appengine.seekret.showOverlay = function(){
          google.appengine.seekret.page_overlay.appendTo(document.body);
-        
+         var target = document.getElementById('overlay');
+         google.appengine.seekret.spinner = new Spinner().spin(target);
     }
     
     // Function to Remove the overlay from the page
 google.appengine.seekret.hideOverlay = function(){
          google.appengine.seekret.page_overlay.remove();
+         google.appengine.seekret.spinner.stop();
     }
     
 

@@ -19,11 +19,8 @@
 	
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="/res_html/js/Chart.js"></script>
-	<script src="/res_html/js/ClusterDetails.js"></script>
-	<script src="/res_html/js/RequestsToSeekret.js"></script>
-	
 	<script src="/res_html/js/spinner.js"></script>
-	
+	<script src="/res_html/js/RequestsToSeekret.js"></script>
 	<script type="text/javascript">
 
 
