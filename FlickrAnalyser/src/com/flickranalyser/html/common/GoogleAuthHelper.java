@@ -107,6 +107,7 @@ public class GoogleAuthHelper {
 		if (userFromDb != null) {
 			return userFromDb;
 		}
+		userService.addUserToDatastore(email, fullName, givenName, profileLink, picture);
 		return new SeekretUser(email, fullName, givenName, profileLink, picture);
 	}
 }

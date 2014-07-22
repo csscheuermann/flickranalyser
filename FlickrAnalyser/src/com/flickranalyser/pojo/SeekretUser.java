@@ -7,6 +7,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.flickranalyser.businesslogic.common.UserRolesEnum;
+
 @PersistenceCapable
 public class SeekretUser implements Serializable {
 
@@ -38,7 +40,7 @@ public class SeekretUser implements Serializable {
 		this.givenName = givenName;
 		this.profileLink = profileLink;
 		this.picture = picture;
-		this.userGroup = "default";
+		this.userGroup = UserRolesEnum.DEFAULT.name();
 	}
 
 	public static long getSerialversionuid() {

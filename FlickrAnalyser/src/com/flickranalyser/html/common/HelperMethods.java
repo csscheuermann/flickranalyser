@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpSession;
 
+import com.flickranalyser.businesslogic.common.UserRolesEnum;
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.html.webfrontend.HtmlStarterServlet;
 import com.flickranalyser.pojo.SeekretUser;
@@ -176,7 +177,7 @@ public class HelperMethods {
 			navigation.append("<li><a href='?showView=Login'>Login</a></li>");
 		} else {
 			navigation.append("<li><a href='?showView=TopSpots'>Top Spots</a></li>");
-			if (currentUser.getUserGroup().equals("ADMIN")) {
+			if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
 				navigation.append("<li><a href='?showView=SearchSpots'>Search Spot</a></li>");
 			}
 			navigation.append("<li><a href='?showView=Logout'>Logout</a></li>");
