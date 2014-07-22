@@ -45,7 +45,7 @@ public class Cluster implements Serializable {
 
 	/** POIs, they are not stored in Datastore */
 	@NotPersistent
-	private final List<PointOfInterest> pointsOfInterest;
+	private List<PointOfInterest> pointsOfInterest;
 
 	/** Overall views, its the sum of every POIs views */
 	@Persistent
