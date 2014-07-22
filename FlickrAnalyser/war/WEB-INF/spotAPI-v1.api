@@ -279,12 +279,12 @@
             "type" : "string",
             "format" : "int64"
           },
-          "polar" : {
-            "type" : "boolean"
-          },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
+          },
+          "polar" : {
+            "type" : "boolean"
           }
         }
       },

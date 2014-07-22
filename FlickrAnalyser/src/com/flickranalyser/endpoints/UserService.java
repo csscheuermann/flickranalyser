@@ -1,7 +1,10 @@
 package com.flickranalyser.endpoints;
 
+import java.util.logging.Logger;
+
 import javax.ws.rs.core.Response;
 
+import com.flickranalyser.persistence.datastore.save.PFSaverCluster;
 import com.flickranalyser.persistence.datastore.save.PFSaverUser;
 import com.flickranalyser.pojo.SeekretUser;
 import com.google.api.server.spi.config.Api;
@@ -13,7 +16,7 @@ import com.google.api.server.spi.config.Named;
 
 @Api(name="userAPI", version="v1", description="API for User.")
 public class UserService {
-
+	  
   public UserService() {
   }
 
