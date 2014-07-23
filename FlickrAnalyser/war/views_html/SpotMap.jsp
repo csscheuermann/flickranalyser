@@ -119,8 +119,10 @@
 		
 		//Now set up the Cluster Info Container
 		$('#seekretSpotInfoContainer').show();
-	    //Get the Custer Address
-		google.appengine.seekret.getClusterAddressByLatLong(lat, lgt);
+	    
+		getAddress(lat, lgt);
+		
+		
 		$('#clusterViews').html(numberOfViews);
 		$('#clusterPOIs').html(numberOfPOIsForCurrentCluster);
 		$('#maxClusterViews').html(maxNumberOfViews);
@@ -156,6 +158,10 @@
    
    }
    
+   function getAddress(lat, lgt){
+	//Get the Custer Address
+	google.appengine.seekret.getClusterAddressByLatLong(lat, lgt);
+   }
 
    
    function addDoughnutChart(percentage, elementId, colorPercent, colorRemainer) {

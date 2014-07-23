@@ -37,11 +37,11 @@ public class HelperMethods {
 		try {
 			return type.cast(Class.forName(className).newInstance());
 		} catch (InstantiationException e) {
-			LOGGER.log(Level.INFO, "COULD NOT INITIATE " + e.getMessage());
+			LOGGER.log(Level.INFO, "COULD NOT INITIATE " + e.getMessage(), e);
 		} catch (IllegalAccessException e) {
-			LOGGER.log(Level.INFO, "ILLEGALACCESSEXCEPTION" + e.getMessage());
+			LOGGER.log(Level.INFO, "ILLEGALACCESSEXCEPTION" + e.getMessage(), e);
 		} catch (ClassNotFoundException e) {
-			LOGGER.log(Level.INFO, "CLASSNOTFOUNDEXCEPTION" + e.getMessage());
+			LOGGER.log(Level.INFO, "CLASSNOTFOUNDEXCEPTION" + e.getMessage(), e);
 		}
 		return null;
 	}
