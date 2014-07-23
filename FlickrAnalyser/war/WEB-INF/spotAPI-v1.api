@@ -145,16 +145,16 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "maxNumberOfPOIsPerCluster" : {
-            "type" : "integer"
+          "clusterRadiusInMeter" : {
+            "type" : "number"
           },
           "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
           },
-          "clusterRadiusInMeter" : {
+          "spotRadiusInMeter" : {
             "type" : "number"
           },
-          "maxClusterViews" : {
+          "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
           "cluster" : {
@@ -163,8 +163,8 @@
               "$ref" : "Cluster"
             }
           },
-          "spotRadiusInMeter" : {
-            "type" : "number"
+          "maxClusterViews" : {
+            "type" : "integer"
           }
         }
       },

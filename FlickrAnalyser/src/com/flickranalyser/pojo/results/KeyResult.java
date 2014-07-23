@@ -2,23 +2,26 @@ package com.flickranalyser.pojo.results;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 public class KeyResult implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private List<String> keys;
+	private HashMap<String, String> keys;
 
 	public KeyResult(List<String> keys){
-		this.keys = keys;
+		for (String string : keys) {
+			this.keys.put(string, "");
+		}
 	}
 	public KeyResult(){
-		keys = new LinkedList<String>();
+		this.keys = new HashMap<String, String>();
 	}
 	
 
-	public List<String> getKeys() {
-		return Collections.unmodifiableList(this.keys);
+	public Map<String, String> getKeys() {
+		return Collections.unmodifiableMap(this.keys);
 	}
 }

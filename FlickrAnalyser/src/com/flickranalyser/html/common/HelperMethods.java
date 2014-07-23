@@ -1,6 +1,6 @@
 package com.flickranalyser.html.common;
 
-import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -389,24 +389,20 @@ public class HelperMethods {
 	}
 	
 	public boolean checkIfClusterWasAlreadyRated(String clusterDatastoreKey){
-		List<String> keys = ratingResult.getKeys();
+		Map<String, String> keys = ratingResult.getKeys();
 		String searchKey = getCurrentUserEmail() + clusterDatastoreKey;
-		for (String string : keys) {
-			if (searchKey.equals(string)){
-				return true;
-			}
+		if(keys.containsKey(searchKey)){
+			return true;
 		}
 		return false;
 	}
 	
 
 	public boolean checkIfClusterWasAlreadyDismissed(String clusterDatastoreKey){
-		List<String> keys = dismissResult.getKeys();
+		Map<String, String> keys = dismissResult.getKeys();
 		String searchKey = getCurrentUserEmail() + clusterDatastoreKey;
-		for (String string : keys) {
-			if (searchKey.equals(string)){
-				return true;
-			}
+		if(keys.containsKey(searchKey)){
+			return true;
 		}
 		return false;
 	}

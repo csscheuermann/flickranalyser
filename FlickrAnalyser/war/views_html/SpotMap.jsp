@@ -154,7 +154,7 @@
 		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
 		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
 	
-		if (clusterAlreadyVoted || clusterAlreadyDismissed){
+		if (clusterAlreadyVoted || clusterAlreadyDismissed  || checkIfAlreadyVotedByMarkerPicture(lastClickedMarkerIcon) ){
 			//Now set up the buttons
 			$('#voteButtonContainer').hide();
 			$('#voteResultField').show();
@@ -170,6 +170,13 @@
 		
    });
    
+   }
+   
+   function checkIfAlreadyVotedByMarkerPicture(lastClickedMarkerIcon){  
+       if ((lastClickedMarkerIcon === '/res_html/img/eye_already_dismissed.png') || (lastClickedMarkerIcon ==='/res_html/img/eye_already_voted.png')){
+	       return true;
+       }
+	   return false;
    }
    
    function getAddress(lat, lgt){

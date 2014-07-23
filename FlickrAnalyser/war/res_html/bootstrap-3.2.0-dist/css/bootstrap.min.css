@@ -4465,7 +4465,7 @@ textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon
 
 .navbar-inverse .navbar-nav>li>a:hover,.navbar-inverse .navbar-nav>li>a:focus
 	{
-	color: #fff;
+	color: #999;
 	background-color: transparent
 }
 
