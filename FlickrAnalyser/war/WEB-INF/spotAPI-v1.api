@@ -145,14 +145,14 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "clusterRadiusInMeter" : {
-            "type" : "number"
-          },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
           "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
+          },
+          "clusterRadiusInMeter" : {
+            "type" : "number"
           },
           "maxClusterViews" : {
             "type" : "integer"
