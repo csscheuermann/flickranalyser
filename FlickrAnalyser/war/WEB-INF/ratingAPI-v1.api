@@ -25,21 +25,17 @@
     "maxAge" : 0
   },
   "methods" : {
-    "ratingAPI.hasUserAlreadyVoted" : {
-      "path" : "hasUserAlreadyVoted/{userPrimaryKey}/{clusterPrimaryKey}",
-      "httpMethod" : "POST",
+    "ratingAPI.getAllDismissKeysOfSpecifiedUser" : {
+      "path" : "getAllDismissKeysOfSpecifiedUser",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted",
+      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.getAllDismissKeysOfSpecifiedUser",
       "request" : {
         "parameters" : {
           "userPrimaryKey" : {
-            "type" : "string",
-            "required" : true
-          },
-          "clusterPrimaryKey" : {
             "type" : "string",
             "required" : true
           }
@@ -74,10 +70,68 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "ratingAPI.hasUserAlreadyVoted" : {
+      "path" : "hasUserAlreadyVoted/{userPrimaryKey}/{clusterPrimaryKey}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted",
+      "request" : {
+        "parameters" : {
+          "userPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          },
+          "clusterPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "ratingAPI.getAllRatingKeysOfSpecifiedUser" : {
+      "path" : "getAllRatingKeysOfSpecifiedUser",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.getAllRatingKeysOfSpecifiedUser",
+      "request" : {
+        "parameters" : {
+          "userPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
+      "KeyResult" : {
+        "id" : "KeyResult",
+        "type" : "object",
+        "properties" : {
+          "keys" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
       "Response" : {
         "id" : "Response",
         "type" : "object",
@@ -103,14 +157,24 @@
       }
     },
     "methods" : {
-      "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted" : {
+      "com.flickranalyser.endpoints.RatingService.getAllDismissKeysOfSpecifiedUser" : {
         "response" : {
-          "$ref" : "Response"
+          "$ref" : "KeyResult"
         }
       },
       "com.flickranalyser.endpoints.RatingService.addNewRating" : {
         "response" : {
           "$ref" : "Response"
+        }
+      },
+      "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted" : {
+        "response" : {
+          "$ref" : "Response"
+        }
+      },
+      "com.flickranalyser.endpoints.RatingService.getAllRatingKeysOfSpecifiedUser" : {
+        "response" : {
+          "$ref" : "KeyResult"
         }
       }
     }

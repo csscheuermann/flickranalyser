@@ -3,7 +3,9 @@ package com.flickranalyser.endpoints;
 import javax.ws.rs.core.Response;
 
 import com.flickranalyser.persistence.datastore.get.PFGetterRating;
+import com.flickranalyser.persistence.datastore.get.PFGetterRatingDismissCounter;
 import com.flickranalyser.persistence.datastore.save.PFSaverRating;
+import com.flickranalyser.pojo.results.KeyResult;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.Named;
@@ -22,4 +24,18 @@ public class RatingService
   {
     return PFGetterRating.hasUserAlreadyRated(userPrimaryKey, clusterPrimaryKey);
   }
+  
+  @ApiMethod(name="getAllRatingKeysOfSpecifiedUser", path="getAllRatingKeysOfSpecifiedUser")
+  public KeyResult getAllRatingKeysOfSpecifiedUser(@Named("userPrimaryKey") String userPrimaryKey){
+    
+	  return PFGetterRating.getAllRatingKeysOfSpecifiedUser(userPrimaryKey);
+  }
+  
+  @ApiMethod(name="getAllDismissKeysOfSpecifiedUser", path="getAllDismissKeysOfSpecifiedUser")
+  public KeyResult getAllDismissKeysOfSpecifiedUser(@Named("userPrimaryKey") String userPrimaryKey){
+	  return PFGetterRatingDismissCounter.getAllDismissKeysOfSpecifiedUser(userPrimaryKey);
+  }
+  
+  
+  
 }

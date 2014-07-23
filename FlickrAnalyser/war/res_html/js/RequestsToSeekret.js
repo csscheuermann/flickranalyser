@@ -52,6 +52,8 @@ $.ajax({
  		},  
 	    success: function(data){ 
 	        google.appengine.seekret.hideOverlay()
+	        lastClickedMarker.setIcon('/res_html/img/eye_already_dismissed.png');
+	        lastClickedMarkerIcon = '/res_html/img/eye_already_dismissed.png';
 			$('#voteResultField').show();
 		    $('#voteResultMessage').html(data);
 		    $('#voteResultMessage').show();
@@ -85,8 +87,9 @@ google.appengine.seekret.vote = function(buttonId, clusterRatingValue) {
 		    google.appengine.seekret.showOverlay();
  		},  
 	    success: function(data){ 
-	        google.appengine.seekret.hideOverlay()
-			$(buttonId).attr("disabled", true);      
+	    	lastClickedMarker.setIcon('/res_html/img/eye_already_voted.png');
+	    	lastClickedMarkerIcon ='/res_html/img/eye_already_voted.png';
+	    	google.appengine.seekret.hideOverlay()   
             $('#voteResultField').show();
 		    $('#voteResultMessage').html(data);
 		    $('#voteResultMessage').show();

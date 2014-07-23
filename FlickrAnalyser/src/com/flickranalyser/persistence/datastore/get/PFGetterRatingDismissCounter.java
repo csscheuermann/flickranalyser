@@ -10,7 +10,9 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.flickranalyser.persistence.datastore.common.PMF;
+import com.flickranalyser.pojo.Rating;
 import com.flickranalyser.pojo.RatingDismissCounter;
+import com.flickranalyser.pojo.results.KeyResult;
 
 public class PFGetterRatingDismissCounter
 {
@@ -54,4 +56,32 @@ public class PFGetterRatingDismissCounter
       pm.close();
     }
   }
+  
+  
+  
+  
+  public static KeyResult getAllDismissKeysOfSpecifiedUser(String userPrimaryKey){
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try{
+			Query newQuery = pm.newQuery("select datastoreRatingKey from " + RatingDismissCounter.class.getName());
+			newQuery.setFilter("userEmail == userPrimaryKey");
+			newQuery.declareParameters("String userPrimaryKey");
+
+			@SuppressWarnings("unchecked")
+			List<String> resultList = (List<String>)newQuery.execute(userPrimaryKey);
+			
+			LOGGER.log(Level.INFO, "RESULT LENGTH " + resultList.size());
+			
+			return new KeyResult(resultList);
+		}
+		catch (Exception ex){
+			LOGGER.log(Level.SEVERE, "EXCEPTION WHILE FETCHING RATING." + ex.getMessage(), ex);
+		}
+		finally{
+			pm.close();
+		}
+		return new KeyResult();
+	}
+
+  
 }

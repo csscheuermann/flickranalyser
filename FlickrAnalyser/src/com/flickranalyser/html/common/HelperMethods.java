@@ -1,14 +1,17 @@
 package com.flickranalyser.html.common;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.businesslogic.common.UserRolesEnum;
+import com.flickranalyser.endpoints.RatingService;
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.html.webfrontend.HtmlStarterServlet;
 import com.flickranalyser.pojo.SeekretUser;
+import com.flickranalyser.pojo.results.KeyResult;
 
 public class HelperMethods {
 	public static final String PAGE_TITLE = "SECRET PLACES";
@@ -28,9 +31,15 @@ public class HelperMethods {
 	public static final String LATITUDE_PARAM = "latitude";
 	public static final String SPOT = "spot";
 	public static final String SPOT_NAME = "spotName";
-
+	private KeyResult ratingResult;
+	private KeyResult dismissResult;
+	
+	
 	public HelperMethods(HttpSession session) {
 		this.session = session;
+		RatingService rs = new RatingService();
+		this.ratingResult = rs.getAllRatingKeysOfSpecifiedUser(getCurrentUserEmail());
+		this.dismissResult = rs.getAllDismissKeysOfSpecifiedUser(getCurrentUserEmail());
 	}
 
 	public static <T> T instantiate(String className, Class<T> type) {
@@ -204,26 +213,26 @@ public class HelperMethods {
 		marketing.append("<div class='row'>");
 		marketing.append("<div class='col-lg-4'>");
 		marketing
-				.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
+		.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
 		marketing.append("<h2>Heading</h2>");
 		marketing
-				.append("<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>");
+		.append("<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>");
 		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
 		marketing.append("</div><!-- /.col-lg-4 -->");
 		marketing.append("<div class='col-lg-4'>");
 		marketing
-				.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
+		.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
 		marketing.append("<h2>Heading</h2>");
 		marketing
-				.append("<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>");
+		.append("<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>");
 		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
 		marketing.append("</div><!-- /.col-lg-4 -->");
 		marketing.append("<div class='col-lg-4'>");
 		marketing
-				.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
+		.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
 		marketing.append("<h2>Heading</h2>");
 		marketing
-				.append("<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>");
+		.append("<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>");
 		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
 		marketing.append("</div><!-- /.col-lg-4 -->");
 		marketing.append("  </div><!-- /.row -->");
@@ -245,56 +254,58 @@ public class HelperMethods {
 
 	public String createSpotInfo() {
 		StringBuilder spotInfo = new StringBuilder();
+		SeekretUser currentUser = (SeekretUser) this.session.getAttribute("currentUser");
+		if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
+			spotInfo.append("<div id='spotInfoContainer' class='container showGroup background-grey'>");
+			// spotInfo.append("<div class='row'>");
+			// spotInfo.append("<div class='col-xs-12'>");
+			// spotInfo.append("<h2>INFORMATION ABOUT LOCATION</h2>");
+			// spotInfo.append(" </div>");
+			// spotInfo.append(" </div>");
 
-		spotInfo.append("<div id='spotInfoContainer' class='container showGroup background-grey'>");
-		// spotInfo.append("<div class='row'>");
-		// spotInfo.append("<div class='col-xs-12'>");
-		// spotInfo.append("<h2>INFORMATION ABOUT LOCATION</h2>");
-		// spotInfo.append(" </div>");
-		// spotInfo.append(" </div>");
+			spotInfo.append("<div class='row'>");
+			spotInfo.append("<div class='col-md-6'>\t<div><h4>Address</h4></div> \t\t\t<div id='spotaddress'> \t\t</div> </div>");
+			spotInfo.append("<div class='col-md-3'>\t<div><h4>Overall Max #POIs</h4></div> \t\t\t<div id='poiCount'>\t\t\t</div> </div>");
+			spotInfo.append("<div class='col-md-3'>\t<div><h4>Overall Max #Views</h4></div> \t\t\t<div id='spotOverallview'>\t</div> </div>");
 
-		spotInfo.append("<div class='row'>");
-		spotInfo.append("<div class='col-md-6'>\t<div><h4>Address</h4></div> \t\t\t<div id='spotaddress'> \t\t</div> </div>");
-		spotInfo.append("<div class='col-md-3'>\t<div><h4>Overall Max #POIs</h4></div> \t\t\t<div id='poiCount'>\t\t\t</div> </div>");
-		spotInfo.append("<div class='col-md-3'>\t<div><h4>Overall Max #Views</h4></div> \t\t\t<div id='spotOverallview'>\t</div> </div>");
-
-		spotInfo.append(" </div>");
-		spotInfo.append(" </div>");
-
+			spotInfo.append(" </div>");
+			spotInfo.append(" </div>");
+		}
 		return spotInfo.toString();
 	}
 
 	public String createSeekretSpotInformation() {
 		StringBuilder seekretSpotInformation = new StringBuilder();
+		SeekretUser currentUser = (SeekretUser) this.session.getAttribute("currentUser");
+		if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
+			seekretSpotInformation.append("<div id='seekretSpotInfoContainer' class='container showGroup background-grey'>");
+			// seekretSpotInformation.append("<div class='row'>");
+			// seekretSpotInformation.append("<div class='col-xs-12'>");
+			// seekretSpotInformation.append("<h2>SEEKRET SPOT INFORMATION</h2>");
+			// seekretSpotInformation.append(" </div>");
+			// seekretSpotInformation.append(" </div>");
 
-		seekretSpotInformation.append("<div id='seekretSpotInfoContainer' class='container showGroup background-grey'>");
-		// seekretSpotInformation.append("<div class='row'>");
-		// seekretSpotInformation.append("<div class='col-xs-12'>");
-		// seekretSpotInformation.append("<h2>SEEKRET SPOT INFORMATION</h2>");
-		// seekretSpotInformation.append(" </div>");
-		// seekretSpotInformation.append(" </div>");
+			seekretSpotInformation.append("<div class='row'>");
+			seekretSpotInformation.append("<div class='col-md-6'>\t<div><h4>Address</h4></div> \t\t\t<div id='clusterAddress'> \t\t</div> </div>");
+			seekretSpotInformation.append("<div class='col-md-3'>\t<div><h4>Max #POIs</h4></div> \t\t\t<div id='maxClusterPOIs'> \t\t</div> </div>");
+			seekretSpotInformation.append("<div class='col-md-3'>\t<div><h4>Max #Views</h4></div> \t\t\t<div id='maxClusterViews'> \t\t</div> </div>");
+			seekretSpotInformation.append(" </div>");
 
-		seekretSpotInformation.append("<div class='row'>");
-		seekretSpotInformation.append("<div class='col-md-6'>\t<div><h4>Address</h4></div> \t\t\t<div id='clusterAddress'> \t\t</div> </div>");
-		seekretSpotInformation.append("<div class='col-md-3'>\t<div><h4>Max #POIs</h4></div> \t\t\t<div id='maxClusterPOIs'> \t\t</div> </div>");
-		seekretSpotInformation.append("<div class='col-md-3'>\t<div><h4>Max #Views</h4></div> \t\t\t<div id='maxClusterViews'> \t\t</div> </div>");
-		seekretSpotInformation.append(" </div>");
+			seekretSpotInformation.append("<div class='row bottom-sapce'>");
+			seekretSpotInformation.append("<div class='col-md-6'>\t&nbsp; </div>");
+			seekretSpotInformation.append("<div class='col-md-3'>\t<div><h4>#POIs</h4></div> \t\t\t<div id='clusterPOIs'> \t\t</div> </div>");
+			seekretSpotInformation.append("<div class='col-md-3'>\t<div><h4>#Views</h4></div> \t\t\t<div id='clusterViews'> \t\t</div> </div>");
+			seekretSpotInformation.append(" </div>");
 
-		seekretSpotInformation.append("<div class='row bottom-sapce'>");
-		seekretSpotInformation.append("<div class='col-md-6'>\t&nbsp; </div>");
-		seekretSpotInformation.append("<div class='col-md-3'>\t<div><h4>#POIs</h4></div> \t\t\t<div id='clusterPOIs'> \t\t</div> </div>");
-		seekretSpotInformation.append("<div class='col-md-3'>\t<div><h4>#Views</h4></div> \t\t\t<div id='clusterViews'> \t\t</div> </div>");
-		seekretSpotInformation.append(" </div>");
+			seekretSpotInformation.append("<div class='row'>");
+			seekretSpotInformation.append("<div class='col-md-4'><h4>Download</h4></div>");
+			seekretSpotInformation.append("<div class='col-md-2'><button type='button' class='btn btn-default'>KML</button></div>");
+			seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
+			seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
 
-		seekretSpotInformation.append("<div class='row'>");
-		seekretSpotInformation.append("<div class='col-md-4'><h4>Download</h4></div>");
-		seekretSpotInformation.append("<div class='col-md-2'><button type='button' class='btn btn-default'>KML</button></div>");
-		seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
-		seekretSpotInformation.append("<div class='col-md-2'> <button type='button' class='btn btn-default'>PDF</button></div>");
-
-		seekretSpotInformation.append(" </div>");
-		seekretSpotInformation.append(" </div>");
-
+			seekretSpotInformation.append(" </div>");
+			seekretSpotInformation.append(" </div>");
+		}
 		return seekretSpotInformation.toString();
 	}
 
@@ -322,35 +333,36 @@ public class HelperMethods {
 
 	public String createRatingInformationContainer() {
 		StringBuilder ratingInformationContainer = new StringBuilder();
+		SeekretUser currentUser = (SeekretUser) this.session.getAttribute("currentUser");
+		if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
+			ratingInformationContainer.append("<div id='ratingInformationContainer' class='container showGroup background-grey'>");
 
-		ratingInformationContainer.append("<div id='ratingInformationContainer' class='container showGroup background-grey'>");
+			// ratingInformationContainer.append("<div class='row'>");
+			// ratingInformationContainer.append("<div class='col-xs-12'>");
+			// ratingInformationContainer.append("<h2>RATING INFORMATION</h2>");
+			// ratingInformationContainer.append(" </div>");
+			// ratingInformationContainer.append(" </div>");
 
-		// ratingInformationContainer.append("<div class='row'>");
-		// ratingInformationContainer.append("<div class='col-xs-12'>");
-		// ratingInformationContainer.append("<h2>RATING INFORMATION</h2>");
-		// ratingInformationContainer.append(" </div>");
-		// ratingInformationContainer.append(" </div>");
+			ratingInformationContainer.append("<div class='row'>");
+			ratingInformationContainer
+			.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Seekretmeter</h4></div>  \t\t<div id='seekretMeter'>\t\t\t\t\t<canvas id='touristicness' width='200' height='200'></canvas> \t\t</div> \t\t\t\t</div>");
+			ratingInformationContainer
+			.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Relative POI Count</h4></div> \t<div id='relativePOICountChart'> \t\t<canvas id='poiCountRelative' width='200' height='200'></canvas>\t</div>  \t</div>");
+			ratingInformationContainer
+			.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Realtive View Count</h4></div> <div id='relativeViewCountChart'>\t\t<canvas id='viewCountRelative' width='200' height='200'></canvas> \t</div> \t</div>");
+			ratingInformationContainer.append(" </div>");
 
-		ratingInformationContainer.append("<div class='row'>");
-		ratingInformationContainer
-				.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Seekretmeter</h4></div>  \t\t<div id='seekretMeter'>\t\t\t\t\t<canvas id='touristicness' width='200' height='200'></canvas> \t\t</div> \t\t\t\t</div>");
-		ratingInformationContainer
-				.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Relative POI Count</h4></div> \t<div id='relativePOICountChart'> \t\t<canvas id='poiCountRelative' width='200' height='200'></canvas>\t</div>  \t</div>");
-		ratingInformationContainer
-				.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Realtive View Count</h4></div> <div id='relativeViewCountChart'>\t\t<canvas id='viewCountRelative' width='200' height='200'></canvas> \t</div> \t</div>");
-		ratingInformationContainer.append(" </div>");
+			ratingInformationContainer.append("<div class='row'>");
+			ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>\t&nbsp; \t\t\t\t</div>");
+			ratingInformationContainer
+			.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Absolute POI Count</h4></div> \t<div id='absolutePOICountChart'><canvas id='poiCountOverall' width='200' height='200'></canvas> </div>  \t</div>");
+			ratingInformationContainer
+			.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Absolute View Count</h4></div> <div id='absoluteViewCountChart'><canvas id='viewCountOverall' width='200' height='200'></canvas> </div> \t</div>");
 
-		ratingInformationContainer.append("<div class='row'>");
-		ratingInformationContainer.append("<div class='col-md-4 centeralized-div'>\t&nbsp; \t\t\t\t</div>");
-		ratingInformationContainer
-				.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Absolute POI Count</h4></div> \t<div id='absolutePOICountChart'><canvas id='poiCountOverall' width='200' height='200'></canvas> </div>  \t</div>");
-		ratingInformationContainer
-				.append("<div class='col-md-4 centeralized-div'>\t<div><h4>Absolute View Count</h4></div> <div id='absoluteViewCountChart'><canvas id='viewCountOverall' width='200' height='200'></canvas> </div> \t</div>");
+			ratingInformationContainer.append(" </div>");
 
-		ratingInformationContainer.append(" </div>");
-
-		ratingInformationContainer.append(" </div>");
-
+			ratingInformationContainer.append(" </div>");
+		}
 		return ratingInformationContainer.toString();
 	}
 
@@ -368,6 +380,38 @@ public class HelperMethods {
 		return createVoteButtons.toString();
 	}
 
+	public SeekretUser getCurrentUser(){
+		return (SeekretUser) this.session.getAttribute("currentUser");
+	}
+	
+	public String getCurrentUserEmail(){
+		return ((SeekretUser) this.session.getAttribute("currentUser")).getEmail();
+	}
+	
+	public boolean checkIfClusterWasAlreadyRated(String clusterDatastoreKey){
+		List<String> keys = ratingResult.getKeys();
+		String searchKey = getCurrentUserEmail() + clusterDatastoreKey;
+		for (String string : keys) {
+			if (searchKey.equals(string)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+
+	public boolean checkIfClusterWasAlreadyDismissed(String clusterDatastoreKey){
+		List<String> keys = dismissResult.getKeys();
+		String searchKey = getCurrentUserEmail() + clusterDatastoreKey;
+		for (String string : keys) {
+			if (searchKey.equals(string)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	public String createVoteResultField() {
 		StringBuilder createVoteResultField = new StringBuilder();
 

@@ -5,14 +5,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SpotResultList
-  implements Serializable
-{
+public class SpotResultList implements Serializable {
   private static final long serialVersionUID = 1L;
   private LinkedList<String> topTenSpots;
 
-  public SpotResultList(LinkedList<String> topTenSpots)
-  {
+  public SpotResultList(LinkedList<String> topTenSpots){
     this.topTenSpots = topTenSpots;
   }
 

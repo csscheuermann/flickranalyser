@@ -13,7 +13,7 @@ public class PFSaverRating
     PersistenceManager pm = PMF.get().getPersistenceManager();
     try {
       String datastoreKey = userKey + clusterKey;
-      Rating rating = new Rating(datastoreKey);
+      Rating rating = new Rating(datastoreKey, userKey);
       pm.makePersistent(rating);
     } finally {
       pm.close();

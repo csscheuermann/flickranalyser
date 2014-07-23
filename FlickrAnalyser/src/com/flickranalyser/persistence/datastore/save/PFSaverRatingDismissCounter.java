@@ -13,7 +13,7 @@ public class PFSaverRatingDismissCounter
     PersistenceManager pm = PMF.get().getPersistenceManager();
     try {
       String datastoreKey = userKey + clusterKey;
-      RatingDismissCounter rating = new RatingDismissCounter(datastoreKey);
+      RatingDismissCounter rating = new RatingDismissCounter(datastoreKey, userKey);
       pm.makePersistent(rating);
     } finally {
       pm.close();

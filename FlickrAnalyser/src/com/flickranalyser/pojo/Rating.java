@@ -19,7 +19,11 @@ public class Rating {
 	@Persistent
 	private long created;
 	
-	public Rating(String datastoreRatingKey){
+	@Persistent
+	private String userEmail;
+	
+	public Rating(String datastoreRatingKey, String userEmail) {
+		this.userEmail = userEmail;
 		this.datastoreRatingKey = datastoreRatingKey;
 		this.created =  new Date().getTime();
 	}

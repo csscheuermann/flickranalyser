@@ -57,6 +57,7 @@
 		
 		var map;
 		var lastClickedMarker = null;
+		var lastClickedMarkerIcon = null;
 		  var geo = new google.maps.Geocoder;
 
    //Construct the circle for each value in citymap.
@@ -77,23 +78,33 @@
    }
    
 
-   function addMarker(datastoreClusterKey, spotName,overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat,lgt , numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
+   function addMarker(datastoreClusterKey, spotName, clusterAlreadyVoted,clusterAlreadyDismissed, overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat,lgt , numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
+   
+   var iconForMarker = '/res_html/img/eye_not_watched_yet.png';
+   if(clusterAlreadyVoted){
+       iconForMarker = '/res_html/img/eye_already_voted.png';
+   }else if(clusterAlreadyDismissed){
+       iconForMarker = '/res_html/img/eye_already_dismissed.png';
+   }
+   
    	// To add the marker to the map, use the 'map' property
    	var marker = new google.maps.Marker({
    	    position: new google.maps.LatLng(lat, lgt),
    	    map: map,
    	    title: 'CLUSTER NAME STILL TO DO',
-		icon: '/res_html/img/eye_not_watched_yet.png'
+		icon: iconForMarker 
    	});
 	
    google.maps.event.addListener(marker, 'click', function() {
    
+   	
+   
    	if (lastClickedMarker != null){
-   		lastClickedMarker.setIcon('/res_html/img/eye_already_watched.png');
-		lastClickedMarker = marker;
-	}else{
-		lastClickedMarker = marker;
+   		lastClickedMarker.setIcon(lastClickedMarkerIcon);
 	}
+	
+	lastClickedMarker = marker;
+	lastClickedMarkerIcon = marker.getIcon();
 	
 	marker.setIcon('/res_html/img/eye_currently_watching.png');
 			
@@ -106,16 +117,16 @@
 		var btnSeekret = document.getElementById("btnSeekret");
 		btnSeekret.setAttribute('value', datastoreClusterKey);
 	
+		$('#btnTouristic').attr("disabled", clusterAlreadyVoted);   
+		$('#btnDismiss').attr("disabled", clusterAlreadyDismissed);   
+		$('#btnSeekret').attr("disabled", clusterAlreadyVoted);   
+	
+	
 		//Now set up the Spot Info Container
 		$('#spotInfoContainer').show();
 		$('#spotaddress').html(spotName);
 		$('#poiCount').html(overallMaxNumberOfPOIs);
 		$('#spotOverallview').html(overallMaxNumberOfViews);
-		
-		
-		
-		
-		
 		
 		//Now set up the Cluster Info Container
 		$('#seekretSpotInfoContainer').show();
@@ -134,11 +145,8 @@
 		google.appengine.seekret.addImageTagToDivId('#picture1', pictureUrl1);
 		google.appengine.seekret.addImageTagToDivId('#picture2', pictureUrl2);
 		google.appengine.seekret.addImageTagToDivId('#picture3', pictureUrl3);
-
-
-		//Now set up the Charts
-		$('#ratingInformationContainer').show();
 		
+		$('#ratingInformationContainer').show();
 		
 		addDoughnutChart(viewCountRelativeInPercent, 'viewCountRelative', "#F7464A" , "#E2EAE9");
 		addDoughnutChart(pOICountRealativeInPercent, 'poiCountRelative', "#F7464A", "#E2EAE9");
@@ -146,12 +154,18 @@
 		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
 		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
 	
-		//Now set up the buttons
-		$('#voteButtonContainer').show();
-		$('#voteButtonContainer').attr("disabled", true);
+		if (clusterAlreadyVoted || clusterAlreadyDismissed){
+			//Now set up the buttons
+			$('#voteButtonContainer').hide();
+			$('#voteResultField').show();
+			$('#voteResultMessage').html("Already rated.");
+		} else{
+			$('#voteButtonContainer').show();	
+			$('#voteResultField').hide();
+		}
+	
 		  
-		//Always Hide voteresult after click
-		$('#voteResultField').hide();
+	
 		
 		
    });
@@ -179,20 +193,22 @@
    	]
 	
    	//Get the context of the canvas element we want to select
-   	var ctx = document.getElementById(elementId).getContext("2d");
-	ctx.clearRect(0, 0, 200, 200);
-	ctx.width = 200;
-	ctx.height = 200;
+	var elementById = document.getElementById(elementId)
+	if (elementById !== null){
+   	    var ctx = elementById.getContext("2d");
+	    ctx.clearRect(0, 0, 200, 200);
+	    ctx.width = 200;
+	    ctx.height = 200;
 	
-	ctx.canvas.width = 200;
-	ctx.canvas.height = 200;
+	    ctx.canvas.width = 200;
+	    ctx.canvas.height = 200;
 	
-   	var options = {
-   	segmentShowStroke : true
-   	};
+   	    var options = {
+   	        segmentShowStroke : true
+   	    };
 	
-   	new Chart(ctx).Doughnut(data,options);
-	
+   	    new Chart(ctx).Doughnut(data,options);
+	}
 	
 	}
 
@@ -231,10 +247,8 @@
 			int maxNumberOfPOIs = spot.getMaxNumberOfPOIsPerCluster();	
 			int maxNumberOfViews = spot.getMaxNumberOfViewsPerCluster();	
 		
-		
-	     	String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
-	     	String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
-	     	String PHOTO_SEARCH_REQUEST = "flickr.photos.geo.photosForLocation";
+	
+			
  
 	   	for (Cluster currentCluster : cluster){
 		
@@ -262,7 +276,10 @@
 		
 		 	String datastoreClusterKey = currentCluster.getDatastoreClusterKey();
 			
-	   		NearestSpotFinder  nearestSpotFinder = new NearestSpotFinder();
+			boolean clusterAlreadyVoted = helperMethods.checkIfClusterWasAlreadyRated(datastoreClusterKey);
+	   		boolean clusterAlreadyDismissed = helperMethods.checkIfClusterWasAlreadyDismissed(datastoreClusterKey);
+			
+			NearestSpotFinder  nearestSpotFinder = new NearestSpotFinder();
 			String clusterAdressFromGoogle = nearestSpotFinder.findAddressByLatLng(currentLat,currentLng);
 			
 			
@@ -270,6 +287,8 @@
 	     			out.println("addMarker('"+
 						datastoreClusterKey  + "','" +		
 						spotName 		+ "'," +
+						clusterAlreadyVoted + "," +
+						clusterAlreadyDismissed + "," +
 						overallMaxNumberOfPOIs+ "," +
 						overallMaxNumberOfViews	+ "," +
 						maxNumberOfPOIs + "," +
@@ -310,19 +329,19 @@
 	
 	
 	
-	<% out.println(helperMethods.createBodyBegin()); %>
-	<% out.println(helperMethods.createNavigation(false)); %>
-	<% out.println(helperMethods.createMap()); %>
+	<% out.println(helperMethods.createBodyBegin()); 
+	 out.println(helperMethods.createNavigation(false)); 
+	 out.println(helperMethods.createMap()); 
 	
-	<% out.println(helperMethods.createVoteResultField()); %>
-	<% out.println(helperMethods.createTopPicturesContainer()); %>	
-	<% out.println(helperMethods.createVoteButtons()); %>	
+	 out.println(helperMethods.createVoteResultField());
+	 out.println(helperMethods.createTopPicturesContainer()); 
+	 out.println(helperMethods.createVoteButtons()); 
 	
-	<% out.println(helperMethods.createSpotInfo()); %>
-	<% out.println(helperMethods.createSeekretSpotInformation()); %>
-	<% out.println(helperMethods.createRatingInformationContainer()); %>
+	 out.println(helperMethods.createSpotInfo()); 
+	 out.println(helperMethods.createSeekretSpotInformation());
+	 out.println(helperMethods.createRatingInformationContainer()); 
 	
-	<% out.println(helperMethods.createBodyEnd());%>
+	 out.println(helperMethods.createBodyEnd()); %>
 	
 	</html>
 	
