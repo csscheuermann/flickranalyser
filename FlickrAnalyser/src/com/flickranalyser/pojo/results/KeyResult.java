@@ -9,7 +9,7 @@ public class KeyResult implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private HashMap<String, String> keys;
+	private HashMap<String, String> keys = new HashMap<String, String>();
 
 	public KeyResult(List<String> keys){
 		for (String string : keys) {

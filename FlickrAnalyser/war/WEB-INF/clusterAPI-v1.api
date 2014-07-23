@@ -50,27 +50,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "clusterAPI.incrementDismissCount" : {
-      "path" : "incrementDismissCount/{datastoreKeyOfCluster}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.flickranalyser.endpoints.ClusterService.incrementDismissCount",
-      "request" : {
-        "parameters" : {
-          "datastoreKeyOfCluster" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "clusterAPI.evaluateCluster" : {
       "path" : "evaluateCluster/{datastoreKeyOfCluster}/{touristicnessRatingFrom1To10}/{spotName}",
       "httpMethod" : "POST",
@@ -90,6 +69,27 @@
             "required" : true
           },
           "spotName" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "clusterAPI.incrementDismissCount" : {
+      "path" : "incrementDismissCount/{datastoreKeyOfCluster}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.ClusterService.incrementDismissCount",
+      "request" : {
+        "parameters" : {
+          "datastoreKeyOfCluster" : {
             "type" : "string",
             "required" : true
           }
@@ -142,12 +142,12 @@
           "$ref" : "Address"
         }
       },
-      "com.flickranalyser.endpoints.ClusterService.incrementDismissCount" : {
+      "com.flickranalyser.endpoints.ClusterService.evaluateCluster" : {
         "response" : {
           "$ref" : "Response"
         }
       },
-      "com.flickranalyser.endpoints.ClusterService.evaluateCluster" : {
+      "com.flickranalyser.endpoints.ClusterService.incrementDismissCount" : {
         "response" : {
           "$ref" : "Response"
         }
