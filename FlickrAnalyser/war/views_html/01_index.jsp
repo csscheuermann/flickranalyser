@@ -13,7 +13,7 @@
 	<% out.println(helperMethods.createNavigation(true)); %>
 	<% out.println(helperMethods.createCarusel()); %>
 	<% out.println(helperMethods.getMarketingForMainPage()); %>
-	
+	<% out.println(helperMethods.createWhoWeAre()); %>
 	<% out.println(helperMethods.getFooter()); %>
 	
 	<% out.println(helperMethods.createBodyEnd());%>

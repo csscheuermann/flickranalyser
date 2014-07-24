@@ -20,29 +20,10 @@
 
 	
 	<div class='container'>
-		
-		<% out.println("<div class='row'> " +
-			"<div class='col-xs-3'> <h4>Name</h4> </div>" +
-			"<div class='col-xs-9'><h4>Cluster Algos</h4></div></div>");
-		for (String spotName : topSpots.getTopSpots())	{
-			StringBuffer stringBuffer = new StringBuffer();
-			stringBuffer.append("<div class='row'> ");
-			stringBuffer.append("<div class='col-xs-3'> ");
-			stringBuffer.append(spotName);
-			stringBuffer.append("</div>");
-			stringBuffer.append("<div class='col-xs-9'> ");
-			stringBuffer.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=DoNotFilterStrategy'>DoNotFilterStrategy</a> ");
-			if(JSPHelper.isUserAdmin(request)){
-				stringBuffer.append("|<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFewPOIsFilter'>ManyViewsAndFewPOIsFilter</a> |");
-				stringBuffer.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=RelativeRatioViewsAndPOIsFilter'>RelativeRatioViewsAndPOIsFilter</a> |");
-				stringBuffer.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFixedAmountOfPOIsFilter'>ManyViewsAndFixedAmountOfPOIsFilter</a> |");
-			}
-			stringBuffer.append("</div></div>");
-			
-			out.println(stringBuffer.toString());
-		} 
-		%>
-		
+		<div class='row'>
+			<div class='col-xs-12'> <h1>Top Spots</h1> </div>
+		</div>
+		<% out.println(helperMethods.getFilterStrategyButtons(topSpots)); %>
 	</div>
 	
 	

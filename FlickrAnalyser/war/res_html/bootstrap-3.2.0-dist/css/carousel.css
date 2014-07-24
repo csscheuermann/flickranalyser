@@ -72,10 +72,11 @@ body {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-	height: 800px;
-	background: url('/res_html/img/background.jpg');
-	background-size: cover;
+		height: 800;
+		background: url('/res_html/img/background.jpg');
+		background-size: cover;
 }
+
 
 .carousel-caption-map {
 	position: absolute;

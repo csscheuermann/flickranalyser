@@ -1,3 +1,15 @@
+@font-face {
+	font-family: 'bebas_neueregular';
+	src: url('/res_html/fonts/bebas/bebasneue-webfont.eot');
+	src: url('/res_html/fonts/bebas/bebasneue-webfont.eot?#iefix')
+		format('embedded-opentype'),
+		url('/res_html/fonts/bebas/bebasneue-webfont.woff') format('woff'),
+		url('/res_html/fonts/bebas/bebasneue-webfont.ttf') format('truetype'),
+		url('/res_html/fonts/bebas/bebasneue-webfont.svg#bebas_neueregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .showGroup {
 	padding-bottom: 20px;
 	padding-top: 20px;
@@ -6,7 +18,7 @@
 }
 
 .background-grey {
-		background-color: rgba(214, 214, 214, 1);
+	background-color: rgba(214, 214, 214, 1);
 }
 
 #spotInfoContainer {
@@ -35,6 +47,14 @@
 
 .bottom-sapce {
 	margin-bottom: 10px;
+}
+
+.bottom-sapce-20 {
+	margin-bottom: 20px;
+}
+
+.bottom-sapce-30 {
+	margin-bottom: 30px;
 }
 
 #seekretSpotInfoContainer {
@@ -107,7 +127,10 @@
 	box-shadow: 0 0 3px gray;
 	font-size: 20px;
 	font-weight: bold;
-	
+}
+
+.who-we-are {
+	width: 250px;
 }
 
 .seekret {

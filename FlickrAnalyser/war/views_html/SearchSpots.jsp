@@ -133,7 +133,11 @@
 	<% out.println(helperMethods.createNavigation(false)); %>
 
 
-
+  	<div class='container'>
+  		<div class='row'>
+  	  		<div class='col-xs-12'><h1>Search for a  Spot</div>
+  		</div>
+    </div>
 
    	<%  
 	  	out.println("<div class='container'>");
@@ -154,6 +158,10 @@
 		out.println("</div>");
 	  %>
 	
+  	
+		
+		
+		
 	<div class='container'>
 		<div class='row'>
 	  	<div class='col-xs-9'><input type="text" class="form-control" id="spotName" placeholder="Munich"></div>

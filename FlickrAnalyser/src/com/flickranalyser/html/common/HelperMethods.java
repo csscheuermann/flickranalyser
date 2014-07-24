@@ -11,6 +11,7 @@ import com.flickranalyser.endpoints.RatingService;
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.html.webfrontend.HtmlStarterServlet;
 import com.flickranalyser.pojo.SeekretUser;
+import com.flickranalyser.pojo.SpotResultList;
 import com.flickranalyser.pojo.results.KeyResult;
 
 public class HelperMethods {
@@ -33,8 +34,8 @@ public class HelperMethods {
 	public static final String SPOT_NAME = "spotName";
 	private KeyResult ratingResult;
 	private KeyResult dismissResult;
-	
-	
+
+
 	public HelperMethods(HttpSession session) {
 		this.session = session;
 		RatingService rs = new RatingService();
@@ -55,6 +56,36 @@ public class HelperMethods {
 		return null;
 	}
 
+
+	public String getFilterStrategyButtons(SpotResultList topSpots){
+
+
+		SeekretUser currentUser = (SeekretUser) this.session.getAttribute("currentUser");
+
+		StringBuilder getFilterStrategyButtons = new StringBuilder();
+		getFilterStrategyButtons.append("<div class='row'>");
+		getFilterStrategyButtons.append("<div class='col-xs-3'> <h4>Name</h4> </div>");
+		getFilterStrategyButtons.append("<div class='col-xs-9'><h4>Cluster Algos</h4></div></div>");
+		for (String spotName : topSpots.getTopSpots())	{
+			getFilterStrategyButtons.append("<div class='row bottom-sapce' > ");
+			getFilterStrategyButtons.append("<div class='col-xs-3'>");
+			getFilterStrategyButtons.append(spotName);
+			getFilterStrategyButtons.append("</div>");
+			getFilterStrategyButtons.append("<div class='col-xs-9'> ");
+
+			getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=DoNotFilterStrategy'><button type='button' class='btn'>No Filter</button></a> ");
+
+			if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
+				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFewPOIsFilter'><button type='button' class='btn'>ManyViews FewPOIs</button></a> ");
+				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=RelativeRatioViewsAndPOIsFilter'><button type='button' class='btn'>RelativeRatioViewsAndPOIs</button></a> ");
+				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFixedAmountOfPOIsFilter'><button type='button' class='btn'>ManyViewsAndFixedAmountOfPOIs</button></a>");
+			}
+			getFilterStrategyButtons.append("</div></div>");
+		}
+		getFilterStrategyButtons.append("</div>");
+		return getFilterStrategyButtons.toString(); 
+
+	}
 	public String getHTMLHeader() {
 		StringBuilder header = new StringBuilder();
 		header.append(getHTMLHeaderUnclosed());
@@ -107,7 +138,7 @@ public class HelperMethods {
 		bodyBegin.append("<div class='container'>");
 
 		bodyBegin.append("<div class='row'>");
-		bodyBegin.append("  <div class='col-xs-6 col-md-4'>&nbsp;</div>");
+		bodyBegin.append("  <div class='col-xs-6 col-md-4'><h1>A place I will never forget</h1></div>");
 		bodyBegin.append(" <div class='col-xs-12 col-md-8 image-iphone'>&nbsp;</div>");
 		bodyBegin.append("</div>");
 
@@ -213,8 +244,8 @@ public class HelperMethods {
 		marketing.append("<div class='row'>");
 		marketing.append("<div class='col-lg-4'>");
 		marketing
-		.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
-		marketing.append("<h2>Heading</h2>");
+		.append("<img class='img-circle' src='/res_html/img/frontpage/mountain.svg' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
+		marketing.append("<h2>What's Seekret?</h2>");
 		marketing
 		.append("<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>");
 		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
@@ -222,7 +253,7 @@ public class HelperMethods {
 		marketing.append("<div class='col-lg-4'>");
 		marketing
 		.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
-		marketing.append("<h2>Heading</h2>");
+		marketing.append("<h2>Our Mission</h2>");
 		marketing
 		.append("<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>");
 		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
@@ -230,7 +261,7 @@ public class HelperMethods {
 		marketing.append("<div class='col-lg-4'>");
 		marketing
 		.append("<img class='img-circle' src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' alt='Generic placeholder image' style='width: 140px; height: 140px;'>");
-		marketing.append("<h2>Heading</h2>");
+		marketing.append("<h2>Who we are</h2>");
 		marketing
 		.append("<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>");
 		marketing.append("<p><a class='btn btn-default' href='#' role='button'>View details &raquo;</a></p>");
@@ -383,11 +414,11 @@ public class HelperMethods {
 	public SeekretUser getCurrentUser(){
 		return (SeekretUser) this.session.getAttribute("currentUser");
 	}
-	
+
 	public String getCurrentUserEmail(){
 		return ((SeekretUser) this.session.getAttribute("currentUser")).getEmail();
 	}
-	
+
 	public boolean checkIfClusterWasAlreadyRated(String clusterDatastoreKey){
 		Map<String, String> keys = ratingResult.getKeys();
 		String searchKey = getCurrentUserEmail() + clusterDatastoreKey;
@@ -396,7 +427,7 @@ public class HelperMethods {
 		}
 		return false;
 	}
-	
+
 
 	public boolean checkIfClusterWasAlreadyDismissed(String clusterDatastoreKey){
 		Map<String, String> keys = dismissResult.getKeys();
@@ -406,8 +437,25 @@ public class HelperMethods {
 		}
 		return false;
 	}
-	
-	
+
+
+	public String createWhoWeAre(){
+		StringBuilder createWhoWeAre = new StringBuilder();
+
+		createWhoWeAre.append("<div class='container bottom-sapce-30'>");
+		createWhoWeAre.append("<div class='row'>");
+		createWhoWeAre.append("<div class='col-md-3'><div id='firstWorker'><img class='who-we-are' src='/res_html/img/photos/constantin.jpg' alt='constantin'/></div></div>");
+		createWhoWeAre.append("<div class='col-md-3'><div id='firstWorker'><img class='who-we-are' src='/res_html/img/photos/julia.jpg' alt='julia'/></div></div>");
+		createWhoWeAre.append("<div class='col-md-3'><div id='firstWorker'><img class='who-we-are' src='/res_html/img/photos/simon.jpg' alt='simon'/></div></div>");
+		createWhoWeAre.append("<div class='col-md-3'><div id='firstWorker'><img class='who-we-are' src='/res_html/img/photos/daniel.jpg' alt='daniel'/></div></div>");
+		createWhoWeAre.append(" </div>");
+		createWhoWeAre.append(" </div>");
+
+		return createWhoWeAre.toString();
+
+	}
+
+
 	public String createVoteResultField() {
 		StringBuilder createVoteResultField = new StringBuilder();
 
