@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.flickranalyser.businesslogic.filter.IFilterStrategy;
+import com.flickranalyser.businesslogic.filterstrategies.IFilterStrategy;
 import com.flickranalyser.endpoints.SpotService;
 import com.flickranalyser.html.common.HelperMethods;
 import com.flickranalyser.pojo.Cluster;
@@ -22,7 +22,8 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
     this.spotService = new SpotService();
   }
 
-  public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession){
+  @Override
+public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession){
     String location = pRequest.getParameter("location");
     String filterStrategy = pRequest.getParameter("strategy");
 
@@ -30,10 +31,10 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
     LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);
 
     StringBuilder fullClassPath = new StringBuilder();
-    fullClassPath.append("com.flickranalyser.businesslogic.filter.impl.");
+    fullClassPath.append("com.flickranalyser.businesslogic.filterstrategies.impl.");
     fullClassPath.append(filterStrategy);
 
-    IFilterStrategy choosenFilterStrategy = (IFilterStrategy)HelperMethods.instantiate(
+    IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(
       fullClassPath.toString(), IFilterStrategy.class);
     LOGGER.log(Level.INFO, "INITIALIZED FILTER STRATEGY:" + 
       choosenFilterStrategy.getClass().getName());

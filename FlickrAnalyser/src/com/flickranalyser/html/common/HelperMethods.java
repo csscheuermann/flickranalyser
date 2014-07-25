@@ -47,11 +47,11 @@ public class HelperMethods {
 		try {
 			return type.cast(Class.forName(className).newInstance());
 		} catch (InstantiationException e) {
-			LOGGER.log(Level.INFO, "COULD NOT INITIATE " + e.getMessage(), e);
+			LOGGER.log(Level.SEVERE, "COULD NOT INITIATE " + e.getMessage(), e);
 		} catch (IllegalAccessException e) {
-			LOGGER.log(Level.INFO, "ILLEGALACCESSEXCEPTION" + e.getMessage(), e);
+			LOGGER.log(Level.SEVERE, "ILLEGALACCESSEXCEPTION" + e.getMessage(), e);
 		} catch (ClassNotFoundException e) {
-			LOGGER.log(Level.INFO, "CLASSNOTFOUNDEXCEPTION" + e.getMessage(), e);
+			LOGGER.log(Level.SEVERE, "CLASSNOTFOUNDEXCEPTION" + e.getMessage(), e);
 		}
 		return null;
 	}
@@ -76,9 +76,9 @@ public class HelperMethods {
 			getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=DoNotFilterStrategy'><button type='button' class='btn'>No Filter</button></a> ");
 
 			if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
-				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFewPOIsFilter'><button type='button' class='btn'>ManyViews FewPOIs</button></a> ");
-				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=RelativeRatioViewsAndPOIsFilter'><button type='button' class='btn'>RelativeRatioViewsAndPOIs</button></a> ");
-				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFixedAmountOfPOIsFilter'><button type='button' class='btn'>ManyViewsAndFixedAmountOfPOIs</button></a>");
+				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFewPOIsFilterStrategy'><button type='button' class='btn'>ManyViews FewPOIs</button></a> ");
+				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=RelativeRatioViewsAndPOIsFilterStrategy'><button type='button' class='btn'>RelativeRatioViewsAndPOIs</button></a> ");
+				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFixedAmountOfPOIsFilterStrategy'><button type='button' class='btn'>ManyViewsAndFixedAmountOfPOIs</button></a>");
 			}
 			getFilterStrategyButtons.append("</div></div>");
 		}

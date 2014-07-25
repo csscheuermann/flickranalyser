@@ -1,6 +1,6 @@
 package com.flickranalyser.businesslogic.common;
 
-import com.flickranalyser.businesslogic.filter.IFilterStrategy;
+import com.flickranalyser.businesslogic.filterstrategies.IFilterStrategy;
 
 public class ParameterConstants {
 

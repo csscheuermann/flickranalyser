@@ -5,7 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.flickranalyser.businesslogic.filter.decorator.IClusterScoreDecorator;
+import com.flickranalyser.businesslogic.filterstrategies.scoredecorator.IClusterScoreDecorator;
+import com.flickranalyser.businesslogic.filterstrategies.scoredecorator.impl.RelativeNumberViewsScoreDecorator;
 import com.flickranalyser.pojo.Cluster;
 import com.javadocmd.simplelatlng.LatLng;
 
