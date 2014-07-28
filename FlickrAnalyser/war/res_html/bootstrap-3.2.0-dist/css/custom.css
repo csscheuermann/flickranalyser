@@ -57,6 +57,10 @@
 	margin-bottom: 30px;
 }
 
+.bottom-padding-30 {
+	padding-bottom: 30px;
+}
+
 #seekretSpotInfoContainer {
 	display: none;
 }

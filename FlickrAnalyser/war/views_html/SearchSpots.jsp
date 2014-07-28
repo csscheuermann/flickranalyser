@@ -16,19 +16,7 @@
 	<script type="text/javascript">
 		
 		
-		
-		function addSpotResult(spotName){
-		
-		var clusterDetails = new ClusterDetails();
-		<%	
-		Spot spotForSpotName = (Spot) request.getAttribute(HelperMethods.SPOT); 
-		if (spotForSpotName != null){
-			out.println("clusterDetails.addElementDiv('spotResult', 'spotResultInfo', \""+ helperMethods.getFilterStrategyButtons(spotForSpotName.getName()) + "\");");
-		}
-		%>
 	
-		
-		}
 		
 		function addCrawlQueueRequest(spotName){
 			var clusterDetails = new ClusterDetails();
@@ -167,7 +155,13 @@
 	
 	</div>
 	
-	
+	<%	
+	Spot spotForSpotName = (Spot) request.getAttribute(HelperMethods.SPOT); 
+	if (spotForSpotName != null){
+		 out.println(helperMethods.getFilterStrategyButtons(spotForSpotName.getName()));
+	}
+	%>
+		
 	
 	<% out.println(helperMethods.createBodyEnd());%>
 	

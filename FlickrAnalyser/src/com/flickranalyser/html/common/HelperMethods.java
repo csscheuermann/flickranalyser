@@ -124,7 +124,7 @@ public class HelperMethods {
 		SeekretUser currentUser = (SeekretUser) this.session.getAttribute("currentUser");
 		StringBuilder createFilterSettings = new StringBuilder();
 		if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
-			createFilterSettings.append("<div class='container bg-info'>");
+			createFilterSettings.append("<div class='container bg-info bottom-sapce-30 bottom-padding-30'>");
 			createFilterSettings.append("<h3> Filter Settings </h3>");
 			createFilterSettings.append("<div class='row'>");
 			createFilterSettings.append("<div class='col-xs-3'>  ");
