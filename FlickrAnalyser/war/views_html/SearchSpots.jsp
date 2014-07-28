@@ -18,31 +18,16 @@
 		
 		
 		function addSpotResult(spotName){
-			var clusterDetails = new ClusterDetails();
-			
-			var linkManyViewsAndViewPOIsFilter = "https://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=ManyViewsAndFewPOIsFilter"
-			var linkDoNotFilterStrategy = "https://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=DoNotFilterStrategy"
-			var linkRelativeRatioViewsAndPOIsFilter = "https://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=RelativeRatioViewsAndPOIsFilter"
-			var linkManyViewsAndFixedAmountOfPOIsFilter = "https://flickeranalyser.appspot.com/?showView=SpotMap&location=" + spotName + "&strategy=ManyViewsAndFixedAmountOfPOIsFilter"
-			
-			
-				var htmlToShow = '<div class="container"> ' + 
-					'<div class="row"> ' +
-						'<div class="col-xs-3"><h4>Full Spot Name</h4></div> ' + 
-						'<div class="col-xs-9"><h4>' + spotName + '</h4></div> ' + 
-					'</div> ' + 
-					'<div class="row"> ' +
-					
-						'<div class="col-md-3"><a href="'+ linkManyViewsAndViewPOIsFilter + '">ManyViewsAndFewPOIsFilter</a> </div> '+
-						'<div class="col-md-3"><a href="'+ linkDoNotFilterStrategy + '">DoNotFilterStrategy</a> </div> '+
-						'<div class="col-md-3"><a href="'+ linkRelativeRatioViewsAndPOIsFilter + '">RelativeRatioViewsAndPOIsFilter</a> </div> '+
-						'<div class="col-md-3"><a href="'+ linkManyViewsAndFixedAmountOfPOIsFilter + '">ManyViewsAndFixedAmountOfPOIsFilter</a> </div> '+
-
-					'</div> ' + 
-				'</div> ' ;
-			
-			
-			clusterDetails.addElementDiv('spotResult', 'spotResultInfo',  htmlToShow);
+		
+		var clusterDetails = new ClusterDetails();
+		<%	
+		Spot spotForSpotName = (Spot) request.getAttribute(HelperMethods.SPOT); 
+		if (spotForSpotName != null){
+			out.println("clusterDetails.addElementDiv('spotResult', 'spotResultInfo', \""+ helperMethods.getFilterStrategyButtons(spotForSpotName.getName()) + "\");");
+		}
+		%>
+	
+		
 		}
 		
 		function addCrawlQueueRequest(spotName){

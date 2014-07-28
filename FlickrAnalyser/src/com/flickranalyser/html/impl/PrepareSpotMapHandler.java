@@ -26,6 +26,9 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
 public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession){
     String location = pRequest.getParameter("location");
     String filterStrategy = pRequest.getParameter("strategy");
+    boolean dissmissCluster = Boolean.parseBoolean(pRequest.getParameter("dissmissCluster"));
+    
+    LOGGER.log(Level.INFO, "DISMISS CLUSTER: " + dissmissCluster);
 
     LOGGER.log(Level.INFO, "LOCATION: " + location);
     LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);

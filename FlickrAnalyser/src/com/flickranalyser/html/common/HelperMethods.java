@@ -1,5 +1,6 @@
 package com.flickranalyser.html.common;
 
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +56,12 @@ public class HelperMethods {
 		}
 		return null;
 	}
+	public String getFilterStrategyButtons(String spotName){
+		LinkedList<String> linkedList = new LinkedList<String>();
+		linkedList.add(spotName);
+		SpotResultList spotResultList = new SpotResultList(linkedList);
+		return getFilterStrategyButtons(spotResultList);
+	}
 
 
 	public String getFilterStrategyButtons(SpotResultList topSpots){
@@ -63,6 +70,21 @@ public class HelperMethods {
 		SeekretUser currentUser = (SeekretUser) this.session.getAttribute("currentUser");
 
 		StringBuilder getFilterStrategyButtons = new StringBuilder();
+		getFilterStrategyButtons.append("<script type='text/javascript'>");
+		getFilterStrategyButtons.append("function 	setSpotNameToInput(spotname, inputElementId){");
+		getFilterStrategyButtons.append("alert(inputElementId);");
+		getFilterStrategyButtons.append("alert(spotname);");
+		getFilterStrategyButtons.append("var spotName = document.getElementById(inputElementId);");
+		getFilterStrategyButtons.append("spotName.setAttribute('value', spotname);");
+		getFilterStrategyButtons.append("	document.forms['FilterForm'].submit();}");
+		getFilterStrategyButtons.append("</script>");
+
+
+		getFilterStrategyButtons.append("<form role='form' name='FilterForm' action='https://flickeranalyser.appspot.com/?showView=SpotMap' method='post'>");
+		getFilterStrategyButtons.append(createFilterSettings());
+		getFilterStrategyButtons.append("<input type='hidden' name='location' id='locationSetByJQuery'>"); 
+
+		getFilterStrategyButtons.append("<div class='container'>");
 		getFilterStrategyButtons.append("<div class='row'>");
 		getFilterStrategyButtons.append("<div class='col-xs-3'> <h4>Name</h4> </div>");
 		getFilterStrategyButtons.append("<div class='col-xs-9'><h4>Cluster Algos</h4></div></div>");
@@ -72,18 +94,39 @@ public class HelperMethods {
 			getFilterStrategyButtons.append(spotName);
 			getFilterStrategyButtons.append("</div>");
 			getFilterStrategyButtons.append("<div class='col-xs-9'> ");
-
-			getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=DoNotFilterStrategy'><button type='button' class='btn'>No Filter</button></a> ");
+			getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='DoNotFilterStrategy'>No Filter</button>&nbsp;");
 
 			if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
-				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFewPOIsFilterStrategy'><button type='button' class='btn'>ManyViews FewPOIs</button></a> ");
-				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=RelativeRatioViewsAndPOIsFilterStrategy'><button type='button' class='btn'>RelativeRatioViewsAndPOIs</button></a> ");
-				getFilterStrategyButtons.append("<a href='https://flickeranalyser.appspot.com/?showView=SpotMap&location="+spotName+"&strategy=ManyViewsAndFixedAmountOfPOIsFilterStrategy'><button type='button' class='btn'>ManyViewsAndFixedAmountOfPOIs</button></a>");
+				getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='ManyViewsAndFewPOIsFilterStrategy'>ManyViews FewPOIs</button>&nbsp;");
+				getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='RelativeRatioViewsAndPOIsFilterStrategy'>RelativeRatioViewsAndPOIs</button>&nbsp;");
+				getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='ManyViewsAndFixedAmountOfPOIsFilterStrategy'>ManyViewsAndFixedAmountOfPOIs</button>&nbsp;");
 			}
 			getFilterStrategyButtons.append("</div></div>");
 		}
 		getFilterStrategyButtons.append("</div>");
+		getFilterStrategyButtons.append("</div>");
+		getFilterStrategyButtons.append("</form>");
 		return getFilterStrategyButtons.toString(); 
+
+	}
+
+	private String createFilterSettings(){
+		SeekretUser currentUser = (SeekretUser) this.session.getAttribute("currentUser");
+		StringBuilder createFilterSettings = new StringBuilder();
+		if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
+			createFilterSettings.append("<div class='container bg-info'>");
+			createFilterSettings.append("<h3> Filter Settings </h3>");
+			createFilterSettings.append("<div class='row'>");
+			createFilterSettings.append("<div class='col-xs-3'>  ");
+			createFilterSettings.append("      <input type='checkbox' name='dissmissCluster' id='doNotConsiderDismissedClusters'> ");
+			createFilterSettings.append("  </div>");
+			createFilterSettings.append("<div class='col-xs-9'>Do not consider dismissed clusters</div>");
+			createFilterSettings.append("</div>");
+			createFilterSettings.append("</div>");
+		}
+
+		return createFilterSettings.toString();
+
 
 	}
 	public String getHTMLHeader() {
