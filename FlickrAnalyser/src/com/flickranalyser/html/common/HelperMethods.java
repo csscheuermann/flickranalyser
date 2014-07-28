@@ -72,9 +72,19 @@ public class HelperMethods {
 		StringBuilder getFilterStrategyButtons = new StringBuilder();
 		getFilterStrategyButtons.append("<script type='text/javascript'>");
 		getFilterStrategyButtons.append("function 	setSpotNameToInput(spotname, inputElementId){");
-		getFilterStrategyButtons.append("alert(inputElementId);");
-		getFilterStrategyButtons.append("alert(spotname);");
 		getFilterStrategyButtons.append("var spotName = document.getElementById(inputElementId);");
+		
+		getFilterStrategyButtons.append("if ($('#doNotConsiderDismissedClusters').is(':checked') == true)");
+		getFilterStrategyButtons.append("{");
+		getFilterStrategyButtons.append("$('#doNotConsiderDismissedClusters').val(true);");
+		getFilterStrategyButtons.append("}");
+		getFilterStrategyButtons.append("else");
+		getFilterStrategyButtons.append("{");
+		getFilterStrategyButtons.append("	$('#doNotConsiderDismissedClusters').val(false);");
+
+		getFilterStrategyButtons.append("}");
+
+
 		getFilterStrategyButtons.append("spotName.setAttribute('value', spotname);");
 		getFilterStrategyButtons.append("	document.forms['FilterForm'].submit();}");
 		getFilterStrategyButtons.append("</script>");
