@@ -230,7 +230,9 @@ public class Cluster implements Serializable {
 		return dismissCounter;
 	}
 
-
+	public void incrementDismissCounter(){
+		this.dismissCounter++;
+	}
 
 
 }
