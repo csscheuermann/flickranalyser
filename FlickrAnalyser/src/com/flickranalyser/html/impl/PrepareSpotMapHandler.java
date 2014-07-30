@@ -24,28 +24,32 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
 
   @Override
 public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession){
-    String location = pRequest.getParameter("location");
+    
+	  //Get the needed Parameters
+	String location = pRequest.getParameter("location");
     String filterStrategy = pRequest.getParameter("strategy");
     boolean dissmissCluster = Boolean.parseBoolean(pRequest.getParameter("dissmissCluster"));
     
     LOGGER.log(Level.INFO, "DISMISS CLUSTER: " + dissmissCluster);
-
     LOGGER.log(Level.INFO, "LOCATION: " + location);
     LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);
 
+    
+    if (location == null || filterStrategy == null){
+    	pRequest.setAttribute(HelperMethods.MESSAGE_ERROR, "Location or Filterstategy was not set");
+    	return "TopSpots";
+    }
+    
     StringBuilder fullClassPath = new StringBuilder();
     fullClassPath.append("com.flickranalyser.businesslogic.filterstrategies.impl.");
     fullClassPath.append(filterStrategy);
 
-    IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(
-      fullClassPath.toString(), IFilterStrategy.class);
-    LOGGER.log(Level.INFO, "INITIALIZED FILTER STRATEGY:" + 
-      choosenFilterStrategy.getClass().getName());
+    IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(fullClassPath.toString(), IFilterStrategy.class);
+    LOGGER.log(Level.INFO, "INITIALIZED FILTER STRATEGY:" + choosenFilterStrategy.getClass().getName());
 
     Spot spot = this.spotService.getSpotByName(location);
     if (spot != null){
       List<Cluster> cluster = spot.getCluster();
-
       List<Cluster> filteredCluster = choosenFilterStrategy.filterCluster(cluster, spot);
       spot.setCluster(filteredCluster);
       

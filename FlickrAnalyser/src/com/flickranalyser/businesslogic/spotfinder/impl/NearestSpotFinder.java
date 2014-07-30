@@ -167,6 +167,7 @@ public class NearestSpotFinder implements ISpotFinder {
 	@Override
 	public String findAddressByLatLng(double lat, double lng) {
 
+		LOGGER.log(Level.INFO, "LATITUDE: " + lat + " LONGITUDE :" + lng);
 		// prepare a URL to the geocoder
 				try {
 					URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?latlng="

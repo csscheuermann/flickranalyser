@@ -2,7 +2,6 @@ package com.flickranalyser.persistence.datastore.get;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +13,6 @@ import javax.ws.rs.core.Response;
 import com.flickranalyser.persistence.datastore.common.PMF;
 import com.flickranalyser.pojo.Rating;
 import com.flickranalyser.pojo.results.KeyResult;
-import com.google.appengine.api.datastore.Key;
 
 public class PFGetterRating
 {

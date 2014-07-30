@@ -21,7 +21,7 @@ google.appengine.seekret.hideOverlay = function(){
     
 
 google.appengine.seekret.getClusterAddressByLatLong = function(lat, lng) {
-
+console.log('Getting Cluster Address.');
  $.ajax({
          type: "post",
          url: "?action=GetClusterAddress", //this is my servlet

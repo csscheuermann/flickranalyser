@@ -1,13 +1,15 @@
 package com.flickranalyser.html.impl;
 
-import com.flickranalyser.endpoints.SpotService;
-import com.flickranalyser.pojo.Spot;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
+
+import com.flickranalyser.endpoints.SpotService;
+import com.flickranalyser.pojo.Spot;
 
 public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
 {

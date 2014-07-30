@@ -9,7 +9,7 @@
 <%@ page import="com.flickranalyser.html.common.HelperMethods" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
-<%@ page import="com.flickranalyser.businesslogic.spotfinder.impl.NearestSpotFinder" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -100,7 +100,12 @@
    	
    
    	if (lastClickedMarker != null){
-   		lastClickedMarker.setIcon(lastClickedMarkerIcon);
+	    if (lastClickedMarkerIcon === '/res_html/img/eye_not_watched_yet.png'){
+	    	lastClickedMarker.setIcon('/res_html/img/eye_already_watched.png');
+		}else{
+			lastClickedMarker.setIcon(lastClickedMarkerIcon);
+		}
+   		
 	}
 	
 	lastClickedMarker = marker;
@@ -285,10 +290,6 @@
 			
 			boolean clusterAlreadyVoted = helperMethods.checkIfClusterWasAlreadyRated(datastoreClusterKey);
 	   		boolean clusterAlreadyDismissed = helperMethods.checkIfClusterWasAlreadyDismissed(datastoreClusterKey);
-			
-			NearestSpotFinder  nearestSpotFinder = new NearestSpotFinder();
-			String clusterAdressFromGoogle = nearestSpotFinder.findAddressByLatLng(currentLat,currentLng);
-			
 			
 			if (clusterOverallViews > 200){
 	     			out.println("addMarker('"+

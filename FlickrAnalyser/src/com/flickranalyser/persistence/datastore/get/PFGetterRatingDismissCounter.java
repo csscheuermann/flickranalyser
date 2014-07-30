@@ -10,7 +10,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.flickranalyser.persistence.datastore.common.PMF;
-import com.flickranalyser.pojo.Rating;
 import com.flickranalyser.pojo.RatingDismissCounter;
 import com.flickranalyser.pojo.results.KeyResult;
 

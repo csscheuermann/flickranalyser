@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javax.jdo.PersistenceManager;
 import javax.ws.rs.core.Response;
 
-import com.flickranalyser.endpoints.UserService;
 import com.flickranalyser.persistence.datastore.common.PMF;
 import com.flickranalyser.pojo.SeekretUser;
 
