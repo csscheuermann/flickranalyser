@@ -27,7 +27,7 @@ public class SpotToQueue extends HttpServlet{
 		double spotRadius =  Double.parseDouble(req.getParameter(PropertiesSpotToCrawl.SPOT_RADIUS_IN_KM.toString()));
 		double clusterRadius =  Double.parseDouble(req.getParameter(PropertiesSpotToCrawl.CLUSTER_RADIUS_IN_KM.toString()));
 
-		SpotToCrawl spot = new SpotToCrawl(latitude, longitude,name,description,clusterRadius,spotRadius, null,0,0);
+		SpotToCrawl spot = new SpotToCrawl(latitude, longitude,name,description,clusterRadius,spotRadius, null,0,0, false);
 		
 		PFSaverSpotToCrawl.saveSpotToDatastore(spot);
 

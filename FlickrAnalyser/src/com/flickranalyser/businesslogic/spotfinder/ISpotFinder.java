@@ -11,7 +11,7 @@ public interface ISpotFinder {
 	
 	Spot findSpotByLocation(long latitude, long longitude);
 	
-	Response getSpotByNamePutToCrawlQueue(String name);
+	Response getSpotByNamePutToCrawlQueue(String name, boolean onlyExcludedPictures);
 	
 	String findAddressBySearchString(String searchAdress);
 	

@@ -13,8 +13,10 @@ public class TagBasedFotoExcluder implements IFotoExcluder {
 	private static final Logger LOGGER = Logger.getLogger(TagBasedFotoExcluder.class.getName());
 	private final Set<String> unwantedTags;
 	private static int filterCounter = 0;
+	private boolean onlyExcludedTags;
 
-	public TagBasedFotoExcluder() {
+	public TagBasedFotoExcluder(boolean onlyExcludedTags) {
+		this.onlyExcludedTags = onlyExcludedTags;
 		unwantedTags = new HashSet<String>();
 		unwantedTags.add("WOMEN");
 		unwantedTags.add("WOMAN");
@@ -84,16 +86,16 @@ public class TagBasedFotoExcluder implements IFotoExcluder {
 		unwantedTags.add("KITTY");
 		unwantedTags.add("KID");
 		unwantedTags.add("KIDS");
-		
+
 
 		//TODO COS DVV: TO DISCUSS
 		unwantedTags.add("HOTEL");
 		unwantedTags.add("CAKE");
 		unwantedTags.add("MUFFIN");
 		unwantedTags.add("LOVE");
-		
+
 		unwantedTags.add("BIRD");
-		
+
 		unwantedTags.add("FASHION");
 		unwantedTags.add("WEDDING");
 		unwantedTags.add("BEAUTY");
@@ -105,11 +107,11 @@ public class TagBasedFotoExcluder implements IFotoExcluder {
 		unwantedTags.add("MUSCLE");
 		unwantedTags.add("NIPPLE");
 		unwantedTags.add("PORTRAIT");
-		
+
 		unwantedTags.add("BABY");
 		unwantedTags.add("BABYS");
 		unwantedTags.add("BABIES");
-		
+
 		unwantedTags.add("HIGHHEEL");
 		unwantedTags.add("HIGHHEELS");
 		unwantedTags.add("CAMERA");
@@ -121,14 +123,29 @@ public class TagBasedFotoExcluder implements IFotoExcluder {
 		return Collections.disjoint(unwantedTags, poi.getTags());
 	}
 
+	private boolean containsUnwantedTags(PointOfInterest poi) {
+		return !Collections.disjoint(unwantedTags, poi.getTags());
+	}
+
 	@Override
 	public boolean isFotoToExclude(PointOfInterest poi) {
-		if (isFreeOfUnwantedTags(poi)) {	
-			return false;
+		if (onlyExcludedTags){
+			if (containsUnwantedTags(poi)) {	
+				LOGGER.log(Level.INFO, "CONTAINS UNWANTED TAGS");
+				return false;
+			}
+			return true;
 		}else{
-			filterCounter++;
-			LOGGER.log(Level.INFO, "I FILTERED: " + filterCounter + " out of the List");
+
+			if (isFreeOfUnwantedTags(poi)) {	
+				return false;
+			}else{
+				filterCounter++;
+				LOGGER.log(Level.INFO, "I FILTERED: " + filterCounter + " out of the List");
+			}
+			return true;
 		}
-		return true;
+
+
 	}
 }

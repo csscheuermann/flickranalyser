@@ -26,7 +26,7 @@ public class CrawlData extends HttpServlet{
 		
 		if(resultSpotToCrawlFromDatastore != null){
 			Spot spot = new Spot(resultSpotToCrawlFromDatastore);
-			SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(spot);
+			SecretPlacesFacade secretPlacesFacade = new SecretPlacesFacade(spot, resultSpotToCrawlFromDatastore.isOnlyExcludedPictures());
 			//TODO COS DVV: We can remove the parameter I think
 			Spot spotAttribute = secretPlacesFacade.getSpotInformationForName("munich") ;
 			PFSaverSpot.saveSpotToDatastore(spotAttribute);

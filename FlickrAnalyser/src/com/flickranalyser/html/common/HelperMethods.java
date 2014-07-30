@@ -74,6 +74,7 @@ public class HelperMethods {
 		getFilterStrategyButtons.append("function 	setSpotNameToInput(spotname, inputElementId){");
 		getFilterStrategyButtons.append("var spotName = document.getElementById(inputElementId);");
 
+		//TODO COS WTF :) Das bitte ändern
 		getFilterStrategyButtons.append("if ($('#doNotConsiderDismissedClusters').is(':checked') == true)");
 		getFilterStrategyButtons.append("{");
 		getFilterStrategyButtons.append("$('#doNotConsiderDismissedClusters').val(true);");
@@ -142,9 +143,32 @@ public class HelperMethods {
 		}
 
 		return createFilterSettings.toString();
-
-
 	}
+	
+	
+	public String createCrawlSettings(){
+		SeekretUser currentUser = (SeekretUser) this.session.getAttribute("currentUser");
+		StringBuilder createFilterSettings = new StringBuilder();
+		if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
+			createFilterSettings.append("<div class='container'>");
+
+			createFilterSettings.append("<div class='alert alert-info bottom-sapce-30 bottom-padding-30'>");
+			createFilterSettings.append("<h3> Crawl Settings </h3>");
+			createFilterSettings.append("<div class='row'>");
+			createFilterSettings.append("<div class='col-xs-3'>  ");
+			createFilterSettings.append("      <input type='checkbox' id='onlyExcludedPictures'> ");
+			createFilterSettings.append("  </div>");
+			createFilterSettings.append("<div class='col-xs-9'>Get only the excluded pictures</div>");
+			createFilterSettings.append("</div>");
+
+			createFilterSettings.append("</div>");
+			createFilterSettings.append("</div>");
+		}
+
+		return createFilterSettings.toString();
+	}
+	
+	
 	public String getHTMLHeader() {
 		StringBuilder header = new StringBuilder();
 		header.append(getHTMLHeaderUnclosed());

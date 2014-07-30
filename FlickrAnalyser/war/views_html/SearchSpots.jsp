@@ -31,6 +31,7 @@
 			
 			'<div class="row"> ' +
 				'<form role="form" name="crawlForm" action="/" method="post"> ' + 
+					'<input type="hidden" name="onlyExcluded" id="onlyExcludedPicturesField">' + 
 					'<input type="hidden" name="action" value="SearchSpots" id="spotCrawlParameters" >' + 
 					'<input type="hidden" name="crawlLatitude" value="default" id="spotCrawlLatitude" >' + 
 					'<input type="hidden" name="crawlLongitude" value="default" id="spotCrawlLongitude" >' + 
@@ -44,8 +45,9 @@
 		function addToCrawlQueue(spotCrawlName){
 			var spotName = document.getElementById("spotCrawlAddress");
 			spotName.setAttribute('value', spotCrawlName);
+			
+			$('#onlyExcludedPicturesField').val($('#onlyExcludedPictures').is(':checked'));
 			document.forms["crawlForm"].submit();
-		
 		
 		}
 		
@@ -78,6 +80,7 @@
 		if (error != null){
 			String spotName = (String) request.getAttribute(HelperMethods.ADDRESS_PARAM);
 			
+		
 			out.println("addCrawlQueueRequest('"+ 
 				spotName + "');");
 		
@@ -133,8 +136,11 @@
 	
   	
 		
-		
-		
+	  <%
+	  	if (error != null){
+	  		out.println(helperMethods.createCrawlSettings());
+	  	}
+	%>
 	<div class='container'>
 		<div class='row'>
 	  	<div class='col-xs-9'><input type="text" class="form-control" id="spotName" placeholder="Munich"></div>
@@ -156,6 +162,8 @@
 	</div>
 	
 	<%	
+	
+
 	Spot spotForSpotName = (Spot) request.getAttribute(HelperMethods.SPOT); 
 	if (spotForSpotName != null){
 		 out.println(helperMethods.getFilterStrategyButtons(spotForSpotName.getName()));

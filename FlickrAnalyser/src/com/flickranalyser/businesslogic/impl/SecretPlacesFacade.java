@@ -19,9 +19,9 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 
 	private static final Logger LOGGER = Logger.getLogger(SecretPlacesFacade.class.getName());
 	
-	public SecretPlacesFacade(Spot spot) {
+	public SecretPlacesFacade(Spot spot, boolean onlyUnwantedTags) {
 		this.spot = spot;
-		IFotoExcluder fotoExcluder = new TagBasedFotoExcluder();
+		IFotoExcluder fotoExcluder = new TagBasedFotoExcluder(onlyUnwantedTags);
 		flickrRequestHandler = new FlickrRequestHandler(fotoExcluder);
 		spotCalculationHandler = new SpotCalculationHandler();
 	}

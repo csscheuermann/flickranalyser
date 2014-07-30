@@ -45,7 +45,7 @@ public class NearestSpotFinder implements ISpotFinder {
 
 
 	@Override
-	public Response getSpotByNamePutToCrawlQueue(String name) {
+	public Response getSpotByNamePutToCrawlQueue(String name, boolean onlyExcludedPictures) {
 
 		// prepare a URL to the geocoder
 		try {
@@ -81,6 +81,10 @@ public class NearestSpotFinder implements ISpotFinder {
 				break;
 			}
 
+			if (onlyExcludedPictures){
+				address += ", Excluded Pictures Only";
+			}
+			
 			if(MemcacheSpot.getSpotForSpotName(address) == null){
 
 				// c) extract the coordinates of the first result
@@ -94,7 +98,7 @@ public class NearestSpotFinder implements ISpotFinder {
 				}
 
 				LOGGER.log(Level.INFO, "lat/lng=" + lat + "," + lng);
-				return PFSaverSpotToCrawl.saveSpotToDatastore(new SpotToCrawl(new Spot(lat,lng,address,"NOT SET")));
+				return PFSaverSpotToCrawl.saveSpotToDatastore(new SpotToCrawl(new Spot(lat,lng,address,"NOT SET"), onlyExcludedPictures));
 			}else{
 				return Response.status(400).entity("SPOT ALREADY IN DATASTORE").build();
 			}

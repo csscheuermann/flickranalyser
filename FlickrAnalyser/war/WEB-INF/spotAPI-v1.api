@@ -26,7 +26,7 @@
   },
   "methods" : {
     "spotAPI.getSpotByNamePutToCrawlQueue" : {
-      "path" : "response/{spotName}",
+      "path" : "response/{spotName}/{onlyExcludedPictures}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -38,26 +38,9 @@
           "spotName" : {
             "type" : "string",
             "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "spotAPI.getSpotByName" : {
-      "path" : "spot/{spotName}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.flickranalyser.endpoints.SpotService.getSpotByName",
-      "request" : {
-        "parameters" : {
-          "spotName" : {
-            "type" : "string",
+          },
+          "onlyExcludedPictures" : {
+            "type" : "boolean",
             "required" : true
           }
         },
@@ -76,6 +59,48 @@
       "clientIds" : [ "1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.flickranalyser.endpoints.SpotService.getTopSpots",
       "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "spotAPI.getNearestSpotByAddress" : {
+      "path" : "spot/{spotName}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.SpotService.getNearestSpotByAddress",
+      "request" : {
+        "parameters" : {
+          "spotName" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "spotAPI.getSpotById" : {
+      "path" : "getSpotById",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.flickranalyser.endpoints.SpotService.getSpotById",
+      "request" : {
+        "parameters" : {
+          "spotId" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
         "body" : "empty"
       },
       "response" : {
@@ -107,6 +132,18 @@
       "_any" : {
         "id" : "_any",
         "type" : "any"
+      },
+      "SpotResultList" : {
+        "id" : "SpotResultList",
+        "type" : "object",
+        "properties" : {
+          "topSpots" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
       },
       "Spot" : {
         "id" : "Spot",
@@ -287,18 +324,6 @@
             "type" : "boolean"
           }
         }
-      },
-      "SpotResultList" : {
-        "id" : "SpotResultList",
-        "type" : "object",
-        "properties" : {
-          "topSpots" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }
       }
     },
     "methods" : {
@@ -307,14 +332,19 @@
           "$ref" : "Response"
         }
       },
-      "com.flickranalyser.endpoints.SpotService.getSpotByName" : {
+      "com.flickranalyser.endpoints.SpotService.getTopSpots" : {
+        "response" : {
+          "$ref" : "SpotResultList"
+        }
+      },
+      "com.flickranalyser.endpoints.SpotService.getNearestSpotByAddress" : {
         "response" : {
           "$ref" : "Spot"
         }
       },
-      "com.flickranalyser.endpoints.SpotService.getTopSpots" : {
+      "com.flickranalyser.endpoints.SpotService.getSpotById" : {
         "response" : {
-          "$ref" : "SpotResultList"
+          "$ref" : "Spot"
         }
       }
     }

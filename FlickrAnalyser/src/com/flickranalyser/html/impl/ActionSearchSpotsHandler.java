@@ -26,8 +26,12 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
 
     if (crawlSpotName != null) {
       LOGGER.log(Level.INFO, MESSAGE_CRAWLQUEUE_SPOT_NAME+ " SPOT TO CRAWL.");
-      Response findSpotByNamePutToCrawlQueue = spotService.getSpotByNamePutToCrawlQueue(crawlSpotName);
+      boolean onlyExcludedPictures = Boolean.parseBoolean(pRequest.getParameter("onlyExcluded"));
+      LOGGER.log(Level.INFO, "onlyExcluded: " + onlyExcludedPictures);
+      
+      Response findSpotByNamePutToCrawlQueue = spotService.getSpotByNamePutToCrawlQueue(crawlSpotName, onlyExcludedPictures);
 
+      
       if (findSpotByNamePutToCrawlQueue.getStatus() == 400)
         pRequest.setAttribute("errorCron", findSpotByNamePutToCrawlQueue.getEntity().toString());
       else {
@@ -43,7 +47,7 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
   private String handleSpotBehavior(HttpServletRequest pRequest, SpotService spotService)
   {
     String spotName = pRequest.getParameter("address");
-    Spot spotByName = spotService.getSpotByName(spotName);
+    Spot spotByName = spotService.getNearestSpotByAddress(spotName);
 
     if (spotByName == null) {
       pRequest.setAttribute("error", "Spot was not found in Database");
