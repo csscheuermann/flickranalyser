@@ -19,8 +19,10 @@ public class Prepare01_indexHandler extends AbstractHtmlRequestHandler {
 		return false;
 	}
 
+	
 	@Override
-	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession) {
+	public void prepareViewConcrete(HttpServletRequest pRequest,
+			HttpServletResponse pResponse, HttpSession pSession) {
 		if ((pRequest.getParameter("code") != null) && (pRequest.getParameter("state") != null) && (pRequest.getParameter("state").equals(pSession.getAttribute("state")))) {
 			GoogleAuthHelper helper = new GoogleAuthHelper();
 			pSession.removeAttribute("state");
@@ -31,6 +33,7 @@ public class Prepare01_indexHandler extends AbstractHtmlRequestHandler {
 				LOGGER.log(Level.SEVERE, "COULD NOT GET USER INFO FROM GOOGLE. " + pRequest);
 			}
 		}
-		return "01_index";
 	}
+	
+	
 }

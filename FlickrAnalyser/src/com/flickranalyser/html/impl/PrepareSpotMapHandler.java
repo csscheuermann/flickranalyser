@@ -1,5 +1,6 @@
 package com.flickranalyser.html.impl;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +24,10 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
   }
 
   @Override
-public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession){
-    
+	public void prepareViewConcrete(HttpServletRequest pRequest,
+			HttpServletResponse pResponse, HttpSession session) {
+	
+	  
 	  //Get the needed Parameters
 	String location = pRequest.getParameter("location");
     String filterStrategy = pRequest.getParameter("strategy");
@@ -34,11 +37,21 @@ public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, H
     LOGGER.log(Level.INFO, "LOCATION: " + location);
     LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);
 
-    
-    if (location == null || filterStrategy == null){
-    	pRequest.setAttribute(HelperMethods.MESSAGE_ERROR, "Location or Filterstategy was not set");
-    	return "TopSpots";
+    if (location != null){
+    	try {
+			pResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "LOCATION NULL");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
+    if (filterStrategy != null){
+    	try {
+			pResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "FILTERSTRATEGY NULL");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    	
     
     StringBuilder fullClassPath = new StringBuilder();
     fullClassPath.append("com.flickranalyser.businesslogic.filterstrategies.impl.");
@@ -59,6 +72,14 @@ public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, H
 
       pRequest.setAttribute("spot", spot);
     }
+	  
+	  
+	}
+  
+  @Override
+public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession){
+   
+    
     return null;
   }
 }

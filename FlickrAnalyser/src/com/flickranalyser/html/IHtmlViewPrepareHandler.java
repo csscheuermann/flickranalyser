@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 
 /** Handles Prepares the Webfrontend with data */
-public interface IHtmlRequestHandler {
+public interface IHtmlViewPrepareHandler {
   
 	
 	/**
@@ -17,8 +17,5 @@ public interface IHtmlRequestHandler {
 	 * @param pSession
 	 * @return the name of the new view that has to be shown or null if the current view should stay
 	 */
-	public String performActionAndGetNextView( final HttpServletRequest pRequest, HttpServletResponse pResponse, final HttpSession pSession);
-
-	public void prepareView(HttpServletRequest mRequest,
-			HttpServletResponse mResponse, HttpSession session);
+	public String prepareView( final HttpServletRequest pRequest, HttpServletResponse pResponse, final HttpSession pSession);
 }

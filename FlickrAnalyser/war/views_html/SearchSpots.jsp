@@ -48,7 +48,6 @@
 			
 			$('#onlyExcludedPicturesField').val($('#onlyExcludedPictures').is(':checked'));
 			document.forms["crawlForm"].submit();
-		
 		}
 		
 	
@@ -56,14 +55,9 @@
 		
 		function handleClick(event){
 			var searchString = document.getElementById("spotName").value;
-			
 			var spotName = document.getElementById("spotAddress");
 			spotName.setAttribute('value', searchString);
-	
 			document.forms["searchForm"].submit();
-			
-			
-			
 		}
 		
 		function resultChecker(){

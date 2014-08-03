@@ -12,6 +12,14 @@ public class PrepareTopSpotsHandler extends AbstractHtmlRequestHandler{
 	private SpotResultList topSpots;
 
 	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse mResponse, HttpSession pSession){
+		
+		return null;
+	}
+	
+	@Override
+	public void prepareViewConcrete(HttpServletRequest pRequest,
+			HttpServletResponse pResponse,
+			HttpSession pSession) {
 		SpotService spotService = new SpotService();
 		com.flickranalyser.pojo.SeekretUser currentUser = (com.flickranalyser.pojo.SeekretUser)pSession.getAttribute("currentUser");
 		try{
@@ -21,6 +29,5 @@ public class PrepareTopSpotsHandler extends AbstractHtmlRequestHandler{
 			e.printStackTrace();
 		}
 		pRequest.setAttribute("topSpots", this.topSpots);
-		return null;
 	}
 }

@@ -1,5 +1,6 @@
 package com.flickranalyser.html.impl;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,35 +12,70 @@ import com.flickranalyser.html.IHtmlRequestHandler;
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.pojo.SeekretUser;
 
-public abstract class AbstractHtmlRequestHandler
-  implements IHtmlRequestHandler
-{
-  private static final String MESSAGE_USER_NOT_LOGGED_IN = "USER NOT LOGGED IN";
-  private static final String MESSAGE_USERNAME = "USERNAME: ";
-  private static final String VIEW_LOGIN = "Login";
-  private static final Logger LOGGER = Logger.getLogger(AbstractHtmlRequestHandler.class.getName());
+public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler {
+	private static final String MESSAGE_USER_NOT_LOGGED_IN = "USER NOT LOGGED IN";
+	private static final String MESSAGE_USERNAME = "USERNAME: ";
+	private static final String VIEW_LOGIN = "Login";
+	private static final Logger LOGGER = Logger
+			.getLogger(AbstractHtmlRequestHandler.class.getName());
 
-  public String performActionAndGetNextView(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
-  {
-	  
-	 
-    if (isLoginRequired()) {
-      SeekretUser currentUser = (SeekretUser)pSession.getAttribute("currentUser");
-      LOGGER.log(Level.INFO, MESSAGE_USERNAME + currentUser.getEmail());
+	public final String performActionAndGetNextView(
+			HttpServletRequest pRequest, HttpServletResponse pResponse,
+			HttpSession pSession) {
 
-      if (currentUser.getEmail().equals(
-        HtmlRequestProcessor.GUEST_USER.getEmail())) {
-        LOGGER.log(Level.INFO, MESSAGE_USER_NOT_LOGGED_IN);
-        return VIEW_LOGIN;
-      }
-    }
+		SeekretUser currentUser = (SeekretUser) pSession
+				.getAttribute("currentUser");
+		if (isLoginRequired() && !isUserLoggedIn(currentUser)) {
+			try {
+				pResponse.sendRedirect("google.com");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+		return performActionAndGetNextViewConcrete(pRequest, pResponse,
+				pSession);
+	}
 
-    return performActionAndGetNextViewConcrete(pRequest, pResponse, pSession);
-  }
+	public final void prepareView(HttpServletRequest mRequest,
+			HttpServletResponse mResponse, HttpSession session) {
+		SeekretUser currentUser = (SeekretUser) session
+				.getAttribute("currentUser");
+		if (isLoginRequired() && !isUserLoggedIn(currentUser)) {
+			try {
+				mResponse.sendRedirect("google.com");
 
-  protected boolean isLoginRequired() {
-    return true;
-  }
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
+		}
+		prepareViewConcrete(mRequest, mResponse, session);
 
-  public abstract String performActionAndGetNextViewConcrete(HttpServletRequest paramHttpServletRequest, HttpServletResponse paramHttpServletResponse, HttpSession paramHttpSession);
+	}
+
+	protected boolean isLoginRequired() {
+		return true;
+	}
+
+	public String performActionAndGetNextViewConcrete(
+			HttpServletRequest paramHttpServletRequest,
+			HttpServletResponse paramHttpServletResponse,
+			HttpSession paramHttpSession) {
+		return null;
+	}
+
+	public void prepareViewConcrete(HttpServletRequest paramHttpServletRequest,
+			HttpServletResponse paramHttpServletResponse,
+			HttpSession paramHttpSession) {
+
+	}
+
+	private boolean isUserLoggedIn(SeekretUser currentUser) {
+		return !currentUser.getEmail().equals(
+				HtmlRequestProcessor.GUEST_USER.getEmail());
+	}
+
 }
