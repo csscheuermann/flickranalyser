@@ -107,6 +107,17 @@ public class TagBasedFotoExcluder implements IFotoExcluder {
 		unwantedTags.add("MUSCLE");
 		unwantedTags.add("NIPPLE");
 		unwantedTags.add("PORTRAIT");
+		
+		unwantedTags.add("TATTOOS");
+		unwantedTags.add("TATTOO");
+		unwantedTags.add("TATOO");
+		unwantedTags.add("TATOOS");
+		unwantedTags.add("TATO");
+		unwantedTags.add("TATOS");
+		unwantedTags.add("TATTO");
+		unwantedTags.add("TATTOS");
+		
+		
 
 		unwantedTags.add("BABY");
 		unwantedTags.add("BABYS");

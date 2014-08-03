@@ -1,4 +1,4 @@
-package com.flickranalyser.html.impl;
+package com.flickranalyser.html.request.impl;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,13 +11,16 @@ import javax.ws.rs.core.Response;
 
 import com.flickranalyser.endpoints.ClusterService;
 import com.flickranalyser.endpoints.RatingService;
+import com.flickranalyser.html.ViewNameEnum;
 import com.flickranalyser.pojo.SeekretUser;
 
 public class ActionEvaluateSpotHandler extends AbstractHtmlRequestHandler
 {
 	private static final Logger LOGGER = Logger.getLogger(ActionEvaluateSpotHandler.class.getName());
 
-	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
+
+	
+	public ViewNameEnum performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
 	{
 		ClusterService clusterService = new ClusterService();
 		RatingService ratingService = new RatingService();

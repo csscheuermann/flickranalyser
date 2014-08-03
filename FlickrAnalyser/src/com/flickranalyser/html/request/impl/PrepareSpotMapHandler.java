@@ -1,4 +1,4 @@
-package com.flickranalyser.html.impl;
+package com.flickranalyser.html.request.impl;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,19 +32,21 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
 	String location = pRequest.getParameter("location");
     String filterStrategy = pRequest.getParameter("strategy");
     boolean dissmissCluster = Boolean.parseBoolean(pRequest.getParameter("dissmissCluster"));
+    boolean useFluster = Boolean.parseBoolean(pRequest.getParameter("useFluster"));
     
     LOGGER.log(Level.INFO, "DISMISS CLUSTER: " + dissmissCluster);
+    LOGGER.log(Level.INFO, "USE FLUSTER: " + useFluster);
     LOGGER.log(Level.INFO, "LOCATION: " + location);
     LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);
-
-    if (location != null){
+    
+    if (location == null){
     	try {
 			pResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "LOCATION NULL");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     }
-    if (filterStrategy != null){
+    if (filterStrategy == null){
     	try {
 			pResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "FILTERSTRATEGY NULL");
 		} catch (IOException e) {
@@ -76,10 +78,4 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
 	  
 	}
   
-  @Override
-public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession){
-   
-    
-    return null;
-  }
 }

@@ -1,4 +1,4 @@
-package com.flickranalyser.html.impl;
+package com.flickranalyser.html.request.impl;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.flickranalyser.html.IHtmlRequestHandler;
+import com.flickranalyser.html.ViewNameEnum;
+import com.flickranalyser.html.request.IHtmlRequestHandler;
 import com.flickranalyser.html.webfrontend.HtmlRequestProcessor;
 import com.flickranalyser.pojo.SeekretUser;
 
@@ -19,7 +20,7 @@ public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler 
 	private static final Logger LOGGER = Logger
 			.getLogger(AbstractHtmlRequestHandler.class.getName());
 
-	public final String performActionAndGetNextView(
+	public final ViewNameEnum performActionAndGetNextView(
 			HttpServletRequest pRequest, HttpServletResponse pResponse,
 			HttpSession pSession) {
 
@@ -27,7 +28,7 @@ public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler 
 				.getAttribute("currentUser");
 		if (isLoginRequired() && !isUserLoggedIn(currentUser)) {
 			try {
-				pResponse.sendRedirect("google.com");
+				pResponse.sendRedirect("?showView="+ViewNameEnum.LOGIN.name());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -44,7 +45,7 @@ public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler 
 				.getAttribute("currentUser");
 		if (isLoginRequired() && !isUserLoggedIn(currentUser)) {
 			try {
-				mResponse.sendRedirect("google.com");
+				mResponse.sendRedirect("?showView="+ViewNameEnum.LOGIN.name());
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -60,7 +61,7 @@ public abstract class AbstractHtmlRequestHandler implements IHtmlRequestHandler 
 		return true;
 	}
 
-	public String performActionAndGetNextViewConcrete(
+	public ViewNameEnum performActionAndGetNextViewConcrete(
 			HttpServletRequest paramHttpServletRequest,
 			HttpServletResponse paramHttpServletResponse,
 			HttpSession paramHttpSession) {

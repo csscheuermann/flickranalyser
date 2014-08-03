@@ -1,9 +1,11 @@
-package com.flickranalyser.html;
+package com.flickranalyser.html.request;
 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.flickranalyser.html.ViewNameEnum;
 
 
 /** Handles Prepares the Webfrontend with data */
@@ -17,7 +19,7 @@ public interface IHtmlRequestHandler {
 	 * @param pSession
 	 * @return the name of the new view that has to be shown or null if the current view should stay
 	 */
-	public String performActionAndGetNextView( final HttpServletRequest pRequest, HttpServletResponse pResponse, final HttpSession pSession);
+	public ViewNameEnum performActionAndGetNextView( final HttpServletRequest pRequest, HttpServletResponse pResponse, final HttpSession pSession);
 
 	public void prepareView(HttpServletRequest mRequest,
 			HttpServletResponse mResponse, HttpSession session);

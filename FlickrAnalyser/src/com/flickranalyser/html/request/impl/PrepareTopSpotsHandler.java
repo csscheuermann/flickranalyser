@@ -1,4 +1,4 @@
-package com.flickranalyser.html.impl;
+package com.flickranalyser.html.request.impl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,10 +11,6 @@ import com.google.api.server.spi.response.UnauthorizedException;
 public class PrepareTopSpotsHandler extends AbstractHtmlRequestHandler{
 	private SpotResultList topSpots;
 
-	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse mResponse, HttpSession pSession){
-		
-		return null;
-	}
 	
 	@Override
 	public void prepareViewConcrete(HttpServletRequest pRequest,

@@ -20,8 +20,13 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="/res_html/js/Chart.js"></script>
 	<script src="/res_html/js/spinner.js"></script>
+	<script src="/res_html/js/Fluster2.packed.js"></script>
 	<script src="/res_html/js/RequestsToSeekret.js"></script>
 	<script type="text/javascript">
+	
+	
+	<% boolean useFluster = helperMethods.isFlusterFlag(request); %>
+	
 
 
 	//KOMMT IN DIE INIT NACHHER	 	
@@ -56,6 +61,7 @@
 		
 		
 		var map;
+		var fluster;
 		var lastClickedMarker = null;
 		var lastClickedMarkerIcon = null;
 		  var geo = new google.maps.Geocoder;
@@ -90,11 +96,21 @@
    	// To add the marker to the map, use the 'map' property
    	var marker = new google.maps.Marker({
    	    position: new google.maps.LatLng(lat, lgt),
-   	    map: map,
+	   	 <% 
+	     if(!useFluster){
+	    	 out.println("map:map,");
+	     }
+	   	%>
    	    title: 'CLUSTER NAME STILL TO DO',
 		icon: iconForMarker 
    	});
 	
+   <% 
+   if(useFluster){
+	out.println("fluster.addMarker(marker);");   
+   }
+   %>
+   
    google.maps.event.addListener(marker, 'click', function() {
    
    	
@@ -241,12 +257,38 @@
 			%>
     	};
      	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+     	fluster = new Fluster2(map);
+     	
+     // Add a listener to the zoom change event so we can change the grid size
+     // of the cluster script. Should be dynamic!
+     google.maps.event.addListener(map, "zoom_changed", function() {
 
+       var zoomLevel = map.getZoom();
+
+       switch(true){
+         case zoomLevel > 13:
+           fluster.gridSize = 0;
+           break;
+         case zoomLevel > 12:
+           fluster.gridSize = 15;
+           break;
+         case zoomLevel > 7:
+           fluster.gridSize = 20;
+           break;
+         case zoomLevel > 5:
+           fluster.gridSize = 40;
+           break;
+         default:
+           fluster.gridSize = 60;
+           break;
+       }
+
+     });
 	    <%
 
 			if (spot != null){
 			double spotRadiusInMeter = spot.getSpotRadiusInMeter();
-			out.println("addCircle(" + spot.getLatitude() + "," + spot.getLongitude() + ",0.1," + spotRadiusInMeter + ");");
+			//out.println("addCircle(" + spot.getLatitude() + "," + spot.getLongitude() + ",0.1," + spotRadiusInMeter + ");");
 			String spotName = spot.getName();
 	    	int maxValue = spot.getMaxClusterViews();
 
@@ -321,8 +363,9 @@
 			
 			
 			double opacityViewCountRelative = viewCountRealativeInPercent/100.00;
-	       	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + "," + clusterRadiusInMeter + ");");
+	       //	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + "," + clusterRadiusInMeter + ");");
 		}	
+	   	out.println("fluster.initialize();");
 	   	}
 	     	%>
    }

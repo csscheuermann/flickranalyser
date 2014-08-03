@@ -1,4 +1,4 @@
-package com.flickranalyser.html.impl;
+package com.flickranalyser.html.request.impl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,15 +9,15 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 
 import com.flickranalyser.endpoints.SpotService;
+import com.flickranalyser.html.ViewNameEnum;
 import com.flickranalyser.pojo.Spot;
 
 public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
 {
-  private static final String VIEW_SEARCH_SPOTS = "SearchSpots";
   private static final String MESSAGE_CRAWLQUEUE_SPOT_NAME = "CRAWL QUEUE, FULL SPOT NAME: ";
   private static final Logger LOGGER = Logger.getLogger(ActionSearchSpotsHandler.class.getName());
 
-  public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
+  public ViewNameEnum performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
   {
     SpotService spotService = new SpotService();
 
@@ -38,13 +38,13 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
         pRequest.setAttribute("successfulCron", findSpotByNamePutToCrawlQueue.getEntity().toString());
       }
 
-      return VIEW_SEARCH_SPOTS;
+      return ViewNameEnum.SEARCH_SPOT;
     }
 
     return handleSpotBehavior(pRequest, spotService);
   }
 
-  private String handleSpotBehavior(HttpServletRequest pRequest, SpotService spotService)
+  private ViewNameEnum handleSpotBehavior(HttpServletRequest pRequest, SpotService spotService)
   {
     String spotName = pRequest.getParameter("address");
     Spot spotByName = spotService.getNearestSpotByAddress(spotName);
@@ -57,6 +57,6 @@ public class ActionSearchSpotsHandler extends AbstractHtmlRequestHandler
       pRequest.setAttribute("spot", spotByName);
     }
 
-    return VIEW_SEARCH_SPOTS;
+    return ViewNameEnum.SEARCH_SPOT;
   }
 }

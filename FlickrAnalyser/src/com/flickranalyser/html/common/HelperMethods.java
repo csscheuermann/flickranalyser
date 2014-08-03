@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.flickranalyser.businesslogic.common.UserRolesEnum;
@@ -75,17 +76,10 @@ public class HelperMethods {
 		getFilterStrategyButtons.append("var spotName = document.getElementById(inputElementId);");
 
 		//TODO COS WTF :) Das bitte ändern
-		getFilterStrategyButtons.append("if ($('#doNotConsiderDismissedClusters').is(':checked') == true)");
-		getFilterStrategyButtons.append("{");
-		getFilterStrategyButtons.append("$('#doNotConsiderDismissedClusters').val(true);");
-		getFilterStrategyButtons.append("}");
-		getFilterStrategyButtons.append("else");
-		getFilterStrategyButtons.append("{");
-		getFilterStrategyButtons.append("	$('#doNotConsiderDismissedClusters').val(false);");
-
-		getFilterStrategyButtons.append("}");
-
-
+		
+		getFilterStrategyButtons.append("$('#doNotConsiderDismissedClusters').val($('#doNotConsiderDismissedClusters').is(':checked'));");
+		getFilterStrategyButtons.append("$('#useFlusterFlag').val($('#useFlusterFlag').is(':checked'));");
+		
 		getFilterStrategyButtons.append("spotName.setAttribute('value', spotname);");
 		getFilterStrategyButtons.append("	document.forms['FilterForm'].submit();}");
 		getFilterStrategyButtons.append("</script>");
@@ -132,10 +126,17 @@ public class HelperMethods {
 			createFilterSettings.append("<div class='alert alert-info bottom-sapce-30 bottom-padding-30'>");
 			createFilterSettings.append("<h3> Filter Settings </h3>");
 			createFilterSettings.append("<div class='row'>");
+			createFilterSettings.append("<div class='col-xs-9'>Do not consider dismissed clusters</div>");
 			createFilterSettings.append("<div class='col-xs-3'>  ");
 			createFilterSettings.append("      <input type='checkbox' name='dissmissCluster' id='doNotConsiderDismissedClusters'> ");
 			createFilterSettings.append("  </div>");
-			createFilterSettings.append("<div class='col-xs-9'>Do not consider dismissed clusters</div>");
+			createFilterSettings.append("</div>");
+			createFilterSettings.append("<div class='row'>");
+			createFilterSettings.append("<div class='col-xs-9'>Use fluster</div>");
+			createFilterSettings.append("<div class='col-xs-3'>  ");
+			createFilterSettings.append("      <input type='checkbox' name='useFluster' id='useFlusterFlag'> ");
+			createFilterSettings.append("  </div>");
+		
 			createFilterSettings.append("</div>");
 
 			createFilterSettings.append("</div>");
@@ -550,4 +551,9 @@ public class HelperMethods {
 
 		return createVoteResultField.toString();
 	}
+	
+	public boolean isFlusterFlag(HttpServletRequest request){
+		return	Boolean.parseBoolean(request.getParameter("useFluster"));
+	}
+	
 }

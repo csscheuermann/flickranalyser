@@ -1,4 +1,4 @@
-package com.flickranalyser.html.impl;
+package com.flickranalyser.html.request.impl;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 
 import com.flickranalyser.endpoints.ClusterService;
+import com.flickranalyser.html.ViewNameEnum;
 import com.flickranalyser.pojo.SeekretUser;
 import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.users.User;
@@ -19,7 +20,7 @@ public class ActionDismissClusterHandler extends AbstractHtmlRequestHandler {
 
 	 private static final Logger LOGGER = Logger.getLogger(ActionDismissClusterHandler.class.getName());
 	 
-	public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession) {
+	public ViewNameEnum performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession) {
 		ClusterService clusterService = new ClusterService();
 
 		SeekretUser currentUser = (SeekretUser) pSession.getAttribute("currentUser");

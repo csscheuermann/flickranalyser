@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.flickranalyser.html.IHtmlRequestHandler;
+import com.flickranalyser.html.ActionNameEnum;
+import com.flickranalyser.html.ViewNameEnum;
 import com.flickranalyser.html.common.HelperMethods;
+import com.flickranalyser.html.request.HtmlRequestHandlerFactory;
+import com.flickranalyser.html.request.IHtmlRequestHandler;
 import com.flickranalyser.pojo.SeekretUser;
 
 public class HtmlRequestProcessor {
@@ -73,60 +76,59 @@ public class HtmlRequestProcessor {
 		makeHelperMethodsClassAvailableToViews();
 
 		String nextViewName = this.mRequest.getParameter(SHOW_VIEW);
+		ViewNameEnum viewStringToEnum = null;
+		
+		if (nextViewName != null){
+			viewStringToEnum = ViewNameEnum.viewStringToEnum(nextViewName);
+		}
 		String action = this.mRequest.getParameter(ACTION);
 
 		if ((nextViewName == null) && (action == null)) {
-			nextViewName = "01_index";
+			viewStringToEnum = ViewNameEnum.INDEX;
 		}
 
+
 		if (action != null) {
-			IHtmlRequestHandler requestHandler = loadHandlerForAction(action);
-			nextViewName = requestHandler.performActionAndGetNextView(
+			
+			IHtmlRequestHandler requestHandler = loadHandlerForAction(ActionNameEnum.viewStringToEnum(action));
+			viewStringToEnum = requestHandler.performActionAndGetNextView(
 					this.mRequest, this.mResponse, this.mRequest.getSession());
 		}
 
-		if (nextViewName == null) {
+		if (viewStringToEnum == null) {
 			return;
 		}
 
-		IHtmlRequestHandler viewPreparationHandler = loadHandlerForPreparingView(nextViewName);
+		IHtmlRequestHandler viewPreparationHandler = loadHandlerForPreparingView(viewStringToEnum);
 		viewPreparationHandler.prepareView(this.mRequest, this.mResponse,
 				this.mRequest.getSession());
-		showView(nextViewName);
+		showView(viewStringToEnum);
 	}
 
-	private IHtmlRequestHandler loadHandlerForAction(String action)
+	private IHtmlRequestHandler loadHandlerForAction(ActionNameEnum action)
 			throws Exception {
-		if (action == null) {
-			return null;
-		}
-
-		IHtmlRequestHandler requestHandler = loadRequestHandlerByName(PREFIX_ACTION_HANDLER_CLASS
-				+ action);
-
-		if (requestHandler != null) {
-			return requestHandler;
-		}
-
-		throw new RuntimeException("No action requestHandler has been found.");
+		
+		HtmlRequestHandlerFactory requestHandlerFactory = new HtmlRequestHandlerFactory();
+		return requestHandlerFactory.createActionHandler(action);
 	}
 
-	private IHtmlRequestHandler loadHandlerForPreparingView(String pNextViewName)
+
+	private IHtmlRequestHandler loadHandlerForPreparingView(ViewNameEnum viewName)
 			throws Exception {
-		String nameForHandlerWhichPreparesView = "Prepare" + pNextViewName;
-		IHtmlRequestHandler requestHandler = loadRequestHandlerByName(nameForHandlerWhichPreparesView);
-		return requestHandler;
+		HtmlRequestHandlerFactory requestHandlerFactory = new HtmlRequestHandlerFactory();
+		return requestHandlerFactory.createViewPrepareHandler(viewName);
 	}
 
-	private void showView(String pViewName) throws Exception {
-		LOGGER.info("Showing view: " + pViewName);
+	private void showView(ViewNameEnum viewName) throws Exception {
+		String  view = viewName.toString();
+		LOGGER.info("Showing view: " + view);
 
-		if (!doesViewExist(pViewName)) {
-			throw new RuntimeException("View does not exist: " + pViewName);
+		if (!doesViewExist(view)) {
+			throw new RuntimeException("View does not exist: " + view);
 		}
-		LOGGER.info("View exists " + pViewName);
+		LOGGER.info("View exists " + view);
 		RequestDispatcher rd = this.mServletContext
-				.getRequestDispatcher("/views_html/" + pViewName + ".jsp");
+				.getRequestDispatcher("/views_html/" + view + ".jsp");
 		LOGGER.info("mRequest " + this.mRequest.toString());
 		LOGGER.info("mResponse " + this.mResponse.toString());
 		rd.forward(this.mRequest, this.mResponse);
@@ -161,7 +163,7 @@ public class HtmlRequestProcessor {
 	}
 
 	private void checkUserLogin() {
-		
+
 		HttpSession session = this.mRequest.getSession();
 		SeekretUser currentUser = (SeekretUser) session
 				.getAttribute("currentUser");
@@ -171,12 +173,13 @@ public class HtmlRequestProcessor {
 			session.setAttribute("currentUser", currentUser);
 		}
 
-		
+
 		this.mRequest.setAttribute("currentUser", currentUser);
 	}
 
 	private IHtmlRequestHandler loadRequestHandlerByName(String prepareViewName)
 			throws Exception {
+		
 		String expectedName = "com.flickranalyser.html.impl." + prepareViewName
 				+ "Handler";
 		IHtmlRequestHandler htmlRequestHandler = (IHtmlRequestHandler) HelperMethods
