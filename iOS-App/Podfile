@@ -1,0 +1,12 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, "6.0"
+
+target "SEEKRET" do
+pod 'AFNetworking', '~> 2.3.1'
+pod 'google-plus-ios-sdk', '~> 1.7'
+end
+
+target "SEEKRETTests" do
+
+end
+
