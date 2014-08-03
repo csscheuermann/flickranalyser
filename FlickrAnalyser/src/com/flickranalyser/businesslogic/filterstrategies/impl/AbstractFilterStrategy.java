@@ -69,7 +69,7 @@ public abstract class AbstractFilterStrategy implements IFilterStrategy {
 	}
 
 	@Override
-	public void ignoreDismissedClusters(boolean ignoreDismissedClusters) {
+	public void setIgnoreDismissedClustersFlag(boolean ignoreDismissedClusters) {
 		this.ignoreDismissedClusters = ignoreDismissedClusters;
 	}
 

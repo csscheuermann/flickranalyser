@@ -45,6 +45,7 @@ public String performActionAndGetNextViewConcrete(HttpServletRequest pRequest, H
     fullClassPath.append(filterStrategy);
 
     IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(fullClassPath.toString(), IFilterStrategy.class);
+    choosenFilterStrategy.setIgnoreDismissedClustersFlag(dissmissCluster);
     LOGGER.log(Level.INFO, "INITIALIZED FILTER STRATEGY:" + choosenFilterStrategy.getClass().getName());
 
     Spot spot = this.spotService.getSpotById(location);
