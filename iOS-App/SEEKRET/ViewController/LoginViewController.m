@@ -24,6 +24,9 @@ static NSString * const kClientID = @"1099379908084-v0l7ieuv3mvu4i3ql2psaou2l0au
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [self.logoutButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    
     self.signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
     self.signIn.clientID = kClientID;
@@ -42,6 +45,27 @@ static NSString * const kClientID = @"1099379908084-v0l7ieuv3mvu4i3ql2psaou2l0au
     self.signIn = [GPPSignIn sharedInstance];
     [self.signIn authenticate];
 }
+- (IBAction)logutButtonTouched:(id)sender {
+
+    [self disconnect];
+}
+- (IBAction)loginWithoutOAuthTouched:(id)sender {
+    
+}
+
+- (void)disconnect {
+    [[GPPSignIn sharedInstance] disconnect];
+}
+
+- (void)didDisconnectWithError:(NSError *)error {
+    if (error) {
+        NSLog(@"Received error %@", error);
+    } else {
+        // Der Nutzer ist abgemeldet und getrennt.
+        // Bereinigen Sie die Nutzerdaten entsprechend den Google+ Vorgaben.
+    }
+}
+
 
 -(void)refreshInterfaceBasedOnSignIn
 {

@@ -23,7 +23,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHV-r1-EGo">
                                         <rect key="frame" x="49" y="218" width="226" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Log-In with Google">
+                                        <state key="normal" title="Login with Google">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -31,8 +31,30 @@
                                             <action selector="loginButtonTouched:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Zpf-TK-f0y"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVC-Py-Y44">
+                                        <rect key="frame" x="49" y="253" width="226" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Logout SEEKRET">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="logutButtonTouched:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Tgt-un-mGm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7P-gG-vQH">
+                                        <rect key="frame" x="49" y="300" width="226" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Proceed without Login">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginWithoutOAuthTouched:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Whi-yb-NxT"/>
+                                        </connections>
+                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="mJE-pf-m9W">
-                                        <rect key="frame" x="20" y="118" width="285" height="58"/>
+                                        <rect key="frame" x="35" y="135" width="255" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -42,6 +64,8 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="GHV-r1-EGo" id="zOe-4i-Mq8"/>
+                        <outlet property="logoutButton" destination="lVC-Py-Y44" id="Eco-tO-WhX"/>
+                        <outlet property="proceedWithoutLoginButton" destination="E7P-gG-vQH" id="NxO-MN-gve"/>
                         <outlet property="view" destination="kh9-bI-dsS" id="97n-Ef-c0m"/>
                     </connections>
                 </viewController>
