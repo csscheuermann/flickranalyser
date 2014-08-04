@@ -9,6 +9,7 @@ public class ClusterMaxValuesInformation {
 	private int maximumNumberViews = 0;
 	private int maximumNumberPOIs = 0;
 
+	
 	public ClusterMaxValuesInformation(List<Cluster> cluster) {
 		determineMaxNumberViewsAndPOis(cluster);
 	}
