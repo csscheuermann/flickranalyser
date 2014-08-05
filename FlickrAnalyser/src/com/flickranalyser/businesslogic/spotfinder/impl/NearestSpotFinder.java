@@ -36,12 +36,8 @@ public class NearestSpotFinder implements ISpotFinder {
 		if(addressBySearchString != null){
 			return  MemcacheSpot.getSpotForSpotName(addressBySearchString);			
 		}
-
 		return null;
 	}
-
-
-
 
 
 	@Override
