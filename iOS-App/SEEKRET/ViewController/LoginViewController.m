@@ -9,6 +9,11 @@
 #import "LoginViewController.h"
 #import <GTLPlusConstants.h>
 #import <GPPSignInButton.h>
+#import "GTLServiceSpotAPI.h"
+#import "GTMHTTPFetcher.h"
+#import "GTLQuerySpotAPI.h"
+#import "GTLSpotAPISpot.h"
+#import "GTLSpotAPICluster.h"
 
 
 @interface LoginViewController ()
@@ -51,7 +56,7 @@ static NSString * const kClientID = @"1099379908084-v0l7ieuv3mvu4i3ql2psaou2l0au
     [self disconnect];
 }
 - (IBAction)loginWithoutOAuthTouched:(id)sender {
-    
+    [self showEndpoints];
 }
 
 - (void)disconnect {
@@ -78,6 +83,25 @@ static NSString * const kClientID = @"1099379908084-v0l7ieuv3mvu4i3ql2psaou2l0au
     } else {
         self.loginButton.hidden = NO;
         // Führen Sie hier andere Aktionen durch.
+    }
+}
+
+-(void)showEndpoints {
+    static GTLServiceSpotAPI *service = nil;
+    if (!service) {
+        service = [[GTLServiceSpotAPI alloc] init];
+        service.retryEnabled = YES;
+        [GTMHTTPFetcher setLoggingEnabled:YES];
+        
+        GTLQuerySpotAPI *query = [GTLQuerySpotAPI queryForGetNearestSpotByAddressWithSpotName:@"Berlin, Germany"];
+        [service executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLSpotAPISpot *object, NSError *error){
+            NSNumber *array = object.overallMaxPOINumberPerCluster;
+//            object.cluster[0]
+            GTLSpotAPICluster *cluster = object.cluster[0];
+            NSURL *url = cluster.urlOfMostViewedPicture[0];
+            NSLog(@"First output: %@", array);
+        }];
+        
     }
 }
 

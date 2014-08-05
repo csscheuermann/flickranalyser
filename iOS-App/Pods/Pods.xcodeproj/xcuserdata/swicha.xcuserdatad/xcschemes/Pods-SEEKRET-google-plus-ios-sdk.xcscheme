@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "51C4DDD9DAB2465F80C71966"
+               BlueprintIdentifier = "C97811DD88AB43DAACBEA5BE"
                BuildableName = "libPods-SEEKRET-google-plus-ios-sdk.a"
                BlueprintName = "Pods-SEEKRET-google-plus-ios-sdk"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -23,6 +23,18 @@
 		81A0F440198E428400D148B1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A0F43E198E428400D148B1 /* LoginViewController.m */; };
 		81A0F447198EA77700D148B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A0F446198EA77700D148B1 /* Security.framework */; };
 		81A0F449198EA78300D148B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A0F448198EA78300D148B1 /* SystemConfiguration.framework */; };
+		81AB6446199160A3008C2040 /* ShowEndpointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB6445199160A3008C2040 /* ShowEndpointViewController.m */; };
+		81AB64A2199167B1008C2040 /* GTLQuerySpotAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB648B199167B1008C2040 /* GTLQuerySpotAPI.m */; };
+		81AB64A3199167B1008C2040 /* GTLServiceSpotAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB648D199167B1008C2040 /* GTLServiceSpotAPI.m */; };
+		81AB64A5199167B1008C2040 /* GTLSpotAPICluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB6491199167B1008C2040 /* GTLSpotAPICluster.m */; };
+		81AB64A6199167B1008C2040 /* GTLSpotAPIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB6493199167B1008C2040 /* GTLSpotAPIConstants.m */; };
+		81AB64A7199167B1008C2040 /* GTLSpotAPIJsonMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB6495199167B1008C2040 /* GTLSpotAPIJsonMap.m */; };
+		81AB64A8199167B1008C2040 /* GTLSpotAPIKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB6497199167B1008C2040 /* GTLSpotAPIKey.m */; };
+		81AB64A9199167B1008C2040 /* GTLSpotAPILatLng.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB6499199167B1008C2040 /* GTLSpotAPILatLng.m */; };
+		81AB64AA199167B1008C2040 /* GTLSpotAPIPointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB649B199167B1008C2040 /* GTLSpotAPIPointOfInterest.m */; };
+		81AB64AB199167B1008C2040 /* GTLSpotAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB649D199167B1008C2040 /* GTLSpotAPIResponse.m */; };
+		81AB64AC199167B1008C2040 /* GTLSpotAPISpot.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB649F199167B1008C2040 /* GTLSpotAPISpot.m */; };
+		81AB64AD199167B1008C2040 /* GTLSpotAPISpotResultList.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB64A1199167B1008C2040 /* GTLSpotAPISpotResultList.m */; };
 		F725501D9E8A46C8A26A93B5 /* libPods-SEEKRET.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +71,31 @@
 		81A0F43E198E428400D148B1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		81A0F446198EA77700D148B1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		81A0F448198EA78300D148B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		81AB6444199160A3008C2040 /* ShowEndpointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowEndpointViewController.h; sourceTree = "<group>"; };
+		81AB6445199160A3008C2040 /* ShowEndpointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowEndpointViewController.m; sourceTree = "<group>"; };
+		81AB648A199167B1008C2040 /* GTLQuerySpotAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQuerySpotAPI.h; sourceTree = "<group>"; };
+		81AB648B199167B1008C2040 /* GTLQuerySpotAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQuerySpotAPI.m; sourceTree = "<group>"; };
+		81AB648C199167B1008C2040 /* GTLServiceSpotAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceSpotAPI.h; sourceTree = "<group>"; };
+		81AB648D199167B1008C2040 /* GTLServiceSpotAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServiceSpotAPI.m; sourceTree = "<group>"; };
+		81AB648F199167B1008C2040 /* GTLSpotAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPI.h; sourceTree = "<group>"; };
+		81AB6490199167B1008C2040 /* GTLSpotAPICluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPICluster.h; sourceTree = "<group>"; };
+		81AB6491199167B1008C2040 /* GTLSpotAPICluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPICluster.m; sourceTree = "<group>"; };
+		81AB6492199167B1008C2040 /* GTLSpotAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIConstants.h; sourceTree = "<group>"; };
+		81AB6493199167B1008C2040 /* GTLSpotAPIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIConstants.m; sourceTree = "<group>"; };
+		81AB6494199167B1008C2040 /* GTLSpotAPIJsonMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIJsonMap.h; sourceTree = "<group>"; };
+		81AB6495199167B1008C2040 /* GTLSpotAPIJsonMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIJsonMap.m; sourceTree = "<group>"; };
+		81AB6496199167B1008C2040 /* GTLSpotAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIKey.h; sourceTree = "<group>"; };
+		81AB6497199167B1008C2040 /* GTLSpotAPIKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIKey.m; sourceTree = "<group>"; };
+		81AB6498199167B1008C2040 /* GTLSpotAPILatLng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPILatLng.h; sourceTree = "<group>"; };
+		81AB6499199167B1008C2040 /* GTLSpotAPILatLng.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPILatLng.m; sourceTree = "<group>"; };
+		81AB649A199167B1008C2040 /* GTLSpotAPIPointOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIPointOfInterest.h; sourceTree = "<group>"; };
+		81AB649B199167B1008C2040 /* GTLSpotAPIPointOfInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIPointOfInterest.m; sourceTree = "<group>"; };
+		81AB649C199167B1008C2040 /* GTLSpotAPIResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIResponse.h; sourceTree = "<group>"; };
+		81AB649D199167B1008C2040 /* GTLSpotAPIResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIResponse.m; sourceTree = "<group>"; };
+		81AB649E199167B1008C2040 /* GTLSpotAPISpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPISpot.h; sourceTree = "<group>"; };
+		81AB649F199167B1008C2040 /* GTLSpotAPISpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpot.m; sourceTree = "<group>"; };
+		81AB64A0199167B1008C2040 /* GTLSpotAPISpotResultList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPISpotResultList.h; sourceTree = "<group>"; };
+		81AB64A1199167B1008C2040 /* GTLSpotAPISpotResultList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpotResultList.m; sourceTree = "<group>"; };
 		CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEEKRET.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,6 +163,7 @@
 		81A0F40B198D2BEE00D148B1 /* SEEKRET */ = {
 			isa = PBXGroup;
 			children = (
+				81AB648919916785008C2040 /* Endpoints */,
 				81A0F441198E5C1C00D148B1 /* Ressources */,
 				81A0F43A198E428400D148B1 /* Controller */,
 				81A0F43B198E428400D148B1 /* Model */,
@@ -187,6 +225,8 @@
 			children = (
 				81A0F43D198E428400D148B1 /* LoginViewController.h */,
 				81A0F43E198E428400D148B1 /* LoginViewController.m */,
+				81AB6444199160A3008C2040 /* ShowEndpointViewController.h */,
+				81AB6445199160A3008C2040 /* ShowEndpointViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -204,6 +244,36 @@
 				81A0F41D198D2BEE00D148B1 /* Images.xcassets */,
 			);
 			path = Ressources;
+			sourceTree = "<group>";
+		};
+		81AB648919916785008C2040 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				81AB648A199167B1008C2040 /* GTLQuerySpotAPI.h */,
+				81AB648B199167B1008C2040 /* GTLQuerySpotAPI.m */,
+				81AB648C199167B1008C2040 /* GTLServiceSpotAPI.h */,
+				81AB648D199167B1008C2040 /* GTLServiceSpotAPI.m */,
+				81AB648F199167B1008C2040 /* GTLSpotAPI.h */,
+				81AB6490199167B1008C2040 /* GTLSpotAPICluster.h */,
+				81AB6491199167B1008C2040 /* GTLSpotAPICluster.m */,
+				81AB6492199167B1008C2040 /* GTLSpotAPIConstants.h */,
+				81AB6493199167B1008C2040 /* GTLSpotAPIConstants.m */,
+				81AB6494199167B1008C2040 /* GTLSpotAPIJsonMap.h */,
+				81AB6495199167B1008C2040 /* GTLSpotAPIJsonMap.m */,
+				81AB6496199167B1008C2040 /* GTLSpotAPIKey.h */,
+				81AB6497199167B1008C2040 /* GTLSpotAPIKey.m */,
+				81AB6498199167B1008C2040 /* GTLSpotAPILatLng.h */,
+				81AB6499199167B1008C2040 /* GTLSpotAPILatLng.m */,
+				81AB649A199167B1008C2040 /* GTLSpotAPIPointOfInterest.h */,
+				81AB649B199167B1008C2040 /* GTLSpotAPIPointOfInterest.m */,
+				81AB649C199167B1008C2040 /* GTLSpotAPIResponse.h */,
+				81AB649D199167B1008C2040 /* GTLSpotAPIResponse.m */,
+				81AB649E199167B1008C2040 /* GTLSpotAPISpot.h */,
+				81AB649F199167B1008C2040 /* GTLSpotAPISpot.m */,
+				81AB64A0199167B1008C2040 /* GTLSpotAPISpotResultList.h */,
+				81AB64A1199167B1008C2040 /* GTLSpotAPISpotResultList.m */,
+			);
+			name = Endpoints;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,9 +408,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81AB64AC199167B1008C2040 /* GTLSpotAPISpot.m in Sources */,
+				81AB6446199160A3008C2040 /* ShowEndpointViewController.m in Sources */,
+				81AB64A9199167B1008C2040 /* GTLSpotAPILatLng.m in Sources */,
+				81AB64A7199167B1008C2040 /* GTLSpotAPIJsonMap.m in Sources */,
+				81AB64AA199167B1008C2040 /* GTLSpotAPIPointOfInterest.m in Sources */,
+				81AB64A3199167B1008C2040 /* GTLServiceSpotAPI.m in Sources */,
+				81AB64A2199167B1008C2040 /* GTLQuerySpotAPI.m in Sources */,
 				81A0F416198D2BEE00D148B1 /* AppDelegate.m in Sources */,
 				81A0F412198D2BEE00D148B1 /* main.m in Sources */,
 				81A0F440198E428400D148B1 /* LoginViewController.m in Sources */,
+				81AB64A8199167B1008C2040 /* GTLSpotAPIKey.m in Sources */,
+				81AB64AB199167B1008C2040 /* GTLSpotAPIResponse.m in Sources */,
+				81AB64AD199167B1008C2040 /* GTLSpotAPISpotResultList.m in Sources */,
+				81AB64A6199167B1008C2040 /* GTLSpotAPIConstants.m in Sources */,
+				81AB64A5199167B1008C2040 /* GTLSpotAPICluster.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
