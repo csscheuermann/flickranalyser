@@ -9,7 +9,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SEEKRET-GTMHTTPFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SEEKRET-Google-API-Client.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SEEKRET-google-plus-ios-sdk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SEEKRET-gtm-oauth2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -21,22 +36,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>2FB582F5C0AA480BB89E6E47</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3196C2691D34467697222214</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7AB6885BDCA7459EB83FF24F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
