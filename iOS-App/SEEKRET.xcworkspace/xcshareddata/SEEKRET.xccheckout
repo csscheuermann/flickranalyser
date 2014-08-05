@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>61CF394E-0B91-4964-86A9-46ACDBA076E3</string>
+	<string>FDE37F86-1267-4B0E-A29F-8ABB7C2CA782</string>
 	<key>IDESourceControlProjectName</key>
 	<string>SEEKRET</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>E66A0AFD-0124-410D-BBE6-AA97B2A21AE5</key>
+		<key>C45A0E06-1B1B-4F69-99DC-C4737B3A1337</key>
 		<string>https://github.com/csscheuermann/flickranalyser.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>iOS-App/SEEKRET.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>E66A0AFD-0124-410D-BBE6-AA97B2A21AE5</key>
+		<key>C45A0E06-1B1B-4F69-99DC-C4737B3A1337</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E66A0AFD-0124-410D-BBE6-AA97B2A21AE5</string>
+	<string>C45A0E06-1B1B-4F69-99DC-C4737B3A1337</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E66A0AFD-0124-410D-BBE6-AA97B2A21AE5</string>
+			<string>C45A0E06-1B1B-4F69-99DC-C4737B3A1337</string>
 			<key>IDESourceControlWCCName</key>
 			<string>flickranalyser</string>
 		</dict>
