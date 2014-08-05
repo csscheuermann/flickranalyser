@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"p_qcyFV0KQVqSB1Aq3pqmPu-2MY/SIF2J6d1OsxfaADytAqX3QVDq-4\"",
+ "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/tx5-In-AuXjNIgSVj8XcvmTj_E4\"",
  "discoveryVersion": "v1",
  "id": "clusterAPI:v1",
  "name": "clusterAPI",
@@ -69,6 +69,15 @@
   }
  },
  "schemas": {
+  "Address": {
+   "id": "Address",
+   "type": "object",
+   "properties": {
+    "address": {
+     "type": "string"
+    }
+   }
+  },
   "JsonMap": {
    "id": "JsonMap",
    "type": "object"
@@ -116,6 +125,50 @@
     "datastoreKeyOfCluster",
     "touristicnessRatingFrom1To10",
     "spotName"
+   ],
+   "returns": {
+    "$ref": "Response"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "clusterAPI.getAddressFromLatLng": {
+   "id": "clusterAPI.getAddressFromLatLng",
+   "allowGet": true,
+   "parameters": {
+    "latitude": {
+     "type": "number",
+     "required": true,
+     "format": "double"
+    },
+    "longitude": {
+     "type": "number",
+     "required": true,
+     "format": "double"
+    }
+   },
+   "parameterOrder": [
+    "latitude",
+    "longitude"
+   ],
+   "returns": {
+    "$ref": "Address"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "clusterAPI.incrementDismissCount": {
+   "id": "clusterAPI.incrementDismissCount",
+   "parameters": {
+    "datastoreKeyOfCluster": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "datastoreKeyOfCluster"
    ],
    "returns": {
     "$ref": "Response"

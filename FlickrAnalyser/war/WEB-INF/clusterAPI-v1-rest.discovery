@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"p_qcyFV0KQVqSB1Aq3pqmPu-2MY/SIF2J6d1OsxfaADytAqX3QVDq-4\"",
+ "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/tx5-In-AuXjNIgSVj8XcvmTj_E4\"",
  "discoveryVersion": "v1",
  "id": "clusterAPI:v1",
  "name": "clusterAPI",
@@ -11,10 +11,10 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rest",
- "baseUrl": "https://flickeranalyser.appspot.com/_ah/api/clusterAPI/v1/evaluateCluster/",
- "basePath": "/_ah/api/clusterAPI/v1/evaluateCluster/",
+ "baseUrl": "https://flickeranalyser.appspot.com/_ah/api/clusterAPI/v1/",
+ "basePath": "/_ah/api/clusterAPI/v1/",
  "rootUrl": "https://flickeranalyser.appspot.com/_ah/api/",
- "servicePath": "clusterAPI/v1/evaluateCluster/",
+ "servicePath": "clusterAPI/v1/",
  "batchPath": "batch",
  "parameters": {
   "alt": {
@@ -71,6 +71,15 @@
   }
  },
  "schemas": {
+  "Address": {
+   "id": "Address",
+   "type": "object",
+   "properties": {
+    "address": {
+     "type": "string"
+    }
+   }
+  },
   "JsonMap": {
    "id": "JsonMap",
    "type": "object"
@@ -99,7 +108,7 @@
  "methods": {
   "evaluateCluster": {
    "id": "clusterAPI.evaluateCluster",
-   "path": "{datastoreKeyOfCluster}/{touristicnessRatingFrom1To10}/{spotName}",
+   "path": "evaluateCluster/{datastoreKeyOfCluster}/{touristicnessRatingFrom1To10}/{spotName}",
    "httpMethod": "POST",
    "parameters": {
     "datastoreKeyOfCluster": {
@@ -123,6 +132,56 @@
     "datastoreKeyOfCluster",
     "touristicnessRatingFrom1To10",
     "spotName"
+   ],
+   "response": {
+    "$ref": "Response"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getAddressFromLatLng": {
+   "id": "clusterAPI.getAddressFromLatLng",
+   "path": "address/{latitude}/{longitude}",
+   "httpMethod": "GET",
+   "parameters": {
+    "latitude": {
+     "type": "number",
+     "required": true,
+     "format": "double",
+     "location": "path"
+    },
+    "longitude": {
+     "type": "number",
+     "required": true,
+     "format": "double",
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "latitude",
+    "longitude"
+   ],
+   "response": {
+    "$ref": "Address"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "incrementDismissCount": {
+   "id": "clusterAPI.incrementDismissCount",
+   "path": "incrementDismissCount/{datastoreKeyOfCluster}",
+   "httpMethod": "POST",
+   "parameters": {
+    "datastoreKeyOfCluster": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "datastoreKeyOfCluster"
    ],
    "response": {
     "$ref": "Response"
