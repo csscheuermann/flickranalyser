@@ -116,24 +116,24 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
-          "entity" : {
-            "$ref" : "_any"
+          "status" : {
+            "type" : "integer"
           },
           "metadata" : {
             "$ref" : "JsonMap"
           },
-          "status" : {
-            "type" : "integer"
+          "entity" : {
+            "$ref" : "_any"
           }
         }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
       },
       "JsonMap" : {
         "id" : "JsonMap",
         "type" : "object"
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
       }
     },
     "methods" : {

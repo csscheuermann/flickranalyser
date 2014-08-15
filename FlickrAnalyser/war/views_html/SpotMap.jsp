@@ -1,32 +1,38 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.flickranalyser.pojo.Spot" %>
-<%@ page import="com.flickranalyser.pojo.Cluster" %>
-<%@ page import="com.javadocmd.simplelatlng.LatLng" %>
-<%@ page import="java.lang.StringBuilder" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="com.flickranalyser.businesslogic.common.ParameterConstants" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.flickranalyser.html.common.HelperMethods" %>
-<%@ page import="com.google.appengine.api.datastore.Key" %>
-<%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
+<%@ page import="java.util.List"%>
+<%@ page import="com.flickranalyser.pojo.Spot"%>
+<%@ page import="com.flickranalyser.pojo.Cluster"%>
+<%@ page import="com.javadocmd.simplelatlng.LatLng"%>
+<%@ page import="java.lang.StringBuilder"%>
+<%@ page import="java.util.Iterator"%>
+<%@ page
+	import="com.flickranalyser.businesslogic.common.ParameterConstants"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page import="com.flickranalyser.html.common.HelperMethods"%>
+<%@ page import="com.google.appengine.api.datastore.Key"%>
+<%@ page import="com.google.appengine.api.datastore.KeyFactory"%>
 
 
 <!DOCTYPE html>
 <html lang="en">
 
-	<%  HelperMethods helperMethods = (HelperMethods) request.getAttribute("helperMethods"); %>
-	<% out.println(helperMethods.getHTMLHeaderUnclosed()); %>
+<%  HelperMethods helperMethods = (HelperMethods) request.getAttribute("helperMethods"); %>
+<% out.println(helperMethods.getHTMLHeaderUnclosed()); %>
+
+<script
+	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="/res_html/js/Chart.js"></script>
+<script src="/res_html/js/spinner.js"></script>
+<script src="/res_html/js/Fluster2.packed.js"></script>
+<script src="/res_html/js/RequestsToSeekret.js"></script>
+<script type="text/javascript">
 	
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-	<script src="/res_html/js/Chart.js"></script>
-	<script src="/res_html/js/spinner.js"></script>
-	<script src="/res_html/js/Fluster2.packed.js"></script>
-	<script src="/res_html/js/RequestsToSeekret.js"></script>
-	<script type="text/javascript">
 	
-	
-	<% boolean useFluster = helperMethods.isFlusterFlag(request); %>
-	
+	<%  
+	boolean useFluster = helperMethods.isFlusterFlag(request);
+	Spot spot = (Spot) request.getAttribute("spot");
+	List<Cluster> cluster = (List<Cluster>) request.getAttribute("filteredClusters");
+	final String DIV_MAP_ID_FILTERED = "map-canvas";
+	%>
 
 
 	//KOMMT IN DIE INIT NACHHER	 	
@@ -49,42 +55,162 @@
 	
      
      </script>
-	
-	
-	
-   	<script type="text/javascript">
-		
-		
-		
-		
-		
-		
+
+
+
+<script type="text/javascript">
 		
 		var map;
 		var fluster;
 		var lastClickedMarker = null;
 		var lastClickedMarkerIcon = null;
-		  var geo = new google.maps.Geocoder;
+		var geo = new google.maps.Geocoder;
 
+		
    //Construct the circle for each value in citymap.
    // Note: We scale the area of the circle based on the population.
-   function addCircle(lgt, lat, opacity,radius ) {
+   function addCircle(lat,
+		   lgt,
+		   opacity,
+		   radius,
+		   datastoreClusterKey,
+		   spotName,
+		   clusterAlreadyVoted,
+		   clusterAlreadyDismissed,
+		   overallMaxNumberOfPOIs,
+		   overallMaxNumberOfViews,
+		   numberOfViews,
+		   numberOfPOIsForCurrentCluster,
+		   maxNumberOfViews,
+		   maxNumberOfPOIs,
+			viewCountRelativeInPercent,
+			pOICountRealativeInPercent, 
+			touristicnessInPercent,
+			pOICountOverallInPercent,
+			viewCountOverallInPercent,
+		   pictureUrl1,
+		   pictureUrl2,
+		   pictureUrl3
+		   ) {
      var populationOptions = {
-       strokeColor: '#FF0000',
-       strokeOpacity: 1,
+       strokeColor: '#CC0000',
+       strokeOpacity: 0.5,
        strokeWeight: 2,
-       fillColor: '#FF0000',
+       fillColor: '#FF4444',
        fillOpacity: opacity,
        map: map,
-       center: new google.maps.LatLng(lgt, lat),
+       center: new google.maps.LatLng(lat, lgt),
        radius: radius
      };
      // Add the circle for this city to the map.
      var cityCircle = new google.maps.Circle(populationOptions);
+     google.maps.event.addListener(cityCircle, 'click', function() {
+    	
+    	 showVoting(datastoreClusterKey,
+    			   spotName,
+    			   clusterAlreadyVoted,
+    			   clusterAlreadyDismissed,
+    			   overallMaxNumberOfPOIs,
+    			   overallMaxNumberOfViews,
+    			   lat,
+    			   lgt,
+    			   numberOfViews,
+    			   numberOfPOIsForCurrentCluster,
+    			   maxNumberOfViews,
+    			   maxNumberOfPOIs,
+    			   viewCountRelativeInPercent,
+    			   pOICountRealativeInPercent, 
+    			   touristicnessInPercent,
+    			   pOICountOverallInPercent,
+    			   viewCountOverallInPercent,
+    			   pictureUrl1,
+    			   pictureUrl2,
+    			   pictureUrl3);	 
+     });
    }
    
+   
+   function showVoting(
+		   datastoreClusterKey,
+		   spotName,
+		   clusterAlreadyVoted,
+		   clusterAlreadyDismissed,
+		   overallMaxNumberOfPOIs,
+		   overallMaxNumberOfViews,
+		   lat,
+		   lgt,
+		   numberOfViews,
+		   numberOfPOIsForCurrentCluster,
+		   maxNumberOfViews,
+		   maxNumberOfPOIs,
+			viewCountRelativeInPercent,
+			pOICountRealativeInPercent, 
+			touristicnessInPercent,
+			pOICountOverallInPercent,
+			viewCountOverallInPercent,
+		   pictureUrl1,
+		   pictureUrl2,
+		   pictureUrl3){
+		var btnTouristicness = document.getElementById("btnTouristic");
+ 		btnTouristicness.setAttribute('value', datastoreClusterKey);
+ 		
+ 		var btnDismiss = document.getElementById("btnDismiss");
+ 		btnDismiss.setAttribute('value', datastoreClusterKey);
+ 		
+ 		var btnSeekret = document.getElementById("btnSeekret");
+ 		btnSeekret.setAttribute('value', datastoreClusterKey);
+ 	
+ 		$('#btnTouristic').attr("disabled", clusterAlreadyVoted);   
+ 		$('#btnDismiss').attr("disabled", clusterAlreadyDismissed);   
+ 		$('#btnSeekret').attr("disabled", clusterAlreadyVoted);   
+ 	
+ 	
+ 		//Now set up the Spot Info Container
+ 		$('#spotInfoContainer').show();
+ 		$('#spotaddress').html(spotName);
+ 		$('#poiCount').html(overallMaxNumberOfPOIs);
+ 		$('#spotOverallview').html(overallMaxNumberOfViews);
+ 		
+ 		//Now set up the Cluster Info Container
+ 		$('#seekretSpotInfoContainer').show();
+ 	    
+ 		getAddress(lat, lgt);
+ 		
+ 		
+ 		$('#clusterViews').html(numberOfViews);
+ 		$('#clusterPOIs').html(numberOfPOIsForCurrentCluster);
+ 		$('#maxClusterViews').html(maxNumberOfViews);
+ 		$('#maxClusterPOIs').html(maxNumberOfPOIs);
+ 		 
+ 		//Now set up the Image Container
+ 		$('#topPicturesContainer').show();
 
-   function addMarker(datastoreClusterKey, spotName, clusterAlreadyVoted,clusterAlreadyDismissed, overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat,lgt , numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
+ 		google.appengine.seekret.addImageTagToDivId('#picture1', pictureUrl1);
+ 		google.appengine.seekret.addImageTagToDivId('#picture2', pictureUrl2);
+ 		google.appengine.seekret.addImageTagToDivId('#picture3', pictureUrl3);
+ 		
+ 		$('#ratingInformationContainer').show();
+ 		
+ 		addDoughnutChart(viewCountRelativeInPercent, 'viewCountRelative', "#F7464A" , "#E2EAE9");
+ 		addDoughnutChart(pOICountRealativeInPercent, 'poiCountRelative', "#F7464A", "#E2EAE9");
+ 		addDoughnutChart(touristicnessInPercent, 'touristicness', "#FFBB33" , "#99CC00");
+ 		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
+ 		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
+ 	
+ 		if (clusterAlreadyVoted || clusterAlreadyDismissed  || checkIfAlreadyVotedByMarkerPicture(lastClickedMarkerIcon) ){
+			//Now set up the buttons
+			$('#voteButtonContainer').hide();
+			$('#voteResultField').show();
+			$('#voteResultMessage').html("Already rated.");
+		} else{
+			$('#voteButtonContainer').show();	
+			$('#voteResultField').hide();
+		} 
+	   
+	   
+   }
+
+   function addMarker(datastoreClusterKey, spotName, clusterAlreadyVoted,clusterAlreadyDismissed, overallMaxNumberOfPOIs, overallMaxNumberOfViews, maxNumberOfPOIs, maxNumberOfViews, lat, lgt, numberOfViews,numberOfPOIsForCurrentCluster, viewCountRelativeInPercent,pOICountRealativeInPercent, touristicnessInPercent,pOICountOverallInPercent, viewCountOverallInPercent,  pictureUrl1, pictureUrl2, pictureUrl3) {
    
    var iconForMarker = '/res_html/img/eye_not_watched_yet.png';
    if(clusterAlreadyVoted){
@@ -129,63 +255,29 @@
 	
 	marker.setIcon('/res_html/img/eye_currently_watching.png');
 			
-		var btnTouristicness = document.getElementById("btnTouristic");
-		btnTouristicness.setAttribute('value', datastoreClusterKey);
-		
-		var btnDismiss = document.getElementById("btnDismiss");
-		btnDismiss.setAttribute('value', datastoreClusterKey);
-		
-		var btnSeekret = document.getElementById("btnSeekret");
-		btnSeekret.setAttribute('value', datastoreClusterKey);
+	showVoting(datastoreClusterKey,
+			   spotName,
+			   clusterAlreadyVoted,
+			   clusterAlreadyDismissed,
+			   overallMaxNumberOfPOIs,
+			   overallMaxNumberOfViews,
+			   lat,
+			   lgt,
+			   numberOfViews,
+			   numberOfPOIsForCurrentCluster,
+			   maxNumberOfViews,
+			   maxNumberOfPOIs,
+				viewCountRelativeInPercent,
+				pOICountRealativeInPercent, 
+				touristicnessInPercent,
+				pOICountOverallInPercent,
+				viewCountOverallInPercent,
+			   pictureUrl1,
+			   pictureUrl2,
+			   pictureUrl3, 
+			   lastClickedMarkerIcon);
 	
-		$('#btnTouristic').attr("disabled", clusterAlreadyVoted);   
-		$('#btnDismiss').attr("disabled", clusterAlreadyDismissed);   
-		$('#btnSeekret').attr("disabled", clusterAlreadyVoted);   
-	
-	
-		//Now set up the Spot Info Container
-		$('#spotInfoContainer').show();
-		$('#spotaddress').html(spotName);
-		$('#poiCount').html(overallMaxNumberOfPOIs);
-		$('#spotOverallview').html(overallMaxNumberOfViews);
-		
-		//Now set up the Cluster Info Container
-		$('#seekretSpotInfoContainer').show();
-	    
-		getAddress(lat, lgt);
-		
-		
-		$('#clusterViews').html(numberOfViews);
-		$('#clusterPOIs').html(numberOfPOIsForCurrentCluster);
-		$('#maxClusterViews').html(maxNumberOfViews);
-		$('#maxClusterPOIs').html(maxNumberOfPOIs);
-		 
-		//Now set up the Image Container
-		$('#topPicturesContainer').show();
-
-		google.appengine.seekret.addImageTagToDivId('#picture1', pictureUrl1);
-		google.appengine.seekret.addImageTagToDivId('#picture2', pictureUrl2);
-		google.appengine.seekret.addImageTagToDivId('#picture3', pictureUrl3);
-		
-		$('#ratingInformationContainer').show();
-		
-		addDoughnutChart(viewCountRelativeInPercent, 'viewCountRelative', "#F7464A" , "#E2EAE9");
-		addDoughnutChart(pOICountRealativeInPercent, 'poiCountRelative', "#F7464A", "#E2EAE9");
-		addDoughnutChart(touristicnessInPercent, 'touristicness', "#FFBB33" , "#99CC00");
-		addDoughnutChart(pOICountOverallInPercent, 'poiCountOverall', "#F7464A", "#E2EAE9");
-		addDoughnutChart(viewCountOverallInPercent, 'viewCountOverall', "#F7464A", "#E2EAE9");
-	
-		if (clusterAlreadyVoted || clusterAlreadyDismissed  || checkIfAlreadyVotedByMarkerPicture(lastClickedMarkerIcon) ){
-			//Now set up the buttons
-			$('#voteButtonContainer').hide();
-			$('#voteResultField').show();
-			$('#voteResultMessage').html("Already rated.");
-		} else{
-			$('#voteButtonContainer').show();	
-			$('#voteResultField').hide();
-		}
-	
-		  
+ 
 	
 		
 		
@@ -243,20 +335,20 @@
 
 	
 	
-   <%  Spot spot = (Spot) request.getAttribute("spot"); %>
+
 
    	function initialize() {
-     		var mapOptions = {
+        var mapOptions = {
        	zoom: 14,
-      	 <% 
+      	<% 
 			 if (spot != null){
 			 	out.println("center: new google.maps.LatLng("+ spot.getLatitude()+","+  spot.getLongitude()+")");
 		 	}else{
 		 		out.println("center: new google.maps.LatLng('43','11')");
 		 	}
-			%>
+	    %>
     	};
-     	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+     	map = new google.maps.Map(document.getElementById(<% out.println("'"+DIV_MAP_ID_FILTERED+"'"); %>),mapOptions);
      	fluster = new Fluster2(map);
      	
      // Add a listener to the zoom change event so we can change the grid size
@@ -292,7 +384,7 @@
 			String spotName = spot.getName();
 	    	int maxValue = spot.getMaxClusterViews();
 
-			List<Cluster> cluster = spot.getCluster();
+			
 	  		
 			double clusterRadiusInMeter = spot.getClusterRadiusInMeter();
 			int overallMaxNumberOfPOIs = spot.getOverallMaxPOINumberPerCluster();
@@ -304,7 +396,10 @@
 	
 			
  
-	   	for (Cluster currentCluster : cluster){
+	   	for (Cluster currentCluster : spot.getCluster()){
+	   		
+	   		boolean clusterWasFiltered = !cluster.contains(currentCluster);
+	   		
 		
 			int numberOfPOIsForCurrentCluster = currentCluster.getNumberOfPOIs();
  
@@ -333,7 +428,7 @@
 			boolean clusterAlreadyVoted = helperMethods.checkIfClusterWasAlreadyRated(datastoreClusterKey);
 	   		boolean clusterAlreadyDismissed = helperMethods.checkIfClusterWasAlreadyDismissed(datastoreClusterKey);
 			
-			if (clusterOverallViews > 200){
+			if (!clusterWasFiltered){
 	     			out.println("addMarker('"+
 						datastoreClusterKey  + "','" +		
 						spotName 		+ "'," +
@@ -357,14 +452,33 @@
 						 urls[2] + "');");
 				
 				
+	       	}else{
+	       	   double opacityViewCountRelative = viewCountRealativeInPercent/100.00;
+	       		out.println("addCircle(" +
+			    currentLat + "," +
+	       		currentLng + "," +
+			    opacityViewCountRelative + "," +
+	       		clusterRadiusInMeter + ",'"+
+	       		datastoreClusterKey  + "','" +		
+				spotName 		+ "'," +
+				clusterAlreadyVoted + "," +
+				clusterAlreadyDismissed + "," +
+				overallMaxNumberOfPOIs+ "," +
+				overallMaxNumberOfViews	+ "," +
+				maxNumberOfPOIs + "," +
+				maxNumberOfViews + "," +
+				clusterOverallViews 	+ "," +
+				numberOfPOIsForCurrentCluster 	+ "," +	
+				viewCountRealativeInPercent 	+ "," +
+				pOICountRealativeInPercent 	+ "," +	
+				touristicnessInPercent 	+ "," +	
+				pOICountOverallInPercent 	+ "," +	
+				viewCountOverallInPercent 	+ ",'" +		
+				 urls[0] + "' , '" +		
+				 urls[1] + "' , '" +
+				 urls[2] + "');");
 	       	}
-			
-			
-			
-			
-			double opacityViewCountRelative = viewCountRealativeInPercent/100.00;
-	       //	out.println("addCircle(" + currentLat + "," + currentLng + "," + opacityViewCountRelative + "," + clusterRadiusInMeter + ");");
-		}	
+	       }	
 	   	out.println("fluster.initialize();");
 	   	}
 	     	%>
@@ -373,16 +487,16 @@
    </script>
 
 
-   </head>
-	
-	
-	
-	
-	
-	
-	<% out.println(helperMethods.createBodyBegin()); 
+</head>
+
+
+
+
+
+
+<% out.println(helperMethods.createBodyBegin()); 
 	 out.println(helperMethods.createNavigation(false)); 
-	 out.println(helperMethods.createMap()); 
+	 out.println(helperMethods.createMap(DIV_MAP_ID_FILTERED)); 
 	
 	 out.println(helperMethods.createVoteResultField());
 	 out.println(helperMethods.createTopPicturesContainer()); 
@@ -393,6 +507,6 @@
 	 out.println(helperMethods.createRatingInformationContainer()); 
 	
 	 out.println(helperMethods.createBodyEnd()); %>
-	
-	</html>
-	
+
+</html>
+

@@ -33,7 +33,7 @@ public class ActionGetClusterAddressHandler extends AbstractHtmlRequestHandler {
 
 		try {
 			String address = clusterService.getAddressFromLatLng(user, latitude, logitude).getAddress();
-			LOGGER.log(Level.INFO,address);
+			LOGGER.log(Level.INFO,"ADDRESS RECEIVED" +  address);
 			ServletOutputStream out = pResponse.getOutputStream();
 			out.write(address.getBytes("UTF-8")); 
 		

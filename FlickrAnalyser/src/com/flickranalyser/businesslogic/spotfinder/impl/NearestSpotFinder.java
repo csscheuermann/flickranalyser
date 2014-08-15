@@ -193,10 +193,15 @@ public class NearestSpotFinder implements ISpotFinder {
 
 					// a) obtain the formatted_address field for every result
 					NodeList resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result/formatted_address", geocoderResultDocument, XPathConstants.NODESET);
+					LOGGER.log(Level.INFO, "LENGTH " + resultNodeList.getLength() );
+					if (resultNodeList.getLength() == 0){
+						throw new RuntimeException();
+					}
 					for(int i=0; i < resultNodeList.getLength(); i++) {
 					//	LOGGER.log(Level.INFO, resultNodeList.item(i).getTextContent());
 						return resultNodeList.item(i).getTextContent();
 					}
+					
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -204,7 +209,7 @@ public class NearestSpotFinder implements ISpotFinder {
 					LOGGER.log(Level.SEVERE, "error while retrieving location information", e);
 				} 
 
-				return null;
+				return "NO ADDRESS AVAILABLE.";
 	}
 
 }

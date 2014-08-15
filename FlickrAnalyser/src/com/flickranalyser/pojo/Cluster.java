@@ -234,5 +234,15 @@ public class Cluster implements Serializable {
 		this.dismissCounter++;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) return true;
+		if (o instanceof Cluster) {
+			return this.getDatastoreClusterKey().equals(((Cluster) o).getDatastoreClusterKey());
+		} else {
+			return false;
+		}
+	}
 
 }

@@ -176,14 +176,4 @@ public class HtmlRequestProcessor {
 
 		this.mRequest.setAttribute("currentUser", currentUser);
 	}
-
-	private IHtmlRequestHandler loadRequestHandlerByName(String prepareViewName)
-			throws Exception {
-		
-		String expectedName = "com.flickranalyser.html.impl." + prepareViewName
-				+ "Handler";
-		IHtmlRequestHandler htmlRequestHandler = (IHtmlRequestHandler) HelperMethods
-				.instantiate(expectedName, IHtmlRequestHandler.class);
-		return htmlRequestHandler;
-	}
 }

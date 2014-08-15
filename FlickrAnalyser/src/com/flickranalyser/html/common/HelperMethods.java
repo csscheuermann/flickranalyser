@@ -106,6 +106,9 @@ public class HelperMethods {
 					getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='ManyViewsAndFewPOIsFilterStrategy'>ManyViews FewPOIs</button>&nbsp;");
 					getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='RelativeRatioViewsAndPOIsFilterStrategy'>RelativeRatioViewsAndPOIs</button>&nbsp;");
 					getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='ManyViewsAndFixedAmountOfPOIsFilterStrategy'>ManyViewsAndFixedAmountOfPOIs</button>&nbsp;");
+					getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='SeekretFinderStrategy'>SeekretFinderStrategy</button>&nbsp;");
+					
+				
 				}
 				getFilterStrategyButtons.append("</div></div>");
 			}
@@ -239,12 +242,12 @@ public class HelperMethods {
 		return bodyBegin.toString();
 	}
 
-	public String createMap() {
+	public String createMap(String mapDivId) {
 		StringBuilder bodyBegin = new StringBuilder();
 
 		bodyBegin.append("<div class='container'>");
 		bodyBegin.append("<div class='row'>");
-		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='margin-bottom: 20px; height:400px; width:100%'></div></div>");
+		bodyBegin.append("<div class='col-xs-12'><div id='" + mapDivId + "' style='margin-bottom: 20px; height:400px; width:100%'></div></div>");
 		bodyBegin.append("</div>");
 		bodyBegin.append("</div>");
 
