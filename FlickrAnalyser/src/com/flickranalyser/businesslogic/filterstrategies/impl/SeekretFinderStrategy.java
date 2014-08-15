@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.flickranalyser.businesslogic.common.ClusterMaxValuesInformation;
 import com.flickranalyser.businesslogic.filterstrategies.scoredecorator.IClusterScoreDecorator;
-import com.flickranalyser.businesslogic.filterstrategies.scoredecorator.impl.EquallyWeightedScoreDecorator;
-import com.flickranalyser.businesslogic.filterstrategies.scoredecorator.impl.RelativeNumberPOIsScoreDecorator;
 import com.flickranalyser.businesslogic.filterstrategies.scoredecorator.impl.RelativeNumberViewsScoreDecorator;
 import com.flickranalyser.businesslogic.filterstrategies.scoredecorator.impl.TouristicnessScoreDecorator;
 import com.flickranalyser.businesslogic.filterstrategies.scoredecorator.impl.WeightedScoreDecorator;
