@@ -29,7 +29,6 @@ public class WeightedScoreDecorator implements IClusterScoreDecorator {
 				sumOfWeights += weightedDecoratorInformation.getWeight();
 				overallClusterScore += (clusterScore * weightedDecoratorInformation.getWeight());
 				LOGGER.log(Level.INFO, "OVERALLCLUSTERSCORE STEP" + overallClusterScore + " CLUSTERSCORE " + clusterScore+ " WEIGHT " + weightedDecoratorInformation.getWeight());
-			
 			}
 		}
 		double normalizedClusterWeights = overallClusterScore/sumOfWeights;
