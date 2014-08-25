@@ -770,10 +770,10 @@ NSString *GTMApplicationIdentifier(NSBundle *bundle);
 // sufficient reason for rejection from the app store.
 - (void)waitForCompletionWithTimeout:(NSTimeInterval)timeoutInSeconds;
 
-//#if STRIP_GTM_FETCH_LOGGING
+#if STRIP_GTM_FETCH_LOGGING
 // if logging is stripped, provide a stub for the main method
 // for controlling logging
 + (void)setLoggingEnabled:(BOOL)flag;
-//#endif // STRIP_GTM_FETCH_LOGGING
+#endif // STRIP_GTM_FETCH_LOGGING
 
 @end
