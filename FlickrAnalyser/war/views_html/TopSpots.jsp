@@ -20,8 +20,10 @@
 
 	
 	<div class='container'>
-		<div class='row'>
-			<div class='col-xs-12'> <h1>Top Spots</h1> </div>
+		<div class='container'>
+			<div class='row'>
+				<div class='col-xs-12'> <h1>Top Spots</h1> </div>
+			</div>
 		</div>
 		<% out.println(helperMethods.getFilterStrategyButtons(topSpots)); %>
 	</div>

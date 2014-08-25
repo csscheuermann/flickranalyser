@@ -117,21 +117,21 @@
           "status" : {
             "type" : "integer"
           },
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "entity" : {
             "$ref" : "_any"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           }
         }
-      },
-      "JsonMap" : {
-        "id" : "JsonMap",
-        "type" : "object"
       },
       "_any" : {
         "id" : "_any",
         "type" : "any"
+      },
+      "JsonMap" : {
+        "id" : "JsonMap",
+        "type" : "object"
       },
       "SpotResultList" : {
         "id" : "SpotResultList",
@@ -182,17 +182,14 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "maxNumberOfPOIsPerCluster" : {
-            "type" : "integer"
-          },
           "maxNumberOfViewsPerCluster" : {
-            "type" : "integer"
-          },
-          "maxClusterViews" : {
             "type" : "integer"
           },
           "clusterRadiusInMeter" : {
             "type" : "number"
+          },
+          "maxNumberOfPOIsPerCluster" : {
+            "type" : "integer"
           },
           "spotRadiusInMeter" : {
             "type" : "number"
@@ -202,6 +199,9 @@
             "items" : {
               "$ref" : "Cluster"
             }
+          },
+          "maxClusterViews" : {
+            "type" : "integer"
           }
         }
       },
@@ -222,14 +222,14 @@
           "name" : {
             "type" : "string"
           },
-          "namespace" : {
-            "type" : "string"
-          },
           "parent" : {
             "$ref" : "Key"
           },
           "complete" : {
             "type" : "boolean"
+          },
+          "namespace" : {
+            "type" : "string"
           }
         }
       },
@@ -312,16 +312,16 @@
           "longitude" : {
             "type" : "number"
           },
-          "polar" : {
-            "type" : "boolean"
+          "latitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
           },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },
-          "latitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
+          "polar" : {
+            "type" : "boolean"
           }
         }
       }

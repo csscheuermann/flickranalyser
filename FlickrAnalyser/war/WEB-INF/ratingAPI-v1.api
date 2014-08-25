@@ -140,11 +140,11 @@
           "status" : {
             "type" : "integer"
           },
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "entity" : {
             "$ref" : "_any"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           }
         }
       },

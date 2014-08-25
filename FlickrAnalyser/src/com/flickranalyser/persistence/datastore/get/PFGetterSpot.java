@@ -59,7 +59,7 @@ public static SpotResultList getTopSpots() {
     Query q = pm.newQuery(Spot.class);
     try {
       q.setOrdering("overallMaxViewNumberPerCluster desc");
-      q.setRange(0, 20);
+      q.setRange(0, 30);
 
   	List<Spot> results = (List<Spot>) q.execute();
 	//TODO COS: Discuss with Daniel
