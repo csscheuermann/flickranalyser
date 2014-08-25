@@ -29,10 +29,9 @@ static NSString * const kClientID = @"1099379908084-v0l7ieuv3mvu4i3ql2psaou2l0au
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.logoutButton.hidden = YES;
     [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    [self.logoutButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     
+    self.alreadyConenctedLabel.hidden = YES;
     self.signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
     self.signIn.clientID = kClientID;
@@ -77,11 +76,10 @@ static NSString * const kClientID = @"1099379908084-v0l7ieuv3mvu4i3ql2psaou2l0au
 {
     if ([[GPPSignIn sharedInstance] authentication]) {
         // Der Nutzer ist angemeldet.
-        self.loginButton.hidden = YES;
-        self.logoutButton.hidden = NO;
         // Führen Sie hier andere Aktionen durch, z. B. das Anzeigen einer Abmelden-Schaltfläche.
+        self.alreadyConenctedLabel.hidden = NO;
+        self.loginButton.hidden = YES;
     } else {
-        self.loginButton.hidden = NO;
         // Führen Sie hier andere Aktionen durch.
     }
 }
@@ -91,7 +89,6 @@ static NSString * const kClientID = @"1099379908084-v0l7ieuv3mvu4i3ql2psaou2l0au
     if (!service) {
         service = [[GTLServiceSpotAPI alloc] init];
         service.retryEnabled = YES;
-        [GTMHTTPFetcher setLoggingEnabled:YES];
         
         GTLQuerySpotAPI *query = [GTLQuerySpotAPI queryForGetNearestSpotByAddressWithSpotName:@"Berlin, Germany"];
         [service executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLSpotAPISpot *object, NSError *error){

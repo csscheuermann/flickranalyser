@@ -14,8 +14,8 @@
 @interface LoginViewController : UIViewController <GPPSignInDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *view;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+@property (weak, nonatomic) IBOutlet GPPSignInButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *proceedWithoutLoginButton;
+@property (weak, nonatomic) IBOutlet UILabel *alreadyConenctedLabel;
 
 @end
