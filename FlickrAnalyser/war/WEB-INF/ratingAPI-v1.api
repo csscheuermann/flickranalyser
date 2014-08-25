@@ -46,14 +46,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "ratingAPI.hasUserAlreadyVoted" : {
-      "path" : "hasUserAlreadyVoted/{userPrimaryKey}/{clusterPrimaryKey}",
+    "ratingAPI.addNewRating" : {
+      "path" : "addNewRating/{userPrimaryKey}/{clusterPrimaryKey}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted",
+      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.addNewRating",
       "request" : {
         "parameters" : {
           "userPrimaryKey" : {
@@ -71,14 +71,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "ratingAPI.addNewRating" : {
-      "path" : "addNewRating/{userPrimaryKey}/{clusterPrimaryKey}",
+    "ratingAPI.hasUserAlreadyVoted" : {
+      "path" : "hasUserAlreadyVoted/{userPrimaryKey}/{clusterPrimaryKey}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.addNewRating",
+      "rosyMethod" : "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted",
       "request" : {
         "parameters" : {
           "userPrimaryKey" : {
@@ -137,14 +137,14 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
+          "status" : {
+            "type" : "integer"
+          },
           "entity" : {
             "$ref" : "_any"
           },
           "metadata" : {
             "$ref" : "JsonMap"
-          },
-          "status" : {
-            "type" : "integer"
           }
         }
       },
@@ -159,12 +159,12 @@
           "$ref" : "KeyResult"
         }
       },
-      "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted" : {
+      "com.flickranalyser.endpoints.RatingService.addNewRating" : {
         "response" : {
           "$ref" : "Response"
         }
       },
-      "com.flickranalyser.endpoints.RatingService.addNewRating" : {
+      "com.flickranalyser.endpoints.RatingService.hasUserAlreadyVoted" : {
         "response" : {
           "$ref" : "Response"
         }

@@ -15,7 +15,7 @@ import com.flickranalyser.pojo.Spot;
 
 public abstract class AbstractFilterStrategy implements IFilterStrategy {
 
-	private static final int DEFAULT_MAX_NUMBER_OF_CLUSTERS = 30;
+	private static final int DEFAULT_MAX_NUMBER_OF_CLUSTERS = 60;
 
 	private boolean ignoreDismissedClusters;
 

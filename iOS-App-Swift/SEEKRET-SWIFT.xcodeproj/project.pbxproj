@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03779E13A8F143C693E306AB /* libPods-SEEKRET-SWIFT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A1E4390EEB4D52913DD232 /* libPods-SEEKRET-SWIFT.a */; };
+		B48A0C8619AB19A600978CFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A0C8519AB19A600978CFC /* AppDelegate.swift */; };
+		B48A0C8819AB19A600978CFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A0C8719AB19A600978CFC /* ViewController.swift */; };
+		B48A0C8B19AB19A600978CFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48A0C8919AB19A600978CFC /* Main.storyboard */; };
+		B48A0C8D19AB19A600978CFC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B48A0C8C19AB19A600978CFC /* Images.xcassets */; };
+		B48A0C9919AB19A600978CFC /* SEEKRET_SWIFTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A0C9819AB19A600978CFC /* SEEKRET_SWIFTTests.swift */; };
+		B48A0CBC19AB1D2900978CFC /* GTLQuerySpotAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CA619AB1D2900978CFC /* GTLQuerySpotAPI.m */; };
+		B48A0CBD19AB1D2900978CFC /* GTLServiceSpotAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CA819AB1D2900978CFC /* GTLServiceSpotAPI.m */; };
+		B48A0CBE19AB1D2900978CFC /* GTLSpotAPICluster.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CAB19AB1D2900978CFC /* GTLSpotAPICluster.m */; };
+		B48A0CBF19AB1D2900978CFC /* GTLSpotAPIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CAD19AB1D2900978CFC /* GTLSpotAPIConstants.m */; };
+		B48A0CC019AB1D2900978CFC /* GTLSpotAPIJsonMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CAF19AB1D2900978CFC /* GTLSpotAPIJsonMap.m */; };
+		B48A0CC119AB1D2900978CFC /* GTLSpotAPIKey.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CB119AB1D2900978CFC /* GTLSpotAPIKey.m */; };
+		B48A0CC219AB1D2900978CFC /* GTLSpotAPILatLng.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CB319AB1D2900978CFC /* GTLSpotAPILatLng.m */; };
+		B48A0CC319AB1D2900978CFC /* GTLSpotAPIPointOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CB519AB1D2900978CFC /* GTLSpotAPIPointOfInterest.m */; };
+		B48A0CC419AB1D2900978CFC /* GTLSpotAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CB719AB1D2900978CFC /* GTLSpotAPIResponse.m */; };
+		B48A0CC519AB1D2900978CFC /* GTLSpotAPISpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CB919AB1D2900978CFC /* GTLSpotAPISpot.m */; };
+		B48A0CC619AB1D2900978CFC /* GTLSpotAPISpotResultList.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CBB19AB1D2900978CFC /* GTLSpotAPISpotResultList.m */; };
+		B48BAD5219AB7BBF00FC6B1D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48BAD5119AB7BBF00FC6B1D /* MapKit.framework */; };
+		B4ADAFAA19AB8BD900143DE2 /* GTLQueryClusterAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFA919AB8BD900143DE2 /* GTLQueryClusterAPI.m */; };
+		B4ADAFAD19AB8C0400143DE2 /* GTLClusterAPIAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFAC19AB8C0400143DE2 /* GTLClusterAPIAddress.m */; };
+		B4ADAFB019AB8C1300143DE2 /* GTLClusterAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFAF19AB8C1300143DE2 /* GTLClusterAPIResponse.m */; };
+		B4ADAFB319AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B48A0C9319AB19A600978CFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B48A0C7819AB19A600978CFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B48A0C7F19AB19A600978CFC;
+			remoteInfo = "SEEKRET-SWIFT";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07A1E4390EEB4D52913DD232 /* libPods-SEEKRET-SWIFT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEEKRET-SWIFT.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EFE0575A6264DC8B25AEA05 /* Pods-SEEKRET-SWIFT.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SEEKRET-SWIFT.xcconfig"; path = "Pods/Pods-SEEKRET-SWIFT.xcconfig"; sourceTree = "<group>"; };
+		B48A0C8019AB19A600978CFC /* SEEKRET-SWIFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SEEKRET-SWIFT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B48A0C8419AB19A600978CFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B48A0C8519AB19A600978CFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B48A0C8719AB19A600978CFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B48A0C8A19AB19A600978CFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B48A0C8C19AB19A600978CFC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B48A0C9219AB19A600978CFC /* SEEKRET-SWIFTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SEEKRET-SWIFTTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B48A0C9719AB19A600978CFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B48A0C9819AB19A600978CFC /* SEEKRET_SWIFTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEEKRET_SWIFTTests.swift; sourceTree = "<group>"; };
+		B48A0CA219AB1A8700978CFC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		B48A0CA519AB1D2900978CFC /* GTLQuerySpotAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQuerySpotAPI.h; sourceTree = "<group>"; };
+		B48A0CA619AB1D2900978CFC /* GTLQuerySpotAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQuerySpotAPI.m; sourceTree = "<group>"; };
+		B48A0CA719AB1D2900978CFC /* GTLServiceSpotAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceSpotAPI.h; sourceTree = "<group>"; };
+		B48A0CA819AB1D2900978CFC /* GTLServiceSpotAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServiceSpotAPI.m; sourceTree = "<group>"; };
+		B48A0CA919AB1D2900978CFC /* GTLSpotAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPI.h; sourceTree = "<group>"; };
+		B48A0CAA19AB1D2900978CFC /* GTLSpotAPICluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPICluster.h; sourceTree = "<group>"; };
+		B48A0CAB19AB1D2900978CFC /* GTLSpotAPICluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPICluster.m; sourceTree = "<group>"; };
+		B48A0CAC19AB1D2900978CFC /* GTLSpotAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIConstants.h; sourceTree = "<group>"; };
+		B48A0CAD19AB1D2900978CFC /* GTLSpotAPIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIConstants.m; sourceTree = "<group>"; };
+		B48A0CAE19AB1D2900978CFC /* GTLSpotAPIJsonMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIJsonMap.h; sourceTree = "<group>"; };
+		B48A0CAF19AB1D2900978CFC /* GTLSpotAPIJsonMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIJsonMap.m; sourceTree = "<group>"; };
+		B48A0CB019AB1D2900978CFC /* GTLSpotAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIKey.h; sourceTree = "<group>"; };
+		B48A0CB119AB1D2900978CFC /* GTLSpotAPIKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIKey.m; sourceTree = "<group>"; };
+		B48A0CB219AB1D2900978CFC /* GTLSpotAPILatLng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPILatLng.h; sourceTree = "<group>"; };
+		B48A0CB319AB1D2900978CFC /* GTLSpotAPILatLng.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPILatLng.m; sourceTree = "<group>"; };
+		B48A0CB419AB1D2900978CFC /* GTLSpotAPIPointOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIPointOfInterest.h; sourceTree = "<group>"; };
+		B48A0CB519AB1D2900978CFC /* GTLSpotAPIPointOfInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIPointOfInterest.m; sourceTree = "<group>"; };
+		B48A0CB619AB1D2900978CFC /* GTLSpotAPIResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIResponse.h; sourceTree = "<group>"; };
+		B48A0CB719AB1D2900978CFC /* GTLSpotAPIResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIResponse.m; sourceTree = "<group>"; };
+		B48A0CB819AB1D2900978CFC /* GTLSpotAPISpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPISpot.h; sourceTree = "<group>"; };
+		B48A0CB919AB1D2900978CFC /* GTLSpotAPISpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpot.m; sourceTree = "<group>"; };
+		B48A0CBA19AB1D2900978CFC /* GTLSpotAPISpotResultList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPISpotResultList.h; sourceTree = "<group>"; };
+		B48A0CBB19AB1D2900978CFC /* GTLSpotAPISpotResultList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpotResultList.m; sourceTree = "<group>"; };
+		B48BAD5119AB7BBF00FC6B1D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B4ADAFA819AB8BD900143DE2 /* GTLQueryClusterAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQueryClusterAPI.h; sourceTree = "<group>"; };
+		B4ADAFA919AB8BD900143DE2 /* GTLQueryClusterAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQueryClusterAPI.m; sourceTree = "<group>"; };
+		B4ADAFAB19AB8C0400143DE2 /* GTLClusterAPIAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLClusterAPIAddress.h; sourceTree = "<group>"; };
+		B4ADAFAC19AB8C0400143DE2 /* GTLClusterAPIAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIAddress.m; sourceTree = "<group>"; };
+		B4ADAFAE19AB8C1300143DE2 /* GTLClusterAPIResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLClusterAPIResponse.h; sourceTree = "<group>"; };
+		B4ADAFAF19AB8C1300143DE2 /* GTLClusterAPIResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIResponse.m; sourceTree = "<group>"; };
+		B4ADAFB119AB8C2D00143DE2 /* GTLClusterAPIJsonMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLClusterAPIJsonMap.h; sourceTree = "<group>"; };
+		B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIJsonMap.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B48A0C7D19AB19A600978CFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B48BAD5219AB7BBF00FC6B1D /* MapKit.framework in Frameworks */,
+				03779E13A8F143C693E306AB /* libPods-SEEKRET-SWIFT.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B48A0C8F19AB19A600978CFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B48A0C7719AB19A600978CFC = {
+			isa = PBXGroup;
+			children = (
+				B48A0C8219AB19A600978CFC /* SEEKRET-SWIFT */,
+				B48A0C9519AB19A600978CFC /* SEEKRET-SWIFTTests */,
+				B48A0C8119AB19A600978CFC /* Products */,
+				3EFE0575A6264DC8B25AEA05 /* Pods-SEEKRET-SWIFT.xcconfig */,
+				DFDBCD99721E4D9B9CF47B22 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B48A0C8119AB19A600978CFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B48A0C8019AB19A600978CFC /* SEEKRET-SWIFT.app */,
+				B48A0C9219AB19A600978CFC /* SEEKRET-SWIFTTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B48A0C8219AB19A600978CFC /* SEEKRET-SWIFT */ = {
+			isa = PBXGroup;
+			children = (
+				B48A0CA319AB1D0000978CFC /* SEEKRET-Endpoints */,
+				B48A0C8519AB19A600978CFC /* AppDelegate.swift */,
+				B48A0C8719AB19A600978CFC /* ViewController.swift */,
+				B48A0C8919AB19A600978CFC /* Main.storyboard */,
+				B48A0C8C19AB19A600978CFC /* Images.xcassets */,
+				B48A0C8319AB19A600978CFC /* Supporting Files */,
+				B48A0CA219AB1A8700978CFC /* Bridging-Header.h */,
+			);
+			path = "SEEKRET-SWIFT";
+			sourceTree = "<group>";
+		};
+		B48A0C8319AB19A600978CFC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B48A0C8419AB19A600978CFC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B48A0C9519AB19A600978CFC /* SEEKRET-SWIFTTests */ = {
+			isa = PBXGroup;
+			children = (
+				B48A0C9819AB19A600978CFC /* SEEKRET_SWIFTTests.swift */,
+				B48A0C9619AB19A600978CFC /* Supporting Files */,
+			);
+			path = "SEEKRET-SWIFTTests";
+			sourceTree = "<group>";
+		};
+		B48A0C9619AB19A600978CFC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B48A0C9719AB19A600978CFC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B48A0CA319AB1D0000978CFC /* SEEKRET-Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				B4ADAF9219AB82C800143DE2 /* Cluster */,
+				B48A0CA419AB1D1200978CFC /* Spot */,
+			);
+			name = "SEEKRET-Endpoints";
+			sourceTree = "<group>";
+		};
+		B48A0CA419AB1D1200978CFC /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+				B48A0CA519AB1D2900978CFC /* GTLQuerySpotAPI.h */,
+				B48A0CA619AB1D2900978CFC /* GTLQuerySpotAPI.m */,
+				B48A0CA719AB1D2900978CFC /* GTLServiceSpotAPI.h */,
+				B48A0CA819AB1D2900978CFC /* GTLServiceSpotAPI.m */,
+				B48A0CA919AB1D2900978CFC /* GTLSpotAPI.h */,
+				B48A0CAA19AB1D2900978CFC /* GTLSpotAPICluster.h */,
+				B48A0CAB19AB1D2900978CFC /* GTLSpotAPICluster.m */,
+				B48A0CAC19AB1D2900978CFC /* GTLSpotAPIConstants.h */,
+				B48A0CAD19AB1D2900978CFC /* GTLSpotAPIConstants.m */,
+				B48A0CAE19AB1D2900978CFC /* GTLSpotAPIJsonMap.h */,
+				B48A0CAF19AB1D2900978CFC /* GTLSpotAPIJsonMap.m */,
+				B48A0CB019AB1D2900978CFC /* GTLSpotAPIKey.h */,
+				B48A0CB119AB1D2900978CFC /* GTLSpotAPIKey.m */,
+				B48A0CB219AB1D2900978CFC /* GTLSpotAPILatLng.h */,
+				B48A0CB319AB1D2900978CFC /* GTLSpotAPILatLng.m */,
+				B48A0CB419AB1D2900978CFC /* GTLSpotAPIPointOfInterest.h */,
+				B48A0CB519AB1D2900978CFC /* GTLSpotAPIPointOfInterest.m */,
+				B48A0CB619AB1D2900978CFC /* GTLSpotAPIResponse.h */,
+				B48A0CB719AB1D2900978CFC /* GTLSpotAPIResponse.m */,
+				B48A0CB819AB1D2900978CFC /* GTLSpotAPISpot.h */,
+				B48A0CB919AB1D2900978CFC /* GTLSpotAPISpot.m */,
+				B48A0CBA19AB1D2900978CFC /* GTLSpotAPISpotResultList.h */,
+				B48A0CBB19AB1D2900978CFC /* GTLSpotAPISpotResultList.m */,
+			);
+			name = Spot;
+			sourceTree = "<group>";
+		};
+		B4ADAF9219AB82C800143DE2 /* Cluster */ = {
+			isa = PBXGroup;
+			children = (
+				B4ADAFB119AB8C2D00143DE2 /* GTLClusterAPIJsonMap.h */,
+				B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */,
+				B4ADAFAE19AB8C1300143DE2 /* GTLClusterAPIResponse.h */,
+				B4ADAFAF19AB8C1300143DE2 /* GTLClusterAPIResponse.m */,
+				B4ADAFAB19AB8C0400143DE2 /* GTLClusterAPIAddress.h */,
+				B4ADAFAC19AB8C0400143DE2 /* GTLClusterAPIAddress.m */,
+				B4ADAFA819AB8BD900143DE2 /* GTLQueryClusterAPI.h */,
+				B4ADAFA919AB8BD900143DE2 /* GTLQueryClusterAPI.m */,
+			);
+			name = Cluster;
+			sourceTree = "<group>";
+		};
+		DFDBCD99721E4D9B9CF47B22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B48BAD5119AB7BBF00FC6B1D /* MapKit.framework */,
+				07A1E4390EEB4D52913DD232 /* libPods-SEEKRET-SWIFT.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B48A0C7F19AB19A600978CFC /* SEEKRET-SWIFT */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B48A0C9C19AB19A600978CFC /* Build configuration list for PBXNativeTarget "SEEKRET-SWIFT" */;
+			buildPhases = (
+				58E277E7E80046C1BF08405C /* Check Pods Manifest.lock */,
+				B48A0C7C19AB19A600978CFC /* Sources */,
+				B48A0C7D19AB19A600978CFC /* Frameworks */,
+				B48A0C7E19AB19A600978CFC /* Resources */,
+				99BC1D31A9CC4C408C0D47EE /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SEEKRET-SWIFT";
+			productName = "SEEKRET-SWIFT";
+			productReference = B48A0C8019AB19A600978CFC /* SEEKRET-SWIFT.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B48A0C9119AB19A600978CFC /* SEEKRET-SWIFTTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B48A0C9F19AB19A600978CFC /* Build configuration list for PBXNativeTarget "SEEKRET-SWIFTTests" */;
+			buildPhases = (
+				B48A0C8E19AB19A600978CFC /* Sources */,
+				B48A0C8F19AB19A600978CFC /* Frameworks */,
+				B48A0C9019AB19A600978CFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B48A0C9419AB19A600978CFC /* PBXTargetDependency */,
+			);
+			name = "SEEKRET-SWIFTTests";
+			productName = "SEEKRET-SWIFTTests";
+			productReference = B48A0C9219AB19A600978CFC /* SEEKRET-SWIFTTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B48A0C7819AB19A600978CFC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Constantin Scheuermann";
+				TargetAttributes = {
+					B48A0C7F19AB19A600978CFC = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					B48A0C9119AB19A600978CFC = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = B48A0C7F19AB19A600978CFC;
+					};
+				};
+			};
+			buildConfigurationList = B48A0C7B19AB19A600978CFC /* Build configuration list for PBXProject "SEEKRET-SWIFT" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B48A0C7719AB19A600978CFC;
+			productRefGroup = B48A0C8119AB19A600978CFC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B48A0C7F19AB19A600978CFC /* SEEKRET-SWIFT */,
+				B48A0C9119AB19A600978CFC /* SEEKRET-SWIFTTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B48A0C7E19AB19A600978CFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B48A0C8B19AB19A600978CFC /* Main.storyboard in Resources */,
+				B48A0C8D19AB19A600978CFC /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B48A0C9019AB19A600978CFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		58E277E7E80046C1BF08405C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		99BC1D31A9CC4C408C0D47EE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-SEEKRET-SWIFT-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B48A0C7C19AB19A600978CFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4ADAFAA19AB8BD900143DE2 /* GTLQueryClusterAPI.m in Sources */,
+				B48A0CC519AB1D2900978CFC /* GTLSpotAPISpot.m in Sources */,
+				B48A0C8819AB19A600978CFC /* ViewController.swift in Sources */,
+				B48A0CC619AB1D2900978CFC /* GTLSpotAPISpotResultList.m in Sources */,
+				B4ADAFB019AB8C1300143DE2 /* GTLClusterAPIResponse.m in Sources */,
+				B48A0C8619AB19A600978CFC /* AppDelegate.swift in Sources */,
+				B4ADAFB319AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m in Sources */,
+				B48A0CC419AB1D2900978CFC /* GTLSpotAPIResponse.m in Sources */,
+				B48A0CC119AB1D2900978CFC /* GTLSpotAPIKey.m in Sources */,
+				B48A0CBE19AB1D2900978CFC /* GTLSpotAPICluster.m in Sources */,
+				B48A0CC319AB1D2900978CFC /* GTLSpotAPIPointOfInterest.m in Sources */,
+				B4ADAFAD19AB8C0400143DE2 /* GTLClusterAPIAddress.m in Sources */,
+				B48A0CBD19AB1D2900978CFC /* GTLServiceSpotAPI.m in Sources */,
+				B48A0CC019AB1D2900978CFC /* GTLSpotAPIJsonMap.m in Sources */,
+				B48A0CBF19AB1D2900978CFC /* GTLSpotAPIConstants.m in Sources */,
+				B48A0CBC19AB1D2900978CFC /* GTLQuerySpotAPI.m in Sources */,
+				B48A0CC219AB1D2900978CFC /* GTLSpotAPILatLng.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B48A0C8E19AB19A600978CFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B48A0C9919AB19A600978CFC /* SEEKRET_SWIFTTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B48A0C9419AB19A600978CFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B48A0C7F19AB19A600978CFC /* SEEKRET-SWIFT */;
+			targetProxy = B48A0C9319AB19A600978CFC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B48A0C8919AB19A600978CFC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B48A0C8A19AB19A600978CFC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B48A0C9A19AB19A600978CFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B48A0C9B19AB19A600978CFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B48A0C9D19AB19A600978CFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EFE0575A6264DC8B25AEA05 /* Pods-SEEKRET-SWIFT.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "SEEKRET-SWIFT/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEEKRET-SWIFT/Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		B48A0C9E19AB19A600978CFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EFE0575A6264DC8B25AEA05 /* Pods-SEEKRET-SWIFT.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "SEEKRET-SWIFT/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEEKRET-SWIFT/Bridging-Header.h";
+			};
+			name = Release;
+		};
+		B48A0CA019AB19A600978CFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SEEKRET-SWIFTTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SEEKRET-SWIFT.app/SEEKRET-SWIFT";
+			};
+			name = Debug;
+		};
+		B48A0CA119AB19A600978CFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SEEKRET-SWIFTTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SEEKRET-SWIFT.app/SEEKRET-SWIFT";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B48A0C7B19AB19A600978CFC /* Build configuration list for PBXProject "SEEKRET-SWIFT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B48A0C9A19AB19A600978CFC /* Debug */,
+				B48A0C9B19AB19A600978CFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B48A0C9C19AB19A600978CFC /* Build configuration list for PBXNativeTarget "SEEKRET-SWIFT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B48A0C9D19AB19A600978CFC /* Debug */,
+				B48A0C9E19AB19A600978CFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B48A0C9F19AB19A600978CFC /* Build configuration list for PBXNativeTarget "SEEKRET-SWIFTTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B48A0CA019AB19A600978CFC /* Debug */,
+				B48A0CA119AB19A600978CFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B48A0C7819AB19A600978CFC /* Project object */;
+}

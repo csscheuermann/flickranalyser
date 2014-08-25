@@ -91,21 +91,24 @@ public class HelperMethods {
 
 		getFilterStrategyButtons.append("<div class='container'>");
 		getFilterStrategyButtons.append("<div class='row'>");
-		getFilterStrategyButtons.append("<div class='col-xs-3'> <h4>Name</h4> </div>");
-		getFilterStrategyButtons.append("<div class='col-xs-9'><h4>Cluster Algos</h4></div></div>");
+		getFilterStrategyButtons.append("<div class='col-xs-4'> <h4>Name</h4> </div>");
+		getFilterStrategyButtons.append("<div class='col-xs-8'><h4>Cluster Algos</h4></div></div>");
 		if (topSpots != null){
 			for (String spotName : topSpots.getTopSpots())	{
 				getFilterStrategyButtons.append("<div class='row bottom-sapce' > ");
-				getFilterStrategyButtons.append("<div class='col-xs-3'>");
+				getFilterStrategyButtons.append("<div class='col-xs-4'>");
 				getFilterStrategyButtons.append(spotName);
 				getFilterStrategyButtons.append("</div>");
-				getFilterStrategyButtons.append("<div class='col-xs-9'> ");
+				getFilterStrategyButtons.append("<div class='col-xs-8'> ");
 				getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='DoNotFilterStrategy'>No Filter</button>&nbsp;");
 
 				if (currentUser.getUserGroup().equals(UserRolesEnum.ADMIN.name())) {
 					getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='ManyViewsAndFewPOIsFilterStrategy'>ManyViews FewPOIs</button>&nbsp;");
 					getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='RelativeRatioViewsAndPOIsFilterStrategy'>RelativeRatioViewsAndPOIs</button>&nbsp;");
 					getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='ManyViewsAndFixedAmountOfPOIsFilterStrategy'>ManyViewsAndFixedAmountOfPOIs</button>&nbsp;");
+					getFilterStrategyButtons.append("<button type='submit' class='btn' name='strategy' onClick=\"setSpotNameToInput('"+spotName+"', 'locationSetByJQuery')\" value='SeekretFinderStrategy'>SeekretFinderStrategy</button>&nbsp;");
+					
+				
 				}
 				getFilterStrategyButtons.append("</div></div>");
 			}
@@ -126,16 +129,16 @@ public class HelperMethods {
 			createFilterSettings.append("<div class='alert alert-info bottom-sapce-30 bottom-padding-30'>");
 			createFilterSettings.append("<h3> Filter Settings </h3>");
 			createFilterSettings.append("<div class='row'>");
-			createFilterSettings.append("<div class='col-xs-9'>Do not consider dismissed clusters</div>");
-			createFilterSettings.append("<div class='col-xs-3'>  ");
+			createFilterSettings.append("<div class='col-xs-1'>  ");
 			createFilterSettings.append("      <input type='checkbox' name='dissmissCluster' id='doNotConsiderDismissedClusters'> ");
 			createFilterSettings.append("  </div>");
+			createFilterSettings.append("<div class='col-xs-11'>Do not consider dismissed clusters</div>");
 			createFilterSettings.append("</div>");
 			createFilterSettings.append("<div class='row'>");
-			createFilterSettings.append("<div class='col-xs-9'>Use fluster</div>");
-			createFilterSettings.append("<div class='col-xs-3'>  ");
+			createFilterSettings.append("<div class='col-xs-1'>  ");
 			createFilterSettings.append("      <input type='checkbox' name='useFluster' id='useFlusterFlag'> ");
 			createFilterSettings.append("  </div>");
+			createFilterSettings.append("<div class='col-xs-11'>Use fluster</div>");
 		
 			createFilterSettings.append("</div>");
 
@@ -239,12 +242,12 @@ public class HelperMethods {
 		return bodyBegin.toString();
 	}
 
-	public String createMap() {
+	public String createMap(String mapDivId) {
 		StringBuilder bodyBegin = new StringBuilder();
 
 		bodyBegin.append("<div class='container'>");
 		bodyBegin.append("<div class='row'>");
-		bodyBegin.append("<div class='col-xs-12'><div id='map-canvas' style='margin-bottom: 20px; height:400px; width:100%'></div></div>");
+		bodyBegin.append("<div class='col-xs-12'><div id='" + mapDivId + "' style='margin-bottom: 20px; height:400px; width:100%'></div></div>");
 		bodyBegin.append("</div>");
 		bodyBegin.append("</div>");
 

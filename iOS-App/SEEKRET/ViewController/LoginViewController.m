@@ -22,7 +22,7 @@
 
 @end
 
-static NSString * const kClientID = @"1099379908084-v0l7ieuv3mvu4i3ql2psaou2l0aucfk6.apps.googleusercontent.com";
+static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtpspgb.apps.googleusercontent.com";
 
 @implementation LoginViewController
 
