@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-                            
+
+class ViewController: UIViewController{
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,13 +28,43 @@ class ViewController: UIViewController {
         spotAPI.executeQuery(query, completionHandler: { (ticket, returnedSpot, nsError) -> Void in
             println(returnedSpot.clusterRadiusInKm)
             
-            var cluster:[AnyObject] = returnedSpot.cluster as [AnyObject]!;
+            var cluster:[GTLSpotAPICluster] = returnedSpot.cluster as [GTLSpotAPICluster]!;
+            
+        
+            for (index, currentCluster) in enumerate(cluster){
+                println(index)
+                var castedCluster = currentCluster as GTLSpotAPICluster
+                var castedClusterLatitude = castedCluster.latitude
+                println(castedClusterLatitude)
+            }
+            
+            
             
             var urls:[AnyObject] =  cluster.first?.urlOfMostViewedPicture as [AnyObject]!;
             
-            for currentItem in urls{
+            
+            
+            
+            
+            for (index, currentItem) in enumerate(urls){
+                
+                
                 var url:String = currentItem as String
                 println(url)
+                println(index)
+                let nsURL = NSURL.URLWithString(url);
+                var err: NSError?
+                
+                var imageData :NSData = NSData.dataWithContentsOfURL(nsURL,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err)
+      
+                
+                var bgImage = UIImage(data:imageData)
+                var positionY = index*(Int(bgImage.size.height));
+                
+                var imageView = UIImageView(frame: CGRectMake(10, CGFloat(positionY)+30, bgImage.size.width, bgImage.size.height))
+                imageView.image = bgImage
+                self.view.addSubview(imageView)
+                
             }
             
            

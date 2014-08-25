@@ -13,3 +13,5 @@
 #import "GTLSpotAPISpot.h"
 #import "GTLSpotAPICluster.h"
 #import <GTLPlusConstants.h>
+
+#import "GTLQueryClusterAPI.h"

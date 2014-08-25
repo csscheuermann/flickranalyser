@@ -24,6 +24,11 @@
 		B48A0CC419AB1D2900978CFC /* GTLSpotAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CB719AB1D2900978CFC /* GTLSpotAPIResponse.m */; };
 		B48A0CC519AB1D2900978CFC /* GTLSpotAPISpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CB919AB1D2900978CFC /* GTLSpotAPISpot.m */; };
 		B48A0CC619AB1D2900978CFC /* GTLSpotAPISpotResultList.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A0CBB19AB1D2900978CFC /* GTLSpotAPISpotResultList.m */; };
+		B48BAD5219AB7BBF00FC6B1D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48BAD5119AB7BBF00FC6B1D /* MapKit.framework */; };
+		B4ADAFAA19AB8BD900143DE2 /* GTLQueryClusterAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFA919AB8BD900143DE2 /* GTLQueryClusterAPI.m */; };
+		B4ADAFAD19AB8C0400143DE2 /* GTLClusterAPIAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFAC19AB8C0400143DE2 /* GTLClusterAPIAddress.m */; };
+		B4ADAFB019AB8C1300143DE2 /* GTLClusterAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFAF19AB8C1300143DE2 /* GTLClusterAPIResponse.m */; };
+		B4ADAFB319AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +77,15 @@
 		B48A0CB919AB1D2900978CFC /* GTLSpotAPISpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpot.m; sourceTree = "<group>"; };
 		B48A0CBA19AB1D2900978CFC /* GTLSpotAPISpotResultList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPISpotResultList.h; sourceTree = "<group>"; };
 		B48A0CBB19AB1D2900978CFC /* GTLSpotAPISpotResultList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpotResultList.m; sourceTree = "<group>"; };
+		B48BAD5119AB7BBF00FC6B1D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B4ADAFA819AB8BD900143DE2 /* GTLQueryClusterAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQueryClusterAPI.h; sourceTree = "<group>"; };
+		B4ADAFA919AB8BD900143DE2 /* GTLQueryClusterAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQueryClusterAPI.m; sourceTree = "<group>"; };
+		B4ADAFAB19AB8C0400143DE2 /* GTLClusterAPIAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLClusterAPIAddress.h; sourceTree = "<group>"; };
+		B4ADAFAC19AB8C0400143DE2 /* GTLClusterAPIAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIAddress.m; sourceTree = "<group>"; };
+		B4ADAFAE19AB8C1300143DE2 /* GTLClusterAPIResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLClusterAPIResponse.h; sourceTree = "<group>"; };
+		B4ADAFAF19AB8C1300143DE2 /* GTLClusterAPIResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIResponse.m; sourceTree = "<group>"; };
+		B4ADAFB119AB8C2D00143DE2 /* GTLClusterAPIJsonMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLClusterAPIJsonMap.h; sourceTree = "<group>"; };
+		B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIJsonMap.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B48BAD5219AB7BBF00FC6B1D /* MapKit.framework in Frameworks */,
 				03779E13A8F143C693E306AB /* libPods-SEEKRET-SWIFT.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +170,7 @@
 		B48A0CA319AB1D0000978CFC /* SEEKRET-Endpoints */ = {
 			isa = PBXGroup;
 			children = (
+				B4ADAF9219AB82C800143DE2 /* Cluster */,
 				B48A0CA419AB1D1200978CFC /* Spot */,
 			);
 			name = "SEEKRET-Endpoints";
@@ -190,9 +206,25 @@
 			name = Spot;
 			sourceTree = "<group>";
 		};
+		B4ADAF9219AB82C800143DE2 /* Cluster */ = {
+			isa = PBXGroup;
+			children = (
+				B4ADAFB119AB8C2D00143DE2 /* GTLClusterAPIJsonMap.h */,
+				B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */,
+				B4ADAFAE19AB8C1300143DE2 /* GTLClusterAPIResponse.h */,
+				B4ADAFAF19AB8C1300143DE2 /* GTLClusterAPIResponse.m */,
+				B4ADAFAB19AB8C0400143DE2 /* GTLClusterAPIAddress.h */,
+				B4ADAFAC19AB8C0400143DE2 /* GTLClusterAPIAddress.m */,
+				B4ADAFA819AB8BD900143DE2 /* GTLQueryClusterAPI.h */,
+				B4ADAFA919AB8BD900143DE2 /* GTLQueryClusterAPI.m */,
+			);
+			name = Cluster;
+			sourceTree = "<group>";
+		};
 		DFDBCD99721E4D9B9CF47B22 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B48BAD5119AB7BBF00FC6B1D /* MapKit.framework */,
 				07A1E4390EEB4D52913DD232 /* libPods-SEEKRET-SWIFT.a */,
 			);
 			name = Frameworks;
@@ -332,14 +364,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4ADAFAA19AB8BD900143DE2 /* GTLQueryClusterAPI.m in Sources */,
 				B48A0CC519AB1D2900978CFC /* GTLSpotAPISpot.m in Sources */,
 				B48A0C8819AB19A600978CFC /* ViewController.swift in Sources */,
 				B48A0CC619AB1D2900978CFC /* GTLSpotAPISpotResultList.m in Sources */,
+				B4ADAFB019AB8C1300143DE2 /* GTLClusterAPIResponse.m in Sources */,
 				B48A0C8619AB19A600978CFC /* AppDelegate.swift in Sources */,
+				B4ADAFB319AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m in Sources */,
 				B48A0CC419AB1D2900978CFC /* GTLSpotAPIResponse.m in Sources */,
 				B48A0CC119AB1D2900978CFC /* GTLSpotAPIKey.m in Sources */,
 				B48A0CBE19AB1D2900978CFC /* GTLSpotAPICluster.m in Sources */,
 				B48A0CC319AB1D2900978CFC /* GTLSpotAPIPointOfInterest.m in Sources */,
+				B4ADAFAD19AB8C0400143DE2 /* GTLClusterAPIAddress.m in Sources */,
 				B48A0CBD19AB1D2900978CFC /* GTLServiceSpotAPI.m in Sources */,
 				B48A0CC019AB1D2900978CFC /* GTLSpotAPIJsonMap.m in Sources */,
 				B48A0CBF19AB1D2900978CFC /* GTLSpotAPIConstants.m in Sources */,
