@@ -29,6 +29,8 @@
 		B4ADAFAD19AB8C0400143DE2 /* GTLClusterAPIAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFAC19AB8C0400143DE2 /* GTLClusterAPIAddress.m */; };
 		B4ADAFB019AB8C1300143DE2 /* GTLClusterAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFAF19AB8C1300143DE2 /* GTLClusterAPIResponse.m */; };
 		B4ADAFB319AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */; };
+		B4ADAFB519ABAF0D00143DE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */; };
+		B4ADAFB719ABB14C00143DE2 /* EndpointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		B4ADAFAF19AB8C1300143DE2 /* GTLClusterAPIResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIResponse.m; sourceTree = "<group>"; };
 		B4ADAFB119AB8C2D00143DE2 /* GTLClusterAPIJsonMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLClusterAPIJsonMap.h; sourceTree = "<group>"; };
 		B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIJsonMap.m; sourceTree = "<group>"; };
+		B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,8 @@
 				B48A0C8C19AB19A600978CFC /* Images.xcassets */,
 				B48A0C8319AB19A600978CFC /* Supporting Files */,
 				B48A0CA219AB1A8700978CFC /* Bridging-Header.h */,
+				B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */,
+				B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */,
 			);
 			path = "SEEKRET-SWIFT";
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4ADAFB719ABB14C00143DE2 /* EndpointController.swift in Sources */,
 				B4ADAFAA19AB8BD900143DE2 /* GTLQueryClusterAPI.m in Sources */,
 				B48A0CC519AB1D2900978CFC /* GTLSpotAPISpot.m in Sources */,
 				B48A0C8819AB19A600978CFC /* ViewController.swift in Sources */,
@@ -377,6 +384,7 @@
 				B48A0CC319AB1D2900978CFC /* GTLSpotAPIPointOfInterest.m in Sources */,
 				B4ADAFAD19AB8C0400143DE2 /* GTLClusterAPIAddress.m in Sources */,
 				B48A0CBD19AB1D2900978CFC /* GTLServiceSpotAPI.m in Sources */,
+				B4ADAFB519ABAF0D00143DE2 /* MapViewController.swift in Sources */,
 				B48A0CC019AB1D2900978CFC /* GTLSpotAPIJsonMap.m in Sources */,
 				B48A0CBF19AB1D2900978CFC /* GTLSpotAPIConstants.m in Sources */,
 				B48A0CBC19AB1D2900978CFC /* GTLQuerySpotAPI.m in Sources */,
