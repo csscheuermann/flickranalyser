@@ -34,6 +34,8 @@ class EnpointController{
         println(returnedSpot.clusterRadiusInKm)
             
         cluster = returnedSpot.cluster as [GTLSpotAPICluster]!;
+        
+            
             
             
         /*for (index, currentCluster) in enumerate(cluster){

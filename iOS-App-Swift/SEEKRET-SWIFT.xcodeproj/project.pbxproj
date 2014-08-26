@@ -31,6 +31,7 @@
 		B4ADAFB319AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */; };
 		B4ADAFB519ABAF0D00143DE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */; };
 		B4ADAFB719ABB14C00143DE2 /* EndpointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */; };
+		B4ADAFBA19AC6D4400143DE2 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB919AC6D4400143DE2 /* UIHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		B4ADAFB219AB8C2D00143DE2 /* GTLClusterAPIJsonMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLClusterAPIJsonMap.m; sourceTree = "<group>"; };
 		B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointController.swift; sourceTree = "<group>"; };
+		B4ADAFB919AC6D4400143DE2 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		B48A0C8219AB19A600978CFC /* SEEKRET-SWIFT */ = {
 			isa = PBXGroup;
 			children = (
+				B4ADAFB819AC6D1E00143DE2 /* SEEKRE-UI-Helper */,
 				B48A0CA319AB1D0000978CFC /* SEEKRET-Endpoints */,
 				B48A0C8519AB19A600978CFC /* AppDelegate.swift */,
 				B48A0C8719AB19A600978CFC /* ViewController.swift */,
@@ -225,6 +228,14 @@
 				B4ADAFA919AB8BD900143DE2 /* GTLQueryClusterAPI.m */,
 			);
 			name = Cluster;
+			sourceTree = "<group>";
+		};
+		B4ADAFB819AC6D1E00143DE2 /* SEEKRE-UI-Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B4ADAFB919AC6D4400143DE2 /* UIHelper.swift */,
+			);
+			name = "SEEKRE-UI-Helper";
 			sourceTree = "<group>";
 		};
 		DFDBCD99721E4D9B9CF47B22 /* Frameworks */ = {
@@ -373,6 +384,7 @@
 				B4ADAFB719ABB14C00143DE2 /* EndpointController.swift in Sources */,
 				B4ADAFAA19AB8BD900143DE2 /* GTLQueryClusterAPI.m in Sources */,
 				B48A0CC519AB1D2900978CFC /* GTLSpotAPISpot.m in Sources */,
+				B4ADAFBA19AC6D4400143DE2 /* UIHelper.swift in Sources */,
 				B48A0C8819AB19A600978CFC /* ViewController.swift in Sources */,
 				B48A0CC619AB1D2900978CFC /* GTLSpotAPISpotResultList.m in Sources */,
 				B4ADAFB019AB8C1300143DE2 /* GTLClusterAPIResponse.m in Sources */,
