@@ -1,0 +1,179 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://seekret-dev.appspot.com/_ah/api",
+  "name" : "ratingAPI",
+  "version" : "v1",
+  "description" : "This API serves everything needed for Ratings",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://seekret-dev.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "ratingAPI.hasUserAlreadyVoted" : {
+      "path" : "hasUserAlreadyVoted/{userPrimaryKey}/{clusterPrimaryKey}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.seekret.endpoints.RatingService.hasUserAlreadyVoted",
+      "request" : {
+        "parameters" : {
+          "userPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          },
+          "clusterPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "ratingAPI.addNewRating" : {
+      "path" : "addNewRating/{userPrimaryKey}/{clusterPrimaryKey}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.seekret.endpoints.RatingService.addNewRating",
+      "request" : {
+        "parameters" : {
+          "userPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          },
+          "clusterPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "ratingAPI.getAllRatingKeysOfSpecifiedUser" : {
+      "path" : "getAllRatingKeysOfSpecifiedUser",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.seekret.endpoints.RatingService.getAllRatingKeysOfSpecifiedUser",
+      "request" : {
+        "parameters" : {
+          "userPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "ratingAPI.getAllDismissKeysOfSpecifiedUser" : {
+      "path" : "getAllDismissKeysOfSpecifiedUser",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.seekret.endpoints.RatingService.getAllDismissKeysOfSpecifiedUser",
+      "request" : {
+        "parameters" : {
+          "userPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Response" : {
+        "id" : "Response",
+        "type" : "object",
+        "properties" : {
+          "metadata" : {
+            "$ref" : "JsonMap"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "entity" : {
+            "$ref" : "_any"
+          }
+        }
+      },
+      "JsonMap" : {
+        "id" : "JsonMap",
+        "type" : "object"
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
+      },
+      "KeyResult" : {
+        "id" : "KeyResult",
+        "type" : "object",
+        "properties" : {
+          "keys" : {
+            "$ref" : "JsonMap"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.seekret.endpoints.RatingService.hasUserAlreadyVoted" : {
+        "response" : {
+          "$ref" : "Response"
+        }
+      },
+      "com.seekret.endpoints.RatingService.addNewRating" : {
+        "response" : {
+          "$ref" : "Response"
+        }
+      },
+      "com.seekret.endpoints.RatingService.getAllRatingKeysOfSpecifiedUser" : {
+        "response" : {
+          "$ref" : "KeyResult"
+        }
+      },
+      "com.seekret.endpoints.RatingService.getAllDismissKeysOfSpecifiedUser" : {
+        "response" : {
+          "$ref" : "KeyResult"
+        }
+      }
+    }
+  }
+}

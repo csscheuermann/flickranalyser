@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/com/flickranalyser/html/common/HelperMethods.java=UTF-8
+encoding//src/com/flickranalyser/persistence/datastore/save/PFSaverRating.java=UTF-8
+encoding//src/com/flickranalyser/persistence/datastore/save/PFSaverRatingDismissCounter.java=UTF-8
+encoding//src/com/flickranalyser/persistence/datastore/save/PFSaverSpot.java=UTF-8
+encoding//src/com/flickranalyser/persistence/datastore/save/PFSaverSpotToCrawl.java=UTF-8
+encoding//test/java/com/flickranalyser/businesslogic/SpotCalculationHandlerTest.java=UTF-8
+encoding//war/res_html/js/RequestsToSeekret.js=UTF-8

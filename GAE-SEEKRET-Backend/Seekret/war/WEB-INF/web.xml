@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>cron</web-resource-name>
+			<url-pattern>/cron/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<servlet>
+		<servlet-name>Index</servlet-name>
+		<servlet-class>com.seekret.html.webfrontend.HtmlStarterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Index</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+		<servlet>
+		<servlet-name>CallBack</servlet-name>
+		<servlet-class>com.seekret.html.webfrontend.HtmlStarterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CallBack</servlet-name>
+		<url-pattern>/oauth2callback</url-pattern>
+	</servlet-mapping>
+	
+	
+
+	<servlet>
+		<servlet-name>Crawler</servlet-name>
+		<servlet-class>com.seekret.html.cron.CrawlData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Crawler</servlet-name>
+		<url-pattern>/cron/crawl</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<servlet-name>Put In Queue</servlet-name>
+		<servlet-class>com.seekret.html.SpotToQueue</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Put In Queue</servlet-name>
+		<url-pattern>/queue/put</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>API-Interface-Enpoints</servlet-name>
+		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+		<init-param>
+			<param-name>services</param-name>
+			<param-value>com.seekret.endpoints.ClusterService</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>API-Interface-Enpoints</servlet-name>
+		<url-pattern>/_ah/spi/*</url-pattern>
+	</servlet-mapping>
+
+	
+  <servlet>
+    <servlet-name>SystemServiceServlet</servlet-name>
+    <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+    <init-param>
+      <param-name>services</param-name>
+      <param-value>com.seekret.endpoints.ClusterService,com.seekret.endpoints.RatingService,com.seekret.endpoints.SpotService,com.seekret.endpoints.UserService</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SystemServiceServlet</servlet-name>
+    <url-pattern>/_ah/spi/*</url-pattern>
+  </servlet-mapping>
+
+</web-app>

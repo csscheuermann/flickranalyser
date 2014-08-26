@@ -1,0 +1,162 @@
+@font-face {
+	font-family: 'bebas_neueregular';
+	src: url('/res_html/fonts/bebas/bebasneue-webfont.eot');
+	src: url('/res_html/fonts/bebas/bebasneue-webfont.eot?#iefix')
+		format('embedded-opentype'),
+		url('/res_html/fonts/bebas/bebasneue-webfont.woff') format('woff'),
+		url('/res_html/fonts/bebas/bebasneue-webfont.ttf') format('truetype'),
+		url('/res_html/fonts/bebas/bebasneue-webfont.svg#bebas_neueregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.showGroup {
+	padding-bottom: 20px;
+	padding-top: 20px;
+	margin-bottom: 40px;
+	margin-top: 40px;
+}
+
+.background-grey {
+	background-color: rgba(214, 214, 214, 1);
+}
+
+#spotInfoContainer {
+	display: none;
+}
+
+#seekretSpotInfoContainer {
+	display: none;
+}
+
+#ratingInformationContainer {
+	display: none;
+}
+
+#topPicturesContainer {
+	display: none;
+}
+
+#voteButtonContainer {
+	display: none;
+}
+
+#voteResultField {
+	display: none;
+}
+
+.bottom-sapce {
+	margin-bottom: 10px;
+}
+
+.bottom-sapce-20 {
+	margin-bottom: 20px;
+}
+
+.bottom-sapce-30 {
+	margin-bottom: 30px;
+}
+
+.bottom-padding-30 {
+	padding-bottom: 30px;
+}
+
+#seekretSpotInfoContainer {
+	display: none;
+}
+
+#loadingImage {
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	margin-left: -250px;
+	margin-top: -250px;
+	width: 250px;
+	height: 250px;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width:
+	568px) {
+	#loadingImage {
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		margin-left: -100px;
+		margin-top: -100px;
+		width: 100px;
+		height: 100px;
+	}
+	#loadingImage img {
+		width: 100px;
+		height: 100px;
+	}
+	.round-button {
+		width: 75px;
+		height: 75px;
+		line-height: 50px;
+		border: 2px solid #f5f5f5;
+		border-radius: 50%;
+		color: #f5f5f5;
+		text-align: center;
+		text-decoration: none;
+		box-shadow: 0 0 3px gray;
+		font-size: 10px;
+		font-weight: bold;
+	}
+}
+
+#overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100% !important; /*change to YOUR page height*/
+	background-color: #FFF;
+	filter: alpha(opacity = 50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+	z-index: 998;
+}
+
+.round-button {
+	width: 150px;
+	height: 150px;
+	line-height: 50px;
+	border: 2px solid #f5f5f5;
+	border-radius: 50%;
+	color: #f5f5f5;
+	text-align: center;
+	text-decoration: none;
+	box-shadow: 0 0 3px gray;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.who-we-are {
+	width: 250px;
+}
+
+.seekret {
+	background: #99CC00;
+}
+
+.seekret:hover {
+	background: #669900;
+}
+
+.touristic {
+	background: #FFBB33;
+}
+
+.touristic:hover {
+	background: #FF8800;
+}
+
+.dismiss {
+	background: #FF4444;
+}
+
+.dismiss:hover {
+	background: #CC0000;
+}
