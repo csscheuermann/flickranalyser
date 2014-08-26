@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>de.tum.in.www1.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>de.tum.in.www1.SEEKRET</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -26,10 +26,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>net.nomis-development.SEEKRET</string>
+			<string>de.tum.in.www1.SEEKRET</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>net.nomis-development.SEEKRET</string>
+				<string>de.tum.in.www1.SEEKRET</string>
 			</array>
 		</dict>
 	</array>
