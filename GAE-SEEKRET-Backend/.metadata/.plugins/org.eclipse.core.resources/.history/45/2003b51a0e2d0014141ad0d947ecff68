@@ -28,7 +28,6 @@ public class Prepare01_indexHandler extends AbstractHtmlRequestHandler {
 			pSession.removeAttribute("state");
 			try{
 				SeekretUser user = helper.getGoogleUserInfo(pRequest.getParameter("code"));
-				LOGGER.log(Level.INFO, "USER WITH GROUP " + user.getUserGroup());
 				pSession.setAttribute("currentUser", user);
 			} catch (IOException e) {
 				LOGGER.log(Level.SEVERE, "COULD NOT GET USER INFO FROM GOOGLE. " + pRequest);

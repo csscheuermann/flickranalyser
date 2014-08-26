@@ -18,7 +18,7 @@ class EnpointController{
         self.delegate = delegate
     }
     
-        
+    
     
     func getCluster(clusterName: String) {
         let spotAPI = GTLServiceSpotAPI()

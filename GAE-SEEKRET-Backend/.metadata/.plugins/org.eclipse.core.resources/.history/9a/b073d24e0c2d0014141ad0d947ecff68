@@ -25,8 +25,8 @@ import com.seekret.pojo.SeekretUser;
 public class GoogleAuthHelper {
 	private static final String NOT_AVAILABLE = "NOT AVAILABLE";
 	private static final Logger LOGGER = Logger.getLogger(GoogleAuthHelper.class.getName());
-	public static final String CLIENT_ID = "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com";
-	public static final String CLIENT_SECRET = "373LBORcbZnl6e94TbzWTgtj";
+	public static final String CLIENT_ID = "449444009918-38qr2m478r389n8r5d7vm2u9jqs5kd0d.apps.googleusercontent.com";
+	public static final String CLIENT_SECRET = "sqfGSOzgeEOgYo3x3AR_r5Oi";
 	private static final String CALLBACK_URI = "https://seekret-dev.appspot.com/oauth2callback";
 	private static final Iterable<String> SCOPE = Arrays.asList("https://www.googleapis.com/auth/userinfo.profile;https://www.googleapis.com/auth/userinfo.email".split(";"));
 	private static final String USER_INFO_URL = "https://www.googleapis.com/oauth2/v1/userinfo";

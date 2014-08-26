@@ -82,7 +82,7 @@ class MapViewController: UIViewController, EndpointControllerProtocol{
         // Dispose of any resources that can be recreated.
     }
     
-    
+
     
     
     
