@@ -16,8 +16,6 @@ import com.seekret.pojo.Cluster;
 import com.seekret.pojo.Spot;
 
 public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
-	//TODO COS DVV FACTORY
-	private static final String COM_SEEKRET_BUSINESSLOGIC_FILTERSTRATEGIES_IMPL = "com.seekret.businesslogic.filterstrategies.impl.";
 	private static final Logger LOGGER = Logger.getLogger(PrepareSpotMapHandler.class.getName());
 	private final SpotService spotService;
 
@@ -58,7 +56,7 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
 
 
 		StringBuilder fullClassPath = new StringBuilder();
-		fullClassPath.append(COM_SEEKRET_BUSINESSLOGIC_FILTERSTRATEGIES_IMPL);
+		fullClassPath.append("com.flickranalyser.businesslogic.filterstrategies.impl.");
 		fullClassPath.append(filterStrategy);
 
 		IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(fullClassPath.toString(), IFilterStrategy.class);

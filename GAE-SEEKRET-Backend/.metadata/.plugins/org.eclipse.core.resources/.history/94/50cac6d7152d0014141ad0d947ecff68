@@ -85,7 +85,7 @@ public class HelperMethods {
 		getFilterStrategyButtons.append("</script>");
 
 
-		getFilterStrategyButtons.append("<form role='form' name='FilterForm' action='https://seekret-dev.appspot.com/?showView=SpotMap' method='post'>");
+		getFilterStrategyButtons.append("<form role='form' name='FilterForm' action='https://flickeranalyser.appspot.com/?showView=SpotMap' method='post'>");
 		getFilterStrategyButtons.append(createFilterSettings());
 		getFilterStrategyButtons.append("<input type='hidden' name='location' id='locationSetByJQuery'>"); 
 
