@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/ratingAPI/v1/20140826093152/java/1.16.0-rc/seekret_dev_appspot_com-ratingAPI-v1-20140826093152-java-1.16.0-rc-sources.jar", 
-      "path": "seekret_dev_appspot_com-ratingAPI-v1-20140826093152-java-1.16.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/ratingAPI/v1/20140826095713/java/1.16.0-rc/seekret_dev_appspot_com-ratingAPI-v1-20140826095713-java-1.16.0-rc-sources.jar", 
+      "path": "seekret_dev_appspot_com-ratingAPI-v1-20140826095713-java-1.16.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2014-08-26 09:31"
+      "timestamp": "2014-08-26 09:57"
     }, 
     {
-      "path": "seekret_dev_appspot_com-ratingAPI-v1-20140826093152-java-1.16.0-rc.jar.properties", 
+      "path": "seekret_dev_appspot_com-ratingAPI-v1-20140826095713-java-1.16.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -701,5 +701,5 @@
   "version": "v1", 
   "language_version": "1.16.0-rc", 
   "id": "ratingAPI:v1", 
-  "revision": 20140826093152
+  "revision": 20140826095713
 }

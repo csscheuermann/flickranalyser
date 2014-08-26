@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/pNt0Upb3yP56SFBpDvXiyGExTfk\"",
+ "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/AdEaCLt1BdlJrjjwc3cHEweOQe4\"",
  "discoveryVersion": "v1",
  "id": "spotAPI:v1",
  "name": "spotAPI",
@@ -11,8 +11,8 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rpc",
- "rootUrl": "https://flickeranalyser.appspot.com/_ah/api/",
- "rpcUrl": "https://flickeranalyser.appspot.com/_ah/api/rpc",
+ "rootUrl": "https://seekret-dev.appspot.com/_ah/api/",
+ "rpcUrl": "https://seekret-dev.appspot.com/_ah/api/rpc",
  "rpcPath": "/_ah/api/rpc",
  "parameters": {
   "alt": {

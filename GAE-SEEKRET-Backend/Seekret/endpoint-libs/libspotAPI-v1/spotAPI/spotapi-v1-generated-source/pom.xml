@@ -8,8 +8,8 @@
 
   <groupId>com.google.apis</groupId>
   <artifactId>google-api-services-spotAPI</artifactId>
-  <version>v1-rev20140826093156-1.16.0-rc</version>
-  <name>spotAPI v1 (revision 20140826093156)</name>
+  <version>v1-rev20140826095716-1.16.0-rc</version>
+  <name>spotAPI v1 (revision 20140826095716)</name>
   <packaging>jar</packaging>
 
   <inceptionYear>2011</inceptionYear>

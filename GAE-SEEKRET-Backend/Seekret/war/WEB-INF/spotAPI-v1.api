@@ -300,12 +300,12 @@
           "longitude" : {
             "type" : "number"
           },
+          "polar" : {
+            "type" : "boolean"
+          },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
-          },
-          "polar" : {
-            "type" : "boolean"
           },
           "latitudeInternal" : {
             "type" : "string",
