@@ -803,3 +803,23 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY com.google.gdt.eclipse.core 1 0 2014-08-27 13:01:30.405
 !MESSAGE Scheduled rebuild of project Seekret because of plugin update (current version: 3.5.1.v201312301723-rel-r43)
+!SESSION 2014-08-27 21:16:10.105 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/scheuermann/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/scheuermann/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-08-27 21:16:18.304
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-08-27 21:21:09.903
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-08-27 21:21:10.087
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-08-27 21:21:10.659
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;

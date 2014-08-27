@@ -39,7 +39,7 @@ public class SpotService
     return this.spotFinder.getSpotByNamePutToCrawlQueue(spotName, onlyExcludedPictures);
   }
 
-  @ApiMethod(name="getTopSpots", scopes={"https://www.googleapis.com/auth/userinfo.email"}, clientIds={"1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com"})
+  @ApiMethod(name="getTopSpots", scopes={"https://www.googleapis.com/auth/userinfo.email"}, clientIds={"449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v4gu.apps.googleusercontent.com", "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com"})
   public SpotResultList getTopSpots(User user)
     throws UnauthorizedException
   {

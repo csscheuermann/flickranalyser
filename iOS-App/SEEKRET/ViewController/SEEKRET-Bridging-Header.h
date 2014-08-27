@@ -10,4 +10,6 @@
 #import "GTLQuerySpotAPI.h"
 #import "GTLSpotAPISpot.h"
 #import "GTLSpotAPICluster.h"
-#import "LoginViewController.h"
+#import "GTMOAuth2Authentication.h"
+#import "GTLSpotAPISpotResultList.h"
+

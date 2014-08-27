@@ -8,8 +8,8 @@
 
   <groupId>com.google.apis</groupId>
   <artifactId>google-api-services-userAPI</artifactId>
-  <version>v1-rev20140826095706-1.16.0-rc</version>
-  <name>userAPI v1 (revision 20140826095706)</name>
+  <version>v1-rev20140827191847-1.16.0-rc</version>
+  <name>userAPI v1 (revision 20140827191847)</name>
   <packaging>jar</packaging>
 
   <inceptionYear>2011</inceptionYear>
