@@ -1,75 +1,96 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uhV-GT-3BT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="uhV-GT-3BT">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="SEEKRET_SWIFT" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="451" y="30"/>
-        </scene>
         <!--Map View Controller-->
         <scene sceneID="CJf-NK-RTc">
             <objects>
-                <viewController id="Uoy-bh-UTz" customClass="MapViewController" customModule="SEEKRET_SWIFT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Map View Controller" id="Uoy-bh-UTz" customClass="MapViewController" customModule="SEEKRET_SWIFT" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ELv-Fu-t7c"/>
-                        <viewControllerLayoutGuide type="bottom" id="46e-bQ-42q"/>
+                        <viewControllerLayoutGuide type="top" id="erl-vr-ZPR"/>
+                        <viewControllerLayoutGuide type="bottom" id="jJW-DV-iDl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VQ0-3g-8Ew">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dq9-PX-CbK">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </mapView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWS-Ke-sFL">
+                                <rect key="frame" x="0.0" y="20" width="319" height="355"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dq9-PX-CbK">
+                                        <rect key="frame" x="0.0" y="34" width="324" height="616"/>
+                                    </mapView>
+                                </subviews>
+                            </scrollView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WjZ-ki-s4C">
+                                <rect key="frame" x="0.0" y="9" width="320" height="48"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLo-8R-op6">
+                                        <rect key="frame" x="8" y="8" width="304" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="ugz-k9-gLf"/>
+                    <navigationItem key="navigationItem" title="test" id="XLn-ng-cOc">
+                        <barButtonItem key="backBarButtonItem" title="test" id="YY6-zn-Xzk"/>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="labelSpotName" destination="kLo-8R-op6" id="gvs-uA-VOv"/>
                         <outlet property="mapView" destination="dq9-PX-CbK" id="9Q2-D6-qvL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zeG-tr-0nm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-211" y="30"/>
+            <point key="canvasLocation" x="337" y="682"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Google Login Controller-->
         <scene sceneID="ljb-Cx-fLu">
             <objects>
-                <viewController id="uhV-GT-3BT" userLabel="Login View Controller" customClass="LoginViewController" customModule="SEEKRET_SWIFT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Google Login Controller" id="uhV-GT-3BT" userLabel="Google Login Controller" customClass="GoogleLoginController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="558-Zq-Gg0"/>
-                        <viewControllerLayoutGuide type="bottom" id="FqH-6q-b3i"/>
+                        <viewControllerLayoutGuide type="top" id="WDR-YB-6jE"/>
+                        <viewControllerLayoutGuide type="bottom" id="8yk-2x-Rix"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Yit-Z3-P50">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sqJ-ZH-y9v">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sqJ-ZH-y9v">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-aM-twu">
-                                        <rect key="frame" x="172" y="259" width="256" height="82"/>
+                                    <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-aM-twu" customClass="GPPSignInButton">
+                                        <rect key="frame" x="25" y="186" width="256" height="82"/>
                                         <state key="normal" title="Login with Google">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="LyZ-Iq-l5i">
+                                        <rect key="frame" x="-14" y="40" width="349" height="92"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FaZ-AW-vRM">
+                                        <rect key="frame" x="117" y="407" width="86" height="30"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Uoy-bh-UTz" kind="modal" id="GML-UV-oqG"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="LyZ-Iq-l5i" secondAttribute="centerY" id="Xs3-eY-8Yq"/>
+                                    <constraint firstAttribute="centerX" secondItem="LyZ-Iq-l5i" secondAttribute="centerX" id="qWN-hK-pIK"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="jPy-aM-twu" id="S7S-rV-m85"/>
                                 </connections>
@@ -84,7 +105,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1F-9G-ffo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="398" y="731"/>
+            <point key="canvasLocation" x="-193" y="682"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo" width="300" height="55"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
+    </simulatedMetricsContainer>
 </document>

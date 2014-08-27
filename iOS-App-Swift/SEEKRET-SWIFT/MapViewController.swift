@@ -10,19 +10,17 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, EndpointControllerProtocol{
-
-
+    
+    
+    @IBOutlet weak var labelSpotName: UILabel!
     var uiHelper:UIHelper!
     @IBOutlet weak var mapView: MKMapView!
     
     
-    
-    
-    
-    func didRecieveCluster(cluster: [GTLSpotAPICluster]){
+    func didRecieveCluster(cluster: [GTLSpotAPICluster], spotName: String){
         
         var annotations = [MKPointAnnotation]()
-        
+        labelSpotName.text = spotName
         for (index, currentCluster) in enumerate(cluster){
             var castedCluster = currentCluster as GTLSpotAPICluster
             var castedClusterLatitude = castedCluster.latitude
@@ -61,14 +59,17 @@ class MapViewController: UIViewController, EndpointControllerProtocol{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.uiHelper = UIHelper(uiView: self.mapView)
+        
+        
         
         doLoadCluster();
         
     }
     
     
+    
     func doLoadCluster(){
+        self.uiHelper = UIHelper(uiView: self.mapView)
         uiHelper.showSpinner("Fetching Cluster")
         let endpointController = EnpointController(delegate: self);
         endpointController.getCluster("SANTOS")
@@ -82,7 +83,7 @@ class MapViewController: UIViewController, EndpointControllerProtocol{
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     
     
     

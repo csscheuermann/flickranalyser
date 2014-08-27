@@ -790,3 +790,16 @@ GIF89a  �� ���   ,       D ;
 !ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-08-26 13:45:58.944
 !MESSAGE Analytics ping response: 200: OK
 GIF89a  �� ���   ,       D ;
+!SESSION 2014-08-27 13:00:49.272 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/scheuermann/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/scheuermann/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-08-27 13:01:01.209
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.google.gdt.eclipse.core 1 0 2014-08-27 13:01:30.405
+!MESSAGE Scheduled rebuild of project Seekret because of plugin update (current version: 3.5.1.v201312301723-rel-r43)

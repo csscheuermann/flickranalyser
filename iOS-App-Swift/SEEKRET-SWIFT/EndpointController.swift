@@ -7,7 +7,7 @@
 //
 
 protocol EndpointControllerProtocol {
-    func didRecieveCluster(cluster: [GTLSpotAPICluster])
+    func didRecieveCluster(cluster: [GTLSpotAPICluster], spotName: String)
 }
 
 class EnpointController{
@@ -32,6 +32,7 @@ class EnpointController{
         
         spotAPI.executeQuery(query, completionHandler: { (ticket, returnedSpot, nsError) -> Void in
         println(returnedSpot.clusterRadiusInKm)
+
             
         cluster = returnedSpot.cluster as [GTLSpotAPICluster]!;
         
@@ -45,7 +46,7 @@ class EnpointController{
             println(castedClusterLatitude)
         }*/
             // Now send the JSON result to our delegate object
-        self.delegate.didRecieveCluster(cluster)
+            self.delegate.didRecieveCluster(cluster, spotName: returnedSpot.name)
         
         })
     }

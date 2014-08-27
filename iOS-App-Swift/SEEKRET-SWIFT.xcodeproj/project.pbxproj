@@ -10,7 +10,6 @@
 		03779E13A8F143C693E306AB /* libPods-SEEKRET-SWIFT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A1E4390EEB4D52913DD232 /* libPods-SEEKRET-SWIFT.a */; };
 		B4851D1519ACC0030037A068 /* GoogleLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4851D1419ACC0030037A068 /* GoogleLoginController.m */; };
 		B48A0C8619AB19A600978CFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A0C8519AB19A600978CFC /* AppDelegate.swift */; };
-		B48A0C8819AB19A600978CFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A0C8719AB19A600978CFC /* ViewController.swift */; };
 		B48A0C8B19AB19A600978CFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48A0C8919AB19A600978CFC /* Main.storyboard */; };
 		B48A0C8D19AB19A600978CFC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B48A0C8C19AB19A600978CFC /* Images.xcassets */; };
 		B48A0C9919AB19A600978CFC /* SEEKRET_SWIFTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A0C9819AB19A600978CFC /* SEEKRET_SWIFTTests.swift */; };
@@ -50,7 +49,6 @@
 		B48A0C8019AB19A600978CFC /* SEEKRET-SWIFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SEEKRET-SWIFT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48A0C8419AB19A600978CFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B48A0C8519AB19A600978CFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B48A0C8719AB19A600978CFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B48A0C8A19AB19A600978CFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B48A0C8C19AB19A600978CFC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B48A0C9219AB19A600978CFC /* SEEKRET-SWIFTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SEEKRET-SWIFTTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,7 +141,6 @@
 				B4ADAFB819AC6D1E00143DE2 /* SEEKRE-UI-Helper */,
 				B48A0CA319AB1D0000978CFC /* SEEKRET-Endpoints */,
 				B48A0C8519AB19A600978CFC /* AppDelegate.swift */,
-				B48A0C8719AB19A600978CFC /* ViewController.swift */,
 				B48A0C8919AB19A600978CFC /* Main.storyboard */,
 				B48A0C8C19AB19A600978CFC /* Images.xcassets */,
 				B48A0C8319AB19A600978CFC /* Supporting Files */,
@@ -383,7 +380,6 @@
 				B4ADAFBA19AC6D4400143DE2 /* UIHelper.swift in Sources */,
 				B4ADB00519AC94E600143DE2 /* GTLSpotAPIResponse.m in Sources */,
 				B4ADB02119AC95D800143DE2 /* GTLSpotAPIConstants.m in Sources */,
-				B48A0C8819AB19A600978CFC /* ViewController.swift in Sources */,
 				B48A0C8619AB19A600978CFC /* AppDelegate.swift in Sources */,
 				B4ADB01419AC955400143DE2 /* GTLSpotAPIPointOfInterest.m in Sources */,
 				B4ADB01719AC956300143DE2 /* GTLSpotAPILatLng.m in Sources */,

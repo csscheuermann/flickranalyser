@@ -7,16 +7,16 @@
 //
 
 #import <AFNetworking/AFNetworking.h>
-#import <GPPSignIn.h>
+
 #import "GTLServiceSpotAPI.h"
 #import "GTMHTTPFetcher.h"
 #import "GTLQuerySpotAPI.h"
 #import "GTLSpotAPISpot.h"
 #import "GTLSpotAPICluster.h"
-#import <GTLPlusConstants.h>
-#import <GTLPlusConstants.h>
-#import <GPPSignInButton.h>
-#import "GoogleLoginController.h"
+
+
+
+#import "GTLPlusConstants.h"
+#import "GPPSignInButton.h"
+#import "GPPSignIn.h"
 #import "GTMOAuth2ViewControllerTouch.h"
-
-

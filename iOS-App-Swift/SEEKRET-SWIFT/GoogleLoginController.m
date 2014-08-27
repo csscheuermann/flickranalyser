@@ -14,6 +14,7 @@
 #import "GTLQuerySpotAPI.h"
 #import "GTLSpotAPISpot.h"
 #import "GTLSpotAPICluster.h"
+#import "SEEKRET_SWIFT-Swift.h"
 
 
 
@@ -23,7 +24,7 @@
 
 @end
 
-static NSString * const kClientID = @"449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v4gu.apps.googleusercontent.com";
+static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtpspgb.apps.googleusercontent.com";
 
 @implementation GoogleLoginController
 
@@ -31,16 +32,16 @@ static NSString * const kClientID = @"449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v
 {
     [super viewDidLoad];
     [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-      NSLog(@"LOADING GOOGLE LOGIN");
+    NSLog(@"LOADING GOOGLE LOGIN");
     self.alreadyConenctedLabel.hidden = YES;
     self.signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
     self.signIn.clientID = kClientID;
     self.signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin, nil];
     self.signIn.delegate = self;
-    [self.signIn trySilentAuthentication];
-    self.signIn = [GPPSignIn sharedInstance];
-    [self.signIn authenticate];
+   [self.signIn trySilentAuthentication];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,7 +55,7 @@ static NSString * const kClientID = @"449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v
     [self.signIn authenticate];
 }
 - (IBAction)logutButtonTouched:(id)sender {
-
+    
     [self disconnect];
 }
 - (IBAction)loginWithoutOAuthTouched:(id)sender {
@@ -82,6 +83,8 @@ static NSString * const kClientID = @"449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v
         // Führen Sie hier andere Aktionen durch, z. B. das Anzeigen einer Abmelden-Schaltfläche.
         self.alreadyConenctedLabel.hidden = NO;
         self.loginButton.hidden = YES;
+              
+
     } else {
         // Führen Sie hier andere Aktionen durch.
     }
@@ -89,7 +92,7 @@ static NSString * const kClientID = @"449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v
 
 -(void)showEndpoints {
     
-   }
+}
 
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error
 {
