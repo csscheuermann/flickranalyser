@@ -35,6 +35,10 @@
 		81CD641D19952F2C003EAFDE /* GTLSpotAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD641019952F2C003EAFDE /* GTLSpotAPIResponse.m */; };
 		81CD641E19952F2C003EAFDE /* GTLSpotAPISpot.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD641219952F2C003EAFDE /* GTLSpotAPISpot.m */; };
 		81CD641F19952F2C003EAFDE /* GTLSpotAPISpotResultList.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD641419952F2C003EAFDE /* GTLSpotAPISpotResultList.m */; };
+		B4D0B35919AE368F005291B5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D0B35819AE368F005291B5 /* MainViewController.swift */; };
+		B4F0AD6F19AE4ADA00213B12 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */; };
+		B4F0AD7019AE4ADA00213B12 /* EndpointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */; };
+		B4F0AD7219AE4B1200213B12 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD7119AE4B1200213B12 /* UIHelper.swift */; };
 		F725501D9E8A46C8A26A93B5 /* libPods-SEEKRET.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +100,11 @@
 		81CD641219952F2C003EAFDE /* GTLSpotAPISpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLSpotAPISpot.m; path = Endpoints/GTLSpotAPISpot.m; sourceTree = "<group>"; };
 		81CD641319952F2C003EAFDE /* GTLSpotAPISpotResultList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLSpotAPISpotResultList.h; path = Endpoints/GTLSpotAPISpotResultList.h; sourceTree = "<group>"; };
 		81CD641419952F2C003EAFDE /* GTLSpotAPISpotResultList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLSpotAPISpotResultList.m; path = Endpoints/GTLSpotAPISpotResultList.m; sourceTree = "<group>"; };
+		B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SEEKRET-Bridging-Header.h"; sourceTree = "<group>"; };
+		B4D0B35819AE368F005291B5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointController.swift; sourceTree = "<group>"; };
+		B4F0AD7119AE4B1200213B12 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIHelper.swift; path = "../../../iOS-App-Swift/SEEKRET-SWIFT/UIHelper.swift"; sourceTree = "<group>"; };
 		CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEEKRET.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -216,6 +225,7 @@
 		81A0F43B198E428400D148B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4F0AD7119AE4B1200213B12 /* UIHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -223,10 +233,14 @@
 		81A0F43C198E428400D148B1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */,
+				B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */,
 				81A0F43D198E428400D148B1 /* LoginViewController.h */,
 				81A0F43E198E428400D148B1 /* LoginViewController.m */,
 				81AB6444199160A3008C2040 /* ShowEndpointViewController.h */,
 				81AB6445199160A3008C2040 /* ShowEndpointViewController.m */,
+				B4D0B35819AE368F005291B5 /* MainViewController.swift */,
+				B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -415,17 +429,21 @@
 				81CD641919952F2C003EAFDE /* GTLSpotAPIJsonMap.m in Sources */,
 				81CD641619952F2C003EAFDE /* GTLServiceSpotAPI.m in Sources */,
 				81AB6446199160A3008C2040 /* ShowEndpointViewController.m in Sources */,
+				B4F0AD7019AE4ADA00213B12 /* EndpointController.swift in Sources */,
 				81A0F416198D2BEE00D148B1 /* AppDelegate.m in Sources */,
 				81CD641D19952F2C003EAFDE /* GTLSpotAPIResponse.m in Sources */,
 				81CD641B19952F2C003EAFDE /* GTLSpotAPILatLng.m in Sources */,
+				B4D0B35919AE368F005291B5 /* MainViewController.swift in Sources */,
 				81CD641C19952F2C003EAFDE /* GTLSpotAPIPointOfInterest.m in Sources */,
 				81CD641F19952F2C003EAFDE /* GTLSpotAPISpotResultList.m in Sources */,
 				81CD641819952F2C003EAFDE /* GTLSpotAPIConstants.m in Sources */,
 				81CD641519952F2C003EAFDE /* GTLQuerySpotAPI.m in Sources */,
 				81CD641E19952F2C003EAFDE /* GTLSpotAPISpot.m in Sources */,
 				81A0F412198D2BEE00D148B1 /* main.m in Sources */,
+				B4F0AD7219AE4B1200213B12 /* UIHelper.swift in Sources */,
 				81CD641A19952F2C003EAFDE /* GTLSpotAPIKey.m in Sources */,
 				81A0F440198E428400D148B1 /* LoginViewController.m in Sources */,
+				B4F0AD6F19AE4ADA00213B12 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,13 +569,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SEEKRET/SEEKRET-Prefix.pch";
 				INFOPLIST_FILE = "SEEKRET/SEEKRET-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEEKRET/ViewController/SEEKRET-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -568,13 +591,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SEEKRET/SEEKRET-Prefix.pch";
 				INFOPLIST_FILE = "SEEKRET/SEEKRET-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEEKRET/ViewController/SEEKRET-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

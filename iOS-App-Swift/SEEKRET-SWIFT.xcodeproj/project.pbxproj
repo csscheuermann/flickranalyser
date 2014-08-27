@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		03779E13A8F143C693E306AB /* libPods-SEEKRET-SWIFT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A1E4390EEB4D52913DD232 /* libPods-SEEKRET-SWIFT.a */; };
-		B4851D1519ACC0030037A068 /* GoogleLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4851D1419ACC0030037A068 /* GoogleLoginController.m */; };
 		B48A0C8619AB19A600978CFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A0C8519AB19A600978CFC /* AppDelegate.swift */; };
 		B48A0C8B19AB19A600978CFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48A0C8919AB19A600978CFC /* Main.storyboard */; };
 		B48A0C8D19AB19A600978CFC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B48A0C8C19AB19A600978CFC /* Images.xcassets */; };
@@ -29,7 +28,6 @@
 		B4ADB01A19AC957F00143DE2 /* GTLSpotAPISpotResultList.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADB01919AC957F00143DE2 /* GTLSpotAPISpotResultList.m */; };
 		B4ADB01D19AC95AC00143DE2 /* GTLServiceSpotAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADB01C19AC95AC00143DE2 /* GTLServiceSpotAPI.m */; };
 		B4ADB02119AC95D800143DE2 /* GTLSpotAPIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ADB02019AC95D800143DE2 /* GTLSpotAPIConstants.m */; };
-		B4B617CC19ACB3BF008224EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B617CB19ACB3BF008224EA /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +43,6 @@
 /* Begin PBXFileReference section */
 		07A1E4390EEB4D52913DD232 /* libPods-SEEKRET-SWIFT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEEKRET-SWIFT.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EFE0575A6264DC8B25AEA05 /* Pods-SEEKRET-SWIFT.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SEEKRET-SWIFT.xcconfig"; path = "Pods/Pods-SEEKRET-SWIFT.xcconfig"; sourceTree = "<group>"; };
-		B4851D1319ACC0030037A068 /* GoogleLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleLoginController.h; sourceTree = "<group>"; };
-		B4851D1419ACC0030037A068 /* GoogleLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleLoginController.m; sourceTree = "<group>"; };
 		B48A0C8019AB19A600978CFC /* SEEKRET-SWIFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SEEKRET-SWIFT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48A0C8419AB19A600978CFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B48A0C8519AB19A600978CFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +80,6 @@
 		B4ADB01E19AC95C500143DE2 /* GTLSpotAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPI.h; sourceTree = "<group>"; };
 		B4ADB01F19AC95D800143DE2 /* GTLSpotAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPIConstants.h; sourceTree = "<group>"; };
 		B4ADB02019AC95D800143DE2 /* GTLSpotAPIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPIConstants.m; sourceTree = "<group>"; };
-		B4B617CB19ACB3BF008224EA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,15 +102,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B4851D1219ACBFF50037A068 /* SEEKRET-LOGIN */ = {
-			isa = PBXGroup;
-			children = (
-				B4851D1319ACC0030037A068 /* GoogleLoginController.h */,
-				B4851D1419ACC0030037A068 /* GoogleLoginController.m */,
-			);
-			name = "SEEKRET-LOGIN";
-			sourceTree = "<group>";
-		};
 		B48A0C7719AB19A600978CFC = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +125,6 @@
 		B48A0C8219AB19A600978CFC /* SEEKRET-SWIFT */ = {
 			isa = PBXGroup;
 			children = (
-				B4851D1219ACBFF50037A068 /* SEEKRET-LOGIN */,
 				B4ADAFB819AC6D1E00143DE2 /* SEEKRE-UI-Helper */,
 				B48A0CA319AB1D0000978CFC /* SEEKRET-Endpoints */,
 				B48A0C8519AB19A600978CFC /* AppDelegate.swift */,
@@ -149,7 +134,6 @@
 				B48A0CA219AB1A8700978CFC /* Bridging-Header.h */,
 				B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */,
 				B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */,
-				B4B617CB19ACB3BF008224EA /* LoginViewController.swift */,
 				B4948CC719ADFE4E0044320A /* MainViewController.swift */,
 			);
 			path = "SEEKRET-SWIFT";
@@ -388,10 +372,8 @@
 				B4ADB01719AC956300143DE2 /* GTLSpotAPILatLng.m in Sources */,
 				B4ADB00819AC950000143DE2 /* GTLSpotAPIJsonMap.m in Sources */,
 				B4ADB01D19AC95AC00143DE2 /* GTLServiceSpotAPI.m in Sources */,
-				B4B617CC19ACB3BF008224EA /* LoginViewController.swift in Sources */,
 				B4ADB00E19AC953300143DE2 /* GTLSpotAPICluster.m in Sources */,
 				B4ADAFB519ABAF0D00143DE2 /* MapViewController.swift in Sources */,
-				B4851D1519ACC0030037A068 /* GoogleLoginController.m in Sources */,
 				B4ADAFF719AC949E00143DE2 /* GTLQuerySpotAPI.m in Sources */,
 				B4948CC819ADFE4E0044320A /* MainViewController.swift in Sources */,
 				B4ADB01119AC954200143DE2 /* GTLSpotAPIKey.m in Sources */,

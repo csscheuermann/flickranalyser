@@ -14,9 +14,7 @@
 #import "GTLSpotAPISpot.h"
 #import "GTLSpotAPICluster.h"
 
-
-#import "GoogleLoginController.h"
-#import "GTLPlusConstants.h"
-#import "GPPSignInButton.h"
+#import "GTMOAuth2Authentication.h"
 #import "GPPSignIn.h"
-#import "GTMOAuth2ViewControllerTouch.h"
+////#import "GTMOAuth2ViewControllerTouch.h"
+#import "GPPSignInDelegate.h"

@@ -108,7 +108,7 @@
         <!--Google Login Controller-->
         <scene sceneID="ljb-Cx-fLu">
             <objects>
-                <viewController title="Google Login Controller" id="uhV-GT-3BT" userLabel="Google Login Controller" customClass="GoogleLoginController" sceneMemberID="viewController">
+                <viewController title="Google Login Controller" id="uhV-GT-3BT" userLabel="Google Login Controller" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WDR-YB-6jE"/>
                         <viewControllerLayoutGuide type="bottom" id="8yk-2x-Rix"/>
@@ -146,18 +146,13 @@
                                 <rect key="frame" x="0.0" y="115" width="320" height="176"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-aM-twu" customClass="GPPSignInButton">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="26" width="320" height="44"/>
                                         <state key="normal" title="Login with Google">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOG-NO-YiR">
-                                        <rect key="frame" x="0.0" y="100" width="320" height="30"/>
-                                        <state key="normal" title="Logout">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
                                         <connections>
-                                            <action selector="logoutTouched:" destination="uhV-GT-3BT" eventType="touchDown" id="TDg-ye-Xze"/>
+                                            <action selector="loginButton:" destination="uhV-GT-3BT" eventType="touchDown" id="9z1-Wf-oOy"/>
+                                            <action selector="loginButton:" destination="uhV-GT-3BT" eventType="touchUpInside" id="j6a-uf-DWe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -168,7 +163,6 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="jPy-aM-twu" id="JUR-i4-38Y"/>
-                        <outlet property="logoutButton" destination="xOG-NO-YiR" id="pVr-0I-cT7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1F-9G-ffo" userLabel="First Responder" sceneMemberID="firstResponder"/>

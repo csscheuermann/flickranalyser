@@ -18,13 +18,15 @@
 
 @interface LoginViewController ()
 
-@property (nonatomic, strong) GPPSignIn *signIn;
+
 
 @end
 
-static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtpspgb.apps.googleusercontent.com";
+static NSString * const kClientID = @"449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v4gu.apps.googleusercontent.com";
 
 @implementation LoginViewController
+static GPPSignIn *signIn;
+
 
 - (void)viewDidLoad
 {
@@ -32,12 +34,12 @@ static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtp
     [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     
     self.alreadyConenctedLabel.hidden = YES;
-    self.signIn = [GPPSignIn sharedInstance];
+    signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
-    self.signIn.clientID = kClientID;
-    self.signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin, nil];
-    self.signIn.delegate = self;
-    [self.signIn trySilentAuthentication];
+    signIn.clientID = kClientID;
+    signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin, nil];
+    signIn.delegate = self;
+    [signIn trySilentAuthentication];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,8 +49,8 @@ static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtp
 }
 - (IBAction)loginButtonTouched:(id)sender {
     
-    self.signIn = [GPPSignIn sharedInstance];
-    [self.signIn authenticate];
+    signIn = [GPPSignIn sharedInstance];
+    [signIn authenticate];
 }
 - (IBAction)logutButtonTouched:(id)sender {
 
@@ -86,20 +88,20 @@ static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtp
 
 -(void)showEndpoints {
     static GTLServiceSpotAPI *service = nil;
-    if (!service) {
-        service = [[GTLServiceSpotAPI alloc] init];
-        service.retryEnabled = YES;
-        
-        GTLQuerySpotAPI *query = [GTLQuerySpotAPI queryForGetNearestSpotByAddressWithSpotName:@"Berlin, Germany"];
-        [service executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLSpotAPISpot *object, NSError *error){
-            NSNumber *array = object.overallMaxPOINumberPerCluster;
-//            object.cluster[0]
-            GTLSpotAPICluster *cluster = object.cluster[0];
-            NSURL *url = cluster.urlOfMostViewedPicture[0];
-            NSLog(@"First output: %@", array);
-        }];
-        
-    }
+//    if (!service) {
+//        service = [[GTLServiceSpotAPI alloc] init];
+//        service.retryEnabled = YES;
+//        
+//        GTLQuerySpotAPI *query = [GTLQuerySpotAPI queryForGetNearestSpotByAddressWithSpotName:@"Berlin, Germany"];
+//        [service executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLSpotAPISpot *object, NSError *error){
+//            NSNumber *array = object.overallMaxPOINumberPerCluster;
+////            object.cluster[0]
+//            GTLSpotAPICluster *cluster = object.cluster[0];
+//            NSURL *url = cluster.urlOfMostViewedPicture[0];
+//            NSLog(@"First output: %@", array);
+//        }];
+//        
+//    }
 }
 
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error
@@ -108,9 +110,11 @@ static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtp
     if (error) {
         // Führen Sie hier die Fehlerbehandlung durch.
     } else {
+      
         [self refreshInterfaceBasedOnSignIn];
     }
 }
+
 
 
 @end
