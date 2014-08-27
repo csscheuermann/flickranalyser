@@ -14,6 +14,7 @@
 		B48A0C8D19AB19A600978CFC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B48A0C8C19AB19A600978CFC /* Images.xcassets */; };
 		B48A0C9919AB19A600978CFC /* SEEKRET_SWIFTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A0C9819AB19A600978CFC /* SEEKRET_SWIFTTests.swift */; };
 		B48BAD5219AB7BBF00FC6B1D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48BAD5119AB7BBF00FC6B1D /* MapKit.framework */; };
+		B4948CC819ADFE4E0044320A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4948CC719ADFE4E0044320A /* MainViewController.swift */; };
 		B4ADAFB519ABAF0D00143DE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */; };
 		B4ADAFB719ABB14C00143DE2 /* EndpointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */; };
 		B4ADAFBA19AC6D4400143DE2 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ADAFB919AC6D4400143DE2 /* UIHelper.swift */; };
@@ -56,6 +57,7 @@
 		B48A0C9819AB19A600978CFC /* SEEKRET_SWIFTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEEKRET_SWIFTTests.swift; sourceTree = "<group>"; };
 		B48A0CA219AB1A8700978CFC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		B48BAD5119AB7BBF00FC6B1D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B4948CC719ADFE4E0044320A /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointController.swift; sourceTree = "<group>"; };
 		B4ADAFB919AC6D4400143DE2 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				B4ADAFB419ABAF0D00143DE2 /* MapViewController.swift */,
 				B4ADAFB619ABB14C00143DE2 /* EndpointController.swift */,
 				B4B617CB19ACB3BF008224EA /* LoginViewController.swift */,
+				B4948CC719ADFE4E0044320A /* MainViewController.swift */,
 			);
 			path = "SEEKRET-SWIFT";
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				B4ADAFB519ABAF0D00143DE2 /* MapViewController.swift in Sources */,
 				B4851D1519ACC0030037A068 /* GoogleLoginController.m in Sources */,
 				B4ADAFF719AC949E00143DE2 /* GTLQuerySpotAPI.m in Sources */,
+				B4948CC819ADFE4E0044320A /* MainViewController.swift in Sources */,
 				B4ADB01119AC954200143DE2 /* GTLSpotAPIKey.m in Sources */,
 				B4ADB01A19AC957F00143DE2 /* GTLSpotAPISpotResultList.m in Sources */,
 			);

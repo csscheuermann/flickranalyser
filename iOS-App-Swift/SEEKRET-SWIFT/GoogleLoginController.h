@@ -7,14 +7,20 @@
 //
 #import <UIKit/UIKit.h>
 #import <GPPSignIn.h>
+#import "GTMOAuth2Authentication.h"
 
 
 @class GPPSignInButton;
 
 @interface GoogleLoginController : UIViewController <GPPSignInDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+
+- (IBAction)logoutTouched:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet GPPSignInButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *proceedWithoutLoginButton;
 @property (weak, nonatomic) IBOutlet UILabel *alreadyConenctedLabel;
+
+
 @end

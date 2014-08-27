@@ -8,21 +8,22 @@
 
 
 
-class UIHelper{
+ class UIHelper{
     
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     var uiView:UIView
     var label:UILabel!
     var backgroundView:UIView!
-    
+    var authentic:GTMOAuth2Authentication!;
     var backgroundColor = UIColor(red: 0.5, green:0.5, blue:0.5, alpha:0.5);
     
     init(uiView: UIView){
         self.uiView = uiView
+        
     }
     
     
-    func showSpinner(text: String){
+     func showSpinner(text: String){
 
         var screen = UIScreen.mainScreen()
         var boundWidthOfUI = screen.bounds.width

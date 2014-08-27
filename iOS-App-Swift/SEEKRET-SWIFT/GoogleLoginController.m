@@ -54,7 +54,7 @@ static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtp
     self.signIn = [GPPSignIn sharedInstance];
     [self.signIn authenticate];
 }
-- (IBAction)logutButtonTouched:(id)sender {
+- (IBAction)logoutTouched:(id)sender {
     
     [self disconnect];
 }
@@ -99,7 +99,10 @@ static NSString * const kClientID = @"1099379908084-s2b7ltsscjubgnofctrbe5ru1qtp
     NSLog(@"Received error %@ and auth object %@",error, auth);
     if (error) {
         // Führen Sie hier die Fehlerbehandlung durch.
+        
+        
     } else {
+        
         [self refreshInterfaceBasedOnSignIn];
     }
 }

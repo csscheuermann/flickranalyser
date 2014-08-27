@@ -15,7 +15,7 @@
 #import "GTLSpotAPICluster.h"
 
 
-
+#import "GoogleLoginController.h"
 #import "GTLPlusConstants.h"
 #import "GPPSignInButton.h"
 #import "GPPSignIn.h"
