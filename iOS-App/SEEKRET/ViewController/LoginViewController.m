@@ -37,7 +37,8 @@ static GPPSignIn *signIn;
     signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
     signIn.clientID = kClientID;
-    signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin, nil];
+    
+    signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail,kGTLAuthScopePlusMe,kGTLAuthScopePlusUserinfoProfile, nil];
     signIn.delegate = self;
     [signIn trySilentAuthentication];
 }

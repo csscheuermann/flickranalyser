@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/clusterAPI/v1/20140827191856/java/1.16.0-rc/seekret_dev_appspot_com-clusterAPI-v1-20140827191856-java-1.16.0-rc-sources.jar", 
-      "path": "seekret_dev_appspot_com-clusterAPI-v1-20140827191856-java-1.16.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/clusterAPI/v1/20140828055822/java/1.16.0-rc/seekret_dev_appspot_com-clusterAPI-v1-20140828055822-java-1.16.0-rc-sources.jar", 
+      "path": "seekret_dev_appspot_com-clusterAPI-v1-20140828055822-java-1.16.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2014-08-27 19:18"
+      "timestamp": "2014-08-28 05:58"
     }, 
     {
-      "path": "seekret_dev_appspot_com-clusterAPI-v1-20140827191856-java-1.16.0-rc.jar.properties", 
+      "path": "seekret_dev_appspot_com-clusterAPI-v1-20140828055822-java-1.16.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -701,5 +701,5 @@
   "version": "v1", 
   "language_version": "1.16.0-rc", 
   "id": "clusterAPI:v1", 
-  "revision": 20140827191856
+  "revision": 20140828055822
 }

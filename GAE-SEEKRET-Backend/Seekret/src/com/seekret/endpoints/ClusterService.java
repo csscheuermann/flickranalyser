@@ -18,7 +18,15 @@ import com.seekret.pojo.responses.Address;
 
 
 
-@Api(name="clusterAPI", version="v1", description="This API serves everything needed to update a cluster.")
+@Api(name="clusterAPI",
+version="v1", 
+description="This API serves everything needed to update a cluster.",
+scopes = {Constants.EMAIL_SCOPE},
+clientIds = {Constants.WEB_CLIENT_ID, Constants.ANDROID_CLIENT_ID, Constants.IOS_CLIENT_ID},
+audiences = {Constants.ANDROID_AUDIENCE}
+)
+
+
 public class ClusterService
 {
 

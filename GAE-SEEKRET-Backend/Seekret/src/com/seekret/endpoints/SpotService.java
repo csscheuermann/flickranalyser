@@ -10,17 +10,20 @@ import com.google.appengine.api.users.User;
 import com.seekret.businesslogic.spotfinder.ISpotFinder;
 import com.seekret.businesslogic.spotfinder.impl.NearestSpotFinder;
 import com.seekret.memcache.MemcacheSpot;
-import com.seekret.persistence.datastore.get.PFGetterSpot;
 import com.seekret.pojo.Spot;
 import com.seekret.pojo.SpotResultList;
 
-@Api(name="spotAPI", version="v1", description="API for Spots.")
+@Api(name="spotAPI",
+version="v1", 
+description="API for Spots.",
+scopes = {Constants.EMAIL_SCOPE},
+clientIds = {Constants.WEB_CLIENT_ID, Constants.ANDROID_CLIENT_ID, Constants.IOS_CLIENT_ID},
+audiences = {Constants.ANDROID_AUDIENCE})
 public class SpotService
 {
   private final ISpotFinder spotFinder;
 
-  public SpotService()
-  {
+  public SpotService(){
     this.spotFinder = new NearestSpotFinder();
   }
 
@@ -39,10 +42,9 @@ public class SpotService
     return this.spotFinder.getSpotByNamePutToCrawlQueue(spotName, onlyExcludedPictures);
   }
 
-  @ApiMethod(name="getTopSpots", scopes={"https://www.googleapis.com/auth/userinfo.email"}, clientIds={"449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v4gu.apps.googleusercontent.com", "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com"})
+  @ApiMethod(name="getTopSpots")
   public SpotResultList getTopSpots(User user)
-    throws UnauthorizedException
-  {
+    throws UnauthorizedException{
     if (user == null) {
       throw new UnauthorizedException("User is Not Valid");
     }

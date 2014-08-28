@@ -23,6 +23,7 @@ class MainViewController: UIViewController, GPPSignInDelegate {
         } else {
           println("LOGGED IN")
         }
+        
     }
     
     override func didReceiveMemoryWarning() {

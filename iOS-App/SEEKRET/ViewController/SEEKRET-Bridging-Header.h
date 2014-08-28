@@ -12,4 +12,5 @@
 #import "GTLSpotAPICluster.h"
 #import "GTMOAuth2Authentication.h"
 #import "GTLSpotAPISpotResultList.h"
+#import "GTMOAuth2ViewControllerTouch.h"
 

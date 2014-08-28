@@ -9,7 +9,13 @@ import com.seekret.persistence.datastore.get.PFGetterUser;
 import com.seekret.persistence.datastore.save.PFSaverUser;
 import com.seekret.pojo.SeekretUser;
 
-@Api(name="userAPI", version="v1", description="API for User.")
+@Api(name="userAPI", 
+version="v1",
+description="API for User.",
+scopes = {Constants.EMAIL_SCOPE},
+clientIds = {Constants.WEB_CLIENT_ID, Constants.ANDROID_CLIENT_ID, Constants.IOS_CLIENT_ID},
+audiences = {Constants.ANDROID_AUDIENCE}
+)
 public class UserService {
 	  
   public UserService() {

@@ -10,7 +10,14 @@ import com.seekret.persistence.datastore.get.PFGetterRatingDismissCounter;
 import com.seekret.persistence.datastore.save.PFSaverRating;
 import com.seekret.pojo.results.KeyResult;
 
-@Api(name="ratingAPI", version="v1", description="This API serves everything needed for Ratings")
+@Api(name="ratingAPI",
+version="v1",
+description="This API serves everything needed for Ratings",
+scopes = {Constants.EMAIL_SCOPE},
+clientIds = {Constants.WEB_CLIENT_ID, Constants.ANDROID_CLIENT_ID, Constants.IOS_CLIENT_ID},
+audiences = {Constants.ANDROID_AUDIENCE}
+)
+
 public class RatingService
 {
   @ApiMethod(name="addNewRating")
