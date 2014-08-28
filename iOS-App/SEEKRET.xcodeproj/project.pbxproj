@@ -35,10 +35,12 @@
 		B44AFD6C19AEFD7000565AFA /* GTLSpotAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD5F19AEFD7000565AFA /* GTLSpotAPIResponse.m */; };
 		B44AFD6D19AEFD7000565AFA /* GTLSpotAPISpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD6119AEFD7000565AFA /* GTLSpotAPISpot.m */; };
 		B44AFD6E19AEFD7000565AFA /* GTLSpotAPISpotResultList.m in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD6319AEFD7000565AFA /* GTLSpotAPISpotResultList.m */; };
+		B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7019AF053600565AFA /* UIHelper.swift */; };
+		B44AFD7519AF2A3100565AFA /* SpotNameCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */; };
+		B44AFD7819AF358E00565AFA /* EndPointControllerForTopSpots.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7719AF358E00565AFA /* EndPointControllerForTopSpots.swift */; };
 		B4D0B35919AE368F005291B5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D0B35819AE368F005291B5 /* MainViewController.swift */; };
 		B4F0AD6F19AE4ADA00213B12 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */; };
 		B4F0AD7019AE4ADA00213B12 /* EndpointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */; };
-		B4F0AD7219AE4B1200213B12 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD7119AE4B1200213B12 /* UIHelper.swift */; };
 		F725501D9E8A46C8A26A93B5 /* libPods-SEEKRET.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */; };
 /* End PBXBuildFile section */
 
@@ -100,11 +102,13 @@
 		B44AFD6119AEFD7000565AFA /* GTLSpotAPISpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpot.m; sourceTree = "<group>"; };
 		B44AFD6219AEFD7000565AFA /* GTLSpotAPISpotResultList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPISpotResultList.h; sourceTree = "<group>"; };
 		B44AFD6319AEFD7000565AFA /* GTLSpotAPISpotResultList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpotResultList.m; sourceTree = "<group>"; };
+		B44AFD7019AF053600565AFA /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = SOURCE_ROOT; };
+		B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotNameCellView.swift; sourceTree = "<group>"; };
+		B44AFD7719AF358E00565AFA /* EndPointControllerForTopSpots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPointControllerForTopSpots.swift; sourceTree = "<group>"; };
 		B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SEEKRET-Bridging-Header.h"; sourceTree = "<group>"; };
 		B4D0B35819AE368F005291B5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointController.swift; sourceTree = "<group>"; };
-		B4F0AD7119AE4B1200213B12 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIHelper.swift; path = "../../../iOS-App-Swift/SEEKRET-SWIFT/UIHelper.swift"; sourceTree = "<group>"; };
+		B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EndpointController.swift; path = ViewController/EndpointController.swift; sourceTree = "<group>"; };
 		CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEEKRET.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -172,6 +176,7 @@
 		81A0F40B198D2BEE00D148B1 /* SEEKRET */ = {
 			isa = PBXGroup;
 			children = (
+				B44AFD7619AF356F00565AFA /* EndpointController */,
 				81AB648919916785008C2040 /* Endpoints */,
 				81A0F441198E5C1C00D148B1 /* Ressources */,
 				81A0F43A198E428400D148B1 /* Controller */,
@@ -225,7 +230,7 @@
 		81A0F43B198E428400D148B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B4F0AD7119AE4B1200213B12 /* UIHelper.swift */,
+				B44AFD7019AF053600565AFA /* UIHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,13 +239,13 @@
 			isa = PBXGroup;
 			children = (
 				B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */,
-				B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */,
 				81A0F43D198E428400D148B1 /* LoginViewController.h */,
 				81A0F43E198E428400D148B1 /* LoginViewController.m */,
 				81AB6444199160A3008C2040 /* ShowEndpointViewController.h */,
 				81AB6445199160A3008C2040 /* ShowEndpointViewController.m */,
 				B4D0B35819AE368F005291B5 /* MainViewController.swift */,
 				B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */,
+				B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -296,6 +301,15 @@
 				B44AFD6319AEFD7000565AFA /* GTLSpotAPISpotResultList.m */,
 			);
 			name = Spot;
+			sourceTree = "<group>";
+		};
+		B44AFD7619AF356F00565AFA /* EndpointController */ = {
+			isa = PBXGroup;
+			children = (
+				B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */,
+				B44AFD7719AF358E00565AFA /* EndPointControllerForTopSpots.swift */,
+			);
+			name = EndpointController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,17 +454,19 @@
 				B44AFD6419AEFD7000565AFA /* GTLQuerySpotAPI.m in Sources */,
 				81A0F416198D2BEE00D148B1 /* AppDelegate.m in Sources */,
 				B44AFD6819AEFD7000565AFA /* GTLSpotAPIJsonMap.m in Sources */,
+				B44AFD7519AF2A3100565AFA /* SpotNameCellView.swift in Sources */,
 				B44AFD6719AEFD7000565AFA /* GTLSpotAPIConstants.m in Sources */,
 				B44AFD6919AEFD7000565AFA /* GTLSpotAPIKey.m in Sources */,
+				B44AFD7819AF358E00565AFA /* EndPointControllerForTopSpots.swift in Sources */,
 				B44AFD6519AEFD7000565AFA /* GTLServiceSpotAPI.m in Sources */,
 				B44AFD6619AEFD7000565AFA /* GTLSpotAPICluster.m in Sources */,
 				B4D0B35919AE368F005291B5 /* MainViewController.swift in Sources */,
 				B44AFD6B19AEFD7000565AFA /* GTLSpotAPIPointOfInterest.m in Sources */,
 				81A0F412198D2BEE00D148B1 /* main.m in Sources */,
 				B44AFD6A19AEFD7000565AFA /* GTLSpotAPILatLng.m in Sources */,
-				B4F0AD7219AE4B1200213B12 /* UIHelper.swift in Sources */,
 				81A0F440198E428400D148B1 /* LoginViewController.m in Sources */,
 				B44AFD6C19AEFD7000565AFA /* GTLSpotAPIResponse.m in Sources */,
+				B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */,
 				B4F0AD6F19AE4ADA00213B12 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

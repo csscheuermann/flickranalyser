@@ -88,7 +88,7 @@ static GPPSignIn *signIn;
 }
 
 -(void)showEndpoints {
-    static GTLServiceSpotAPI *service = nil;
+  //  static GTLServiceSpotAPI *service = nil;
 //    if (!service) {
 //        service = [[GTLServiceSpotAPI alloc] init];
 //        service.retryEnabled = YES;

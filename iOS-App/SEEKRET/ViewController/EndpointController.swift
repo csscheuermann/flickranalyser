@@ -18,8 +18,7 @@ class EnpointController{
         self.delegate = delegate
     }
     
-    
-    
+      
     func getCluster(clusterName: String) {
         let spotAPI = GTLServiceSpotAPI()
         spotAPI.retryEnabled = true
@@ -50,4 +49,8 @@ class EnpointController{
         
         })
     }
+    
+    
+    
+
 }
