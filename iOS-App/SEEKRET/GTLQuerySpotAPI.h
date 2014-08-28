@@ -13,7 +13,7 @@
 // Description:
 //   API for Spots.
 // Classes:
-//   GTLQuerySpotAPI (4 custom class methods, 4 custom properties)
+//   GTLQuerySpotAPI (5 custom class methods, 4 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -46,6 +46,12 @@
 //   kGTLAuthScopeSpotAPIUserinfoEmail
 // Fetches a GTLSpotAPISpot.
 + (id)queryForGetNearestSpotByAddressWithSpotName:(NSString *)spotName;
+
+// Method: spotAPI.getSeekretSpotsBySpotName
+//  Authorization scope(s):
+//   kGTLAuthScopeSpotAPIUserinfoEmail
+// Fetches a GTLSpotAPIClusterCollection.
++ (id)queryForGetSeekretSpotsBySpotNameWithSpotName:(NSString *)spotName;
 
 // Method: spotAPI.getSpotById
 //  Authorization scope(s):

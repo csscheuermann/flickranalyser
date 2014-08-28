@@ -9,13 +9,43 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, EndpointControllerProtocol{
+class MapViewController: UIViewController, EndpointControllerProtocol, GPPSignInDelegate{
     
     @IBOutlet weak var spotMapView: MKMapView!
  
     var uiHelper:UIHelper!
     var spotName: String?
 
+    
+    /// We have to do the Login here, because it is only possible in subclasses from UIViewController.
+    /// Sad but true ...
+    func performSilentLogin(){
+        //Silent Sign In
+        var signIn = GPPSignIn.sharedInstance()
+        signIn.delegate = self
+        if (!signIn.trySilentAuthentication()) {
+            println("NOT LOGGED IN")
+        } else {
+            println("LOGGED IN")
+        }
+    }
+    
+
+    
+    
+    func finishedWithAuth(auth: GTMOAuth2Authentication,  error: NSError? ) -> Void{
+        if error != nil{
+            debugPrintln("AUTH WENT WRONG")
+        }else{
+            debugPrintln("FINISHED WITH AUTH")
+            self.uiHelper = UIHelper(uiView: self.spotMapView)
+            uiHelper.showSpinner("Fetching Cluster")
+            let endpointController = EnpointController(delegate: self);
+            endpointController.getCluster(spotName!, auth: auth)
+        }
+    }
+    
+    
     func didRecieveCluster(cluster: [GTLSpotAPICluster], spotName: String){
         var annotations = [MKPointAnnotation]()
         for (index, currentCluster) in enumerate(cluster){
@@ -43,15 +73,10 @@ class MapViewController: UIViewController, EndpointControllerProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doLoadCluster();
+        performSilentLogin();
     }
     
-    func doLoadCluster(){
-        self.uiHelper = UIHelper(uiView: self.spotMapView)
-        uiHelper.showSpinner("Fetching Cluster")
-        let endpointController = EnpointController(delegate: self);
-        endpointController.getCluster(spotName!)
-    }
+ 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

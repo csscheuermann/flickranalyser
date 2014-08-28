@@ -16,6 +16,7 @@
 #import "GTLSpotAPIConstants.h"
 
 #import "GTLSpotAPICluster.h"
+#import "GTLSpotAPIClusterCollection.h"
 #import "GTLSpotAPIJsonMap.h"
 #import "GTLSpotAPIKey.h"
 #import "GTLSpotAPILatLng.h"

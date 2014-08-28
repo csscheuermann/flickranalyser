@@ -13,10 +13,11 @@
 // Description:
 //   API for Spots.
 // Classes:
-//   GTLQuerySpotAPI (4 custom class methods, 4 custom properties)
+//   GTLQuerySpotAPI (5 custom class methods, 4 custom properties)
 
 #import "GTLQuerySpotAPI.h"
 
+#import "GTLSpotAPIClusterCollection.h"
 #import "GTLSpotAPIResponse.h"
 #import "GTLSpotAPISpot.h"
 #import "GTLSpotAPISpotResultList.h"
@@ -34,6 +35,14 @@
   GTLQuerySpotAPI *query = [self queryWithMethodName:methodName];
   query.spotName = spotName;
   query.expectedObjectClass = [GTLSpotAPISpot class];
+  return query;
+}
+
++ (id)queryForGetSeekretSpotsBySpotNameWithSpotName:(NSString *)spotName {
+  NSString *methodName = @"spotAPI.getSeekretSpotsBySpotName";
+  GTLQuerySpotAPI *query = [self queryWithMethodName:methodName];
+  query.spotName = spotName;
+  query.expectedObjectClass = [GTLSpotAPIClusterCollection class];
   return query;
 }
 

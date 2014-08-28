@@ -8,8 +8,8 @@
 
   <groupId>com.google.apis</groupId>
   <artifactId>google-api-services-ratingAPI</artifactId>
-  <version>v1-rev20140828055827-1.16.0-rc</version>
-  <name>ratingAPI v1 (revision 20140828055827)</name>
+  <version>v1-rev20140828114006-1.16.0-rc</version>
+  <name>ratingAPI v1 (revision 20140828114006)</name>
   <packaging>jar</packaging>
 
   <inceptionYear>2011</inceptionYear>

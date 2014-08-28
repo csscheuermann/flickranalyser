@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/AdEaCLt1BdlJrjjwc3cHEweOQe4\"",
+ "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/aGTnCYoJLoa3I2_fzgAMUlNTglQ\"",
  "discoveryVersion": "v1",
  "id": "spotAPI:v1",
  "name": "spotAPI",
@@ -120,6 +120,18 @@
      "type": "array",
      "items": {
       "type": "string"
+     }
+    }
+   }
+  },
+  "ClusterCollection": {
+   "id": "ClusterCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Cluster"
      }
     }
    }
@@ -322,6 +334,25 @@
    ],
    "returns": {
     "$ref": "Spot"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "spotAPI.getSeekretSpotsBySpotName": {
+   "id": "spotAPI.getSeekretSpotsBySpotName",
+   "allowGet": true,
+   "parameters": {
+    "spotName": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "spotName"
+   ],
+   "returns": {
+    "$ref": "ClusterCollection"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

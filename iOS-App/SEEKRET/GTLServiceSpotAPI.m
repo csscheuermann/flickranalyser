@@ -26,6 +26,7 @@
   NSArray *classes = [NSArray arrayWithObjects:
                       [GTLQuerySpotAPI class],
                       [GTLSpotAPICluster class],
+                      [GTLSpotAPIClusterCollection class],
                       [GTLSpotAPIJsonMap class],
                       [GTLSpotAPIKey class],
                       [GTLSpotAPILatLng class],
