@@ -49,7 +49,6 @@ static GPPSignIn *signIn;
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)loginButtonTouched:(id)sender {
-    
     signIn = [GPPSignIn sharedInstance];
     [signIn authenticate];
 }
