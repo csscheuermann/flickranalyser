@@ -24,6 +24,8 @@
 		81A0F447198EA77700D148B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A0F446198EA77700D148B1 /* Security.framework */; };
 		81A0F449198EA78300D148B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A0F448198EA78300D148B1 /* SystemConfiguration.framework */; };
 		81AB6446199160A3008C2040 /* ShowEndpointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB6445199160A3008C2040 /* ShowEndpointViewController.m */; };
+		B41E2BD719B054D900E1A180 /* ClusterImageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */; };
+		B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD819B057BF00E1A180 /* SpotViewController.swift */; };
 		B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7019AF053600565AFA /* UIHelper.swift */; };
 		B44AFD7519AF2A3100565AFA /* SpotNameCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */; };
 		B44AFD7819AF358E00565AFA /* EndPointControllerForTopSpots.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7719AF358E00565AFA /* EndPointControllerForTopSpots.swift */; };
@@ -80,6 +82,8 @@
 		81A0F448198EA78300D148B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		81AB6444199160A3008C2040 /* ShowEndpointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowEndpointViewController.h; sourceTree = "<group>"; };
 		81AB6445199160A3008C2040 /* ShowEndpointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowEndpointViewController.m; sourceTree = "<group>"; };
+		B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterImageCellView.swift; sourceTree = "<group>"; };
+		B41E2BD819B057BF00E1A180 /* SpotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
 		B44AFD7019AF053600565AFA /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = SOURCE_ROOT; };
 		B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotNameCellView.swift; sourceTree = "<group>"; };
 		B44AFD7719AF358E00565AFA /* EndPointControllerForTopSpots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPointControllerForTopSpots.swift; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 				B4D0B35819AE368F005291B5 /* MainViewController.swift */,
 				B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */,
 				B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */,
+				B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */,
+				B41E2BD819B057BF00E1A180 /* SpotViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -461,12 +467,14 @@
 				B44AFDBD19AF4E6700565AFA /* GTLSpotAPIResponse.m in Sources */,
 				B44AFDB719AF4E6700565AFA /* GTLSpotAPIClusterCollection.m in Sources */,
 				B44AFDBA19AF4E6700565AFA /* GTLSpotAPIKey.m in Sources */,
+				B41E2BD719B054D900E1A180 /* ClusterImageCellView.swift in Sources */,
 				B44AFD7519AF2A3100565AFA /* SpotNameCellView.swift in Sources */,
 				B44AFDBB19AF4E6700565AFA /* GTLSpotAPILatLng.m in Sources */,
 				B44AFD7819AF358E00565AFA /* EndPointControllerForTopSpots.swift in Sources */,
 				B44AFDB519AF4E6700565AFA /* GTLServiceSpotAPI.m in Sources */,
 				B4D0B35919AE368F005291B5 /* MainViewController.swift in Sources */,
 				81A0F412198D2BEE00D148B1 /* main.m in Sources */,
+				B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */,
 				81A0F440198E428400D148B1 /* LoginViewController.m in Sources */,
 				B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */,
 				B44AFDB919AF4E6700565AFA /* GTLSpotAPIJsonMap.m in Sources */,

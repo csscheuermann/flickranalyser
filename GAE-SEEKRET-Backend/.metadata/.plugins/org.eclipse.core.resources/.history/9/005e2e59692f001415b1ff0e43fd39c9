@@ -46,7 +46,6 @@ public class SpotService
 	  StringBuilder fullClassPath = new StringBuilder();
 	  fullClassPath.append("com.seekret.businesslogic.filterstrategies.impl.SeekretFinderStrategy");
 	  IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(fullClassPath.toString(), IFilterStrategy.class);
-	  choosenFilterStrategy.setIgnoreDismissedClustersFlag(true);
 	  Spot spot = this.getSpotById(spotName);
 		if (spot != null){
 			List<Cluster> cluster = spot.getCluster();

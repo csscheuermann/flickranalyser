@@ -66,10 +66,81 @@
             </objects>
             <point key="canvasLocation" x="493" y="58"/>
         </scene>
+        <!--Spot View Controller-->
+        <scene sceneID="ehK-hu-rg2">
+            <objects>
+                <viewController storyboardIdentifier="SpotViewController" id="f2N-Av-Smy" customClass="SpotViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rhd-SH-lYk"/>
+                        <viewControllerLayoutGuide type="bottom" id="Z4c-72-VSR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vCa-4k-lvd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhe-6y-v2F">
+                                <rect key="frame" x="0.0" y="70" width="320" height="435"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="208" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HiQ-mz-PgX">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="435"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="ClusterCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClusterImageIdent" rowHeight="208" id="K1i-9m-EQD" customClass="ClusterImageCellView" customModule="SEEKRET" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1i-9m-EQD" id="NgO-Yd-CEb">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9T-IJ-r93">
+                                                            <rect key="frame" x="35" y="1" width="250" height="200"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="clusterImageView" destination="P9T-IJ-r93" id="Hbx-dv-SPP"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0024416334313203114" green="0.10958674663378742" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYa-Zj-xGz">
+                                <rect key="frame" x="0.0" y="505" width="320" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="in3-5f-ta5"/>
+                                    <tabBarItem systemItem="more" id="Sdx-ge-Bw5"/>
+                                </items>
+                            </tabBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ckL-gt-q2N">
+                                <rect key="frame" x="0.0" y="20" width="320" height="47"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7m-R2-6lt">
+                                        <rect key="frame" x="8" y="13" width="312" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="clusterTableView" destination="HiQ-mz-PgX" id="ab5-NC-6hc"/>
+                        <outlet property="spotNameLabel" destination="K7m-R2-6lt" id="ygN-EG-4mm"/>
+                        <outlet property="tabBar" destination="cYa-Zj-xGz" id="SCY-Vm-MeD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gDj-E4-fXc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1040" y="761"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="JRA-8l-Me0">
             <objects>
-                <viewController id="kyC-JP-zoM" customClass="MainViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="kyC-JP-zoM" customClass="MainViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r5T-jZ-gqK"/>
                         <viewControllerLayoutGuide type="bottom" id="c00-I4-SNj"/>
@@ -79,20 +150,20 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONj-pa-ize" userLabel="Search View">
-                                <rect key="frame" x="0.0" y="28" width="320" height="61"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxO-6M-ELe">
-                                        <rect key="frame" x="0.0" y="8" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.9158437781325266" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PeD-3A-Hra">
-                                <rect key="frame" x="0.0" y="97" width="320" height="471"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PeD-3A-Hra" userLabel="View For TableView">
+                                <rect key="frame" x="0.0" y="97" width="320" height="409"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DEV-0O-eTT">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="463"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="409"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="SpotNameCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpotNameCellIdent" rowHeight="49" id="3A9-9h-ajb" customClass="SpotNameCellView" customModule="SEEKRET" customModuleProvider="target">
@@ -142,10 +213,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvs-6C-Peg">
-                                <rect key="frame" x="0.0" y="20" width="320" height="390"/>
+                                <rect key="frame" x="0.0" y="17" width="320" height="510"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kU6-h0-4OQ">
-                                        <rect key="frame" x="0.0" y="15" width="320" height="367"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
                                     </mapView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.036265060260000002" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

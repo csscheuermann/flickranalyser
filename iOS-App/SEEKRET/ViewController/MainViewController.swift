@@ -55,6 +55,7 @@ class MainViewController: UIViewController,EndPointControllerForTopSpotsProtocol
     }
     
     func didRecieveTopSpots(topSpots: [String]){
+        debugPrintln("RECEIVED TOP SPOTS. LENGTH: \(topSpots.count)")
         self.topSpots = topSpots
         self.topSpotsTableView.reloadData()
          uiHelper.stopSpinner()
@@ -72,9 +73,19 @@ class MainViewController: UIViewController,EndPointControllerForTopSpotsProtocol
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let spotName = topSpots[indexPath.row]
-        var mapViewController:MapViewController = self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as MapViewController
+       
+        //Show the Mapview Controller
+        /*var mapViewController:MapViewController = self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as MapViewController
         mapViewController.spotName = spotName
-      self.presentViewController(mapViewController, animated: true, completion: nil)
+      self.presentViewController(mapViewController, animated: true, completion: nil)*/
+        
+        
+        //Show the SpotViewController
+        var spotViewController:SpotViewController =
+        self.storyboard.instantiateViewControllerWithIdentifier("SpotViewController") as SpotViewController
+        spotViewController.spotName = spotName
+        self.presentViewController(spotViewController, animated: true, completion: nil)
+        
     
         
     }

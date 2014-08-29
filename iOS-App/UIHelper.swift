@@ -69,8 +69,7 @@ class UIHelper{
         backgroundView.addSubview(label)
         self.uiView.addSubview(backgroundView)
         
-        
-        
+
         spinner.startAnimating()
         
     }
@@ -80,7 +79,8 @@ class UIHelper{
          self.uiView.backgroundColor = UIColor.whiteColor()
         backgroundView.removeFromSuperview()
         spinner.stopAnimating()
-        
+        debugPrintln("STOPPING SPINNER.")
+
     }
     
     
