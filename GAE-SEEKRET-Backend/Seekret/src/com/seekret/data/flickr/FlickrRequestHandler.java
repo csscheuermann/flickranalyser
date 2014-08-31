@@ -66,7 +66,7 @@ public class FlickrRequestHandler {
 						.append("lon=").append(key.getLongitude())
 						.append("&radius=").append(radiusInKm)
 						.append("&sort=interestingness-desc")
-						.append("&extras=views%2Cgeo%2Curl_s%2Ctags")
+						.append("&extras=views%2Cgeo%2Curl_z%2Ctags")
 						.append("&per_page=250").append("&page=")
 						.append(requestedPage)
 						.append("&format=json&nojsoncallback=1");
@@ -124,11 +124,25 @@ public class FlickrRequestHandler {
 							}
 							latitude = photo.get("latitude").asDouble();
 							longitude = photo.get("longitude").asDouble();
-							String url = photo.get("url_s").asString();
+							String url = photo.get("url_z").asString();
+							
+							
+							
+							
+							String widthString = photo.get("height_z").asString();
+							String heightString = photo.get("width_z").asString();
+
+							log.log(Level.INFO, "widthString " + widthString + " " + "heightString " +heightString);
+							
+							int height = Integer.parseInt(widthString);
+							int width = Integer.parseInt(heightString);	
+							
+							log.log(Level.INFO, "HEIGHT " + height + " " + "WIDTH " +width);
+							
 							String picture_id = photo.get("id").asString();
 							LatLng location = new LatLng(latitude, longitude);
 
-							if (!picture_ids.contains(picture_id)) {
+							if (!picture_ids.contains(picture_id) && (width >= height)) {
 								picture_ids.add(picture_id);
 								PointOfInterest pointOfInterest = new PointOfInterest(
 										numberViews, location, url, tags);
@@ -138,7 +152,7 @@ public class FlickrRequestHandler {
 								}
 							}
 						} catch (Exception e) {
-							log.log(Level.SEVERE, "COULD NOT PARSE THIS HERE.");
+						log.log(Level.SEVERE, "COULD NOT PARSE THIS HERE.");
 							e.printStackTrace();
 						}
 					}

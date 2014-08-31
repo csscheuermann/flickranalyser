@@ -39,8 +39,13 @@ public class SpotCalculationHandler {
 			Iterator<PointOfInterest> iterator = pointOfInterestList.iterator();
 			int counter = 0;
 			while ((iterator.hasNext()) && (counter < 3)){
-				urls.add(iterator.next().getPictureUrl());
-				counter++;
+				
+				PointOfInterest next = iterator.next();
+				if (next.getPictureUrl() != null || !next.getPictureUrl().equals("")){
+					urls.add(next.getPictureUrl());
+					counter++;
+				}
+				
 			}
 			
 			cluster.setUrlOfMostViewedPicture(urls);

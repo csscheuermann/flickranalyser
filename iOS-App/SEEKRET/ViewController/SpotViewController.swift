@@ -99,6 +99,11 @@ func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
         if (currentClusterUrls != nil){
             cell.urls = currentClusterUrls
             cell.setCellViewPicture()
+            if (currentCluster.overallTouristicnessInPointsFrom1To10 != nil){
+            cell.setTouristicnessValue(currentCluster.overallTouristicnessInPointsFrom1To10)
+
+                
+            }
         }
         
         var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
@@ -148,7 +153,10 @@ func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
     }
     
     
+    
+    
     func didRecieveCluster(cluster: [GTLSpotAPICluster], spotName: String){
+        self.spotNameLabel.font = UIFont (name: "HelveticaNeue-UltraLight", size: 20)
         self.spotNameLabel.text = spotName
         self.cluster = cluster;
         self.clusterTableView.reloadData()

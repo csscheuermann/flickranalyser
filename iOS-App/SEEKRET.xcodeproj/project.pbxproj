@@ -245,6 +245,7 @@
 		81A0F43C198E428400D148B1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B41E2BDA19B0B16C00E1A180 /* CustomCells */,
 				B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */,
 				81A0F43D198E428400D148B1 /* LoginViewController.h */,
 				81A0F43E198E428400D148B1 /* LoginViewController.m */,
@@ -252,8 +253,6 @@
 				81AB6445199160A3008C2040 /* ShowEndpointViewController.m */,
 				B4D0B35819AE368F005291B5 /* MainViewController.swift */,
 				B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */,
-				B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */,
-				B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */,
 				B41E2BD819B057BF00E1A180 /* SpotViewController.swift */,
 			);
 			path = ViewController;
@@ -280,6 +279,15 @@
 				B44AFD6F19AF006500565AFA /* Spot */,
 			);
 			name = Endpoints;
+			sourceTree = "<group>";
+		};
+		B41E2BDA19B0B16C00E1A180 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */,
+				B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */,
+			);
+			name = CustomCells;
 			sourceTree = "<group>";
 		};
 		B44AFD6F19AF006500565AFA /* Spot */ = {

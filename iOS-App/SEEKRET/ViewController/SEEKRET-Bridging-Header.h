@@ -14,4 +14,4 @@
 #import "GTLSpotAPISpotResultList.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTLSpotAPIClusterCollection.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>

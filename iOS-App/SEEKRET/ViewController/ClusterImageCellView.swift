@@ -16,7 +16,7 @@ class ClusterImageCellView: UITableViewCell {
     var counter : Int = 0
     @IBOutlet weak var clusterImageView: UIImageView!
     
-    
+    @IBOutlet weak var touristicnessValue: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,32 +39,69 @@ class ClusterImageCellView: UITableViewCell {
             
             
             if(urls[validIndex] != "test"){
-                let url = NSURL.URLWithString(urls[validIndex]);
-                var err: NSError?
-                var imageData :NSData = NSData.dataWithContentsOfURL(url,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err)
-                var bgImage = UIImage(data:imageData)
-          
-                debugPrintln("SIZE OF IMAGE: \(bgImage.size.height) /  \(bgImage.size.width)")
+                var manager = SDWebImageManager.sharedManager()
+                manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed, progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
+                   
+                    }, completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
+                        
+                        if (self.isImageLandscape(image)){
+                            self.debugImageSize(image, message: "ORIGINAL")
+                            
+                            var imageResized = self.resizeImage(image, withWidth: 320, withHeight: 250)
+                            self.debugImageSize(imageResized, message: "RESIZED")
+                            var croppedImage = self.croppIngimageByImageName(imageResized, toRect: CGRectMake(0, 0, 320, 200))
+                            self.debugImageSize(croppedImage, message: "CROPPED")
+                            
+                            self.clusterImageView.image = croppedImage
+                        }else{
+                            self.clusterImageView.image = nil
+                        }
+                })
                 
-                // Crop to 200 * 150
-             var croppedImage = self.croppIngimageByImageName(bgImage, toRect: CGRectMake(0, 0, 250, 200))
-                         debugPrintln("SIZE OF IMAGE: \(croppedImage.size.height) /  \(croppedImage.size.width)")
+       
                 
-                clusterImageView.image = croppedImage
             }
         }
         
     }
+    
+    
+    func isImageLandscape(image: UIImage) -> Bool{
+        if (image.size.width > image.size.height){
+            return true
+        }
+        debugImageSize(image, message: "NOT LANDSCAPE")
+        return false
+    }
+    
+    func debugImageSize(image: UIImage, message: String){
+        debugPrintln("SIZE OF IMAGE (\(message)) : / WIDTH \(image.size.width) // HEIGHT \(image.size.height) ")
+    }
+    
     func croppIngimageByImageName(imageToCrop: UIImage, toRect:CGRect) -> UIImage
     {
-    //CGRect CropRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height+15);
-    
-        var imageRef:CGImageRef  = CGImageCreateWithImageInRect(imageToCrop.CGImage, toRect);
+//        //CGRect CropRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height+15);
+//        
+//        var imageRef:CGImageRef  = CGImageCreateWithImageInRect(imageToCrop.CGImage, toRect);
+//        
+//        var cropped: UIImage =  UIImage(CGImage: imageRef)
+//        
+//        
+//        return cropped;
         
-        var cropped: UIImage =  UIImage(CGImage: imageRef)
+        
+
+        // Center the crop area
+        var clippedRect:CGRect = CGRectMake(0, 0, 640, 400);
+        
+        // Crop logic
+          var imageRef:CGImageRef  = CGImageCreateWithImageInRect(imageToCrop.CGImage, clippedRect);
+      
+        var croppedImage: UIImage  = UIImage(CGImage: imageRef)
+     
+        return croppedImage;
         
         
-    return cropped;
     }
     
     
@@ -102,7 +139,24 @@ class ClusterImageCellView: UITableViewCell {
         return counter
         
         
+        
     }
+    
+    func setTouristicnessValue(touristicnessValue : Int){
+        switch touristicnessValue {
+        case 0,1,2:
+            self.touristicnessValue.text = "ABSOLUTE SEEKRET"
+        case 3,4:
+            self.touristicnessValue.text = "SEEKRET"
+        case 5,6,7:
+            self.touristicnessValue.text = "TOURISTIC"
+        case 8,9,10:
+            self.touristicnessValue.text = "ABSOLUTE TOURISTIC"
+        default:
+            self.touristicnessValue.text = "NO VOTES AVAILBALE"
+        }
+    }
+    
     func setNextPicture(){
         
         var length = urls.count - 1
