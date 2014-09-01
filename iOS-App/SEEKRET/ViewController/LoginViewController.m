@@ -14,6 +14,7 @@
 #import "GTLQuerySpotAPI.h"
 #import "GTLSpotAPISpot.h"
 #import "GTLSpotAPICluster.h"
+#import "SEEKRET-Swift.h"
 
 
 @interface LoginViewController ()
@@ -77,10 +78,11 @@ static GPPSignIn *signIn;
 -(void)refreshInterfaceBasedOnSignIn
 {
     if ([[GPPSignIn sharedInstance] authentication]) {
-        // Der Nutzer ist angemeldet.
-        // Führen Sie hier andere Aktionen durch, z. B. das Anzeigen einer Abmelden-Schaltfläche.
-        self.alreadyConenctedLabel.hidden = NO;
         self.loginButton.hidden = YES;
+      
+         MainViewController *myVC = (MainViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+        [self presentViewController:myVC animated:YES completion:nil];
+        
     } else {
         // Führen Sie hier andere Aktionen durch.
     }

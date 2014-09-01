@@ -9,24 +9,27 @@
 
 import UIKit
 
-class ClusterImageCellView: UITableViewCell {
+class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
+    
+    
+    @IBOutlet weak var clusterImageView: UIImageView!
     
     
     var urls : [String]!
     var counter : Int = 0
-    @IBOutlet weak var clusterImageView: UIImageView!
+    var circleView: UIView!
+    var textToShow: UILabel!
+    var addressLabel: UILabel!
+    var touristicnessValue : Int!
     
-    @IBOutlet weak var touristicnessValue: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.initCircle()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     func setCellViewPicture(){
@@ -36,38 +39,32 @@ class ClusterImageCellView: UITableViewCell {
             
             assert(validIndex <= urls.count, "COUNTER WAS BIGGER THAN ARRAY SIZE - SHOULD NEVER HAPPEN. COUNTER \(validIndex) URL ARRAY COUNT \(urls.count)")
             
-            
-            
             if(urls[validIndex] != "test"){
                 var manager = SDWebImageManager.sharedManager()
-                manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed, progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
-                   
-                    }, completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
-                        
-                        if (self.isImageLandscape(image)){
-                            self.debugImageSize(image, message: "ORIGINAL")
-                            
-                            var imageResized = self.resizeImage(image, withWidth: 320, withHeight: 250)
-                            self.debugImageSize(imageResized, message: "RESIZED")
-                            var croppedImage = self.croppIngimageByImageName(imageResized, toRect: CGRectMake(0, 0, 320, 200))
-                            self.debugImageSize(croppedImage, message: "CROPPED")
-                            
-                            self.clusterImageView.image = croppedImage
-                        }else{
-                            self.clusterImageView.image = nil
-                        }
+                manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed,
+                    progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
+                        debugPrintln("RECEIVED SIZE \(receivedSize), EXPECTED SIZE \(expectedSize) ")
+                    },
+                    
+                    completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
+                        //TODO COS AND SIW: DAS SOLLTEN WIR MAL VERSTEHEN. WIE FUNKTIONIERT DIESER CROP. Ich habe es so hingebogen, dass es geht, aber verstehen tu ich es nicht mehr ... ich will skalieren und dann croppen.
+                        self.debugImageSize(image, message: "ORIGINAL")
+                        var imageResized = self.resizeImage(image, withWidth: 320, withHeight: 250)
+                        self.debugImageSize(imageResized, message: "RESIZED")
+                        var croppedImage = self.croppIngimageByImageName(imageResized, toRect: CGRectMake(0, 0, 320, 200))
+                        self.debugImageSize(croppedImage, message: "CROPPED")
+                        self.clusterImageView.image = croppedImage
+                        self.setTextForVotes()
+                        self.addressLabel.text = "CAPITALIZED FAKEADDRESS"
                 })
-                
-       
-                
             }
         }
-        
     }
     
     
+    
     func isImageLandscape(image: UIImage) -> Bool{
-        if (image.size.width > image.size.height){
+        if (image.size.width >= image.size.height){
             return true
         }
         debugImageSize(image, message: "NOT LANDSCAPE")
@@ -80,47 +77,24 @@ class ClusterImageCellView: UITableViewCell {
     
     func croppIngimageByImageName(imageToCrop: UIImage, toRect:CGRect) -> UIImage
     {
-//        //CGRect CropRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height+15);
-//        
-//        var imageRef:CGImageRef  = CGImageCreateWithImageInRect(imageToCrop.CGImage, toRect);
-//        
-//        var cropped: UIImage =  UIImage(CGImage: imageRef)
-//        
-//        
-//        return cropped;
-        
-        
-
-        // Center the crop area
         var clippedRect:CGRect = CGRectMake(0, 0, 640, 400);
-        
-        // Crop logic
-          var imageRef:CGImageRef  = CGImageCreateWithImageInRect(imageToCrop.CGImage, clippedRect);
-      
+        var imageRef:CGImageRef  = CGImageCreateWithImageInRect(imageToCrop.CGImage, clippedRect);
         var croppedImage: UIImage  = UIImage(CGImage: imageRef)
-     
         return croppedImage;
-        
-        
     }
     
     
     
-    func resizeImage(image: UIImage,  withWidth: CGFloat, withHeight: CGFloat) -> UIImage
-    {
+    func resizeImage(image: UIImage,  withWidth: CGFloat, withHeight: CGFloat) -> UIImage{
         var newSize = CGSizeMake(withWidth, withHeight)
         var widthRatio = newSize.width/image.size.width
         var heightRatio = newSize.height/image.size.height
         
-        if(widthRatio > heightRatio)
-        {
+        if(widthRatio > heightRatio){
             newSize=CGSizeMake(image.size.width*heightRatio,image.size.height*heightRatio)
-        }
-        else
-        {
+        }else{
             newSize=CGSizeMake(image.size.width*widthRatio,image.size.height*widthRatio)
         }
-        
         
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
         image.drawInRect( CGRectMake(0,0,newSize.width,newSize.height))
@@ -137,30 +111,61 @@ class ClusterImageCellView: UITableViewCell {
             return length
         }
         return counter
-        
-        
-        
     }
     
-    func setTouristicnessValue(touristicnessValue : Int){
-        switch touristicnessValue {
+    
+    func setTouristicnessValue(){
+        switch self.touristicnessValue {
         case 0,1,2:
-            self.touristicnessValue.text = "ABSOLUTE SEEKRET"
+            self.circleView.backgroundColor = UIColor.greenColor()
         case 3,4:
-            self.touristicnessValue.text = "SEEKRET"
+            self.circleView.backgroundColor = UIColor.yellowColor()
         case 5,6,7:
-            self.touristicnessValue.text = "TOURISTIC"
+            self.circleView.backgroundColor = UIColor.orangeColor()
         case 8,9,10:
-            self.touristicnessValue.text = "ABSOLUTE TOURISTIC"
+            self.circleView.backgroundColor = UIColor.redColor()
         default:
-            self.touristicnessValue.text = "NO VOTES AVAILBALE"
+            self.circleView.backgroundColor = UIColor.purpleColor()
         }
     }
     
+    func initCircle(){
+        let circleWidth:CGFloat = 50.0
+        let circleHeight:CGFloat = 50.0
+        
+        let startPointX:CGFloat = clusterImageView.bounds.width-(1.25*circleWidth)
+        debugPrintln("CLUSTER IMAGE VIEW HEIGHT \(clusterImageView.bounds.height)")
+        let startPointY:CGFloat = clusterImageView.frame.height-(circleHeight/2)
+        
+        self.circleView = UIView(frame: CGRectMake(startPointX,startPointY,circleWidth,circleHeight));
+        
+        self.circleView.alpha = 1;
+        self.circleView.layer.cornerRadius = circleHeight/2;
+        self.circleView.backgroundColor = UIColor.blueColor();
+        self.circleView.layer.borderColor = UIColor.whiteColor().CGColor;
+        self.circleView.layer.borderWidth = 2
+        
+        
+        self.textToShow = UILabel(frame: CGRectMake(10,0,50.0,50.0))
+        self.circleView.addSubview(textToShow)
+        
+        self.addressLabel = UILabel(frame: CGRectMake(10,startPointY+35,240,30));
+        textToShow.layer.zPosition = 106
+        // Add it do your label's layer hierarchy
+        clusterImageView.addSubview(circleView)
+        
+        clusterImageView.addSubview(addressLabel)
+        self.circleView.layer.zPosition = 105
+    }
+    
+    func setTextForVotes(){
+        var validCount = self.getValidCounterValue()+1
+        var urlCount = self.urls.count
+        self.textToShow.text = "\(validCount)/\(urlCount)"
+    }
+    
     func setNextPicture(){
-        
         var length = urls.count - 1
-        
         if ( counter == length){
             counter = 0
         }else{

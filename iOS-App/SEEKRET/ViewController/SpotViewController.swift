@@ -14,9 +14,9 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
     @IBOutlet weak var clusterTableView: UITableView!
     @IBOutlet weak var showTopSpots: UITabBarItem!
     
-   
+    
     @IBOutlet weak var tabBar: UITabBar!
-   
+    
     var uiHelper:UIHelper!
     var spotName: String?
     var cluster: [GTLSpotAPICluster] = []
@@ -41,24 +41,24 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
         performSilentLogin();
     }
     
-func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
-    
-    var itemsOfTabBar = tabBar.selectedItem
-   
-    
-    for (index, currentItem) in enumerate(tabBar.items as [UITabBarItem]){
-        if (currentItem == item){
-            debugPrintln("Current Item is \(index)")
+    func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
+        
+        var itemsOfTabBar = tabBar.selectedItem
+        
+        
+        for (index, currentItem) in enumerate(tabBar.items as [UITabBarItem]){
+            if (currentItem == item){
+                debugPrintln("Current Item is \(index)")
+            }
         }
-    }
-    
-    
-    var mainViewController:MainViewController =
-    self.storyboard.instantiateViewControllerWithIdentifier("MainViewController") as MainViewController
-    
-    self.presentViewController(mainViewController, animated: true, completion: nil)
-    
-    
+        
+        
+        var mainViewController:MainViewController =
+        self.storyboard.instantiateViewControllerWithIdentifier("MainViewController") as MainViewController
+        
+        self.presentViewController(mainViewController, animated: true, completion: nil)
+        
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,24 +85,24 @@ func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell: ClusterImageCellView = clusterTableView.dequeueReusableCellWithIdentifier("ClusterImageIdent") as ClusterImageCellView
-    
+        
         var indexRow = indexPath.row
         
         debugPrintln("Current Row index \(indexRow)")
         debugPrintln("Current Cluster Count \(cluster.count)")
-       
+        
         assert(indexRow < cluster.count, "PROBLEM APPEARED")
         
         var currentCluster = cluster[indexRow]
         var currentClusterUrls = currentCluster.urlOfMostViewedPicture as? [String]
         
         if (currentClusterUrls != nil){
+            cell.counter = 0
             cell.urls = currentClusterUrls
             cell.setCellViewPicture()
+            cell.touristicnessValue = currentCluster.overallTouristicnessInPointsFrom1To10
             if (currentCluster.overallTouristicnessInPointsFrom1To10 != nil){
-            cell.setTouristicnessValue(currentCluster.overallTouristicnessInPointsFrom1To10)
-
-                
+                cell.setTouristicnessValue()
             }
         }
         
@@ -152,7 +152,14 @@ func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
         }
     }
     
-    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
+        debugPrintln("SELECTED ROW @ INDEX \(indexPath)")
+        var cell: ClusterImageCellView = self.clusterTableView.cellForRowAtIndexPath(indexPath) as ClusterImageCellView
+        //TODO COS AND SIW: Wieso muss ich das machen, mein Hintergrund von der circleview wird auf transparent gesetzt, wenn ich die 
+        //Zelle selektiere
+        cell.setTouristicnessValue()
+
+    }
     
     
     func didRecieveCluster(cluster: [GTLSpotAPICluster], spotName: String){
