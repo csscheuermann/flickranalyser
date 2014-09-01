@@ -194,10 +194,13 @@
           "clusterRadiusInMeter" : {
             "type" : "number"
           },
+          "maxNumberOfViewsPerCluster" : {
+            "type" : "integer"
+          },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
-          "maxNumberOfViewsPerCluster" : {
+          "maxClusterViews" : {
             "type" : "integer"
           },
           "cluster" : {
@@ -208,9 +211,6 @@
           },
           "spotRadiusInMeter" : {
             "type" : "number"
-          },
-          "maxClusterViews" : {
-            "type" : "integer"
           }
         }
       },
@@ -321,14 +321,14 @@
           "longitude" : {
             "type" : "number"
           },
-          "longitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
-          },
           "polar" : {
             "type" : "boolean"
           },
           "latitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           }

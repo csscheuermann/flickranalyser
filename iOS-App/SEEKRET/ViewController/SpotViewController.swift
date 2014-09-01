@@ -94,6 +94,11 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
                 cell.urls = currentClusterUrls
                 cell.setCellViewPicture()
                 cell.touristicnessValue = currentCluster.overallTouristicnessInPointsFrom1To10
+                if (currentCluster.name != nil){
+                    cell.setAdress(currentCluster.name)
+                }else{
+                     cell.setAdress("")
+                }
                 if (currentCluster.overallTouristicnessInPointsFrom1To10 != nil){
                     cell.setTouristicnessValue()
                 }

@@ -8,7 +8,6 @@ import java.util.Set;
 import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
-import com.seekret.businesslogic.spotfinder.impl.NearestSpotFinder;
 import com.seekret.pojo.Cluster;
 import com.seekret.pojo.PointOfInterest;
 import com.seekret.pojo.Spot;
@@ -22,12 +21,7 @@ public class SpotCalculationHandler {
 		for (PointOfInterest pointOfInterest : pointOfInterests) {
 			if (!isPointIntrestInCluster(hardcodedSpot, clusters, pointOfInterest)){
 				//Add new Cluster, no Cluster found or List was empty
-				double poiLatitude = pointOfInterest.getLocation().getLatitude();
-				double poiLongitude = pointOfInterest.getLocation().getLongitude();
-				Cluster cluster = new Cluster(poiLatitude, poiLongitude, "", "");
-				NearestSpotFinder nsf = new NearestSpotFinder();
-				String findAddressByLatLng = nsf.findAddressByLatLng(poiLatitude, poiLongitude);
-				cluster.setName(findAddressByLatLng);		
+				Cluster cluster = new Cluster(pointOfInterest.getLocation().getLatitude(), pointOfInterest.getLocation().getLongitude(), "", "");
 				cluster.addPointOfInterestToList(pointOfInterest);
 				cluster.addViewCount(pointOfInterest.getCountOfViews());
 				hardcodedSpot.addClusterTo(cluster);

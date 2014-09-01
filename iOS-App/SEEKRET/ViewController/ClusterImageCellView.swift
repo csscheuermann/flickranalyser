@@ -21,6 +21,8 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
     var circleView: UIView!
     var circleViewPictureCounterLabel: UILabel!
     var addressLabel: UILabel!
+    var addressSubLabel: UILabel!
+    
     var touristicnessValue : Int!
     
     
@@ -46,6 +48,8 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
                 
                 completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
                     //TODO COS AND SIW: DAS SOLLTEN WIR MAL VERSTEHEN. WIE FUNKTIONIERT DIESER CROP. Ich habe es so hingebogen, dass es geht, aber verstehen tu ich es nicht mehr ... ich will skalieren und dann croppen.
+                    self.addNiceAnimation()
+                    
                     self.debugImageSize(image, message: "ORIGINAL")
                     var imageResized = self.resizeImage(image, withWidth: 320, withHeight: 250)
                     self.debugImageSize(imageResized, message: "RESIZED")
@@ -53,13 +57,40 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
                     self.debugImageSize(croppedImage, message: "CROPPED")
                     self.clusterImageView.image = croppedImage
                     self.setTextForVotes()
-                    self.addressLabel.text = "CAPITALIZED FAKEADDRESS"
+                    
+                    
+                    
+                    
             })
         }
         
     }
     
+    func setAdress(address: String){
+        
+        var myArray = address.componentsSeparatedByString(",")
+        self.addressLabel.font = UIFont.boldSystemFontOfSize(16)
+        self.addressSubLabel.font = UIFont.systemFontOfSize(14);
+        self.addressSubLabel.textColor = UIColor.grayColor()
+        
+        if (myArray.count > 1){
+            self.addressLabel.text = myArray[0]
+            self.addressSubLabel.text = myArray[1]
+        }else{
+            self.addressLabel.text = "NO ADDRESS AVAILABLE"
+            self.addressSubLabel.text = "NO SUBADDRESS AVAILABLE"
+        }
+    }
     
+    func addNiceAnimation(){
+        var transition:CATransition = CATransition()
+        
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
+        transition.type = kCATransitionFade;
+        
+        self.clusterImageView.layer.addAnimation(transition, forKey:nil)
+    }
     
     func isImageLandscape(image: UIImage) -> Bool{
         if (image.size.width >= image.size.height){
@@ -144,7 +175,10 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
         
         self.circleViewPictureCounterLabel = UILabel(frame: CGRectMake(10,0,50.0,50.0))
         self.addressLabel = UILabel(frame: CGRectMake(10,startPointY+35,240,30));
+        self.addressSubLabel = UILabel(frame: CGRectMake(5,startPointY+60,240,30));
         
+        
+        self.clusterImageView.addSubview(addressSubLabel)
         self.clusterImageView.addSubview(circleView)
         self.circleView.addSubview(circleViewPictureCounterLabel)
         self.clusterImageView.addSubview(addressLabel)

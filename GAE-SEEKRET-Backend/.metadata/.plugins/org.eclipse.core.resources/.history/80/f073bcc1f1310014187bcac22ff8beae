@@ -27,7 +27,11 @@ public class SpotCalculationHandler {
 				Cluster cluster = new Cluster(poiLatitude, poiLongitude, "", "");
 				NearestSpotFinder nsf = new NearestSpotFinder();
 				String findAddressByLatLng = nsf.findAddressByLatLng(poiLatitude, poiLongitude);
-				cluster.setName(findAddressByLatLng);		
+				
+				
+				cluster
+				String address = clusterService.getAddressFromLatLng(user, latitude, logitude).getAddress();
+				
 				cluster.addPointOfInterestToList(pointOfInterest);
 				cluster.addViewCount(pointOfInterest.getCountOfViews());
 				hardcodedSpot.addClusterTo(cluster);
