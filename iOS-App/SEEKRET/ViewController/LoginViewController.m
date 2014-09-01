@@ -58,7 +58,7 @@ static GPPSignIn *signIn;
     [self disconnect];
 }
 - (IBAction)loginWithoutOAuthTouched:(id)sender {
-    [self showEndpoints];
+   //DO NOTHING 
 }
 
 - (void)disconnect {
@@ -88,23 +88,7 @@ static GPPSignIn *signIn;
     }
 }
 
--(void)showEndpoints {
-  //  static GTLServiceSpotAPI *service = nil;
-//    if (!service) {
-//        service = [[GTLServiceSpotAPI alloc] init];
-//        service.retryEnabled = YES;
-//        
-//        GTLQuerySpotAPI *query = [GTLQuerySpotAPI queryForGetNearestSpotByAddressWithSpotName:@"Berlin, Germany"];
-//        [service executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLSpotAPISpot *object, NSError *error){
-//            NSNumber *array = object.overallMaxPOINumberPerCluster;
-////            object.cluster[0]
-//            GTLSpotAPICluster *cluster = object.cluster[0];
-//            NSURL *url = cluster.urlOfMostViewedPicture[0];
-//            NSLog(@"First output: %@", array);
-//        }];
-//        
-//    }
-}
+
 
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error
 {

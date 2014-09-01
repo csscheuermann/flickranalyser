@@ -17,8 +17,9 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
     
     var urls : [String]!
     var counter : Int = 0
+    
     var circleView: UIView!
-    var textToShow: UILabel!
+    var circleViewPictureCounterLabel: UILabel!
     var addressLabel: UILabel!
     var touristicnessValue : Int!
     
@@ -34,31 +35,28 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
     
     func setCellViewPicture(){
         if (urls != nil){
-            
             let validIndex = getValidCounterValue()
-            
             assert(validIndex <= urls.count, "COUNTER WAS BIGGER THAN ARRAY SIZE - SHOULD NEVER HAPPEN. COUNTER \(validIndex) URL ARRAY COUNT \(urls.count)")
             
-            if(urls[validIndex] != "test"){
-                var manager = SDWebImageManager.sharedManager()
-                manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed,
-                    progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
-                        debugPrintln("RECEIVED SIZE \(receivedSize), EXPECTED SIZE \(expectedSize) ")
-                    },
-                    
-                    completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
-                        //TODO COS AND SIW: DAS SOLLTEN WIR MAL VERSTEHEN. WIE FUNKTIONIERT DIESER CROP. Ich habe es so hingebogen, dass es geht, aber verstehen tu ich es nicht mehr ... ich will skalieren und dann croppen.
-                        self.debugImageSize(image, message: "ORIGINAL")
-                        var imageResized = self.resizeImage(image, withWidth: 320, withHeight: 250)
-                        self.debugImageSize(imageResized, message: "RESIZED")
-                        var croppedImage = self.croppIngimageByImageName(imageResized, toRect: CGRectMake(0, 0, 320, 200))
-                        self.debugImageSize(croppedImage, message: "CROPPED")
-                        self.clusterImageView.image = croppedImage
-                        self.setTextForVotes()
-                        self.addressLabel.text = "CAPITALIZED FAKEADDRESS"
-                })
-            }
+            var manager = SDWebImageManager.sharedManager()
+            manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed,
+                progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
+                    debugPrintln("RECEIVED SIZE \(receivedSize), EXPECTED SIZE \(expectedSize) ")
+                },
+                
+                completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
+                    //TODO COS AND SIW: DAS SOLLTEN WIR MAL VERSTEHEN. WIE FUNKTIONIERT DIESER CROP. Ich habe es so hingebogen, dass es geht, aber verstehen tu ich es nicht mehr ... ich will skalieren und dann croppen.
+                    self.debugImageSize(image, message: "ORIGINAL")
+                    var imageResized = self.resizeImage(image, withWidth: 320, withHeight: 250)
+                    self.debugImageSize(imageResized, message: "RESIZED")
+                    var croppedImage = self.croppIngimageByImageName(imageResized, toRect: CGRectMake(0, 0, 320, 200))
+                    self.debugImageSize(croppedImage, message: "CROPPED")
+                    self.clusterImageView.image = croppedImage
+                    self.setTextForVotes()
+                    self.addressLabel.text = "CAPITALIZED FAKEADDRESS"
+            })
         }
+        
     }
     
     
@@ -138,30 +136,27 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
         let startPointY:CGFloat = clusterImageView.frame.height-(circleHeight/2)
         
         self.circleView = UIView(frame: CGRectMake(startPointX,startPointY,circleWidth,circleHeight));
-        
         self.circleView.alpha = 1;
         self.circleView.layer.cornerRadius = circleHeight/2;
         self.circleView.backgroundColor = UIColor.blueColor();
         self.circleView.layer.borderColor = UIColor.whiteColor().CGColor;
         self.circleView.layer.borderWidth = 2
         
-        
-        self.textToShow = UILabel(frame: CGRectMake(10,0,50.0,50.0))
-        self.circleView.addSubview(textToShow)
-        
+        self.circleViewPictureCounterLabel = UILabel(frame: CGRectMake(10,0,50.0,50.0))
         self.addressLabel = UILabel(frame: CGRectMake(10,startPointY+35,240,30));
-        textToShow.layer.zPosition = 106
-        // Add it do your label's layer hierarchy
-        clusterImageView.addSubview(circleView)
         
-        clusterImageView.addSubview(addressLabel)
+        self.clusterImageView.addSubview(circleView)
+        self.circleView.addSubview(circleViewPictureCounterLabel)
+        self.clusterImageView.addSubview(addressLabel)
+        
+        self.circleViewPictureCounterLabel.layer.zPosition = 106
         self.circleView.layer.zPosition = 105
     }
     
     func setTextForVotes(){
         var validCount = self.getValidCounterValue()+1
         var urlCount = self.urls.count
-        self.textToShow.text = "\(validCount)/\(urlCount)"
+        self.circleViewPictureCounterLabel.text = "\(validCount)/\(urlCount)"
     }
     
     func setNextPicture(){

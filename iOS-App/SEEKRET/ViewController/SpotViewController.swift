@@ -19,7 +19,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
     
     var uiHelper:UIHelper!
     var spotName: String?
-    var cluster: [GTLSpotAPICluster] = []
+    var cluster: [GTLSpotAPICluster]!
     var currentUrl: String?
     var currentCell:ClusterImageCellView?
     
@@ -28,16 +28,6 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
         self.clusterTableView.delegate = self
         self.clusterTableView.dataSource = self
         self.tabBar.delegate = self;
-        
-        var initialCluster = GTLSpotAPICluster()
-        
-        var urlPictures = ["test"]
-        initialCluster.urlOfMostViewedPicture = urlPictures
-        cluster.append(initialCluster)
-        cluster.append(initialCluster)
-        cluster.append(initialCluster)
-        
-        
         performSilentLogin();
     }
     
@@ -80,39 +70,43 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.cluster.count;
+        if (cluster != nil){
+            return self.cluster.count
+        }
+        return 0;
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell: ClusterImageCellView = clusterTableView.dequeueReusableCellWithIdentifier("ClusterImageIdent") as ClusterImageCellView
-        
-        var indexRow = indexPath.row
-        
-        debugPrintln("Current Row index \(indexRow)")
-        debugPrintln("Current Cluster Count \(cluster.count)")
-        
-        assert(indexRow < cluster.count, "PROBLEM APPEARED")
-        
-        var currentCluster = cluster[indexRow]
-        var currentClusterUrls = currentCluster.urlOfMostViewedPicture as? [String]
-        
-        if (currentClusterUrls != nil){
-            cell.counter = 0
-            cell.urls = currentClusterUrls
-            cell.setCellViewPicture()
-            cell.touristicnessValue = currentCluster.overallTouristicnessInPointsFrom1To10
-            if (currentCluster.overallTouristicnessInPointsFrom1To10 != nil){
-                cell.setTouristicnessValue()
+        if (cluster != nil){
+            var indexRow = indexPath.row
+            
+            debugPrintln("Current Row index \(indexRow)")
+            debugPrintln("Current Cluster Count \(cluster.count)")
+            
+            assert(indexRow < cluster.count, "PROBLEM APPEARED")
+            
+            var currentCluster = cluster[indexRow]
+            var currentClusterUrls = currentCluster.urlOfMostViewedPicture as? [String]
+            
+            if (currentClusterUrls != nil){
+                cell.counter = 0
+                cell.urls = currentClusterUrls
+                cell.setCellViewPicture()
+                cell.touristicnessValue = currentCluster.overallTouristicnessInPointsFrom1To10
+                if (currentCluster.overallTouristicnessInPointsFrom1To10 != nil){
+                    cell.setTouristicnessValue()
+                }
             }
+            
+            var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+            swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+            cell.addGestureRecognizer(swipeRight)
+            
+            var swipeDown = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+            swipeDown.direction = UISwipeGestureRecognizerDirection.Left
+            cell.addGestureRecognizer(swipeDown)
         }
-        
-        var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
-        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
-        cell.addGestureRecognizer(swipeRight)
-        
-        var swipeDown = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
-        swipeDown.direction = UISwipeGestureRecognizerDirection.Left
-        cell.addGestureRecognizer(swipeDown)
         
         return cell
     }
@@ -155,10 +149,10 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
         debugPrintln("SELECTED ROW @ INDEX \(indexPath)")
         var cell: ClusterImageCellView = self.clusterTableView.cellForRowAtIndexPath(indexPath) as ClusterImageCellView
-        //TODO COS AND SIW: Wieso muss ich das machen, mein Hintergrund von der circleview wird auf transparent gesetzt, wenn ich die 
+        //TODO COS AND SIW: Wieso muss ich das machen, mein Hintergrund von der circleview wird auf transparent gesetzt, wenn ich die
         //Zelle selektiere
         cell.setTouristicnessValue()
-
+        
     }
     
     
