@@ -9,11 +9,12 @@
 
 import UIKit
 
-class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
+class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
     
     
     @IBOutlet weak var clusterImageView: UIImageView!
     
+
     
     var urls : [String]!
     var counter : Int = 0
@@ -22,15 +23,18 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
     var circleViewPictureCounterLabel: UILabel!
     var addressLabel: UILabel!
     var addressSubLabel: UILabel!
-    
+    var clusterDataStoreKey: String!
     var touristicnessValue : Int!
-    
+ 
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initCircle()
+        
     }
     
+
+ 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -57,7 +61,7 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
                     self.debugImageSize(croppedImage, message: "CROPPED")
                     self.clusterImageView.image = croppedImage
                     self.setTextForVotes()
-                    
+                   
                     
                     
                     
@@ -177,7 +181,6 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
         self.addressLabel = UILabel(frame: CGRectMake(10,startPointY+35,240,30));
         self.addressSubLabel = UILabel(frame: CGRectMake(5,startPointY+60,240,30));
         
-        
         self.clusterImageView.addSubview(addressSubLabel)
         self.clusterImageView.addSubview(circleView)
         self.circleView.addSubview(circleViewPictureCounterLabel)
@@ -186,6 +189,8 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
         self.circleViewPictureCounterLabel.layer.zPosition = 106
         self.circleView.layer.zPosition = 105
     }
+    
+    
     
     func setTextForVotes(){
         var validCount = self.getValidCounterValue()+1
@@ -216,6 +221,9 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate {
         setCellViewPicture()
     }
     
+
+    
+
     
     
     

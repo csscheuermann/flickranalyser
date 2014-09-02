@@ -13,6 +13,7 @@ class MainViewController: UIViewController,EndPointControllerForTopSpotsProtocol
     @IBOutlet weak var topSpotsTableView: UITableView!
     var uiHelper:UIHelper!
     var topSpots: [String] = []
+    var auth: GTMOAuth2Authentication!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,7 @@ class MainViewController: UIViewController,EndPointControllerForTopSpotsProtocol
             debugPrintln("FINISHED WITH AUTH")
             self.uiHelper = UIHelper(uiView: self.view)
             uiHelper.showSpinner("Fetching TopList")
-            
+            self.auth = auth
             let endpointControllerForTopSpots = EndPointControllerForTopSpots(delegate: self);
             endpointControllerForTopSpots.getTopSpots(auth)
         }

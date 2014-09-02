@@ -28,11 +28,11 @@ public class WeightedScoreDecorator implements IClusterScoreDecorator {
 			if (clusterScore != 0 ){
 				sumOfWeights += weightedDecoratorInformation.getWeight();
 				overallClusterScore += (clusterScore * weightedDecoratorInformation.getWeight());
-				LOGGER.log(Level.INFO, "OVERALLCLUSTERSCORE STEP" + overallClusterScore + " CLUSTERSCORE " + clusterScore+ " WEIGHT " + weightedDecoratorInformation.getWeight());
+				//LOGGER.log(Level.INFO, "OVERALLCLUSTERSCORE STEP" + overallClusterScore + " CLUSTERSCORE " + clusterScore+ " WEIGHT " + weightedDecoratorInformation.getWeight());
 			}
 		}
 		double normalizedClusterWeights = overallClusterScore/sumOfWeights;
-		LOGGER.log(Level.INFO, "OVERALLCLUSTERSCORE " + normalizedClusterWeights);
+		//LOGGER.log(Level.INFO, "OVERALLCLUSTERSCORE " + normalizedClusterWeights);
 		return normalizedClusterWeights;
 	}
 

@@ -34,8 +34,7 @@ public class ClusterService
 	public Response evaluateCluster(@Named("datastoreKeyOfCluster") String datastoreKeyOfCluster, @Named("touristicnessRatingFrom1To10") int touristicnessRatingFrom1To10, @Named("spotName") String spotName){
 		return PFSaverCluster.evaluateTouristicness(KeyFactory.stringToKey(datastoreKeyOfCluster), touristicnessRatingFrom1To10, spotName);
 	}
-
-	@ApiMethod(name="getAddressFromLatLng", scopes={"https://www.googleapis.com/auth/userinfo.email"}, clientIds={"1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com"})
+	@ApiMethod(name="getAddressFromLatLng")
 	public Address getAddressFromLatLng(User user, @Named("latitude") double latitude, @Named("longitude") double longitude)
 			throws UnauthorizedException{
 		if (user == null) throw new UnauthorizedException("User is Not Valid");
@@ -44,8 +43,7 @@ public class ClusterService
 		String findAddressByLatLng = nsf.findAddressByLatLng(latitude, longitude);
 		return new Address(findAddressByLatLng);
 	}
-
-	@ApiMethod(name="incrementDismissCount", scopes={"https://www.googleapis.com/auth/userinfo.email"}, clientIds={"1099379908084-erlt14509li8acjpd7m20770t9gi5c0g.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com"})
+	@ApiMethod(name="incrementDismissCount")
 	public Response incrementDismissCount(User user, @Named("datastoreKeyOfCluster") String datastoreKeyOfCluster)
 			throws UnauthorizedException {
 		if (user == null) {

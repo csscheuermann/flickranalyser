@@ -22,6 +22,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
     var cluster: [GTLSpotAPICluster]!
     var currentUrl: String?
     var currentCell:ClusterImageCellView?
+    var auth: GTMOAuth2Authentication!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,26 +34,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
         performSilentLogin();
     }
     
-   /* func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
-        
-        var itemsOfTabBar = tabBar.selectedItem
-        
-        
-        for (index, currentItem) in enumerate(tabBar.items as [UITabBarItem]){
-            if (currentItem == item){
-                debugPrintln("Current Item is \(index)")
-            }
-        }
-        
-        
-        var mainViewController:MainViewController =
-        self.storyboard.instantiateViewControllerWithIdentifier("MainViewController") as MainViewController
-        
-        self.presentViewController(mainViewController, animated: true, completion: nil)
-        
-        
-    }*/
-    override func didReceiveMemoryWarning() {
+      override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -95,6 +77,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
                 cell.counter = 0
                 cell.urls = currentClusterUrls
                 cell.setCellViewPicture()
+                cell.clusterDataStoreKey = currentCluster.datastoreClusterKey
                 cell.touristicnessValue = currentCluster.overallTouristicnessInPointsFrom1To10
                 if (currentCluster.name != nil){
                     cell.setAdress(currentCluster.name)
@@ -103,6 +86,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
                 }
                 if (currentCluster.overallTouristicnessInPointsFrom1To10 != nil){
                     cell.setTouristicnessValue()
+                    
                 }
             }
             
@@ -150,18 +134,12 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
             uiHelper.showSpinner("Fetching Cluster")
             let endpointController = EnpointController(delegate: self);
             endpointController.getCluster(spotName!, auth: auth)
+            self.auth = auth
         }
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
-        debugPrintln("SELECTED ROW @ INDEX \(indexPath)")
-        var cell: ClusterImageCellView = self.clusterTableView.cellForRowAtIndexPath(indexPath) as ClusterImageCellView
-        //TODO COS AND SIW: Wieso muss ich das machen, mein Hintergrund von der circleview wird auf transparent gesetzt, wenn ich die
-        //Zelle selektiere
-        cell.setTouristicnessValue()
-        
-    }
-    
+      
+ 
     
     func didRecieveCluster(cluster: [GTLSpotAPICluster], spotName: String){
         self.spotNameLabel.font = UIFont (name: "HelveticaNeue-UltraLight", size: 20)
@@ -170,4 +148,20 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
         self.clusterTableView.reloadData()
         uiHelper.stopSpinner()
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        
+        if (segue.identifier == "showDetailedClusterView"){
+            var indexPath: NSIndexPath = self.clusterTableView.indexPathForSelectedRow()
+            var detailedClusterViewController:DetailedClusterViewController = segue.destinationViewController as DetailedClusterViewController
+            var currentCluster = cluster[indexPath.row]
+            detailedClusterViewController.cluster = currentCluster
+            detailedClusterViewController.auth = self.auth
+
+        }
+    }
+   
+
+    
+    
 }

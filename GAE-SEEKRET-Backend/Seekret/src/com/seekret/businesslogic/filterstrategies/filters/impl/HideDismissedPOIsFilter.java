@@ -18,6 +18,8 @@ public class HideDismissedPOIsFilter implements IClusterFilter {
 		for (Cluster cluster : clusterToFilter) {
 			if(cluster.getDismissCounter() == 0){
 				result.add(cluster);
+			}else{
+				LOGGER.log(Level.INFO, "DID NOT CONCIDER THIS CLUSTER");
 			}
 		}
 		LOGGER.log(Level.INFO, "Number of clusters that have been dismissed and are not going to be shown: " + (clusterToFilter.size() - result.size()) );

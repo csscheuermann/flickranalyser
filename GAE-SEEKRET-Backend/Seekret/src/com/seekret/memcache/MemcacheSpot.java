@@ -21,11 +21,19 @@ public class MemcacheSpot
 
   public static Spot getSpotForSpotName(String spotName)
   {
-    String memcachKey = MemcacheNameStoreEnum.SPOT.toString() + spotName;
-
-    if (SpotPersistenceChecker.checkIfPersistenceMustBeAsked(memcachKey)) {
+    
+	  
+	  String memcachKey = MemcacheNameStoreEnum.SPOT.toString() + spotName;
+	    String memcachKeyTimestamp = "spotRefreshTime";
+    
+	  
+	  if (SpotPersistenceChecker.checkIfPersistenceMustBeAsked(memcachKey, memcachKeyTimestamp)) {
       Spot spot = PFGetterSpot.getSpotByName(spotName);
+  
       if (spot != null) {
+          MemcacheHelperMethods.getSyncCache().put(memcachKey + memcachKeyTimestamp, Long.valueOf(new Date().getTime()));
+          LOGGER.log(Level.INFO, "PUT TIMESTAMP IN CACHE: " + memcachKey+memcachKeyTimestamp);
+          
         MemcacheHelperMethods.getSyncCache().put(memcachKey, spot, Expiration.onDate(MemCacheConstants.MEMCACH_EXPIRE_DATE));
       }
       return spot;
@@ -43,7 +51,7 @@ public class MemcacheSpot
   public static SpotResultList getTopSpots()
   {
     String memcachKey = "topTenSpotList";
-    String memcachKeyTimestamp = "spotRefreshTime";
+    String memcachKeyTimestamp = "topSpotsRefreshTime";
 
     if (SpotPersistenceChecker.checkIfPersistenceMustBeAskedForTop10Spots(memcachKey, memcachKeyTimestamp)) {
       SpotResultList topTenSpotsFromPersistence = PFGetterSpot.getTopSpots();

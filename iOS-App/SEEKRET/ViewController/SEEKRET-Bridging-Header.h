@@ -16,3 +16,5 @@
 #import "GTLSpotAPIClusterCollection.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "QuartzCore/QuartzCore.h"
+#import "GTLRatingAPI.h"
+#import "GTLClusterAPI.h"

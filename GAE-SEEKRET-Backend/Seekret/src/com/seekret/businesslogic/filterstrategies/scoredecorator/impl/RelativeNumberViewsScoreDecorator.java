@@ -27,7 +27,7 @@ IClusterScoreDecorator {
 		}
 		
 		double result = (double)overallViews / MAX_NUMBER_VIEWS;
-		LOGGER.log(Level.INFO, "RelativeNumberViewsScoreDecorator" + result);
+		//LOGGER.log(Level.INFO, "RelativeNumberViewsScoreDecorator" + result);
 		return result;
 	}
 

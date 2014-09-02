@@ -11,10 +11,10 @@ public class TouristicnessScoreDecorator implements IClusterScoreDecorator {
 	@Override
 	public double scoreCluster(Cluster clusterToScore) {
 		double touristicness = clusterToScore.getOverallTouristicnessInPointsFrom1To10()/10.0;
-		LOGGER.log(Level.INFO, "TOURISTICNESS: " + touristicness);		
+		//LOGGER.log(Level.INFO, "TOURISTICNESS: " + touristicness);		
 		double threshold = 0.5;
 		if (touristicness > threshold){
-			LOGGER.log(Level.INFO, "TOURISTICNESS > " + threshold + " " + touristicness);
+			//LOGGER.log(Level.INFO, "TOURISTICNESS > " + threshold + " " + touristicness);
 			return -0.1;
 		}else{
 			return 1.0;

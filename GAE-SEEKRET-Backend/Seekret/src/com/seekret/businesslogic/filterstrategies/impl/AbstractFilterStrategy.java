@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.seekret.businesslogic.filterstrategies.IFilterStrategy;
 import com.seekret.businesslogic.filterstrategies.common.ClusterScoreComparator;
@@ -16,7 +17,7 @@ import com.seekret.pojo.Spot;
 public abstract class AbstractFilterStrategy implements IFilterStrategy {
 
 	private static final int DEFAULT_MAX_NUMBER_OF_CLUSTERS = 60;
-
+	private static final Logger LOGGER = Logger.getLogger(AbstractFilterStrategy.class.getName());
 	private boolean ignoreDismissedClusters;
 
 	private boolean limitResultSize;
