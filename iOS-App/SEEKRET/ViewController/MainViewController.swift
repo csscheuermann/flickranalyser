@@ -16,11 +16,13 @@ class MainViewController: UIViewController,EndPointControllerForTopSpotsProtocol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.automaticallyAdjustsScrollViewInsets = false;
         self.topSpotsTableView.delegate = self
         self.topSpotsTableView.dataSource = self
         topSpots = ["Getting Top Spots ..."]
         performSilentLogin();
+        
+        
     }
     
     /// We have to do the Login here, because it is only possible in subclasses from UIViewController.
@@ -71,7 +73,15 @@ class MainViewController: UIViewController,EndPointControllerForTopSpotsProtocol
         return cell
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        
+        if (segue.identifier == "showClusterView"){
+            var indexPath: NSIndexPath = self.topSpotsTableView.indexPathForSelectedRow()
+             var spotViewController:SpotViewController = segue.destinationViewController as SpotViewController
+            spotViewController.spotName = topSpots[indexPath.row]
+        }
+    }
+    /*func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let spotName = topSpots[indexPath.row]
        
         //Show the Mapview Controller
@@ -88,8 +98,6 @@ class MainViewController: UIViewController,EndPointControllerForTopSpotsProtocol
         
     
         
-    }
-    
-    
-    
+    }*/
 }
+

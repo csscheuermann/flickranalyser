@@ -12,7 +12,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
     
     @IBOutlet weak var spotNameLabel: UILabel!
     @IBOutlet weak var clusterTableView: UITableView!
-    @IBOutlet weak var showTopSpots: UITabBarItem!
+  
     
     
     @IBOutlet weak var tabBar: UITabBar!
@@ -25,13 +25,14 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.automaticallyAdjustsScrollViewInsets = false;
         self.clusterTableView.delegate = self
         self.clusterTableView.dataSource = self
-        self.tabBar.delegate = self;
+
         performSilentLogin();
     }
     
-    func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
+   /* func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
         
         var itemsOfTabBar = tabBar.selectedItem
         
@@ -49,7 +50,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
         self.presentViewController(mainViewController, animated: true, completion: nil)
         
         
-    }
+    }*/
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -97,7 +98,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
                 if (currentCluster.name != nil){
                     cell.setAdress(currentCluster.name)
                 }else{
-                     cell.setAdress("")
+                    cell.setAdress("")
                 }
                 if (currentCluster.overallTouristicnessInPointsFrom1To10 != nil){
                     cell.setTouristicnessValue()

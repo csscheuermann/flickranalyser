@@ -80,8 +80,8 @@ static GPPSignIn *signIn;
     if ([[GPPSignIn sharedInstance] authentication]) {
         self.loginButton.hidden = YES;
       
-         MainViewController *myVC = (MainViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-        [self presentViewController:myVC animated:YES completion:nil];
+        /* MainViewController *myVC = (MainViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+        [self presentViewController:myVC animated:YES completion:nil];*/
         
     } else {
         // Führen Sie hier andere Aktionen durch.
