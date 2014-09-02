@@ -23,7 +23,10 @@
 		81A0F440198E428400D148B1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A0F43E198E428400D148B1 /* LoginViewController.m */; };
 		81A0F447198EA77700D148B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A0F446198EA77700D148B1 /* Security.framework */; };
 		81A0F449198EA78300D148B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A0F448198EA78300D148B1 /* SystemConfiguration.framework */; };
-		81AB6446199160A3008C2040 /* ShowEndpointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AB6445199160A3008C2040 /* ShowEndpointViewController.m */; };
+		B410298219B5CAF100DBF1B9 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B410298119B5CAF100DBF1B9 /* background.jpg */; };
+		B410298419B5CCA700DBF1B9 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B410298319B5CCA700DBF1B9 /* logo.png */; };
+		B410298619B5D11200DBF1B9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B410298519B5D11200DBF1B9 /* icon.png */; };
+		B410298819B5D3C100DBF1B9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B410298719B5D3C100DBF1B9 /* Default-568h@2x.png */; };
 		B41E2BD719B054D900E1A180 /* ClusterImageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */; };
 		B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD819B057BF00E1A180 /* SpotViewController.swift */; };
 		B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7019AF053600565AFA /* UIHelper.swift */; };
@@ -80,8 +83,10 @@
 		81A0F43E198E428400D148B1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		81A0F446198EA77700D148B1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		81A0F448198EA78300D148B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		81AB6444199160A3008C2040 /* ShowEndpointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowEndpointViewController.h; sourceTree = "<group>"; };
-		81AB6445199160A3008C2040 /* ShowEndpointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowEndpointViewController.m; sourceTree = "<group>"; };
+		B410298119B5CAF100DBF1B9 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		B410298319B5CCA700DBF1B9 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		B410298519B5D11200DBF1B9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		B410298719B5D3C100DBF1B9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterImageCellView.swift; sourceTree = "<group>"; };
 		B41E2BD819B057BF00E1A180 /* SpotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
 		B44AFD7019AF053600565AFA /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = SOURCE_ROOT; };
@@ -149,6 +154,7 @@
 		81A0F3F9198D2BEE00D148B1 = {
 			isa = PBXGroup;
 			children = (
+				B410298719B5D3C100DBF1B9 /* Default-568h@2x.png */,
 				81A0F40B198D2BEE00D148B1 /* SEEKRET */,
 				81A0F42A198D2BEE00D148B1 /* SEEKRETTests */,
 				81A0F404198D2BEE00D148B1 /* Frameworks */,
@@ -249,8 +255,6 @@
 				B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */,
 				81A0F43D198E428400D148B1 /* LoginViewController.h */,
 				81A0F43E198E428400D148B1 /* LoginViewController.m */,
-				81AB6444199160A3008C2040 /* ShowEndpointViewController.h */,
-				81AB6445199160A3008C2040 /* ShowEndpointViewController.m */,
 				B4D0B35819AE368F005291B5 /* MainViewController.swift */,
 				B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */,
 				B41E2BD819B057BF00E1A180 /* SpotViewController.swift */,
@@ -269,6 +273,9 @@
 			isa = PBXGroup;
 			children = (
 				81A0F41D198D2BEE00D148B1 /* Images.xcassets */,
+				B410298519B5D11200DBF1B9 /* icon.png */,
+				B410298319B5CCA700DBF1B9 /* logo.png */,
+				B410298119B5CAF100DBF1B9 /* background.jpg */,
 			);
 			path = Ressources;
 			sourceTree = "<group>";
@@ -413,7 +420,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				81A0F41E198D2BEE00D148B1 /* Images.xcassets in Resources */,
+				B410298419B5CCA700DBF1B9 /* logo.png in Resources */,
+				B410298619B5D11200DBF1B9 /* icon.png in Resources */,
+				B410298219B5CAF100DBF1B9 /* background.jpg in Resources */,
 				81A0F410198D2BEE00D148B1 /* InfoPlist.strings in Resources */,
+				B410298819B5D3C100DBF1B9 /* Default-568h@2x.png in Resources */,
 				81A0F419198D2BEE00D148B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +478,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B44AFDB419AF4E6700565AFA /* GTLQuerySpotAPI.m in Sources */,
-				81AB6446199160A3008C2040 /* ShowEndpointViewController.m in Sources */,
 				B44AFDB619AF4E6700565AFA /* GTLSpotAPICluster.m in Sources */,
 				B44AFDBE19AF4E6700565AFA /* GTLSpotAPISpot.m in Sources */,
 				B4F0AD7019AE4ADA00213B12 /* EndpointController.swift in Sources */,
@@ -614,7 +624,7 @@
 			baseConfigurationReference = 6B8563B7BB9D4D22B19A2DA5 /* Pods-SEEKRET.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -636,7 +646,7 @@
 			baseConfigurationReference = 6B8563B7BB9D4D22B19A2DA5 /* Pods-SEEKRET.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

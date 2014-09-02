@@ -34,6 +34,14 @@ static GPPSignIn *signIn;
     [super viewDidLoad];
     [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     
+    
+    /*UIImageView *bgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.jpg"]];
+    bgImageView.frame = self.view.bounds;
+    [self.view addSubview:bgImageView];
+    [self.view sendSubviewToBack:bgImageView];
+    */
+    
+    
     self.alreadyConenctedLabel.hidden = YES;
     signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
@@ -42,6 +50,7 @@ static GPPSignIn *signIn;
     signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail,kGTLAuthScopePlusMe,kGTLAuthScopePlusUserinfoProfile, nil];
     signIn.delegate = self;
     [signIn trySilentAuthentication];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,8 +59,9 @@ static GPPSignIn *signIn;
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)loginButtonTouched:(id)sender {
-    signIn = [GPPSignIn sharedInstance];
-    [signIn authenticate];
+    //THIS WE MUST NOT DO - Otherwise login wont work
+    //signIn = [GPPSignIn sharedInstance];
+    //[signIn authenticate];
 }
 - (IBAction)logutButtonTouched:(id)sender {
 
@@ -80,8 +90,8 @@ static GPPSignIn *signIn;
     if ([[GPPSignIn sharedInstance] authentication]) {
         self.loginButton.hidden = YES;
       
-        /* MainViewController *myVC = (MainViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-        [self presentViewController:myVC animated:YES completion:nil];*/
+        UINavigationController *myVC = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"NavigationBarController"];
+        [self presentViewController:myVC animated:YES completion:nil];
         
     } else {
         // Führen Sie hier andere Aktionen durch.
