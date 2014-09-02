@@ -28,6 +28,7 @@ class SpotViewController: UIViewController,GPPSignInDelegate, EndpointController
          self.automaticallyAdjustsScrollViewInsets = false;
         self.clusterTableView.delegate = self
         self.clusterTableView.dataSource = self
+        self.navigationItem.title = spotName
 
         performSilentLogin();
     }

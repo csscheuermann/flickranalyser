@@ -43,6 +43,7 @@ static GPPSignIn *signIn;
     
     
     self.alreadyConenctedLabel.hidden = YES;
+    self.proceedWithoutLoginButton.hidden = YES;
     signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
     signIn.clientID = kClientID;
