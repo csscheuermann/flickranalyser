@@ -1,8 +1,0 @@
-package com.seekret.data.flickr.copy;
-
-import com.flickranalyser.pojo.PointOfInterest;
-
-public interface IFotoExcluder {
-
-	boolean isFotoToExclude(PointOfInterest poi);
-}

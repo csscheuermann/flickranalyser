@@ -1,9 +1,0 @@
-package com.seekret.businesslogic.filterstrategies.copy;
-
-import com.flickranalyser.businesslogic.filterstrategies.filters.IClusterFilter;
-
-public interface IFilterStrategy extends IClusterFilter{
-
-	void setIgnoreDismissedClustersFlag(boolean ignoreDismissedClusters);
-	
-}

@@ -1,5 +1,0 @@
-package com.seekret.businesslogic.common.copy;
-
-public enum UserRolesEnum {
-DEFAULT, ADMIN
-}
