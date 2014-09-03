@@ -41,6 +41,10 @@
 		B4102A0719B5E43300DBF1B9 /* GTLQueryClusterAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B41029FF19B5E43300DBF1B9 /* GTLQueryClusterAPI.m */; };
 		B4102A0819B5E43300DBF1B9 /* GTLServiceClusterAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B4102A0119B5E43300DBF1B9 /* GTLServiceClusterAPI.m */; };
 		B4102A0A19B5F9C300DBF1B9 /* DetailedClusterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A0919B5F9C300DBF1B9 /* DetailedClusterViewController.swift */; };
+		B4102A0D19B6E7D700DBF1B9 /* LoginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A0C19B6E7D700DBF1B9 /* LoginProtocol.swift */; };
+		B4102A1019B6E97600DBF1B9 /* LoginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A0F19B6E97600DBF1B9 /* LoginHandler.swift */; };
+		B4102A1219B6F88A00DBF1B9 /* CustomerSeekretUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A1119B6F88A00DBF1B9 /* CustomerSeekretUIViewController.swift */; };
+		B4102A1519B7074100DBF1B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A1419B7074100DBF1B9 /* Constants.swift */; };
 		B41E2BD719B054D900E1A180 /* ClusterImageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */; };
 		B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD819B057BF00E1A180 /* SpotViewController.swift */; };
 		B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7019AF053600565AFA /* UIHelper.swift */; };
@@ -129,6 +133,10 @@
 		B4102A0019B5E43300DBF1B9 /* GTLServiceClusterAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceClusterAPI.h; sourceTree = "<group>"; };
 		B4102A0119B5E43300DBF1B9 /* GTLServiceClusterAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServiceClusterAPI.m; sourceTree = "<group>"; };
 		B4102A0919B5F9C300DBF1B9 /* DetailedClusterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedClusterViewController.swift; sourceTree = "<group>"; };
+		B4102A0C19B6E7D700DBF1B9 /* LoginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginProtocol.swift; sourceTree = "<group>"; };
+		B4102A0F19B6E97600DBF1B9 /* LoginHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHandler.swift; sourceTree = "<group>"; };
+		B4102A1119B6F88A00DBF1B9 /* CustomerSeekretUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerSeekretUIViewController.swift; sourceTree = "<group>"; };
+		B4102A1419B7074100DBF1B9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterImageCellView.swift; sourceTree = "<group>"; };
 		B41E2BD819B057BF00E1A180 /* SpotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
 		B44AFD7019AF053600565AFA /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = SOURCE_ROOT; };
@@ -293,6 +301,8 @@
 		81A0F43C198E428400D148B1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B4102A1319B7071100DBF1B9 /* Common */,
+				B4102A0B19B6E53C00DBF1B9 /* Protocols */,
 				B41E2BDA19B0B16C00E1A180 /* CustomCells */,
 				B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */,
 				81A0F43D198E428400D148B1 /* LoginViewController.h */,
@@ -371,6 +381,32 @@
 				B4102A0119B5E43300DBF1B9 /* GTLServiceClusterAPI.m */,
 			);
 			name = Cluster;
+			sourceTree = "<group>";
+		};
+		B4102A0B19B6E53C00DBF1B9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B4102A0C19B6E7D700DBF1B9 /* LoginProtocol.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		B4102A0E19B6E95300DBF1B9 /* SuperClasses */ = {
+			isa = PBXGroup;
+			children = (
+				B4102A0F19B6E97600DBF1B9 /* LoginHandler.swift */,
+				B4102A1119B6F88A00DBF1B9 /* CustomerSeekretUIViewController.swift */,
+			);
+			name = SuperClasses;
+			sourceTree = "<group>";
+		};
+		B4102A1319B7071100DBF1B9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B4102A0E19B6E95300DBF1B9 /* SuperClasses */,
+				B4102A1419B7074100DBF1B9 /* Constants.swift */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		B41E2BDA19B0B16C00E1A180 /* CustomCells */ = {
@@ -565,6 +601,7 @@
 			files = (
 				B41029B219B5D87100DBF1B9 /* GTLRatingAPIResponse.m in Sources */,
 				B41029B119B5D87100DBF1B9 /* GTLRatingAPIKeyResult.m in Sources */,
+				B4102A1219B6F88A00DBF1B9 /* CustomerSeekretUIViewController.swift in Sources */,
 				B44AFDB419AF4E6700565AFA /* GTLQuerySpotAPI.m in Sources */,
 				B44AFDB619AF4E6700565AFA /* GTLSpotAPICluster.m in Sources */,
 				B44AFDBE19AF4E6700565AFA /* GTLSpotAPISpot.m in Sources */,
@@ -583,9 +620,12 @@
 				B4102A0819B5E43300DBF1B9 /* GTLServiceClusterAPI.m in Sources */,
 				B44AFDBB19AF4E6700565AFA /* GTLSpotAPILatLng.m in Sources */,
 				B41029AF19B5D87100DBF1B9 /* GTLRatingAPIConstants.m in Sources */,
+				B4102A0D19B6E7D700DBF1B9 /* LoginProtocol.swift in Sources */,
 				B44AFD7819AF358E00565AFA /* EndPointControllerForTopSpots.swift in Sources */,
 				B44AFDB519AF4E6700565AFA /* GTLServiceSpotAPI.m in Sources */,
+				B4102A1519B7074100DBF1B9 /* Constants.swift in Sources */,
 				B4D0B35919AE368F005291B5 /* MainViewController.swift in Sources */,
+				B4102A1019B6E97600DBF1B9 /* LoginHandler.swift in Sources */,
 				81A0F412198D2BEE00D148B1 /* main.m in Sources */,
 				B4102A0619B5E43300DBF1B9 /* GTLClusterAPIResponse.m in Sources */,
 				B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */,

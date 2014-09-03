@@ -15,7 +15,7 @@ class MapViewController: UIViewController, EndpointControllerProtocol, GPPSignIn
  
     var uiHelper:UIHelper!
     var spotName: String?
-
+   var loginHandler: Loginhandler!
     
     /// We have to do the Login here, because it is only possible in subclasses from UIViewController.
     /// Sad but true ...

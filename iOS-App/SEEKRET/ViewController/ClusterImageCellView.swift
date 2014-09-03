@@ -14,8 +14,6 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
     
     @IBOutlet weak var clusterImageView: UIImageView!
     
-
-    
     var urls : [String]!
     var counter : Int = 0
     
@@ -25,7 +23,7 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
     var addressSubLabel: UILabel!
     var clusterDataStoreKey: String!
     var touristicnessValue : Int!
- 
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,8 +31,8 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
         
     }
     
-
- 
+    
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -47,7 +45,7 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
             var manager = SDWebImageManager.sharedManager()
             manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed,
                 progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
-                    debugPrintln("RECEIVED SIZE \(receivedSize), EXPECTED SIZE \(expectedSize) ")
+                    NSLog("RECEIVED SIZE  %d, EXPECTED SIZE %d", receivedSize, expectedSize)
                 },
                 
                 completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
@@ -61,7 +59,7 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
                     self.debugImageSize(croppedImage, message: "CROPPED")
                     self.clusterImageView.image = croppedImage
                     self.setTextForVotes()
-                   
+                    
                     
                     
                     
@@ -105,7 +103,7 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
     }
     
     func debugImageSize(image: UIImage, message: String){
-        debugPrintln("SIZE OF IMAGE (\(message)) : / WIDTH \(image.size.width) // HEIGHT \(image.size.height) ")
+        NSLog("SIZE OF IMAGE   %@, WIDTH %@, HEIGHT %@", message, image.size.width, image.size.height)
     }
     
     func croppIngimageByImageName(imageToCrop: UIImage, toRect:CGRect) -> UIImage
@@ -167,7 +165,7 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
         let circleHeight:CGFloat = 50.0
         
         let startPointX:CGFloat = clusterImageView.bounds.width-(1.25*circleWidth)
-        debugPrintln("CLUSTER IMAGE VIEW HEIGHT \(clusterImageView.bounds.height)")
+        NSLog("CLUSTER IMAGE VIEW HEIGHT %@", clusterImageView.bounds.height)
         let startPointY:CGFloat = clusterImageView.frame.height-(circleHeight/2)
         
         self.circleView = UIView(frame: CGRectMake(startPointX,startPointY,circleWidth,circleHeight));
@@ -198,33 +196,44 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
         self.circleViewPictureCounterLabel.text = "\(validCount)/\(urlCount)"
     }
     
-    func setNextPicture(){
-        var length = urls.count - 1
-        if ( counter == length){
-            counter = 0
-        }else{
-            counter = counter + 1
-        }
+    
+    func showPicture(showPictureEnum: UISwipeGestureRecognizerDirection){
         
-        debugPrintln("Next Picture will be displayed. Max URL Length: \(length), Countervalue: \(counter).")
-        setCellViewPicture()
-    }
-    func setPreviousPicture(){
         var length = urls.count - 1
+        NSLog("Max URL Length: %d, Current Countervalue: %d.", length, self.counter)
         
-        if ( counter == 0){
-            counter = length
+        if ( self.counter == length){
+            self.counter = 0
         }else{
-            counter = counter - 1
+            switch showPictureEnum {
+            case UISwipeGestureRecognizerDirection.Left:
+                self.counter = self.counter + 1
+                
+                if (self.counter > length){
+                    self.counter = 0
+                }
+                
+                NSLog("Next Picture will be displayed. Max URL Length: %d, Countervalue: %d.", length, self.counter)
+                break
+            case UISwipeGestureRecognizerDirection.Right:
+                
+                self.counter = self.counter - 1
+                
+                if (self.counter < 0){
+                    self.counter = length
+                }
+                
+                NSLog("Previous Picture will be displayed. Max URL Length: %d, Countervalue: %d.", length, self.counter)
+                break
+            default:
+                NSLog("Not a safe place for humans ;)")
+                fatalError("SWIPE GESTURE THAT WAS NOT IMPLEMENTED, PLEASE IMPLEMENT IT!s")
+                break
+            }
         }
-        debugPrintln("Previous Picture will be displayed. Max URL Length: \(length), Countervalue: \(counter).")
         setCellViewPicture()
+        
+        
     }
-    
-
-    
-
-    
-    
     
 }

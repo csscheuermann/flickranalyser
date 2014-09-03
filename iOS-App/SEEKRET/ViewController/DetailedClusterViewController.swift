@@ -9,14 +9,14 @@
 import UIKit
 import MapKit
 
-class DetailedClusterViewController: UIViewController, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate{
+class DetailedClusterViewController: CustomSeekretUIViewController, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate{
     
     
     @IBOutlet weak var latLongPair: UILabel!
     @IBOutlet weak var tabBarForVoting: UITabBar!
     var cluster: GTLSpotAPICluster!
     var uIHelper: UIHelper!
-    var auth: GTMOAuth2Authentication!
+    
     
     @IBOutlet weak var votes: UILabel!
     @IBOutlet weak var touristicness: UILabel!
@@ -45,14 +45,17 @@ class DetailedClusterViewController: UIViewController, EndPointControllerForClus
         // Dispose of any resources that can be recreated.
     }
     
+    override func handleSucessfullLogin(auth: GTMOAuth2Authentication) -> Void {
+        //DO NOTHING AT THE MOMENT
+    }
+    
     func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
         
         var itemsOfTabBar = tabBar.selectedItem
         for (index, currentItem) in enumerate(tabBar.items as [UITabBarItem]){
             
             if (currentItem == item){
-                debugPrintln("Current Item is \(index)")
-                
+                NSLog("Current Item is %d", index)
                 if (index == 0){
                     showAreYouSureDialogBox()
                 }else{
@@ -107,16 +110,12 @@ class DetailedClusterViewController: UIViewController, EndPointControllerForClus
             uIHelper.showSpinner("DISMISSING CLUSTER")
             
         }else{
-            debugPrintln("Will no do anything")
-            //DO NOTHING
-        }
+            NSLog("Will no do anything")
+                    }
     }
     func didDismiss(responseCode: NSNumber, entity: String){
-        
-        debugPrintln("RESPONSE CODE \(responseCode), MESSAGE \(entity)")
-        uIHelper.stopSpinner()
-        
-        
+        NSLog("RESPONSE CODE %d, MESSAGE %@", responseCode, entity)
+        uIHelper.stopSpinner()      
     }
     
     
