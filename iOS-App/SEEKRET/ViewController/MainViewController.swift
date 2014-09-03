@@ -3,7 +3,6 @@
 //
 //  Created by Constantin Scheuermann on 8/27/14.
 //  Copyright (c) 2014 nomis-development.net. All rights reserved.
-//
 
 import UIKit
 
@@ -24,7 +23,8 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
         self.automaticallyAdjustsScrollViewInsets = false;
         self.topSpotsTableView.delegate = self
         self.topSpotsTableView.dataSource = self
-        
+       
+        self.updateLocation()
     }
     
     override func didReceiveMemoryWarning() {

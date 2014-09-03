@@ -30,21 +30,17 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
         self.clusterTableView.delegate = self
         self.clusterTableView.dataSource = self
         self.navigationItem.title = spotName
-
     }
     
       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    
-    
     override func handleSucessfullLogin(auth: GTMOAuth2Authentication) -> Void {
         self.uiHelper = UIHelper(uiView: self.view)
         uiHelper.showSpinner(self.showSpinnerText)
         let endpointController = EnpointController(delegate: self);
         endpointController.getCluster(spotName!, auth: auth)
-        
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
@@ -117,9 +113,6 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
         }
     }
    
-      
- 
-    
     func didRecieveCluster(cluster: [GTLSpotAPICluster], spotName: String){
         self.spotNameLabel.font = UIFont (name: "HelveticaNeue-UltraLight", size: 20)
         self.spotNameLabel.text = spotName
@@ -129,18 +122,11 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        
         if (segue.identifier == "showDetailedClusterView"){
             var indexPath: NSIndexPath = self.clusterTableView.indexPathForSelectedRow()
             var detailedClusterViewController:DetailedClusterViewController = segue.destinationViewController as DetailedClusterViewController
             var currentCluster = cluster[indexPath.row]
             detailedClusterViewController.cluster = currentCluster
-            
-
         }
     }
-   
-
-    
-    
 }

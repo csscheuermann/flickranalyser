@@ -39,7 +39,9 @@
 	<true/>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UIRequiredDeviceCapabilities</key>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>We need the location in order to find Seekrets nearby. In case you dont want to share you location app functionalities might be limited.</string>
+    <key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>

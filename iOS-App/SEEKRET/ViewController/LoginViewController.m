@@ -35,13 +35,6 @@ static GPPSignIn *signIn;
     [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     
     
-    /*UIImageView *bgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.jpg"]];
-    bgImageView.frame = self.view.bounds;
-    [self.view addSubview:bgImageView];
-    [self.view sendSubviewToBack:bgImageView];
-    */
-    
-    
     self.alreadyConenctedLabel.hidden = YES;
     self.proceedWithoutLoginButton.hidden = YES;
     signIn = [GPPSignIn sharedInstance];

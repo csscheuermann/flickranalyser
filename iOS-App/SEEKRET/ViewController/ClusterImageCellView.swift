@@ -51,7 +51,6 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
                 completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
                     //TODO COS AND SIW: DAS SOLLTEN WIR MAL VERSTEHEN. WIE FUNKTIONIERT DIESER CROP. Ich habe es so hingebogen, dass es geht, aber verstehen tu ich es nicht mehr ... ich will skalieren und dann croppen.
                     self.addNiceAnimation()
-                    
                     self.debugImageSize(image, message: "ORIGINAL")
                     var imageResized = self.resizeImage(image, withWidth: 320, withHeight: 250)
                     self.debugImageSize(imageResized, message: "RESIZED")
@@ -59,13 +58,8 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
                     self.debugImageSize(croppedImage, message: "CROPPED")
                     self.clusterImageView.image = croppedImage
                     self.setTextForVotes()
-                    
-                    
-                    
-                    
             })
         }
-        
     }
     
     func setAdress(address: String){
