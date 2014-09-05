@@ -13,7 +13,7 @@
 // Description:
 //   This API serves everything needed for Ratings
 // Classes:
-//   GTLQueryRatingAPI (4 custom class methods, 3 custom properties)
+//   GTLQueryRatingAPI (6 custom class methods, 3 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -44,8 +44,7 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeRatingAPIUserinfoEmail
 // Fetches a GTLRatingAPIResponse.
-+ (id)queryForAddNewRatingWithUserPrimaryKey:(NSString *)userPrimaryKey
-                           clusterPrimaryKey:(NSString *)clusterPrimaryKey;
++ (id)queryForAddNewRatingWithClusterPrimaryKey:(NSString *)clusterPrimaryKey;
 
 // Method: ratingAPI.getAllDismissKeysOfSpecifiedUser
 //  Authorization scope(s):
@@ -59,11 +58,22 @@
 // Fetches a GTLRatingAPIKeyResult.
 + (id)queryForGetAllRatingKeysOfSpecifiedUserWithUserPrimaryKey:(NSString *)userPrimaryKey;
 
+// Method: ratingAPI.hasAlreadyDismissed
+//  Authorization scope(s):
+//   kGTLAuthScopeRatingAPIUserinfoEmail
+// Fetches a GTLRatingAPIResponse.
++ (id)queryForHasAlreadyDismissedWithClusterPrimaryKey:(NSString *)clusterPrimaryKey;
+
+// Method: ratingAPI.hasAlreadyDismissedOrVoted
+//  Authorization scope(s):
+//   kGTLAuthScopeRatingAPIUserinfoEmail
+// Fetches a GTLRatingAPIResponse.
++ (id)queryForHasAlreadyDismissedOrVotedWithClusterPrimaryKey:(NSString *)clusterPrimaryKey;
+
 // Method: ratingAPI.hasUserAlreadyVoted
 //  Authorization scope(s):
 //   kGTLAuthScopeRatingAPIUserinfoEmail
 // Fetches a GTLRatingAPIResponse.
-+ (id)queryForHasUserAlreadyVotedWithUserPrimaryKey:(NSString *)userPrimaryKey
-                                  clusterPrimaryKey:(NSString *)clusterPrimaryKey;
++ (id)queryForHasUserAlreadyVotedWithClusterPrimaryKey:(NSString *)clusterPrimaryKey;
 
 @end

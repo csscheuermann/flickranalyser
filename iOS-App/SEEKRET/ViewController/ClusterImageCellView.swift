@@ -23,15 +23,16 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
     var addressSubLabel: UILabel!
     var clusterDataStoreKey: String!
     var touristicnessValue : Int!
+    var uiHelperMethods: UIHelperMethods!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initCircle()
-        
+        self.uiHelperMethods = UIHelperMethods()
     }
     
-    
+ 
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -39,7 +40,7 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
     
     func setCellViewPicture(){
         if (urls != nil){
-            let validIndex = getValidCounterValue()
+            let validIndex = uiHelperMethods.getValidCounterValue(self.counter, urls: urls)
             assert(validIndex <= urls.count, "COUNTER WAS BIGGER THAN ARRAY SIZE - SHOULD NEVER HAPPEN. COUNTER \(validIndex) URL ARRAY COUNT \(urls.count)")
             
             var manager = SDWebImageManager.sharedManager()
@@ -50,13 +51,7 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
                 
                 completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
                     //TODO COS AND SIW: DAS SOLLTEN WIR MAL VERSTEHEN. WIE FUNKTIONIERT DIESER CROP. Ich habe es so hingebogen, dass es geht, aber verstehen tu ich es nicht mehr ... ich will skalieren und dann croppen.
-                    self.addNiceAnimation()
-                    self.debugImageSize(image, message: "ORIGINAL")
-                    var imageResized = self.resizeImage(image, withWidth: 320, withHeight: 250)
-                    self.debugImageSize(imageResized, message: "RESIZED")
-                    var croppedImage = self.croppIngimageByImageName(imageResized, toRect: CGRectMake(0, 0, 320, 200))
-                    self.debugImageSize(croppedImage, message: "CROPPED")
-                    self.clusterImageView.image = croppedImage
+                    self.uiHelperMethods.setImageToImageView(image, imageView: self.clusterImageView )
                     self.setTextForVotes()
             })
         }
@@ -78,67 +73,8 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
         }
     }
     
-    func addNiceAnimation(){
-        var transition:CATransition = CATransition()
+   
         
-        transition.duration = 0.5
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
-        transition.type = kCATransitionFade;
-        
-        self.clusterImageView.layer.addAnimation(transition, forKey:nil)
-    }
-    
-    func isImageLandscape(image: UIImage) -> Bool{
-        if (image.size.width >= image.size.height){
-            return true
-        }
-        debugImageSize(image, message: "NOT LANDSCAPE")
-        return false
-    }
-    
-    func debugImageSize(image: UIImage, message: String){
-        NSLog("SIZE OF IMAGE   %@, WIDTH %@, HEIGHT %@", message, image.size.width, image.size.height)
-    }
-    
-    func croppIngimageByImageName(imageToCrop: UIImage, toRect:CGRect) -> UIImage
-    {
-        var clippedRect:CGRect = CGRectMake(0, 0, 640, 400);
-        var imageRef:CGImageRef  = CGImageCreateWithImageInRect(imageToCrop.CGImage, clippedRect);
-        var croppedImage: UIImage  = UIImage(CGImage: imageRef)
-        return croppedImage;
-    }
-    
-    
-    
-    func resizeImage(image: UIImage,  withWidth: CGFloat, withHeight: CGFloat) -> UIImage{
-        var newSize = CGSizeMake(withWidth, withHeight)
-        var widthRatio = newSize.width/image.size.width
-        var heightRatio = newSize.height/image.size.height
-        
-        if(widthRatio > heightRatio){
-            newSize=CGSizeMake(image.size.width*heightRatio,image.size.height*heightRatio)
-        }else{
-            newSize=CGSizeMake(image.size.width*widthRatio,image.size.height*widthRatio)
-        }
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        image.drawInRect( CGRectMake(0,0,newSize.width,newSize.height))
-        var newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        return newImage;
-    }
-    
-    
-    func getValidCounterValue() -> Int{
-        var length = urls.count - 1
-        if (counter > length){
-            return length
-        }
-        return counter
-    }
-    
-    
     func setTouristicnessValue(){
         switch self.touristicnessValue {
         case 0,1,2:
@@ -185,49 +121,15 @@ class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
     
     
     func setTextForVotes(){
-        var validCount = self.getValidCounterValue()+1
+        var validCount = uiHelperMethods.getValidCounterValue(self.counter, urls: urls)+1
         var urlCount = self.urls.count
         self.circleViewPictureCounterLabel.text = "\(validCount)/\(urlCount)"
     }
     
     
     func showPicture(showPictureEnum: UISwipeGestureRecognizerDirection){
-        
-        var length = urls.count - 1
-        NSLog("Max URL Length: %d, Current Countervalue: %d.", length, self.counter)
-        
-        if ( self.counter == length){
-            self.counter = 0
-        }else{
-            switch showPictureEnum {
-            case UISwipeGestureRecognizerDirection.Left:
-                self.counter = self.counter + 1
-                
-                if (self.counter > length){
-                    self.counter = 0
-                }
-                
-                NSLog("Next Picture will be displayed. Max URL Length: %d, Countervalue: %d.", length, self.counter)
-                break
-            case UISwipeGestureRecognizerDirection.Right:
-                
-                self.counter = self.counter - 1
-                
-                if (self.counter < 0){
-                    self.counter = length
-                }
-                
-                NSLog("Previous Picture will be displayed. Max URL Length: %d, Countervalue: %d.", length, self.counter)
-                break
-            default:
-                NSLog("Not a safe place for humans ;)")
-                fatalError("SWIPE GESTURE THAT WAS NOT IMPLEMENTED, PLEASE IMPLEMENT IT!s")
-                break
-            }
-        }
+        self.counter = uiHelperMethods.getValidIndex(showPictureEnum, urlArray: urls , counter: self.counter)
         setCellViewPicture()
-        
-        
     }
     
 }

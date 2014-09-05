@@ -203,14 +203,14 @@
           "maxClusterViews" : {
             "type" : "integer"
           },
+          "spotRadiusInMeter" : {
+            "type" : "number"
+          },
           "cluster" : {
             "type" : "array",
             "items" : {
               "$ref" : "Cluster"
             }
-          },
-          "spotRadiusInMeter" : {
-            "type" : "number"
           }
         }
       },
@@ -324,11 +324,11 @@
           "polar" : {
             "type" : "boolean"
           },
-          "latitudeInternal" : {
+          "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           },
-          "longitudeInternal" : {
+          "latitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           }

@@ -9,36 +9,114 @@
 import UIKit
 import MapKit
 
-class DetailedClusterViewController: CustomSeekretUIViewController, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate{
+class DetailedClusterViewController: CustomSeekretUIViewController, EndpointControllerforRatingProtocoll, SDWebImageManagerDelegate, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate{
     
+    @IBOutlet weak var uiImageClusterImage: UIImageView!
     
-    @IBOutlet weak var latLongPair: UILabel!
+    var counter: Int!
+    var ePCFRP: EndPointControllerForCluster!
+    var ePCFRPAPI: EndpointControllerforRatingAPI!
+    
     @IBOutlet weak var tabBarForVoting: UITabBar!
     var cluster: GTLSpotAPICluster!
     var uIHelper: UIHelper!
+    var urls: [String]!
+    var spotName: String!
     
     
-    @IBOutlet weak var votes: UILabel!
-    @IBOutlet weak var touristicness: UILabel!
-    @IBOutlet weak var overallViews: UILabel!
-    @IBOutlet weak var numberOfPOIs: UILabel!
-    
+    @IBOutlet weak var uiImageViewForBluredBackground: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
+    var uiHelperMethods: UIHelperMethods!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.uiHelperMethods = UIHelperMethods()
+        
         self.uIHelper = UIHelper(uiView: self.view)
         self.navigationItem.title = cluster.name
-        self.numberOfPOIs.text = self.getNumberOfPOIs()
-        votes.text = cluster.overallTouristicnessVotes.stringValue
-        touristicness.text = cluster.overallTouristicnessInPointsFrom1To10.stringValue
-        overallViews.text = cluster.overallViews.stringValue
-        latLongPair.text = "\(cluster.latitude) / \(cluster.longitude)"
         
         self.tabBarForVoting.delegate = self
         self.addPointToMapView()
+        self.addGestureListenerToUiImageView(self.uiImageClusterImage)
+        self.urls = cluster.urlOfMostViewedPicture as [String]
+        self.counter = 0
+        self.loadImageForIndex(0)
+        self.ePCFRP = EndPointControllerForCluster(delegate: self)
+        self.ePCFRPAPI =  EndpointControllerforRatingAPI(delegate: self)
+        ePCFRPAPI.hasAlreadyVoted(self.auth, clusterId: cluster.datastoreClusterKey)
+        uIHelper.showSpinner("CHECKING SEEKRET")
         
     }
+    
+    func addGestureListenerToUiImageView(imageView: UIImageView){
+        imageView.userInteractionEnabled = true;
+        var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        imageView.addGestureRecognizer(swipeRight)
+        
+        var swipeDown = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        swipeDown.direction = UISwipeGestureRecognizerDirection.Left
+        imageView.addGestureRecognizer(swipeDown)
+        
+    }
+    
+    func didReceiveHasAlreadyVotedOrDismissed(responseCode: NSNumber, entity: Bool){
+        self.setEnableStatusForRatingBar(!entity)
+        NSLog("MESSAGE: %@, RESPONSE CODE: %d" , entity, responseCode)
+         uIHelper.stopSpinner()
+        
+    }
+    
+    func setEnableStatusForRatingBar(enablestatus: Bool){
+        var allItemsOfRatingBar: [UITabBarItem] = tabBarForVoting.items as [UITabBarItem]
+        allItemsOfRatingBar[0].enabled = enablestatus
+        allItemsOfRatingBar[1].enabled = enablestatus
+        allItemsOfRatingBar[2].enabled = enablestatus
+        
+    }
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.Right:
+                NSLog("SWIPE RIGHT")
+                counter = uiHelperMethods.getValidIndex(UISwipeGestureRecognizerDirection.Right, urlArray: urls, counter: self.counter)
+                loadImageForIndex(counter)
+                break
+            case UISwipeGestureRecognizerDirection.Left:
+                counter = uiHelperMethods.getValidIndex(UISwipeGestureRecognizerDirection.Left, urlArray: urls, counter: self.counter)
+                loadImageForIndex(counter)
+                NSLog("SWIPE LEFT")
+                break
+            default:
+                NSLog("Not a safe place for humans ;)")
+                fatalError("SWIPE GESTURE THAT WAS NOT IMPLEMENTED, PLEASE IMPLEMENT IT!")
+                break
+            }
+        }
+    }
+    
+    
+    
+    func loadImageForIndex(index: Int){
+        
+        var manager = SDWebImageManager.sharedManager()
+        
+        manager.downloadImageWithURL(NSURL.URLWithString(urls[index]), options: SDWebImageOptions.RetryFailed,
+            progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
+                NSLog("RECEIVED SIZE  %d, EXPECTED SIZE %d", receivedSize, expectedSize)
+            },
+            
+            completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
+                
+                self.uiImageViewForBluredBackground.image = image
+                self.uiHelperMethods.setImageToImageView(image, imageView: self.uiImageClusterImage)
+        })
+        
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -58,8 +136,15 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndPointCont
                 NSLog("Current Item is %d", index)
                 if (index == 0){
                     showAreYouSureDialogBox()
+                }else if (index == 1){
+                    ePCFRP.evaluateCluster(auth, touristicness: 0,  datastoreClusterKey: cluster.datastoreClusterKey, spotName: spotName)
+                    uIHelper.showSpinner("VOTING CLUSTER AS SEEKRET")
+                }else if (index == 2){
+                    ePCFRP.evaluateCluster(auth, touristicness: 10,  datastoreClusterKey: cluster.datastoreClusterKey, spotName: spotName)
+                    uIHelper.showSpinner("VOTING CLUSTER AS TOURISTIC")
+                    
                 }else{
-                    //DO OTHER STUFF
+                    fatalError("WE HAVE NOT BEHAVIOUR FOR THAT!")
                 }
             }
         }
@@ -74,7 +159,7 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndPointCont
     }
     
     func addPointToMapView(){
-       
+        
         var currentClusterAnnotation = MKPointAnnotation()
         
         var latitude:CLLocationDegrees = cluster.latitude
@@ -105,18 +190,24 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndPointCont
     }
     func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
         if (buttonIndex == 0){
-            let ePCFRP = EndPointControllerForCluster(delegate: self)
+            
             ePCFRP.dismissCluster(self.auth, clusterId: cluster.datastoreClusterKey)
             uIHelper.showSpinner("DISMISSING CLUSTER")
             
         }else{
             NSLog("Will no do anything")
-                    }
+        }
     }
     func didDismiss(responseCode: NSNumber, entity: String){
         NSLog("RESPONSE CODE %d, MESSAGE %@", responseCode, entity)
-        uIHelper.stopSpinner()      
+        uIHelper.stopSpinner()
+        self.setEnableStatusForRatingBar(false)
     }
     
+    func didEvaluation(responseCode: NSNumber, entity: String){
+        NSLog("RESPONSE CODE %d, MESSAGE %@", responseCode, entity)
+        uIHelper.stopSpinner()
+        self.setEnableStatusForRatingBar(false)
+    }
     
 }

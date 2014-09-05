@@ -13,7 +13,7 @@
 // Description:
 //   This API serves everything needed for Ratings
 // Classes:
-//   GTLQueryRatingAPI (4 custom class methods, 3 custom properties)
+//   GTLQueryRatingAPI (6 custom class methods, 3 custom properties)
 
 #import "GTLQueryRatingAPI.h"
 
@@ -28,11 +28,9 @@
 #pragma mark Service level methods
 // These create a GTLQueryRatingAPI object.
 
-+ (id)queryForAddNewRatingWithUserPrimaryKey:(NSString *)userPrimaryKey
-                           clusterPrimaryKey:(NSString *)clusterPrimaryKey {
++ (id)queryForAddNewRatingWithClusterPrimaryKey:(NSString *)clusterPrimaryKey {
   NSString *methodName = @"ratingAPI.addNewRating";
   GTLQueryRatingAPI *query = [self queryWithMethodName:methodName];
-  query.userPrimaryKey = userPrimaryKey;
   query.clusterPrimaryKey = clusterPrimaryKey;
   query.expectedObjectClass = [GTLRatingAPIResponse class];
   return query;
@@ -54,11 +52,25 @@
   return query;
 }
 
-+ (id)queryForHasUserAlreadyVotedWithUserPrimaryKey:(NSString *)userPrimaryKey
-                                  clusterPrimaryKey:(NSString *)clusterPrimaryKey {
++ (id)queryForHasAlreadyDismissedWithClusterPrimaryKey:(NSString *)clusterPrimaryKey {
+  NSString *methodName = @"ratingAPI.hasAlreadyDismissed";
+  GTLQueryRatingAPI *query = [self queryWithMethodName:methodName];
+  query.clusterPrimaryKey = clusterPrimaryKey;
+  query.expectedObjectClass = [GTLRatingAPIResponse class];
+  return query;
+}
+
++ (id)queryForHasAlreadyDismissedOrVotedWithClusterPrimaryKey:(NSString *)clusterPrimaryKey {
+  NSString *methodName = @"ratingAPI.hasAlreadyDismissedOrVoted";
+  GTLQueryRatingAPI *query = [self queryWithMethodName:methodName];
+  query.clusterPrimaryKey = clusterPrimaryKey;
+  query.expectedObjectClass = [GTLRatingAPIResponse class];
+  return query;
+}
+
++ (id)queryForHasUserAlreadyVotedWithClusterPrimaryKey:(NSString *)clusterPrimaryKey {
   NSString *methodName = @"ratingAPI.hasUserAlreadyVoted";
   GTLQueryRatingAPI *query = [self queryWithMethodName:methodName];
-  query.userPrimaryKey = userPrimaryKey;
   query.clusterPrimaryKey = clusterPrimaryKey;
   query.expectedObjectClass = [GTLRatingAPIResponse class];
   return query;

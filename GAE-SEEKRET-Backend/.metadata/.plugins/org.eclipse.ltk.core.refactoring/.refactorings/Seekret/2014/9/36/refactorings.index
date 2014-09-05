@@ -1,2 +1,5 @@
 1409587469924	Extract local variable 'latitude'
 1409587484281	Extract local variable 'longitude'
+1409919817329	Extract local variable 'email'
+1409933096462	Extract local variable 'string'
+1409933116759	Extract local variable 'string'

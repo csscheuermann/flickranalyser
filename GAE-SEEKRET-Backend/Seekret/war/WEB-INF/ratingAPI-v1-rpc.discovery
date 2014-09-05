@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/AuW6lHdZv1j8S612D5PmseSn67A\"",
+ "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/vCe9ozTsjQ2keQdCHikEJRTy9zc\"",
  "discoveryVersion": "v1",
  "id": "ratingAPI:v1",
  "name": "ratingAPI",
@@ -110,14 +110,9 @@
     "clusterPrimaryKey": {
      "type": "string",
      "required": true
-    },
-    "userPrimaryKey": {
-     "type": "string",
-     "required": true
     }
    },
    "parameterOrder": [
-    "userPrimaryKey",
     "clusterPrimaryKey"
    ],
    "returns": {
@@ -165,20 +160,51 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "ratingAPI.hasAlreadyDismissed": {
+   "id": "ratingAPI.hasAlreadyDismissed",
+   "parameters": {
+    "clusterPrimaryKey": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "clusterPrimaryKey"
+   ],
+   "returns": {
+    "$ref": "Response"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "ratingAPI.hasAlreadyDismissedOrVoted": {
+   "id": "ratingAPI.hasAlreadyDismissedOrVoted",
+   "parameters": {
+    "clusterPrimaryKey": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "clusterPrimaryKey"
+   ],
+   "returns": {
+    "$ref": "Response"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "ratingAPI.hasUserAlreadyVoted": {
    "id": "ratingAPI.hasUserAlreadyVoted",
    "parameters": {
     "clusterPrimaryKey": {
      "type": "string",
      "required": true
-    },
-    "userPrimaryKey": {
-     "type": "string",
-     "required": true
     }
    },
    "parameterOrder": [
-    "userPrimaryKey",
     "clusterPrimaryKey"
    ],
    "returns": {

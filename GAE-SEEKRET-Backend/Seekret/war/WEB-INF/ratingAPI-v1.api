@@ -25,8 +25,29 @@
     "maxAge" : 0
   },
   "methods" : {
+    "ratingAPI.hasAlreadyDismissedOrVoted" : {
+      "path" : "hasAlreadyDismissedOrVoted/{clusterPrimaryKey}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com" ],
+      "clientIds" : [ "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com", "", "449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v4gu.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.seekret.endpoints.RatingService.hasAlreadyDismissedOrVoted",
+      "request" : {
+        "parameters" : {
+          "clusterPrimaryKey" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "ratingAPI.hasUserAlreadyVoted" : {
-      "path" : "hasUserAlreadyVoted/{userPrimaryKey}/{clusterPrimaryKey}",
+      "path" : "hasUserAlreadyVoted/{clusterPrimaryKey}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -35,10 +56,6 @@
       "rosyMethod" : "com.seekret.endpoints.RatingService.hasUserAlreadyVoted",
       "request" : {
         "parameters" : {
-          "userPrimaryKey" : {
-            "type" : "string",
-            "required" : true
-          },
           "clusterPrimaryKey" : {
             "type" : "string",
             "required" : true
@@ -51,7 +68,7 @@
       }
     },
     "ratingAPI.addNewRating" : {
-      "path" : "addNewRating/{userPrimaryKey}/{clusterPrimaryKey}",
+      "path" : "addNewRating/{clusterPrimaryKey}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -60,10 +77,27 @@
       "rosyMethod" : "com.seekret.endpoints.RatingService.addNewRating",
       "request" : {
         "parameters" : {
-          "userPrimaryKey" : {
+          "clusterPrimaryKey" : {
             "type" : "string",
             "required" : true
-          },
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "ratingAPI.hasAlreadyDismissed" : {
+      "path" : "hasAlreadyDismissed/{clusterPrimaryKey}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com" ],
+      "clientIds" : [ "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com", "", "449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v4gu.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.seekret.endpoints.RatingService.hasAlreadyDismissed",
+      "request" : {
+        "parameters" : {
           "clusterPrimaryKey" : {
             "type" : "string",
             "required" : true
@@ -154,12 +188,22 @@
       }
     },
     "methods" : {
+      "com.seekret.endpoints.RatingService.hasAlreadyDismissedOrVoted" : {
+        "response" : {
+          "$ref" : "Response"
+        }
+      },
       "com.seekret.endpoints.RatingService.hasUserAlreadyVoted" : {
         "response" : {
           "$ref" : "Response"
         }
       },
       "com.seekret.endpoints.RatingService.addNewRating" : {
+        "response" : {
+          "$ref" : "Response"
+        }
+      },
+      "com.seekret.endpoints.RatingService.hasAlreadyDismissed" : {
         "response" : {
           "$ref" : "Response"
         }

@@ -1066,3 +1066,178 @@ GIF89a  �� ���   ,       D ;
 !ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-02 14:14:11.695
 !MESSAGE Analytics ping response: 200: OK
 GIF89a  �� ���   ,       D ;
+!SESSION 2014-09-05 08:35:16.133 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/scheuermann/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/scheuermann/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-09-05 08:35:30.207
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.osgi 2 0 2014-09-05 08:35:58.591
+!MESSAGE While loading class "com.google.gdt.eclipse.suite.preferences.GdtPreferences", thread "Thread[org.eclipse.jdt.internal.ui.text.JavaReconciler,1,main]" timed out waiting (5005ms) for thread "Thread[org.eclipse.jdt.internal.ui.text.JavaReconciler,1,main]" to finish starting bundle "com.google.gdt.eclipse.suite_3.5.1.v201312301723-rel-r43 [292]". To avoid deadlock, thread "Thread[org.eclipse.jdt.internal.ui.text.JavaReconciler,1,main]" is proceeding but "com.google.gdt.eclipse.suite.preferences.GdtPreferences" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: State change in progress for bundle "reference:file:plugins/com.google.gdt.eclipse.suite_3.5.1.v201312301723-rel-r43.jar" by thread "org.eclipse.jdt.internal.ui.text.JavaReconciler".
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.SingleSourcePackage.loadClass(SingleSourcePackage.java:35)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:461)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at com.google.gdt.eclipse.suite.ext.update.FeatureUpdateManager.checkForUpdates(FeatureUpdateManager.java:105)
+	at com.google.gdt.eclipse.suite.ext.builders.UpdateTriggerCompilationParticipant.isActive(UpdateTriggerCompilationParticipant.java:40)
+	at org.eclipse.jdt.internal.core.JavaModelManager$CompilationParticipants.getCompilationParticipants(JavaModelManager.java:339)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.notifyParticipants(ReconcileWorkingCopyOperation.java:238)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:728)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:788)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1247)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:126)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:108)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:89)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:178)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:114)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:406)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+Caused by: org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	... 33 more
+Root exception:
+org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.SingleSourcePackage.loadClass(SingleSourcePackage.java:35)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:461)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at com.google.gdt.eclipse.suite.ext.update.FeatureUpdateManager.checkForUpdates(FeatureUpdateManager.java:105)
+	at com.google.gdt.eclipse.suite.ext.builders.UpdateTriggerCompilationParticipant.isActive(UpdateTriggerCompilationParticipant.java:40)
+	at org.eclipse.jdt.internal.core.JavaModelManager$CompilationParticipants.getCompilationParticipants(JavaModelManager.java:339)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.notifyParticipants(ReconcileWorkingCopyOperation.java:238)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:728)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:788)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1247)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:126)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:108)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:89)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:178)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:114)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:406)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 08:37:35.515
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 08:37:35.741
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 08:37:35.864
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 14:36:58.191
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 14:36:58.254
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 14:36:58.380
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 17:01:45.959
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 17:01:46.027
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 17:01:46.605
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 17:05:50.429
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 17:05:50.486
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 17:05:50.988
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 17:39:56.992
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 17:39:57.090
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 17:39:57.206
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 17:50:15.035
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 17:50:15.096
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 17:50:15.220
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 18:03:02.133
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 18:03:02.202
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 18:03:02.325
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 18:07:05.291
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 18:07:05.358
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 18:07:05.435
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2014-09-05 18:10:12.630
+!MESSAGE Seekret successfully deployed to Google App Engine
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 18:10:12.689
+!MESSAGE Analytics ping request parameters: v=1&t=event&el=id%3D1399809205270%26ev%3D3.8.101.v20130717-0806%26v%3Dcom.google.gdt.eclipse.suite.e43.feature_3.5.1.v201312301723-rel-r43%26gwtv%3D2.6.0%26gaev%3D1.9.3%26p%3Dorg.eclipse.epp.package.standard.product%26action%3Dgae_backend_deploy%26appIdHash%3D587CD3223DE0B2EC438649D26A97A4A5B583901B%26isGoogleCloudSqlUsed%3Dfalse%26isCloudEndpointProject%3Dtrue%26isSignedIn%3Dtrue&cd1=org.eclipse.epp.package.standard.product&cd2=587CD3223DE0B2EC438649D26A97A4A5B583901B&an=Google%20Plugin%20for%20Eclipse&tid=UA-43239122-1&ea=DEPLOY_GAE&cid=1399809205270&ec=com.google.gdt.eclipse.core
+
+!ENTRY com.google.gdt.eclipse.suite.ext 1 0 2014-09-05 18:10:12.814
+!MESSAGE Analytics ping response: 200: OK
+GIF89a  �� ���   ,       D ;

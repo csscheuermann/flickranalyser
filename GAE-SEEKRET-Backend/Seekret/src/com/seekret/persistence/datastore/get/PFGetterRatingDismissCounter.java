@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.ws.rs.core.Response;
 
 import com.seekret.persistence.datastore.common.PMF;
 import com.seekret.pojo.RatingDismissCounter;
@@ -17,7 +18,7 @@ public class PFGetterRatingDismissCounter
 {
   private static final Logger LOGGER = Logger.getLogger(PFGetterRatingDismissCounter.class.getName());
 
-  public static boolean hasUserAlreadyDissmissedCluster(String userPrimaryKey, String clusterPrimaryKey)
+  public static Response hasUserAlreadyDissmissedCluster(String userPrimaryKey, String clusterPrimaryKey)
   {
     PersistenceManager pm = PMF.get().getPersistenceManager();
     try
@@ -32,10 +33,11 @@ public class PFGetterRatingDismissCounter
 
       if (resultList.size() > 0) {
         LOGGER.log(Level.INFO, "USER ALREADY DISMISSED THIS CLUSTER.");
-        return true;
+        return Response.status(200).entity(Boolean.valueOf(true)).build();
+       
       }
       LOGGER.log(Level.INFO, "USER CAN DISMISS CLUSTER.");
-      return false;
+      return Response.status(200).entity(Boolean.valueOf(false)).build();
     }
     catch (Exception ex)
     {
@@ -48,7 +50,7 @@ public class PFGetterRatingDismissCounter
 
       String errorMsg = "An error occured: \n" + ex.getMessage() + "\n\nStacktrace: \n" + stacktrace;
       LOGGER.log(Level.SEVERE, errorMsg);
-      return false;
+      return Response.status(200).entity(Boolean.valueOf(false)).build();
     }
     finally
     {

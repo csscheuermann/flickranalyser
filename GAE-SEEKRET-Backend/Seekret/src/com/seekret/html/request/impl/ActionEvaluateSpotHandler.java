@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 
+import com.google.api.server.spi.response.UnauthorizedException;
+import com.google.appengine.api.users.User;
 import com.seekret.endpoints.ClusterService;
-import com.seekret.endpoints.RatingService;
 import com.seekret.html.ViewNameEnum;
 import com.seekret.pojo.SeekretUser;
 
@@ -23,42 +24,31 @@ public class ActionEvaluateSpotHandler extends AbstractHtmlRequestHandler
 	public ViewNameEnum performActionAndGetNextViewConcrete(HttpServletRequest pRequest, HttpServletResponse pResponse, HttpSession pSession)
 	{
 		ClusterService clusterService = new ClusterService();
-		RatingService ratingService = new RatingService();
 
 		String clusterKey = pRequest.getParameter("clusterKey");
 		int clusterRatingValue = Integer.parseInt(pRequest.getParameter("clusterRating"));
 		String spotName = pRequest.getParameter("spotName");
 
 		SeekretUser currentUser = (SeekretUser)pSession.getAttribute("currentUser");
-
-		String email = currentUser.getEmail();
-		Response hasUserAlreadyVoted = ratingService.hasUserAlreadyVoted(email, clusterKey);
-
-		if (hasUserAlreadyVoted.getStatus() == 200) {
-			boolean hasUserAlreadyVotedResult = ((Boolean)hasUserAlreadyVoted.getEntity()).booleanValue();
-			if (hasUserAlreadyVotedResult) {
-				try {
-					pResponse.getWriter().print("ALREADY VOTED");
-				}
-				catch (IOException e) {
-					e.printStackTrace();
-				}
-				LOGGER.log(Level.INFO, "ALREADY VOTED.");
-				return null;
-			}
-
-		}
+		User user = new com.google.appengine.api.users.User(currentUser.getEmail(), "");
+		
 
 		LOGGER.log(Level.INFO, "CLUSTERKEY: " + clusterKey);
 		LOGGER.log(Level.INFO, "CLUSTERRATINGVALUE: " + clusterRatingValue);
 		LOGGER.log(Level.INFO, "SPOTNAME: " + spotName);
-
-		ratingService.addNewRating(email, clusterKey);
 		LOGGER.log(Level.INFO, "ADDED RATING");
-		clusterService.evaluateCluster(clusterKey, clusterRatingValue, spotName);
-		LOGGER.log(Level.INFO, "EVALUATED");
+		Response response = null;
 		try {
-			pResponse.getWriter().print("ADDED RATING THANKS.");
+			response = clusterService.evaluateCluster(user, clusterKey, clusterRatingValue, spotName);
+		} catch (UnauthorizedException e1) {
+			LOGGER.log(Level.SEVERE, "MESSAGE " + e1.getMessage(), e1);
+			e1.printStackTrace();
+		}
+			
+		
+		
+		try {
+			pResponse.getWriter().print(response.getEntity().toString());
 		}
 		catch (IOException e) {
 			e.printStackTrace();

@@ -22,7 +22,7 @@ class UIHelper{
         
     }
     
-    
+
     func showSpinner(text: String){
         
         var screen = UIScreen.mainScreen()
@@ -69,21 +69,21 @@ class UIHelper{
         backgroundView.addSubview(label)
         self.uiView.addSubview(backgroundView)
         
-
+        
         spinner.startAnimating()
         
     }
     
     func stopSpinner(){
         self.uiView.backgroundColor = UIColor.clearColor()
-         self.uiView.backgroundColor = UIColor.whiteColor()
+        self.uiView.backgroundColor = UIColor.whiteColor()
         backgroundView.removeFromSuperview()
         spinner.stopAnimating()
         debugPrintln("STOPPING SPINNER.")
-
+        
     }
     
-    
+       
     
     
     

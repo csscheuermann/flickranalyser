@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/AuW6lHdZv1j8S612D5PmseSn67A\"",
+ "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/vCe9ozTsjQ2keQdCHikEJRTy9zc\"",
  "discoveryVersion": "v1",
  "id": "ratingAPI:v1",
  "name": "ratingAPI",
@@ -108,22 +108,16 @@
  "methods": {
   "addNewRating": {
    "id": "ratingAPI.addNewRating",
-   "path": "addNewRating/{userPrimaryKey}/{clusterPrimaryKey}",
+   "path": "addNewRating/{clusterPrimaryKey}",
    "httpMethod": "POST",
    "parameters": {
     "clusterPrimaryKey": {
      "type": "string",
      "required": true,
      "location": "path"
-    },
-    "userPrimaryKey": {
-     "type": "string",
-     "required": true,
-     "location": "path"
     }
    },
    "parameterOrder": [
-    "userPrimaryKey",
     "clusterPrimaryKey"
    ],
    "response": {
@@ -175,24 +169,60 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "hasUserAlreadyVoted": {
-   "id": "ratingAPI.hasUserAlreadyVoted",
-   "path": "hasUserAlreadyVoted/{userPrimaryKey}/{clusterPrimaryKey}",
+  "hasAlreadyDismissed": {
+   "id": "ratingAPI.hasAlreadyDismissed",
+   "path": "hasAlreadyDismissed/{clusterPrimaryKey}",
    "httpMethod": "POST",
    "parameters": {
     "clusterPrimaryKey": {
      "type": "string",
      "required": true,
      "location": "path"
-    },
-    "userPrimaryKey": {
+    }
+   },
+   "parameterOrder": [
+    "clusterPrimaryKey"
+   ],
+   "response": {
+    "$ref": "Response"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "hasAlreadyDismissedOrVoted": {
+   "id": "ratingAPI.hasAlreadyDismissedOrVoted",
+   "path": "hasAlreadyDismissedOrVoted/{clusterPrimaryKey}",
+   "httpMethod": "POST",
+   "parameters": {
+    "clusterPrimaryKey": {
      "type": "string",
      "required": true,
      "location": "path"
     }
    },
    "parameterOrder": [
-    "userPrimaryKey",
+    "clusterPrimaryKey"
+   ],
+   "response": {
+    "$ref": "Response"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "hasUserAlreadyVoted": {
+   "id": "ratingAPI.hasUserAlreadyVoted",
+   "path": "hasUserAlreadyVoted/{clusterPrimaryKey}",
+   "httpMethod": "POST",
+   "parameters": {
+    "clusterPrimaryKey": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
     "clusterPrimaryKey"
    ],
    "response": {

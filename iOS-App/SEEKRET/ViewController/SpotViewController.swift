@@ -52,6 +52,7 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell: ClusterImageCellView = clusterTableView.dequeueReusableCellWithIdentifier(self.clusterImageIdentifier) as ClusterImageCellView
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         if (cluster != nil){
             var indexRow = indexPath.row
             
@@ -127,6 +128,7 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
             var detailedClusterViewController:DetailedClusterViewController = segue.destinationViewController as DetailedClusterViewController
             var currentCluster = cluster[indexPath.row]
             detailedClusterViewController.cluster = currentCluster
+            detailedClusterViewController.spotName = spotName
         }
     }
 }
