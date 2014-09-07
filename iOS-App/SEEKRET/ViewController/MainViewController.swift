@@ -12,6 +12,8 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
     @IBOutlet weak var topSpotsTableView: UITableView!
     
     var topSpots: [String] = []
+    var refreshControl:UIRefreshControl!
+
     
     //Constants
     let showSpinnerText: String = "Fetching TopList"
@@ -23,8 +25,25 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
         self.automaticallyAdjustsScrollViewInsets = false;
         self.topSpotsTableView.delegate = self
         self.topSpotsTableView.dataSource = self
-       
         self.updateLocation()
+        self.attachUIRefresh()
+    }
+    
+    
+    func attachUIRefresh(){
+        var refreshControl:UIRefreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.orangeColor();
+        refreshControl.addTarget(self, action: "refreshTopSpots", forControlEvents: UIControlEvents.ValueChanged)
+        
+        var refreshTitle: NSAttributedString = NSAttributedString(string: "Pull to Refersh List")
+        refreshControl.attributedTitle = refreshTitle
+        self.topSpotsTableView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+    }
+
+    
+    func refreshTopSpots(){
+        getTopSpots()
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,16 +54,20 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
     override func handleSucessfullLogin(auth: GTMOAuth2Authentication) -> Void {
         self.uiHelper = UIHelper(uiView: self.view)
         uiHelper.showSpinner(self.showSpinnerText)
-        let endpointControllerForTopSpots = EndPointControllerForTopSpots(delegate: self);
-        endpointControllerForTopSpots.getTopSpots(auth)
+        getTopSpots()
     }
     
+    func getTopSpots(){
+        let endpointControllerForTopSpots = EndPointControllerForTopSpots(delegate: self);
+        endpointControllerForTopSpots.getTopSpots(self.auth)
+    }
     
     func didRecieveTopSpots(topSpots: [String]){
         debugPrintln("RECEIVED TOP SPOTS. LENGTH: \(topSpots.count)")
         self.topSpots = topSpots
         self.topSpotsTableView.reloadData()
         uiHelper.stopSpinner()
+        refreshControl.endRefreshing()
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
