@@ -2,4 +2,8 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
 <fullyQualifiedTypeName name="com.seekret.memcache.Constants"/>
+<fullyQualifiedTypeName name="javax.ws.rs.core.Response"/>
+<fullyQualifiedTypeName name="javax.ws.rs.core.Response.StatusType"/>
+<fullyQualifiedTypeName name="com.google.appengine.api.users.User"/>
+<fullyQualifiedTypeName name="java.util.logging.Level"/>
 </qualifiedTypeNameHistroy>
