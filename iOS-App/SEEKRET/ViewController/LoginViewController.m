@@ -19,6 +19,7 @@
 
 @interface LoginViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *viewForBlur;
 
 
 @end
@@ -32,10 +33,21 @@ static GPPSignIn *signIn;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIImage *bgImage = [UIImage imageNamed:@"background"];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:bgImage];
+    imgView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.viewForBlur addSubview:imgView];
+    UIVisualEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *bluredView = [[UIVisualEffectView alloc] initWithEffect:blur];
+    bluredView.frame = imgView.bounds;
+    [imgView addSubview:bluredView];
+    
+//    self.loginButton.hidden = YES;
+    
     [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     
     
-    self.alreadyConenctedLabel.hidden = YES;
+
     self.proceedWithoutLoginButton.hidden = YES;
     signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
@@ -47,6 +59,7 @@ static GPPSignIn *signIn;
     
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -54,8 +67,8 @@ static GPPSignIn *signIn;
 }
 - (IBAction)loginButtonTouched:(id)sender {
     //THIS WE MUST NOT DO - Otherwise login wont work
-    //signIn = [GPPSignIn sharedInstance];
-    //[signIn authenticate];
+    signIn = [GPPSignIn sharedInstance];
+    [signIn authenticate];
 }
 - (IBAction)logutButtonTouched:(id)sender {
 
@@ -82,13 +95,13 @@ static GPPSignIn *signIn;
 -(void)refreshInterfaceBasedOnSignIn
 {
     if ([[GPPSignIn sharedInstance] authentication]) {
-        self.loginButton.hidden = YES;
       
         UINavigationController *myVC = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"NavigationBarController"];
         [self presentViewController:myVC animated:YES completion:nil];
         
     } else {
         // Führen Sie hier andere Aktionen durch.
+        self.loginButton.hidden = NO;
     }
 }
 
@@ -100,7 +113,7 @@ static GPPSignIn *signIn;
     if (error) {
         // Führen Sie hier die Fehlerbehandlung durch.
     } else {
-      
+        self.alreadyConenctedLabel.text = @"Connecting...";
         [self refreshInterfaceBasedOnSignIn];
     }
 }
