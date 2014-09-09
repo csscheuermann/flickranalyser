@@ -159,11 +159,20 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dli-7F-Lcx">
-                                        <rect key="frame" x="0.0" y="-62" width="320" height="525"/>
+                                        <rect key="frame" x="0.0" y="-62" width="320" height="574"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="1WT-NM-oc5">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="525"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="574"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
+                                                <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-Ng-OjU">
+                                                    <rect key="frame" x="0.0" y="524" width="320" height="49"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <items>
+                                                        <tabBarItem title="Dismiss" id="FA5-u5-ELm"/>
+                                                        <tabBarItem title="Seekret" id="9jy-Oe-scf"/>
+                                                        <tabBarItem title="Touristic" id="BsN-y5-rre"/>
+                                                    </items>
+                                                </tabBar>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="c4S-31-E4S">
                                                     <rect key="frame" x="0.0" y="277" width="320" height="240"/>
                                                 </mapView>
@@ -174,15 +183,6 @@
                                         </view>
                                         <blurEffect style="light"/>
                                     </visualEffectView>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-Ng-OjU">
-                                        <rect key="frame" x="0.0" y="463" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem systemItem="favorites" id="FA5-u5-ELm"/>
-                                            <tabBarItem systemItem="downloads" id="9jy-Oe-scf"/>
-                                            <tabBarItem systemItem="featured" id="BsN-y5-rre"/>
-                                        </items>
-                                    </tabBar>
                                 </subviews>
                             </view>
                         </subviews>

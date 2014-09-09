@@ -31,19 +31,16 @@ class EnpointController{
         
         spotAPI.executeQuery(query, completionHandler: { (ticket, returnedCuster, nsError) -> Void in
         println(returnedCuster.clusterRadiusInKm)
-
             
         cluster = returnedCuster.items as [GTLSpotAPICluster]!;
-        
-            
-            
-            
+  
         /*for (index, currentCluster) in enumerate(cluster){
             println(index)
             var castedCluster = currentCluster as GTLSpotAPICluster
             var castedClusterLatitude = castedCluster.latitude
             println(castedClusterLatitude)
         }*/
+            
             // Now send the JSON result to our delegate object
             self.delegate.didRecieveCluster(cluster, spotName: clusterName)
         

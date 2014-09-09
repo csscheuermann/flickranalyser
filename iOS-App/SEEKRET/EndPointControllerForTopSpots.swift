@@ -14,15 +14,12 @@ protocol EndPointControllerForTopSpotsProtocoll {
 
 class EndPointControllerForTopSpots{
     var delegate: EndPointControllerForTopSpotsProtocoll
-   
+    
     init(delegate: EndPointControllerForTopSpotsProtocoll) {
         self.delegate = delegate
     }
-
-
     
-
-     func getTopSpots(auth: GTMOAuth2Authentication){
+    func getTopSpots(auth: GTMOAuth2Authentication){
         let spotAPI = GTLServiceSpotAPI()
         spotAPI.retryEnabled = true
         spotAPI.authorizer = auth
@@ -37,9 +34,6 @@ class EndPointControllerForTopSpots{
             self.delegate.didRecieveTopSpots(resultArray)
             
         })
-
-        
-        
     }
     
 }

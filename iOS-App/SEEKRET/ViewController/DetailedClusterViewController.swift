@@ -12,12 +12,11 @@ import MapKit
 class DetailedClusterViewController: CustomSeekretUIViewController, EndpointControllerforRatingProtocoll, SDWebImageManagerDelegate, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate{
     
     @IBOutlet weak var uiImageClusterImage: UIImageView!
+    @IBOutlet weak var tabBarForVoting: UITabBar!
     
     var counter: Int!
     var ePCFRP: EndPointControllerForCluster!
     var ePCFRPAPI: EndpointControllerforRatingAPI!
-    
-    @IBOutlet weak var tabBarForVoting: UITabBar!
     var cluster: GTLSpotAPICluster!
     var uIHelper: UIHelper!
     var urls: [String]!
@@ -63,7 +62,7 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
     func didReceiveHasAlreadyVotedOrDismissed(responseCode: NSNumber, entity: Bool){
         self.setEnableStatusForRatingBar(!entity)
         NSLog("MESSAGE: %@, RESPONSE CODE: %d" , entity, responseCode)
-         uIHelper.stopSpinner()
+        uIHelper.stopSpinner()
         
     }
     
@@ -113,8 +112,6 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
                 self.uiImageViewForBluredBackground.image = image
                 self.uiHelperMethods.setImageToImageView(image, imageView: self.uiImageClusterImage)
         })
-        
-        
     }
     
     
@@ -128,10 +125,8 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
     }
     
     func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
-        
         var itemsOfTabBar = tabBar.selectedItem
         for (index, currentItem) in enumerate(tabBar.items as [UITabBarItem]){
-            
             if (currentItem == item){
                 NSLog("Current Item is %d", index)
                 if (index == 0){
@@ -148,7 +143,6 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
                 }
             }
         }
-        
     }
     
     
