@@ -43,14 +43,14 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
         endpointController.getCluster(spotName!, auth: auth)
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (cluster != nil){
             return self.cluster.count
         }
         return 0;
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: ClusterImageCellView = clusterTableView.dequeueReusableCellWithIdentifier(self.clusterImageIdentifier) as ClusterImageCellView
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         if (cluster != nil){
@@ -94,7 +94,7 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         
         var swipeLocation: CGPoint = gesture.locationInView(self.clusterTableView)
-        var swipedIndexPath: NSIndexPath = self.clusterTableView.indexPathForRowAtPoint(swipeLocation)
+        var swipedIndexPath: NSIndexPath = self.clusterTableView.indexPathForRowAtPoint(swipeLocation)!
         var swipedCell: ClusterImageCellView = self.clusterTableView.cellForRowAtIndexPath(swipedIndexPath) as ClusterImageCellView
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
@@ -122,9 +122,9 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
         uiHelper.stopSpinner()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "showDetailedClusterView"){
-            var indexPath: NSIndexPath = self.clusterTableView.indexPathForSelectedRow()
+            var indexPath: NSIndexPath = self.clusterTableView.indexPathForSelectedRow()!
             var detailedClusterViewController:DetailedClusterViewController = segue.destinationViewController as DetailedClusterViewController
             var currentCluster = cluster[indexPath.row]
             detailedClusterViewController.cluster = currentCluster

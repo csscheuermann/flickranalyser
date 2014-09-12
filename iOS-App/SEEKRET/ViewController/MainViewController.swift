@@ -70,20 +70,20 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
         refreshControl.endRefreshing()
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.topSpots.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SpotNameCellView = topSpotsTableView.dequeueReusableCellWithIdentifier(self.cellIdentifierforSpot) as SpotNameCellView
         cell.setCell(topSpots[indexPath.row])
         return cell
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         if (segue.identifier == self.segueIdentifier){
-            var indexPath: NSIndexPath = self.topSpotsTableView.indexPathForSelectedRow()
+            var indexPath: NSIndexPath = self.topSpotsTableView.indexPathForSelectedRow()!
             var spotViewController:SpotViewController = segue.destinationViewController as SpotViewController
             spotViewController.spotName = topSpots[indexPath.row]
         }
