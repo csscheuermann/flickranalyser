@@ -18,7 +18,7 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
     var ePCFRP: EndPointControllerForCluster!
     var ePCFRPAPI: EndpointControllerforRatingAPI!
     var cluster: GTLSpotAPICluster!
-    var uIHelper: UIHelper!
+    var uIHelper: MBProgressHUD!
     var urls: [String]!
     var spotName: String!
     
@@ -31,7 +31,7 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
         super.viewDidLoad()
         self.uiHelperMethods = UIHelperMethods()
         
-        self.uIHelper = UIHelper(uiView: self.view)
+        self.uIHelper = MBProgressHUD .showHUDAddedTo(self.view, animated: true);
         self.navigationItem.title = cluster.name
         
         self.tabBarForVoting.delegate = self
@@ -43,7 +43,7 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
         self.ePCFRP = EndPointControllerForCluster(delegate: self)
         self.ePCFRPAPI =  EndpointControllerforRatingAPI(delegate: self)
         ePCFRPAPI.hasAlreadyVoted(self.auth, clusterId: cluster.datastoreClusterKey)
-        uIHelper.showSpinner("CHECKING SEEKRET")
+        uIHelper.labelText = "CHECKING SEEKRET"
         
     }
     
@@ -62,7 +62,7 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
     func didReceiveHasAlreadyVotedOrDismissed(responseCode: NSNumber, entity: Bool){
         self.setEnableStatusForRatingBar(!entity)
         NSLog("MESSAGE: %@, RESPONSE CODE: %d" , entity, responseCode)
-        uIHelper.stopSpinner()
+        uIHelper.hide(true)
         
     }
     
@@ -133,10 +133,10 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
                     showAreYouSureDialogBox()
                 }else if (index == 1){
                     ePCFRP.evaluateCluster(auth, touristicness: 0,  datastoreClusterKey: cluster.datastoreClusterKey, spotName: spotName)
-                    uIHelper.showSpinner("VOTING CLUSTER AS SEEKRET")
+                    uIHelper.labelText = "VOTING CLUSTER AS SEEKRET"
                 }else if (index == 2){
                     ePCFRP.evaluateCluster(auth, touristicness: 10,  datastoreClusterKey: cluster.datastoreClusterKey, spotName: spotName)
-                    uIHelper.showSpinner("VOTING CLUSTER AS TOURISTIC")
+                    uIHelper.labelText = "VOTING CLUSTER AS TOURISTIC"
                     
                 }else{
                     fatalError("WE HAVE NOT BEHAVIOUR FOR THAT!")
@@ -186,7 +186,7 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
         if (buttonIndex == 0){
             
             ePCFRP.dismissCluster(self.auth, clusterId: cluster.datastoreClusterKey)
-            uIHelper.showSpinner("DISMISSING CLUSTER")
+            uIHelper.labelText = "DISMISSING CLUSTER"
             
         }else{
             NSLog("Will no do anything")
@@ -194,13 +194,13 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
     }
     func didDismiss(responseCode: NSNumber, entity: String){
         NSLog("RESPONSE CODE %d, MESSAGE %@", responseCode, entity)
-        uIHelper.stopSpinner()
+        uIHelper.hide(true)
         self.setEnableStatusForRatingBar(false)
     }
     
     func didEvaluation(responseCode: NSNumber, entity: String){
         NSLog("RESPONSE CODE %d, MESSAGE %@", responseCode, entity)
-        uIHelper.stopSpinner()
+        uIHelper.hide(true)
         self.setEnableStatusForRatingBar(false)
     }
     
