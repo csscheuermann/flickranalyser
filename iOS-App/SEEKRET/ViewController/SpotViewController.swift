@@ -37,8 +37,9 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
     }
     
     override func handleSucessfullLogin(auth: GTMOAuth2Authentication) -> Void {
-        self.uiHelper = UIHelper(uiView: self.view)
-        uiHelper.showSpinner(self.showSpinnerText)
+        self.uiHelper = MBProgressHUD .showHUDAddedTo(self.view, animated: true);
+        uiHelper.labelText = self.showSpinnerText
+//        uiHelper.showSpinner(self.showSpinnerText)
         let endpointController = EnpointController(delegate: self);
         endpointController.getCluster(spotName!, auth: auth)
     }
@@ -119,7 +120,7 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
         self.spotNameLabel.text = spotName
         self.cluster = cluster;
         self.clusterTableView.reloadData()
-        uiHelper.stopSpinner()
+        uiHelper.hide(true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

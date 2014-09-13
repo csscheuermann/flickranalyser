@@ -25,6 +25,7 @@
 #import "QuartzCore/QuartzCore.h"
 #import "GTLRatingAPI.h"
 #import "GTLClusterAPI.h"
+#import <MBProgressHUD.h>
 
 
 #endif

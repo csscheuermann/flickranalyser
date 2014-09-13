@@ -15,7 +15,7 @@ class SpotNameCellView: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        fullSpotNameLabel.font = UIFont (name: "HelveticaNeue-UltraLight", size: 15)
+        fullSpotNameLabel.font = UIFont (name: "HelveticaNeue-Light", size: 15)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

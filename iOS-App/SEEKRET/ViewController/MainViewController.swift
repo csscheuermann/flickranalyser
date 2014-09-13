@@ -7,9 +7,10 @@
 import UIKit
 
 
-class MainViewController: CustomSeekretUIViewController, EndPointControllerForTopSpotsProtocoll, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: CustomSeekretUIViewController, EndPointControllerForTopSpotsProtocoll, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
     
     @IBOutlet weak var topSpotsTableView: UITableView!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     
     var topSpots: [String] = []
     var refreshControl:UIRefreshControl!
@@ -42,6 +43,29 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
     }
 
     
+    @IBAction func logoutButtonTouched(sender: AnyObject) {
+        if (sender as UIBarButtonItem == logoutButton) {
+            var alert: UIAlertView = UIAlertView(title: "Logout", message: "Are you sure you want to logout for SEEKRET?", delegate: self, cancelButtonTitle: "YES",  otherButtonTitles: "Cancel")
+            alert.show();
+        }
+    }
+    
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+        if (buttonIndex == 0){
+            GPPSignIn.sharedInstance() .disconnect()
+            var hud = MBProgressHUD .showHUDAddedTo(self.view, animated: true)
+            hud.labelText = "Logging out from SEEKRET ..."
+            hud.hide(true, afterDelay: 2.0)
+            var timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("showLoginScreen"), userInfo: nil, repeats: false)
+        }else{
+            NSLog("Will no do anything")
+        }
+    }
+    
+    func showLoginScreen(){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func refreshTopSpots(){
         getTopSpots()
     }
@@ -52,8 +76,8 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
     
     
     override func handleSucessfullLogin(auth: GTMOAuth2Authentication) -> Void {
-        self.uiHelper = UIHelper(uiView: self.view)
-        uiHelper.showSpinner(self.showSpinnerText)
+        self.uiHelper = MBProgressHUD .showHUDAddedTo(self.view, animated: true);
+        uiHelper.labelText = self.showSpinnerText;
         getTopSpots()
     }
     
@@ -66,7 +90,7 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
         debugPrintln("RECEIVED TOP SPOTS. LENGTH: \(topSpots.count)")
         self.topSpots = topSpots
         self.topSpotsTableView.reloadData()
-        uiHelper.stopSpinner()
+        uiHelper.hide(true);
         refreshControl.endRefreshing()
     }
     

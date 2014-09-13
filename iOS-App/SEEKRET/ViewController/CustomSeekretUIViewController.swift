@@ -23,7 +23,7 @@ class CustomSeekretUIViewController: UIViewController, GPPSignInDelegate, CLLoca
     // of abstract methods for the subclasses.
     var loginHandler: Loginhandler!
     
-    var uiHelper:UIHelper!
+    var uiHelper:MBProgressHUD!
     var auth: GTMOAuth2Authentication!
     var locationManager:CLLocationManager!;
 

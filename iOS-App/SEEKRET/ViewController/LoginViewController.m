@@ -126,7 +126,6 @@ static GPPSignIn *signIn;
         
         UINavigationController *myVC = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"NavigationBarController"];
         [self presentViewController:myVC animated:YES completion:nil];
-        
     }
 }
 

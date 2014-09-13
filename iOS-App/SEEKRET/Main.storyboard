@@ -230,7 +230,7 @@
                                                             <rect key="frame" x="8" y="15" width="304" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <nil key="highlightedColor"/>
+                                                            <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
@@ -247,8 +247,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Top Seekret Cities" id="ozR-v2-e9t"/>
+                    <navigationItem key="navigationItem" title="Top Seekret Cities" id="ozR-v2-e9t">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="3IB-l4-8bQ">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <connections>
+                                <action selector="logoutButtonTouched:" destination="kyC-JP-zoM" id="MAd-v8-6Yd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="logoutButton" destination="3IB-l4-8bQ" id="WOT-0m-yus"/>
                         <outlet property="topSpotsTableView" destination="DEV-0O-eTT" id="R5c-zq-fi1"/>
                     </connections>
                 </viewController>
@@ -293,9 +301,10 @@
             <objects>
                 <navigationController storyboardIdentifier="NavigationBarController" automaticallyAdjustsScrollViewInsets="NO" id="d3L-YR-J3F" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fkh-ZO-qCn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="background" id="fkh-ZO-qCn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -308,6 +317,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="background" width="1080" height="1920"/>
         <image name="logo.png" width="300" height="55"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
