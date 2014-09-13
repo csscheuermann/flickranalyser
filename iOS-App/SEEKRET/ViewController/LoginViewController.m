@@ -89,13 +89,10 @@ static GPPSignIn *signIn;
 }
 - (IBAction)loginButtonTouched:(id)sender {
     //THIS WE MUST NOT DO - Otherwise login wont work
+    // do not implement [signIn authenticate];
     signIn = [GPPSignIn sharedInstance];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //    hud.mode = MBProgressHUDModeAnnularDeterminate;
     hud.labelText = @"performing login ...";
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [signIn authenticate];
-    });
     
 }
 - (IBAction)logutButtonTouched:(id)sender {
