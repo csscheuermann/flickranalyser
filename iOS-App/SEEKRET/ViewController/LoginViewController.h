@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet GPPSignInButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *proceedWithoutLoginButton;
-@property (weak, nonatomic) IBOutlet UILabel *alreadyConenctedLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *logoSeekret;
+@property (weak, nonatomic) IBOutlet UILabel *loginText;
 
 @end

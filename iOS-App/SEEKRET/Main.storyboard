@@ -9,8 +9,8 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="zgu-tQ-6pg"/>
+                        <viewControllerLayoutGuide type="bottom" id="SQ9-6t-PPV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -23,9 +23,9 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sfu-kP-kyA">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHV-r1-EGo" customClass="GPPSignInButton">
+                                    <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHV-r1-EGo" customClass="GPPSignInButton">
                                         <rect key="frame" x="90" y="347" width="145" height="39"/>
-                                        <state key="normal" title="Login with Google">
+                                        <state key="normal">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -33,11 +33,8 @@
                                             <action selector="loginButtonTouched:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Zpf-TK-f0y"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mJE-pf-m9W">
-                                        <rect key="frame" x="35" y="135" width="255" height="40"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login with Google ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ead-gg-kJO">
-                                        <rect key="frame" x="41" y="271" width="243" height="21"/>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login to SEEKRET with your Google Account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ead-gg-kJO">
+                                        <rect key="frame" x="33" y="254" width="254" height="69"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -53,6 +50,9 @@
                                             <action selector="loginWithoutOAuthTouched:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Whi-yb-NxT"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mJE-pf-m9W">
+                                        <rect key="frame" x="-8" y="264" width="320" height="40"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
@@ -61,8 +61,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="WK9-3d-FIO"/>
                     <connections>
-                        <outlet property="alreadyConenctedLabel" destination="ead-gg-kJO" id="QgI-0A-juB"/>
                         <outlet property="loginButton" destination="GHV-r1-EGo" id="zOe-4i-Mq8"/>
+                        <outlet property="loginText" destination="ead-gg-kJO" id="P84-zh-to8"/>
+                        <outlet property="logoSeekret" destination="mJE-pf-m9W" id="5Ch-Ag-wbh"/>
                         <outlet property="proceedWithoutLoginButton" destination="E7P-gG-vQH" id="NxO-MN-gve"/>
                         <outlet property="view" destination="kh9-bI-dsS" id="97n-Ef-c0m"/>
                         <outlet property="viewForBlur" destination="Hd1-e5-dtS" id="l9d-eM-sVS"/>
@@ -77,8 +78,8 @@
             <objects>
                 <viewController storyboardIdentifier="SpotViewController" id="f2N-Av-Smy" customClass="SpotViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Rhd-SH-lYk"/>
-                        <viewControllerLayoutGuide type="bottom" id="Z4c-72-VSR"/>
+                        <viewControllerLayoutGuide type="top" id="K40-jL-HUq"/>
+                        <viewControllerLayoutGuide type="bottom" id="a2K-5B-6qt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vCa-4k-lvd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -141,8 +142,8 @@
             <objects>
                 <viewController storyboardIdentifier="DetailedClusterViewController" id="qXY-Ry-8NJ" customClass="DetailedClusterViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dnc-fh-qHf"/>
-                        <viewControllerLayoutGuide type="bottom" id="POP-D8-PER"/>
+                        <viewControllerLayoutGuide type="top" id="uZn-rh-KIA"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qwu-nN-oEs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CXd-Jl-PFQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -205,8 +206,8 @@
             <objects>
                 <viewController storyboardIdentifier="MainViewController" id="kyC-JP-zoM" customClass="MainViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="r5T-jZ-gqK"/>
-                        <viewControllerLayoutGuide type="bottom" id="c00-I4-SNj"/>
+                        <viewControllerLayoutGuide type="top" id="41M-Ql-uSw"/>
+                        <viewControllerLayoutGuide type="bottom" id="rMF-Un-gDj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Qhj-oV-JBo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -260,8 +261,8 @@
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="apZ-wV-8MU" userLabel="Map View Controller" customClass="MapViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="At6-IB-bjB"/>
-                        <viewControllerLayoutGuide type="bottom" id="XbH-8Q-bsI"/>
+                        <viewControllerLayoutGuide type="top" id="Imw-bY-dOr"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Fi-PA-eJy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="c0i-cQ-fx0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>

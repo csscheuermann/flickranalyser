@@ -37,19 +37,14 @@ static GPPSignIn *signIn;
     
     UIImage *bgImage = [UIImage imageNamed:@"background"];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:bgImage];
-    imgView.contentMode = UIViewContentModeScaleAspectFill;
     [self.viewForBlur addSubview:imgView];
     UIVisualEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *bluredView = [[UIVisualEffectView alloc] initWithEffect:blur];
-    bluredView.frame = imgView.bounds;
+    bluredView.frame = self.viewForBlur.frame;
     [imgView addSubview:bluredView];
-    
-//    self.loginButton.hidden = YES;
     
     [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     
-    
-
     self.proceedWithoutLoginButton.hidden = YES;
     signIn = [GPPSignIn sharedInstance];
     // Sie haben zuvor kClientID im Schritt "Den Google+ Client initialisieren" festgelegt,
@@ -57,13 +52,35 @@ static GPPSignIn *signIn;
     
     signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail,kGTLAuthScopePlusMe,kGTLAuthScopePlusUserinfoProfile, nil];
     signIn.delegate = self;
-    BOOL silent = [signIn trySilentAuthentication];
-    if (silent) {
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [UIView animateWithDuration:1.f
+                          delay:0.5f
+                        options: UIViewAnimationOptionTransitionCrossDissolve
+                     animations:^{
+                         self.logoSeekret.frame = CGRectMake(self.logoSeekret.frame.origin.x, 127, self.logoSeekret.frame.size.width, self.logoSeekret.frame.size.height);
+                         self.loginText.hidden = NO;
+                         self.loginButton.hidden = NO;
+                         self.loginText.alpha = 1.f;
+                         self.loginButton.alpha = 1.f;
+                     }
+                     completion:^(BOOL finished){
+                         [self performSelector:@selector(silentLogin) withObject: nil afterDelay:0.2f];
+                     }];
+    
+    
+}
+
+- (void)silentLogin {
+    if ([signIn trySilentAuthentication]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"performing silent login ...";
     }
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -74,7 +91,7 @@ static GPPSignIn *signIn;
     //THIS WE MUST NOT DO - Otherwise login wont work
     signIn = [GPPSignIn sharedInstance];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    //    hud.mode = MBProgressHUDModeAnnularDeterminate;
     hud.labelText = @"performing login ...";
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [signIn authenticate];
@@ -82,11 +99,11 @@ static GPPSignIn *signIn;
     
 }
 - (IBAction)logutButtonTouched:(id)sender {
-
+    
     [self disconnect];
 }
 - (IBAction)loginWithoutOAuthTouched:(id)sender {
-   //DO NOTHING 
+    //DO NOTHING
 }
 
 - (void)disconnect {
@@ -106,7 +123,7 @@ static GPPSignIn *signIn;
 -(void)refreshInterfaceBasedOnSignIn
 {
     if ([[GPPSignIn sharedInstance] authentication]) {
-      
+        
         UINavigationController *myVC = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"NavigationBarController"];
         [self presentViewController:myVC animated:YES completion:nil];
         
@@ -124,7 +141,7 @@ static GPPSignIn *signIn;
     if (error) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         //TODO: Icon für Fehlermeldung
-//        hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] autorelease];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"error.png"]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"Error with Login";
         
