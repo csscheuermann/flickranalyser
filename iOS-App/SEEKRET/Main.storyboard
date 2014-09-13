@@ -9,8 +9,8 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zgu-tQ-6pg"/>
-                        <viewControllerLayoutGuide type="bottom" id="SQ9-6t-PPV"/>
+                        <viewControllerLayoutGuide type="top" id="lfk-Yt-MrW"/>
+                        <viewControllerLayoutGuide type="bottom" id="MRd-sy-RVx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -78,8 +78,8 @@
             <objects>
                 <viewController storyboardIdentifier="SpotViewController" id="f2N-Av-Smy" customClass="SpotViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="K40-jL-HUq"/>
-                        <viewControllerLayoutGuide type="bottom" id="a2K-5B-6qt"/>
+                        <viewControllerLayoutGuide type="top" id="0jw-Nw-zra"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ejt-Wi-Sj0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vCa-4k-lvd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -142,10 +142,10 @@
             <objects>
                 <viewController storyboardIdentifier="DetailedClusterViewController" id="qXY-Ry-8NJ" customClass="DetailedClusterViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="uZn-rh-KIA"/>
-                        <viewControllerLayoutGuide type="bottom" id="Qwu-nN-oEs"/>
+                        <viewControllerLayoutGuide type="top" id="JfZ-x5-YtP"/>
+                        <viewControllerLayoutGuide type="bottom" id="9ZL-4w-hzJ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CXd-Jl-PFQ">
+                    <view key="view" contentMode="scaleAspectFit" id="CXd-Jl-PFQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -160,32 +160,32 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dli-7F-Lcx">
-                                        <rect key="frame" x="0.0" y="-62" width="320" height="574"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="574"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="1WT-NM-oc5">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="574"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-Ng-OjU">
-                                                    <rect key="frame" x="0.0" y="524" width="320" height="49"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <items>
-                                                        <tabBarItem title="Dismiss" id="FA5-u5-ELm"/>
-                                                        <tabBarItem title="Seekret" id="9jy-Oe-scf"/>
-                                                        <tabBarItem title="Touristic" id="BsN-y5-rre"/>
-                                                    </items>
-                                                </tabBar>
-                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="c4S-31-E4S">
-                                                    <rect key="frame" x="0.0" y="277" width="320" height="240"/>
-                                                </mapView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="He4-pR-Kco">
-                                                    <rect key="frame" x="0.0" y="69" width="320" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                                 </imageView>
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="c4S-31-E4S">
+                                                    <rect key="frame" x="85" y="252" width="150" height="150"/>
+                                                </mapView>
                                             </subviews>
                                         </view>
                                         <blurEffect style="light"/>
                                     </visualEffectView>
                                 </subviews>
                             </view>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-Ng-OjU">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Dismiss" id="FA5-u5-ELm"/>
+                                    <tabBarItem title="Seekret" id="9jy-Oe-scf"/>
+                                    <tabBarItem title="Touristic" id="BsN-y5-rre"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -206,8 +206,8 @@
             <objects>
                 <viewController storyboardIdentifier="MainViewController" id="kyC-JP-zoM" customClass="MainViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="41M-Ql-uSw"/>
-                        <viewControllerLayoutGuide type="bottom" id="rMF-Un-gDj"/>
+                        <viewControllerLayoutGuide type="top" id="nnz-mo-pMU"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gjt-FX-4vM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Qhj-oV-JBo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -269,8 +269,8 @@
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="apZ-wV-8MU" userLabel="Map View Controller" customClass="MapViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Imw-bY-dOr"/>
-                        <viewControllerLayoutGuide type="bottom" id="2Fi-PA-eJy"/>
+                        <viewControllerLayoutGuide type="top" id="qvu-PJ-8va"/>
+                        <viewControllerLayoutGuide type="bottom" id="1SI-CD-5VP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="c0i-cQ-fx0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
