@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -181,9 +181,9 @@
                                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <tabBarItem title="Dismiss" id="FA5-u5-ELm"/>
-                                    <tabBarItem title="Seekret" id="9jy-Oe-scf"/>
-                                    <tabBarItem title="Touristic" id="BsN-y5-rre"/>
+                                    <tabBarItem title="Dismiss" image="dismiss.png" selectedImage="dismiss.png" id="FA5-u5-ELm"/>
+                                    <tabBarItem title="Seekret" image="seekret.png" selectedImage="seekret.png" id="9jy-Oe-scf"/>
+                                    <tabBarItem title="Touristic" image="touristic.png" selectedImage="touristic.png" id="BsN-y5-rre"/>
                                 </items>
                             </tabBar>
                         </subviews>
@@ -318,11 +318,17 @@
     </scenes>
     <resources>
         <image name="background" width="1080" height="1920"/>
+        <image name="dismiss.png" width="50" height="50"/>
         <image name="logo.png" width="300" height="55"/>
+        <image name="seekret.png" width="50" height="50"/>
+        <image name="touristic.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
 </document>
