@@ -83,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		6B8563B7BB9D4D22B19A2DA5 /* Pods-SEEKRET.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SEEKRET.xcconfig"; path = "Pods/Pods-SEEKRET.xcconfig"; sourceTree = "<group>"; };
+		817E08D619C37E51006ACBB5 /* SEEKRET-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SEEKRET-Bridging-Header.h"; sourceTree = "<group>"; };
 		81A0F402198D2BEE00D148B1 /* SEEKRET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SEEKRET.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A0F405198D2BEE00D148B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		81A0F407198D2BEE00D148B1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,7 +145,6 @@
 		B44AFDB119AF4E6700565AFA /* GTLSpotAPISpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpot.m; sourceTree = "<group>"; };
 		B44AFDB219AF4E6700565AFA /* GTLSpotAPISpotResultList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPISpotResultList.h; sourceTree = "<group>"; };
 		B44AFDB319AF4E6700565AFA /* GTLSpotAPISpotResultList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpotResultList.m; sourceTree = "<group>"; };
-		B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SEEKRET-Bridging-Header.h"; sourceTree = "<group>"; };
 		B4D0B35819AE368F005291B5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B4DCC8E319B9A61400AAC38F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B4DCC8E519B9B1D100AAC38F /* UIHelperMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelperMethods.swift; sourceTree = SOURCE_ROOT; };
@@ -257,6 +257,7 @@
 				81A0F414198D2BEE00D148B1 /* AppDelegate.h */,
 				81A0F415198D2BEE00D148B1 /* AppDelegate.m */,
 				81A0F40C198D2BEE00D148B1 /* Supporting Files */,
+				817E08D619C37E51006ACBB5 /* SEEKRET-Bridging-Header.h */,
 			);
 			path = SEEKRET;
 			sourceTree = "<group>";
@@ -317,7 +318,6 @@
 				81A0F43D198E428400D148B1 /* LoginViewController.h */,
 				81A0F43E198E428400D148B1 /* LoginViewController.m */,
 				B4D0B35819AE368F005291B5 /* MainViewController.swift */,
-				B4D0B35719AE368E005291B5 /* SEEKRET-Bridging-Header.h */,
 				B41E2BD819B057BF00E1A180 /* SpotViewController.swift */,
 				B4102A0919B5F9C300DBF1B9 /* DetailedClusterViewController.swift */,
 			);
@@ -779,7 +779,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SEEKRET/ViewController/SEEKRET-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEEKRET/SEEKRET-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
@@ -801,7 +801,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SEEKRET/ViewController/SEEKRET-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEEKRET/SEEKRET-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

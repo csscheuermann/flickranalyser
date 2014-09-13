@@ -1,6 +1,13 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  SEEKRET-Bridging-Header.h
+//  SEEKRET
 //
+//  Created by Simon Wicha on 12.09.14.
+//  Copyright (c) 2014 nomis-development.net. All rights reserved.
+//
+
+#ifndef SEEKRET_SEEKRET_Bridging_Header_h
+#define SEEKRET_SEEKRET_Bridging_Header_h
 
 #import "GPPSignInButton.h"
 #import <GPPSignIn.h>
@@ -18,3 +25,6 @@
 #import "QuartzCore/QuartzCore.h"
 #import "GTLRatingAPI.h"
 #import "GTLClusterAPI.h"
+
+
+#endif

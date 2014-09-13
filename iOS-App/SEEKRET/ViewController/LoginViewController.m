@@ -14,6 +14,7 @@
 #import "GTLQuerySpotAPI.h"
 #import "GTLSpotAPISpot.h"
 #import "GTLSpotAPICluster.h"
+#import <MBProgressHUD.h>
 #import "SEEKRET-Swift.h"
 
 
@@ -33,6 +34,7 @@ static GPPSignIn *signIn;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     UIImage *bgImage = [UIImage imageNamed:@"background"];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:bgImage];
     imgView.contentMode = UIViewContentModeScaleAspectFill;
@@ -55,8 +57,11 @@ static GPPSignIn *signIn;
     
     signIn.scopes = [NSArray arrayWithObjects:kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail,kGTLAuthScopePlusMe,kGTLAuthScopePlusUserinfoProfile, nil];
     signIn.delegate = self;
-    [signIn trySilentAuthentication];
-    
+    BOOL silent = [signIn trySilentAuthentication];
+    if (silent) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"performing silent login ...";
+    }
 }
 
 
@@ -68,7 +73,13 @@ static GPPSignIn *signIn;
 - (IBAction)loginButtonTouched:(id)sender {
     //THIS WE MUST NOT DO - Otherwise login wont work
     signIn = [GPPSignIn sharedInstance];
-    [signIn authenticate];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = @"performing login ...";
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [signIn authenticate];
+    });
+    
 }
 - (IBAction)logutButtonTouched:(id)sender {
 
@@ -99,9 +110,6 @@ static GPPSignIn *signIn;
         UINavigationController *myVC = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"NavigationBarController"];
         [self presentViewController:myVC animated:YES completion:nil];
         
-    } else {
-        // Führen Sie hier andere Aktionen durch.
-        self.loginButton.hidden = NO;
     }
 }
 
@@ -109,11 +117,21 @@ static GPPSignIn *signIn;
 
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
     NSLog(@"Received error %@ and auth object %@",error, auth);
     if (error) {
-        // Führen Sie hier die Fehlerbehandlung durch.
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //TODO: Icon für Fehlermeldung
+//        hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] autorelease];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.labelText = @"Error with Login";
+        
+        [hud show:YES];
+        [hud hide:YES afterDelay:3];
+        
     } else {
-        self.alreadyConenctedLabel.text = @"Connecting...";
         [self refreshInterfaceBasedOnSignIn];
     }
 }
