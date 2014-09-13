@@ -181,9 +181,9 @@
                                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <tabBarItem title="Dismiss" image="dismiss.png" selectedImage="dismiss.png" id="FA5-u5-ELm"/>
-                                    <tabBarItem title="Seekret" image="seekret.png" selectedImage="seekret.png" id="9jy-Oe-scf"/>
-                                    <tabBarItem title="Touristic" image="touristic.png" selectedImage="touristic.png" id="BsN-y5-rre"/>
+                                    <tabBarItem title="Dismiss" image="dismiss" selectedImage="dismiss" id="FA5-u5-ELm"/>
+                                    <tabBarItem title="Seekret" image="seekret" selectedImage="seekret" id="9jy-Oe-scf"/>
+                                    <tabBarItem title="Touristic" image="touristic" selectedImage="touristic" id="BsN-y5-rre"/>
                                 </items>
                             </tabBar>
                         </subviews>
@@ -318,10 +318,10 @@
     </scenes>
     <resources>
         <image name="background" width="1080" height="1920"/>
-        <image name="dismiss.png" width="50" height="50"/>
+        <image name="dismiss" width="50" height="50"/>
         <image name="logo.png" width="300" height="55"/>
-        <image name="seekret.png" width="50" height="50"/>
-        <image name="touristic.png" width="50" height="50"/>
+        <image name="seekret" width="50" height="50"/>
+        <image name="touristic" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

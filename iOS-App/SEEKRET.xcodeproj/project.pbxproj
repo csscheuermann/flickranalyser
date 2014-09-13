@@ -33,9 +33,6 @@
 		B4102A1219B6F88A00DBF1B9 /* CustomSeekretUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A1119B6F88A00DBF1B9 /* CustomSeekretUIViewController.swift */; };
 		B4102A1519B7074100DBF1B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A1419B7074100DBF1B9 /* Constants.swift */; };
 		B4102A1A19B7313600DBF1B9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4102A1919B7313600DBF1B9 /* CoreLocation.framework */; };
-		B41548DD19C4C242002A30E9 /* dismiss.png in Resources */ = {isa = PBXBuildFile; fileRef = B41548DA19C4C242002A30E9 /* dismiss.png */; };
-		B41548DE19C4C242002A30E9 /* seekret.png in Resources */ = {isa = PBXBuildFile; fileRef = B41548DB19C4C242002A30E9 /* seekret.png */; };
-		B41548DF19C4C242002A30E9 /* touristic.png in Resources */ = {isa = PBXBuildFile; fileRef = B41548DC19C4C242002A30E9 /* touristic.png */; };
 		B41E2BD719B054D900E1A180 /* ClusterImageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */; };
 		B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD819B057BF00E1A180 /* SpotViewController.swift */; };
 		B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7019AF053600565AFA /* UIHelper.swift */; };
@@ -118,9 +115,6 @@
 		B4102A1119B6F88A00DBF1B9 /* CustomSeekretUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSeekretUIViewController.swift; sourceTree = "<group>"; };
 		B4102A1419B7074100DBF1B9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B4102A1919B7313600DBF1B9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		B41548DA19C4C242002A30E9 /* dismiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dismiss.png; sourceTree = "<group>"; };
-		B41548DB19C4C242002A30E9 /* seekret.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seekret.png; sourceTree = "<group>"; };
-		B41548DC19C4C242002A30E9 /* touristic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touristic.png; sourceTree = "<group>"; };
 		B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterImageCellView.swift; sourceTree = "<group>"; };
 		B41E2BD819B057BF00E1A180 /* SpotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
 		B44AFD7019AF053600565AFA /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = SOURCE_ROOT; };
@@ -340,9 +334,6 @@
 		81A0F441198E5C1C00D148B1 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				B41548DA19C4C242002A30E9 /* dismiss.png */,
-				B41548DB19C4C242002A30E9 /* seekret.png */,
-				B41548DC19C4C242002A30E9 /* touristic.png */,
 				81A0F41D198D2BEE00D148B1 /* Images.xcassets */,
 				B410298519B5D11200DBF1B9 /* icon.png */,
 				B410298319B5CCA700DBF1B9 /* logo.png */,
@@ -560,11 +551,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B41548DF19C4C242002A30E9 /* touristic.png in Resources */,
 				B4DCC8E419B9A61400AAC38F /* Main.storyboard in Resources */,
-				B41548DE19C4C242002A30E9 /* seekret.png in Resources */,
 				81A0F41E198D2BEE00D148B1 /* Images.xcassets in Resources */,
-				B41548DD19C4C242002A30E9 /* dismiss.png in Resources */,
 				B410298419B5CCA700DBF1B9 /* logo.png in Resources */,
 				B410298619B5D11200DBF1B9 /* icon.png in Resources */,
 				B410298219B5CAF100DBF1B9 /* background.jpg in Resources */,
