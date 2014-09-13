@@ -91,6 +91,7 @@ static GPPSignIn *signIn;
     //THIS WE MUST NOT DO - Otherwise login wont work
     // do not implement [signIn authenticate];
     signIn = [GPPSignIn sharedInstance];
+    signIn.delegate = self;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"performing login ...";
     
