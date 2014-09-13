@@ -50,6 +50,16 @@ class CustomSeekretUIViewController: UIViewController, GPPSignInDelegate, CLLoca
     }
     
     
+     func didDisconnectWithError(error: NSError!) {
+        if error != nil {
+           NSLog("ERROR %@", error)
+        }else{
+             NSLog("LOGOUT WENT OKAY ")
+            GPPSignIn.sharedInstance().signOut()
+        }
+    }
+    
+    
     func updateLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest

@@ -62,6 +62,8 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
         }
     }
     
+
+    
     func showLoginScreen(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -69,6 +71,9 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
     func refreshTopSpots(){
         getTopSpots()
     }
+    
+
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
