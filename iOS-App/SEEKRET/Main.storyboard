@@ -168,9 +168,19 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="He4-pR-Kco">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                                 </imageView>
-                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="c4S-31-E4S">
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4S-31-E4S">
                                                     <rect key="frame" x="85" y="252" width="150" height="150"/>
                                                 </mapView>
+                                                <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOg-vr-zmA">
+                                                    <rect key="frame" x="205" y="371" width="24" height="24"/>
+                                                    <color key="backgroundColor" red="0.44138443129486044" green="0.46804827428613527" blue="0.51369310461956519" alpha="0.46000000000000002" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" image="error">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="mapViewExpandTouched:" destination="qXY-Ry-8NJ" eventType="touchUpInside" id="qs1-F2-bE2"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <blurEffect style="light"/>
@@ -319,6 +329,7 @@
     <resources>
         <image name="background" width="1080" height="1920"/>
         <image name="dismiss" width="50" height="50"/>
+        <image name="error" width="24" height="24"/>
         <image name="logo.png" width="300" height="55"/>
         <image name="seekret" width="50" height="50"/>
         <image name="touristic" width="50" height="50"/>

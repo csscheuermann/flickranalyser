@@ -44,7 +44,6 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
         self.ePCFRPAPI =  EndpointControllerforRatingAPI(delegate: self)
         ePCFRPAPI.hasAlreadyVoted(self.auth, clusterId: cluster.datastoreClusterKey)
         uIHelper.labelText = "CHECKING SEEKRET"
-        
     }
     
     func addGestureListenerToUiImageView(imageView: UIImageView){
@@ -73,6 +72,11 @@ class DetailedClusterViewController: CustomSeekretUIViewController, EndpointCont
         allItemsOfRatingBar[2].enabled = enablestatus
         
     }
+    
+    @IBAction func mapViewExpandTouched(sender: AnyObject) {
+        NSLog("hallo")
+    }
+    
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
