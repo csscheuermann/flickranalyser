@@ -131,11 +131,9 @@ static GPPSignIn *signIn;
 
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    });
-    NSLog(@"Received error %@ and auth object %@",error, auth);
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (error) {
+        NSLog(@"Received error %@ and auth object %@",error, auth);
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         //TODO: Icon für Fehlermeldung
         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"error.png"]];
