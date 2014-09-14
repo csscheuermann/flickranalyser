@@ -18,7 +18,6 @@ class EnpointController{
         self.delegate = delegate
     }
     
-      
     func getCluster(clusterName: String, auth: GTMOAuth2Authentication) {
         let spotAPI = GTLServiceSpotAPI()
         spotAPI.retryEnabled = true
@@ -30,24 +29,9 @@ class EnpointController{
         var cluster:[GTLSpotAPICluster] = []
         
         spotAPI.executeQuery(query, completionHandler: { (ticket, returnedCuster, nsError) -> Void in
-        println(returnedCuster.clusterRadiusInKm)
-            
-        cluster = returnedCuster.items as [GTLSpotAPICluster]!;
-  
-        /*for (index, currentCluster) in enumerate(cluster){
-            println(index)
-            var castedCluster = currentCluster as GTLSpotAPICluster
-            var castedClusterLatitude = castedCluster.latitude
-            println(castedClusterLatitude)
-        }*/
-            
+            cluster = returnedCuster.items as [GTLSpotAPICluster]!;
             // Now send the JSON result to our delegate object
             self.delegate.didRecieveCluster(cluster, spotName: clusterName)
-        
         })
     }
-    
-    
-    
-
 }

@@ -20,6 +20,7 @@ class EndPointControllerForTopSpots{
     }
     
     func getTopSpots(auth: GTMOAuth2Authentication){
+        
         let spotAPI = GTLServiceSpotAPI()
         spotAPI.retryEnabled = true
         spotAPI.authorizer = auth
@@ -30,9 +31,13 @@ class EndPointControllerForTopSpots{
         var cluster:[GTLSpotAPICluster] = []
         
         spotAPI.executeQuery(query, completionHandler: { (ticket, returnedSpot, nsError) -> Void in
-            var resultArray: [String] = returnedSpot.topSpots as [String]
-            self.delegate.didRecieveTopSpots(resultArray)
-            
+            if (nsError != nil) {
+                NSLog("SOMETHING DURING GET TOP SPOTS WENT WRONG %@", nsError)
+            }else{
+                NSLog("UHH JEAH I GOT THE TOP SPOTS BABY...")
+                var resultArray: [String] = returnedSpot.topSpots as [String]
+                self.delegate.didRecieveTopSpots(resultArray)
+            }
         })
     }
     
