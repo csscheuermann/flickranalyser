@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import <DDLog.h>
+#import <DDASLLogger.h>
+#import <DDTTYLogger.h>
 #import <GPPURLHandler.h>
 
 @implementation AppDelegate
@@ -14,6 +17,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+
     return YES;
 }
 							
