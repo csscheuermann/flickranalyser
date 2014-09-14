@@ -31,13 +31,15 @@ class AbstractSeekretViewController: UIViewController, GPPSignInDelegate, CLLoca
     var usersCurrentlongitude:Double!
     
     override func viewDidLoad() {
-        
-        DDLog.logLevel = .Debug
-        DDLog.logAsync = false;
-        
+        self.setupLogging()
         self.abstractAuthenticationManager = AbstractAuthenticationManager(handleSucessfullLogin)
         self.abstractAuthenticationManager.performSilentLogin(self);
         locationManager = CLLocationManager()
+    }
+    
+    func setupLogging(){
+        DDLog.logLevel = .Debug
+        DDLog.logAsync = false;
     }
     
     override func didReceiveMemoryWarning() {
