@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SEEKRET-CocoaLumberjack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SEEKRET-MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3A8A108B0B6D482DBF613981</key>
+		<key>1787FE31F68448F69515AD34</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>749F513731DD4C99A98C20EE</key>
+		<key>1B38F76FAFCE406B889EA1F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>86ACF84589EC45069B00C939</key>
+		<key>5E2CDBDA90DB4B6AB2EB2EDB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C6339BFB395D46C68A656CEF</key>
+		<key>647FCDAF0CEB4145952CCDCC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E25AD20E3B344161BCCE3AA1</key>
+		<key>9617602090F1431582383474</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E104880C835E4CC6A3221142</key>
 		<dict>
 			<key>primary</key>
 			<true/>
