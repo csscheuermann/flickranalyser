@@ -12,24 +12,13 @@ import Foundation
 //Login Handler. Important to mention is the closure pattern. It allows us to create something like abstact methods.
 class AbstractAuthenticationManager: LoginProtocol{
     
-    let className: String = "AbstractAuthenticationManager"
     
     func handleLogin(auth: GTMOAuth2Authentication,  error: NSError?){
         if error != nil{
-            
-            NSLog("\(className): Something went wrong: %@", error!)
+            DDLog.logError(("Something went wrong: \(error?.localizedDescription)"))
         }else{
-            DDLog.addLogger(DDTTYLogger.sharedInstance())
-            DDLog.logLevel = .Info
-            
-            DDLog.logDebug("SWIFT DEBUG")
-            DDLog.logInfo("SWIFT INFO")
-            DDLog.logWarn("SWIFT WARN")
-            
-            NSLog("\(className): Login was sucessfull!")
+            DDLog.logInfo("Login was sucessfull!")
             self.handleSucessfullLogin(auth)
-            
-            
         }
     }
     
@@ -50,9 +39,9 @@ class AbstractAuthenticationManager: LoginProtocol{
         var signIn = GPPSignIn.sharedInstance()
         signIn.delegate = delegate
         if (!signIn.trySilentAuthentication()) {
-            NSLog("\(className): Silentlogin not logged in!")
+            DDLog.logInfo("Silentlogin not logged in!")
         } else {
-            NSLog("\(className): Silentlogin logged in!")
+            DDLog.logInfo("Silentlogin logged in!")
         }
     }
     

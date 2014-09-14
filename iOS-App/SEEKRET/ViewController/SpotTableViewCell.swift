@@ -46,7 +46,7 @@ class SpotTableViewCell: UITableViewCell, SDWebImageManagerDelegate{
             var manager = SDWebImageManager.sharedManager()
             manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed,
                 progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
-                    NSLog("RECEIVED SIZE  %d, EXPECTED SIZE %d", receivedSize, expectedSize)
+                       DDLog.logInfo("RECEIVED SIZE  \(receivedSize), EXPECTED SIZE \(expectedSize)")
                 },
                 
                 completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
@@ -95,7 +95,7 @@ class SpotTableViewCell: UITableViewCell, SDWebImageManagerDelegate{
         let circleHeight:CGFloat = 50.0
         
         let startPointX:CGFloat = clusterImageView.bounds.width-(1.25*circleWidth)
-        NSLog("CLUSTER IMAGE VIEW HEIGHT %@", clusterImageView.bounds.height)
+        DDLog.logInfo("CLUSTER IMAGE VIEW HEIGHT \(clusterImageView.bounds.height)")
         let startPointY:CGFloat = clusterImageView.frame.height-(circleHeight/2)
         
         self.circleView = UIView(frame: CGRectMake(startPointX,startPointY,circleWidth,circleHeight));

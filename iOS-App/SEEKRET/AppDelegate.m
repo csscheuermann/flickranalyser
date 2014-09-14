@@ -11,15 +11,19 @@
 #import <DDASLLogger.h>
 #import <DDTTYLogger.h>
 #import <GPPURLHandler.h>
+#import "SeekretFormatter.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
+    SeekretFormatter *seekretFormatter = [[SeekretFormatter alloc] init];
+    DDTTYLogger *seekretLogger  = [DDTTYLogger sharedInstance];
+    [seekretLogger setLogFormatter:seekretFormatter];
+    [DDLog addLogger:seekretLogger];
+    
     return YES;
 }
 							

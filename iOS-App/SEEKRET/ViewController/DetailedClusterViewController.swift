@@ -60,7 +60,7 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
     
     func didReceiveHasAlreadyVotedOrDismissed(responseCode: NSNumber, entity: Bool){
         self.setEnableStatusForRatingBar(!entity)
-        NSLog("MESSAGE: %@, RESPONSE CODE: %d" , entity, responseCode)
+         DDLog.logInfo("MESSAGE: \(entity), RESPONSE CODE: \(responseCode)")
         uIHelper.hide(true)
         
     }
@@ -74,7 +74,7 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
     }
     
     @IBAction func mapViewExpandTouched(sender: AnyObject) {
-        NSLog("hallo")
+        DDLog.logInfo("hallo")
     }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
@@ -83,17 +83,17 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
             
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.Right:
-                NSLog("SWIPE RIGHT")
+                DDLog.logInfo("SWIPE RIGHT")
                 counter = uiHelperMethods.getValidIndex(UISwipeGestureRecognizerDirection.Right, urlArray: urls, counter: self.counter)
                 loadImageForIndex(counter)
                 break
             case UISwipeGestureRecognizerDirection.Left:
                 counter = uiHelperMethods.getValidIndex(UISwipeGestureRecognizerDirection.Left, urlArray: urls, counter: self.counter)
                 loadImageForIndex(counter)
-                NSLog("SWIPE LEFT")
+                DDLog.logInfo("SWIPE LEFT")
                 break
             default:
-                NSLog("Not a safe place for humans ;)")
+                DDLog.logError("Not a safe place for humans ;)")
                 fatalError("SWIPE GESTURE THAT WAS NOT IMPLEMENTED, PLEASE IMPLEMENT IT!")
                 break
             }

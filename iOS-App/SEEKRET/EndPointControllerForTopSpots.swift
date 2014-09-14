@@ -32,9 +32,9 @@ class EndPointControllerForTopSpots{
         
         spotAPI.executeQuery(query, completionHandler: { (ticket, returnedSpot, nsError) -> Void in
             if (nsError != nil) {
-                NSLog("SOMETHING DURING GET TOP SPOTS WENT WRONG %@", nsError)
+                DDLog.logError("SOMETHING DURING GET TOP SPOTS WENT WRONG \(nsError.description)")
             }else{
-                NSLog("UHH JEAH I GOT THE TOP SPOTS BABY...")
+                DDLog.logInfo("UHH JEAH I GOT THE TOP SPOTS BABY...")
                 var resultArray: [String] = returnedSpot.topSpots as [String]
                 self.delegate.didRecieveTopSpots(resultArray)
             }

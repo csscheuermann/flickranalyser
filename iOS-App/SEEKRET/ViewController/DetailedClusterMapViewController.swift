@@ -9,40 +9,14 @@
 import UIKit
 import MapKit
 
-class DetailedClusterMapViewController: UIViewController, EndpointControllerProtocol, GPPSignInDelegate{
+class DetailedClusterMapViewController: AbstractSeekretViewController, EndpointControllerProtocol, GPPSignInDelegate{
     
     @IBOutlet weak var spotMapView: MKMapView!
     var hud:MBProgressHUD!
     var spotName: String?
-    var abstractAuthenticationManager: AbstractAuthenticationManager!
-    
-    /// We have to do the Login here, because it is only possible in subclasses from UIViewController.
-    /// Sad but true ...
-    func performSilentLogin(){
-        //Silent Sign In
-        var signIn = GPPSignIn.sharedInstance()
-        signIn.delegate = self
-        if (!signIn.trySilentAuthentication()) {
-            println("NOT LOGGED IN")
-        } else {
-            println("LOGGED IN")
-        }
-    }
     
     
     
-    
-    func finishedWithAuth(auth: GTMOAuth2Authentication,  error: NSError? ) -> Void{
-        if error != nil{
-            debugPrintln("AUTH WENT WRONG")
-        }else{
-            debugPrintln("FINISHED WITH AUTH")
-            hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            hud.labelText = "Loading"
-            let endpointController = EnpointController(delegate: self);
-            endpointController.getCluster(spotName!, auth: auth)
-        }
-    }
     
     
     func didRecieveCluster(cluster: [GTLSpotAPICluster], spotName: String){
@@ -73,7 +47,6 @@ class DetailedClusterMapViewController: UIViewController, EndpointControllerProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        performSilentLogin();
     }
     
     

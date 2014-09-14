@@ -58,7 +58,7 @@ class TopSpotsViewController: AbstractSeekretViewController, EndPointControllerF
             hud.hide(true, afterDelay: 2.0)
             var timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("showLoginScreen"), userInfo: nil, repeats: false)
         }else{
-            NSLog("Will no do anything")
+            DDLog.logInfo("Will no do anything")
         }
     }
     
@@ -89,7 +89,7 @@ class TopSpotsViewController: AbstractSeekretViewController, EndPointControllerF
     }
     
     func didRecieveTopSpots(topSpots: [String]){
-        debugPrintln("RECEIVED TOP SPOTS. LENGTH: \(topSpots.count)")
+        DDLog.logInfo("RECEIVED TOP SPOTS. LENGTH: \(topSpots.count)")
         self.topSpots = topSpots
         self.topSpotsTableView.reloadData()
         uiHelper.hide(true);

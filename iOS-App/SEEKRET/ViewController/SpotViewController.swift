@@ -55,8 +55,7 @@ class SpotViewController: AbstractSeekretViewController ,GPPSignInDelegate, Endp
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         if (cluster != nil){
             var indexRow = indexPath.row
-            
-            NSLog("Current Row index %d, Current Cluster Count %d", indexRow, cluster.count)
+            DDLog.logInfo("Current Row index \(indexRow), Current Cluster Count \(cluster.count)")
             assert(indexRow < cluster.count, "PROBLEM APPEARED")
             
             var currentCluster = cluster[indexRow]
@@ -107,7 +106,7 @@ class SpotViewController: AbstractSeekretViewController ,GPPSignInDelegate, Endp
                 swipedCell.showPicture(UISwipeGestureRecognizerDirection.Left)
                 break
             default:
-                NSLog("Not a safe place for humans ;)")
+               DDLog.logError("Not a safe place for humans ;)")
                 fatalError("SWIPE GESTURE THAT WAS NOT IMPLEMENTED, PLEASE IMPLEMENT IT!")
                 break
             }

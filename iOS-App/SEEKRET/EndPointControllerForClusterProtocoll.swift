@@ -53,7 +53,7 @@ class EndPointControllerForCluster{
         clusterAPI.executeQuery(query, completionHandler: { (ticket, returnedResponse, nsError) -> Void in
             var responseCode: NSNumber = returnedResponse.status
             var response = String(returnedResponse.entity as NSString)
-            NSLog("RECEIVED MESSAGE %@", response)
+             DDLog.logInfo("RECEIVED MESSAGE \(response)")
             self.delegate.didEvaluation(responseCode, entity: response)
         })
     }

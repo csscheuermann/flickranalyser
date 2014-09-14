@@ -65,6 +65,7 @@
 		B4DCC96E19BA138800AAC38F /* GTLRatingAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DCC96719BA138800AAC38F /* GTLRatingAPIResponse.m */; };
 		B4DCC96F19BA138800AAC38F /* GTLServiceRatingAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DCC96919BA138800AAC38F /* GTLServiceRatingAPI.m */; };
 		B4E4B41819C5DEDF00977EE3 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E4B41719C5DEDF00977EE3 /* CocoaLumberjack.swift */; };
+		B4E4B41B19C5EED700977EE3 /* SeekretFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E4B41A19C5EED700977EE3 /* SeekretFormatter.m */; };
 		B4F0AD6F19AE4ADA00213B12 /* DetailedClusterMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6D19AE4ADA00213B12 /* DetailedClusterMapViewController.swift */; };
 		B4F0AD7019AE4ADA00213B12 /* EndpointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */; };
 		F725501D9E8A46C8A26A93B5 /* libPods-SEEKRET.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */; };
@@ -172,8 +173,9 @@
 		B4DCC96719BA138800AAC38F /* GTLRatingAPIResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLRatingAPIResponse.m; sourceTree = "<group>"; };
 		B4DCC96819BA138800AAC38F /* GTLServiceRatingAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceRatingAPI.h; sourceTree = "<group>"; };
 		B4DCC96919BA138800AAC38F /* GTLServiceRatingAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServiceRatingAPI.m; sourceTree = "<group>"; };
-		B4E4B41619C5D8D500977EE3 /* SeekretLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekretLogging.h; sourceTree = "<group>"; };
 		B4E4B41719C5DEDF00977EE3 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
+		B4E4B41919C5EE9100977EE3 /* SeekretFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekretFormatter.h; sourceTree = "<group>"; };
+		B4E4B41A19C5EED700977EE3 /* SeekretFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekretFormatter.m; sourceTree = "<group>"; };
 		B4F0AD6D19AE4ADA00213B12 /* DetailedClusterMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedClusterMapViewController.swift; sourceTree = "<group>"; };
 		B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EndpointController.swift; path = ViewController/EndpointController.swift; sourceTree = "<group>"; };
 		CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEEKRET.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -471,8 +473,9 @@
 		B4E4B41519C5D83800977EE3 /* Logging */ = {
 			isa = PBXGroup;
 			children = (
-				B4E4B41619C5D8D500977EE3 /* SeekretLogging.h */,
 				B4E4B41719C5DEDF00977EE3 /* CocoaLumberjack.swift */,
+				B4E4B41919C5EE9100977EE3 /* SeekretFormatter.h */,
+				B4E4B41A19C5EED700977EE3 /* SeekretFormatter.m */,
 			);
 			name = Logging;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				B4102A1019B6E97600DBF1B9 /* AbstractAuthenticationManager.swift in Sources */,
 				B4DCC96B19BA138800AAC38F /* GTLRatingAPIConstants.m in Sources */,
 				B4DCC95A19BA137A00AAC38F /* GTLClusterAPIResponse.m in Sources */,
+				B4E4B41B19C5EED700977EE3 /* SeekretFormatter.m in Sources */,
 				81A0F412198D2BEE00D148B1 /* main.m in Sources */,
 				B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */,
 				81A0F440198E428400D148B1 /* LoginViewController.m in Sources */,

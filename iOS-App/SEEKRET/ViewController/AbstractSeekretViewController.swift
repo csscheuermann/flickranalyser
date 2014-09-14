@@ -26,11 +26,15 @@ class AbstractSeekretViewController: UIViewController, GPPSignInDelegate, CLLoca
     var uiHelper:MBProgressHUD!
     var auth: GTMOAuth2Authentication!
     var locationManager:CLLocationManager!;
-
+    
     var usersCurrentlatitude:Double!
     var usersCurrentlongitude:Double!
     
     override func viewDidLoad() {
+        
+        DDLog.logLevel = .Debug
+        
+        
         self.abstractAuthenticationManager = AbstractAuthenticationManager(handleSucessfullLogin)
         self.abstractAuthenticationManager.performSilentLogin(self);
         locationManager = CLLocationManager()
@@ -43,6 +47,7 @@ class AbstractSeekretViewController: UIViewController, GPPSignInDelegate, CLLoca
     func finishedWithAuth(auth: GTMOAuth2Authentication,  error: NSError? ) -> Void{
         self.auth = auth
         self.abstractAuthenticationManager.handleLogin(auth, error: error)
+        
     }
     
     func handleSucessfullLogin(auth: GTMOAuth2Authentication) -> Void {
@@ -50,11 +55,11 @@ class AbstractSeekretViewController: UIViewController, GPPSignInDelegate, CLLoca
     }
     
     
-     func didDisconnectWithError(error: NSError!) {
+    func didDisconnectWithError(error: NSError!) {
         if error != nil {
-           NSLog("ERROR %@", error)
+            DDLog.logError("ERROR \(error.localizedDescription)")
         }else{
-             NSLog("LOGOUT WENT OKAY ")
+            DDLog.logInfo("DISCONNECT WENT OKAY, WILL NOW SIGN OUT")
             GPPSignIn.sharedInstance().signOut()
         }
     }
@@ -67,19 +72,16 @@ class AbstractSeekretViewController: UIViewController, GPPSignInDelegate, CLLoca
         locationManager.startUpdatingLocation()
     }
     
-     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        println("locations = \(locationManager)")
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var latValue = locationManager.location.coordinate.latitude
         var lonValue = locationManager.location.coordinate.longitude
         self.usersCurrentlatitude = latValue
         self.usersCurrentlongitude = lonValue
-        
-        NSLog("STOPPING LOCATION UPDATES")
+        DDLog.logInfo("STOPPING LOCATION UPDATES")
         locationManager.stopUpdatingLocation()
-        
-        NSLog("LOCATION: Latitude %f, Longitude %f ", latValue, lonValue)
+        DDLog.logInfo("LOCATION: Latitude \(latValue.description), Longitude \(lonValue.description)")
     }
-   
-
+    
+    
     
 }

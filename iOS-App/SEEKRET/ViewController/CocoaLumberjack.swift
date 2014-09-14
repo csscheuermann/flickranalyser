@@ -107,6 +107,7 @@ extension DDLog {
         line: Int32 = __LINE__
         )
     {
+      
         let level:LogLevel = DDLog.logLevel
         let async:Bool = (level != LogLevel.Error) && DDLog.logAsync
         

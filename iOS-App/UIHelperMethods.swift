@@ -18,42 +18,42 @@ class UIHelperMethods{
         var counterToReturn: Int!
         
         var length = urlArray.count - 1
-        NSLog("Max URL Length: %d, Current Countervalue: %d.", length, counter)
+        DDLog.logInfo("Max URL Length: \(length), Current Countervalue: \(counter).")
         
-     
-            switch showPictureEnum {
-            case UISwipeGestureRecognizerDirection.Left:
-                if ( counter == length){
-                    counterToReturn = 0
-                }
-                
-                counterToReturn = counter + 1
-                
-                if (counterToReturn > length){
-                    counterToReturn = 0
-                }
-                
-                NSLog("Next Picture will be displayed. Max URL Length: %d, Countervalue: %d.", length, counterToReturn)
-                break
-            case UISwipeGestureRecognizerDirection.Right:
-                
-                if ( counter == length){
-                    counterToReturn = 1
-                }
-                
-                
-                counterToReturn = counter - 1
-                
-                if (counterToReturn < 0){
-                    counterToReturn = length
-                }
-                
-                NSLog("Previous Picture will be displayed. Max URL Length: %d, Countervalue: %d.", length, counterToReturn)
-                break
-            default:
-                NSLog("Not a safe place for humans ;)")
-                fatalError("SWIPE GESTURE THAT WAS NOT IMPLEMENTED, PLEASE IMPLEMENT IT!s")
-                break
+        
+        switch showPictureEnum {
+        case UISwipeGestureRecognizerDirection.Left:
+            if ( counter == length){
+                counterToReturn = 0
+            }
+            
+            counterToReturn = counter + 1
+            
+            if (counterToReturn > length){
+                counterToReturn = 0
+            }
+            
+            DDLog.logInfo("Next Picture will be displayed. Max URL Length: \(length), Countervalue: \(counterToReturn).")
+            break
+        case UISwipeGestureRecognizerDirection.Right:
+            
+            if ( counter == length){
+                counterToReturn = 1
+            }
+            
+            
+            counterToReturn = counter - 1
+            
+            if (counterToReturn < 0){
+                counterToReturn = length
+            }
+            
+            DDLog.logInfo("Previous Picture will be displayed. Max URL Length: \(length), Countervalue: \(counterToReturn).")
+            break
+        default:
+            DDLog.logError("Not a safe place for humans ;)")
+            fatalError("SWIPE GESTURE THAT WAS NOT IMPLEMENTED, PLEASE IMPLEMENT IT!s")
+            break
             
         }
         
@@ -82,9 +82,9 @@ class UIHelperMethods{
         return counterValue
     }
     
-
+    
     func debugImageSize(image: UIImage, message: String){
-        NSLog("SIZE OF IMAGE   %@, WIDTH %@, HEIGHT %@", message, image.size.width, image.size.height)
+        DDLog.logInfo("SIZE OF IMAGE   \(message), WIDTH \(image.size.width), HEIGHT \(image.size.height)")
     }
     
     func isImageLandscape(image: UIImage) -> Bool{
@@ -134,7 +134,7 @@ class UIHelperMethods{
         return newImage;
     }
     
-
-
+    
+    
     
 }
