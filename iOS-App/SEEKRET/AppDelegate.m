@@ -24,6 +24,7 @@
     [seekretLogger setLogFormatter:seekretFormatter];
     [DDLog addLogger:seekretLogger];
     
+    
     return YES;
 }
 							

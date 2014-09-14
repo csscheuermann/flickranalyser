@@ -29,6 +29,7 @@
     
     
     return [NSString stringWithFormat:@"%@ | %@ %s %d | %@ ", logLevel, className, logMessage->function,logMessage->lineNumber,  logMessage->logMsg];
+     // return [NSString stringWithFormat:@"%@", className];
 }
 
 @end

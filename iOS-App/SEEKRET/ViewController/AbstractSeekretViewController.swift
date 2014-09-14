@@ -33,7 +33,7 @@ class AbstractSeekretViewController: UIViewController, GPPSignInDelegate, CLLoca
     override func viewDidLoad() {
         
         DDLog.logLevel = .Debug
-        
+        DDLog.logAsync = false;
         
         self.abstractAuthenticationManager = AbstractAuthenticationManager(handleSucessfullLogin)
         self.abstractAuthenticationManager.performSilentLogin(self);

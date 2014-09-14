@@ -95,7 +95,8 @@ extension DDLog {
     }
     
     class func logWarn  (message: String, function: String = __FUNCTION__, file: String = __FILE__, line: Int32 = __LINE__) { log(.Warn,  message: message, function: function, file: file, line: line) }
-    class func logInfo  (message: String, function: String = __FUNCTION__, file: String = __FILE__, line: Int32 = __LINE__) { log(.Info,  message: message, function: function, file: file, line: line) }
+    class func logInfo  (message: String, function: String = __FUNCTION__, file: String = __FILE__, line: Int32 = __LINE__) {
+        log(.Info,  message: message, function: function, file: file, line: line) }
     class func logDebug (message: String, function: String = __FUNCTION__, file: String = __FILE__, line: Int32 = __LINE__) { log(.Debug, message: message, function: function, file: file, line: line) }
     
     private class func log (
@@ -112,6 +113,7 @@ extension DDLog {
         let async:Bool = (level != LogLevel.Error) && DDLog.logAsync
         
         if flag.toRaw() & level.toRaw() != 0 {
+                        
             DDLog.log(
                 async,
                 message: DDLogMessage(logMsg: message,

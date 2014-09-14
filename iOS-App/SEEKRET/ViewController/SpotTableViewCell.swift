@@ -46,7 +46,7 @@ class SpotTableViewCell: UITableViewCell, SDWebImageManagerDelegate{
             var manager = SDWebImageManager.sharedManager()
             manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed,
                 progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
-                       DDLog.logInfo("RECEIVED SIZE  \(receivedSize), EXPECTED SIZE \(expectedSize)")
+                       //DDLog.logInfo("RECEIVED SIZE  \(receivedSize), EXPECTED SIZE \(expectedSize)")
                 },
                 
                 completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
