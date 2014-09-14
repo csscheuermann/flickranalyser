@@ -35,6 +35,12 @@ static GPPSignIn *signIn;
 {
     [super viewDidLoad];
     
+    
+    DDLogInfo(@"INFO");
+    DDLogError(@"ERROR");
+    DDLogVerbose(@"VERBOSE");
+    DDLogDebug(@"DEBUG");
+    DDLogWarn(@"WARN");
     UIImage *bgImage = [UIImage imageNamed:@"background"];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:bgImage];
     [self.viewForBlur addSubview:imgView];
