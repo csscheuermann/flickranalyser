@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SEEKRET-CrashlyticsFramework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SEEKRET-MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>301E4A0BC9674A84B421F04E</key>
+		<key>0B10A9B6976440298A81EBB0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>587BF8EE75A649D9B46937F4</key>
+		<key>151208258AC64E438769E77C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B4CD401BB12A4791837F6F4A</key>
+		<key>31B0DBF2ECE5453BA91BC0C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB872842B7454FF09E50ABB6</key>
+		<key>328CFEFA45154EDAB208297B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CD12F0CE72094129A19031FD</key>
+		<key>5BC78CB1DD4443E49D01E1D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FD67E612D36E41D087B590C0</key>
+		<key>8B516710FF0B44DE99A9D9D6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DCF3536F149A4CDEA7FFD697</key>
 		<dict>
 			<key>primary</key>
 			<true/>

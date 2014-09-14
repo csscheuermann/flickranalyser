@@ -12,11 +12,14 @@
 #import <DDTTYLogger.h>
 #import <GPPURLHandler.h>
 #import "SeekretFormatter.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //This is for Crash Reporting Tool Crashlytics
+    [Crashlytics startWithAPIKey:@"c770d22929cfea57f3ab357f65743e28933fd16c"];
     // Override point for customization after application launch.
 
     SeekretFormatter *seekretFormatter = [[SeekretFormatter alloc] init];

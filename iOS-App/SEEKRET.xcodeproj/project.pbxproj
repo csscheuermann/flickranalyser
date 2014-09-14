@@ -492,6 +492,7 @@
 				81A0F3FF198D2BEE00D148B1 /* Frameworks */,
 				81A0F400198D2BEE00D148B1 /* Resources */,
 				6CA1C2E153C843958CF47ED0 /* Copy Pods Resources */,
+				81C758C919C6467B00BFDD15 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -611,6 +612,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-SEEKRET-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		81C758C919C6467B00BFDD15 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run c770d22929cfea57f3ab357f65743e28933fd16c bb076171310cc3b2bcfb712fad866a3902568f9a58e6ee8ef3ae4417f7ad3996";
 		};
 /* End PBXShellScriptBuildPhase section */
 
