@@ -243,13 +243,12 @@
 		81A0F40B198D2BEE00D148B1 /* SEEKRET */ = {
 			isa = PBXGroup;
 			children = (
+				B4E4B41419C5CE8800977EE3 /* Storyboard */,
 				B44AFD7619AF356F00565AFA /* EndpointController */,
 				81AB648919916785008C2040 /* GeneratedEndpointLib */,
 				81A0F441198E5C1C00D148B1 /* Ressources */,
-				81A0F43A198E428400D148B1 /* Controller */,
 				81A0F43B198E428400D148B1 /* Model */,
 				81A0F43C198E428400D148B1 /* ViewController */,
-				81A0F43F198E428400D148B1 /* Views */,
 				81A0F414198D2BEE00D148B1 /* AppDelegate.h */,
 				81A0F415198D2BEE00D148B1 /* AppDelegate.m */,
 				81A0F40C198D2BEE00D148B1 /* Supporting Files */,
@@ -263,7 +262,6 @@
 			children = (
 				81A0F40D198D2BEE00D148B1 /* SEEKRET-Info.plist */,
 				81A0F40E198D2BEE00D148B1 /* InfoPlist.strings */,
-				B4DCC8E319B9A61400AAC38F /* Main.storyboard */,
 				81A0F411198D2BEE00D148B1 /* main.m */,
 				81A0F413198D2BEE00D148B1 /* SEEKRET-Prefix.pch */,
 			);
@@ -288,13 +286,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		81A0F43A198E428400D148B1 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		81A0F43B198E428400D148B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,13 +304,6 @@
 				B4E4B41219C5CC0F00977EE3 /* Cluster */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		81A0F43F198E428400D148B1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		81A0F441198E5C1C00D148B1 /* Ressources */ = {
@@ -470,6 +454,14 @@
 				81A0F43E198E428400D148B1 /* LoginViewController.m */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		B4E4B41419C5CE8800977EE3 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				B4DCC8E319B9A61400AAC38F /* Main.storyboard */,
+			);
+			name = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
