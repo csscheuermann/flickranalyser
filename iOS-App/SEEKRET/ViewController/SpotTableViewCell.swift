@@ -1,5 +1,5 @@
 //
-//  ClusterImageCellView.swift
+//  SpotTableViewCell.swift
 //  SEEKRET
 //
 //  Created by Constantin Scheuermann on 8/29/14.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ClusterImageCellView: UITableViewCell, SDWebImageManagerDelegate{
+class SpotTableViewCell: UITableViewCell, SDWebImageManagerDelegate{
     
     
     @IBOutlet weak var clusterImageView: UIImageView!

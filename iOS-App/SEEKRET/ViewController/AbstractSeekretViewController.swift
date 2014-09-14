@@ -17,11 +17,11 @@ import CoreLocation
 //<key>NSLocationAlwaysUsageDescription</key>
 //<string>We need the location in order to find Seekrets nearby. In case you dont want to share you location app functionalities might be limited.</string>
 
-class CustomSeekretUIViewController: UIViewController, GPPSignInDelegate, CLLocationManagerDelegate{
+class AbstractSeekretViewController: UIViewController, GPPSignInDelegate, CLLocationManagerDelegate{
     
     //Login Handler handels the entire login mechanism for us. It uses closures the simulate kind
     // of abstract methods for the subclasses.
-    var loginHandler: Loginhandler!
+    var abstractAuthenticationManager: AbstractAuthenticationManager!
     
     var uiHelper:MBProgressHUD!
     var auth: GTMOAuth2Authentication!
@@ -31,8 +31,8 @@ class CustomSeekretUIViewController: UIViewController, GPPSignInDelegate, CLLoca
     var usersCurrentlongitude:Double!
     
     override func viewDidLoad() {
-        self.loginHandler = Loginhandler(handleSucessfullLogin)
-        loginHandler.performSilentLogin(self);
+        self.abstractAuthenticationManager = AbstractAuthenticationManager(handleSucessfullLogin)
+        self.abstractAuthenticationManager.performSilentLogin(self);
         locationManager = CLLocationManager()
     }
     
@@ -42,7 +42,7 @@ class CustomSeekretUIViewController: UIViewController, GPPSignInDelegate, CLLoca
     
     func finishedWithAuth(auth: GTMOAuth2Authentication,  error: NSError? ) -> Void{
         self.auth = auth
-        loginHandler.handleLogin(auth, error: error)
+        self.abstractAuthenticationManager.handleLogin(auth, error: error)
     }
     
     func handleSucessfullLogin(auth: GTMOAuth2Authentication) -> Void {

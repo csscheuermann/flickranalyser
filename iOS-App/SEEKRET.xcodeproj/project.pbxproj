@@ -29,14 +29,12 @@
 		B41029B519B5D9FC00DBF1B9 /* EndPointControllerForClusterProtocoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41029B419B5D9FC00DBF1B9 /* EndPointControllerForClusterProtocoll.swift */; };
 		B4102A0A19B5F9C300DBF1B9 /* DetailedClusterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A0919B5F9C300DBF1B9 /* DetailedClusterViewController.swift */; };
 		B4102A0D19B6E7D700DBF1B9 /* LoginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A0C19B6E7D700DBF1B9 /* LoginProtocol.swift */; };
-		B4102A1019B6E97600DBF1B9 /* LoginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A0F19B6E97600DBF1B9 /* LoginHandler.swift */; };
-		B4102A1219B6F88A00DBF1B9 /* CustomSeekretUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A1119B6F88A00DBF1B9 /* CustomSeekretUIViewController.swift */; };
-		B4102A1519B7074100DBF1B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A1419B7074100DBF1B9 /* Constants.swift */; };
+		B4102A1019B6E97600DBF1B9 /* AbstractAuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A0F19B6E97600DBF1B9 /* AbstractAuthenticationManager.swift */; };
+		B4102A1219B6F88A00DBF1B9 /* AbstractSeekretViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4102A1119B6F88A00DBF1B9 /* AbstractSeekretViewController.swift */; };
 		B4102A1A19B7313600DBF1B9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4102A1919B7313600DBF1B9 /* CoreLocation.framework */; };
-		B41E2BD719B054D900E1A180 /* ClusterImageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */; };
+		B41E2BD719B054D900E1A180 /* SpotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD619B054D900E1A180 /* SpotTableViewCell.swift */; };
 		B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41E2BD819B057BF00E1A180 /* SpotViewController.swift */; };
-		B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7019AF053600565AFA /* UIHelper.swift */; };
-		B44AFD7519AF2A3100565AFA /* SpotNameCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */; };
+		B44AFD7519AF2A3100565AFA /* TopSpotsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7419AF2A3100565AFA /* TopSpotsTableViewCell.swift */; };
 		B44AFD7819AF358E00565AFA /* EndPointControllerForTopSpots.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD7719AF358E00565AFA /* EndPointControllerForTopSpots.swift */; };
 		B44AFDB419AF4E6700565AFA /* GTLQuerySpotAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD9C19AF4E6700565AFA /* GTLQuerySpotAPI.m */; };
 		B44AFDB519AF4E6700565AFA /* GTLServiceSpotAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B44AFD9E19AF4E6700565AFA /* GTLServiceSpotAPI.m */; };
@@ -50,7 +48,7 @@
 		B44AFDBD19AF4E6700565AFA /* GTLSpotAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B44AFDAF19AF4E6700565AFA /* GTLSpotAPIResponse.m */; };
 		B44AFDBE19AF4E6700565AFA /* GTLSpotAPISpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B44AFDB119AF4E6700565AFA /* GTLSpotAPISpot.m */; };
 		B44AFDBF19AF4E6700565AFA /* GTLSpotAPISpotResultList.m in Sources */ = {isa = PBXBuildFile; fileRef = B44AFDB319AF4E6700565AFA /* GTLSpotAPISpotResultList.m */; };
-		B4D0B35919AE368F005291B5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D0B35819AE368F005291B5 /* MainViewController.swift */; };
+		B4D0B35919AE368F005291B5 /* TopSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D0B35819AE368F005291B5 /* TopSpotsViewController.swift */; };
 		B4DCC8E419B9A61400AAC38F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4DCC8E319B9A61400AAC38F /* Main.storyboard */; };
 		B4DCC8E619B9B1D100AAC38F /* UIHelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DCC8E519B9B1D100AAC38F /* UIHelperMethods.swift */; };
 		B4DCC91019B9ED5F00AAC38F /* EndpointControllerforRatingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DCC90F19B9ED5F00AAC38F /* EndpointControllerforRatingAPI.swift */; };
@@ -66,7 +64,7 @@
 		B4DCC96D19BA138800AAC38F /* GTLRatingAPIKeyResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DCC96519BA138800AAC38F /* GTLRatingAPIKeyResult.m */; };
 		B4DCC96E19BA138800AAC38F /* GTLRatingAPIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DCC96719BA138800AAC38F /* GTLRatingAPIResponse.m */; };
 		B4DCC96F19BA138800AAC38F /* GTLServiceRatingAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DCC96919BA138800AAC38F /* GTLServiceRatingAPI.m */; };
-		B4F0AD6F19AE4ADA00213B12 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */; };
+		B4F0AD6F19AE4ADA00213B12 /* DetailedClusterMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6D19AE4ADA00213B12 /* DetailedClusterMapViewController.swift */; };
 		B4F0AD7019AE4ADA00213B12 /* EndpointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */; };
 		F725501D9E8A46C8A26A93B5 /* libPods-SEEKRET.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */; };
 /* End PBXBuildFile section */
@@ -111,14 +109,12 @@
 		B41029B419B5D9FC00DBF1B9 /* EndPointControllerForClusterProtocoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPointControllerForClusterProtocoll.swift; sourceTree = "<group>"; };
 		B4102A0919B5F9C300DBF1B9 /* DetailedClusterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedClusterViewController.swift; sourceTree = "<group>"; };
 		B4102A0C19B6E7D700DBF1B9 /* LoginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginProtocol.swift; sourceTree = "<group>"; };
-		B4102A0F19B6E97600DBF1B9 /* LoginHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHandler.swift; sourceTree = "<group>"; };
-		B4102A1119B6F88A00DBF1B9 /* CustomSeekretUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSeekretUIViewController.swift; sourceTree = "<group>"; };
-		B4102A1419B7074100DBF1B9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B4102A0F19B6E97600DBF1B9 /* AbstractAuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractAuthenticationManager.swift; sourceTree = "<group>"; };
+		B4102A1119B6F88A00DBF1B9 /* AbstractSeekretViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractSeekretViewController.swift; sourceTree = "<group>"; };
 		B4102A1919B7313600DBF1B9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterImageCellView.swift; sourceTree = "<group>"; };
+		B41E2BD619B054D900E1A180 /* SpotTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotTableViewCell.swift; sourceTree = "<group>"; };
 		B41E2BD819B057BF00E1A180 /* SpotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
-		B44AFD7019AF053600565AFA /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = SOURCE_ROOT; };
-		B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotNameCellView.swift; sourceTree = "<group>"; };
+		B44AFD7419AF2A3100565AFA /* TopSpotsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopSpotsTableViewCell.swift; sourceTree = "<group>"; };
 		B44AFD7719AF358E00565AFA /* EndPointControllerForTopSpots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPointControllerForTopSpots.swift; sourceTree = "<group>"; };
 		B44AFD9B19AF4E6700565AFA /* GTLQuerySpotAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQuerySpotAPI.h; sourceTree = "<group>"; };
 		B44AFD9C19AF4E6700565AFA /* GTLQuerySpotAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQuerySpotAPI.m; sourceTree = "<group>"; };
@@ -145,7 +141,7 @@
 		B44AFDB119AF4E6700565AFA /* GTLSpotAPISpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpot.m; sourceTree = "<group>"; };
 		B44AFDB219AF4E6700565AFA /* GTLSpotAPISpotResultList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLSpotAPISpotResultList.h; sourceTree = "<group>"; };
 		B44AFDB319AF4E6700565AFA /* GTLSpotAPISpotResultList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLSpotAPISpotResultList.m; sourceTree = "<group>"; };
-		B4D0B35819AE368F005291B5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B4D0B35819AE368F005291B5 /* TopSpotsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopSpotsViewController.swift; sourceTree = "<group>"; };
 		B4DCC8E319B9A61400AAC38F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B4DCC8E519B9B1D100AAC38F /* UIHelperMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelperMethods.swift; sourceTree = SOURCE_ROOT; };
 		B4DCC90F19B9ED5F00AAC38F /* EndpointControllerforRatingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointControllerforRatingAPI.swift; sourceTree = "<group>"; };
@@ -175,7 +171,7 @@
 		B4DCC96719BA138800AAC38F /* GTLRatingAPIResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLRatingAPIResponse.m; sourceTree = "<group>"; };
 		B4DCC96819BA138800AAC38F /* GTLServiceRatingAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceRatingAPI.h; sourceTree = "<group>"; };
 		B4DCC96919BA138800AAC38F /* GTLServiceRatingAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServiceRatingAPI.m; sourceTree = "<group>"; };
-		B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B4F0AD6D19AE4ADA00213B12 /* DetailedClusterMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedClusterMapViewController.swift; sourceTree = "<group>"; };
 		B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EndpointController.swift; path = ViewController/EndpointController.swift; sourceTree = "<group>"; };
 		CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEEKRET.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -248,7 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				B44AFD7619AF356F00565AFA /* EndpointController */,
-				81AB648919916785008C2040 /* Endpoints */,
+				81AB648919916785008C2040 /* GeneratedEndpointLib */,
 				81A0F441198E5C1C00D148B1 /* Ressources */,
 				81A0F43A198E428400D148B1 /* Controller */,
 				81A0F43B198E428400D148B1 /* Model */,
@@ -302,7 +298,6 @@
 		81A0F43B198E428400D148B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B44AFD7019AF053600565AFA /* UIHelper.swift */,
 				B4DCC8E519B9B1D100AAC38F /* UIHelperMethods.swift */,
 			);
 			path = Model;
@@ -311,15 +306,11 @@
 		81A0F43C198E428400D148B1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B4102A1319B7071100DBF1B9 /* Common */,
-				B4102A0B19B6E53C00DBF1B9 /* Protocols */,
-				B41E2BDA19B0B16C00E1A180 /* CustomCells */,
-				B4F0AD6D19AE4ADA00213B12 /* MapViewController.swift */,
-				81A0F43D198E428400D148B1 /* LoginViewController.h */,
-				81A0F43E198E428400D148B1 /* LoginViewController.m */,
-				B4D0B35819AE368F005291B5 /* MainViewController.swift */,
-				B41E2BD819B057BF00E1A180 /* SpotViewController.swift */,
-				B4102A0919B5F9C300DBF1B9 /* DetailedClusterViewController.swift */,
+				B4E4B41319C5CC4900977EE3 /* Login */,
+				B4102A1319B7071100DBF1B9 /* Abstract */,
+				B41E2BDA19B0B16C00E1A180 /* TopSpots */,
+				B4E4B41119C5C8CD00977EE3 /* Spot */,
+				B4E4B41219C5CC0F00977EE3 /* Cluster */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -342,14 +333,14 @@
 			path = Ressources;
 			sourceTree = "<group>";
 		};
-		81AB648919916785008C2040 /* Endpoints */ = {
+		81AB648919916785008C2040 /* GeneratedEndpointLib */ = {
 			isa = PBXGroup;
 			children = (
 				B41029B619B5DD4800DBF1B9 /* Cluster */,
 				B410298919B5D79700DBF1B9 /* Rating */,
 				B44AFD6F19AF006500565AFA /* Spot */,
 			);
-			name = Endpoints;
+			name = GeneratedEndpointLib;
 			sourceTree = "<group>";
 		};
 		B410298919B5D79700DBF1B9 /* Rating */ = {
@@ -392,39 +383,23 @@
 			name = Cluster;
 			sourceTree = "<group>";
 		};
-		B4102A0B19B6E53C00DBF1B9 /* Protocols */ = {
+		B4102A1319B7071100DBF1B9 /* Abstract */ = {
 			isa = PBXGroup;
 			children = (
 				B4102A0C19B6E7D700DBF1B9 /* LoginProtocol.swift */,
+				B4102A0F19B6E97600DBF1B9 /* AbstractAuthenticationManager.swift */,
+				B4102A1119B6F88A00DBF1B9 /* AbstractSeekretViewController.swift */,
 			);
-			name = Protocols;
+			name = Abstract;
 			sourceTree = "<group>";
 		};
-		B4102A0E19B6E95300DBF1B9 /* SuperClasses */ = {
+		B41E2BDA19B0B16C00E1A180 /* TopSpots */ = {
 			isa = PBXGroup;
 			children = (
-				B4102A0F19B6E97600DBF1B9 /* LoginHandler.swift */,
-				B4102A1119B6F88A00DBF1B9 /* CustomSeekretUIViewController.swift */,
+				B4D0B35819AE368F005291B5 /* TopSpotsViewController.swift */,
+				B44AFD7419AF2A3100565AFA /* TopSpotsTableViewCell.swift */,
 			);
-			name = SuperClasses;
-			sourceTree = "<group>";
-		};
-		B4102A1319B7071100DBF1B9 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				B4102A0E19B6E95300DBF1B9 /* SuperClasses */,
-				B4102A1419B7074100DBF1B9 /* Constants.swift */,
-			);
-			name = Common;
-			sourceTree = "<group>";
-		};
-		B41E2BDA19B0B16C00E1A180 /* CustomCells */ = {
-			isa = PBXGroup;
-			children = (
-				B44AFD7419AF2A3100565AFA /* SpotNameCellView.swift */,
-				B41E2BD619B054D900E1A180 /* ClusterImageCellView.swift */,
-			);
-			name = CustomCells;
+			name = TopSpots;
 			sourceTree = "<group>";
 		};
 		B44AFD6F19AF006500565AFA /* Spot */ = {
@@ -468,6 +443,33 @@
 				B4DCC90F19B9ED5F00AAC38F /* EndpointControllerforRatingAPI.swift */,
 			);
 			name = EndpointController;
+			sourceTree = "<group>";
+		};
+		B4E4B41119C5C8CD00977EE3 /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+				B41E2BD819B057BF00E1A180 /* SpotViewController.swift */,
+				B41E2BD619B054D900E1A180 /* SpotTableViewCell.swift */,
+			);
+			name = Spot;
+			sourceTree = "<group>";
+		};
+		B4E4B41219C5CC0F00977EE3 /* Cluster */ = {
+			isa = PBXGroup;
+			children = (
+				B4F0AD6D19AE4ADA00213B12 /* DetailedClusterMapViewController.swift */,
+				B4102A0919B5F9C300DBF1B9 /* DetailedClusterViewController.swift */,
+			);
+			name = Cluster;
+			sourceTree = "<group>";
+		};
+		B4E4B41319C5CC4900977EE3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				81A0F43D198E428400D148B1 /* LoginViewController.h */,
+				81A0F43E198E428400D148B1 /* LoginViewController.m */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -609,7 +611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4102A1219B6F88A00DBF1B9 /* CustomSeekretUIViewController.swift in Sources */,
+				B4102A1219B6F88A00DBF1B9 /* AbstractSeekretViewController.swift in Sources */,
 				B44AFDB419AF4E6700565AFA /* GTLQuerySpotAPI.m in Sources */,
 				B4DCC96A19BA138800AAC38F /* GTLQueryRatingAPI.m in Sources */,
 				B44AFDB619AF4E6700565AFA /* GTLSpotAPICluster.m in Sources */,
@@ -623,8 +625,8 @@
 				B44AFDBD19AF4E6700565AFA /* GTLSpotAPIResponse.m in Sources */,
 				B44AFDB719AF4E6700565AFA /* GTLSpotAPIClusterCollection.m in Sources */,
 				B44AFDBA19AF4E6700565AFA /* GTLSpotAPIKey.m in Sources */,
-				B41E2BD719B054D900E1A180 /* ClusterImageCellView.swift in Sources */,
-				B44AFD7519AF2A3100565AFA /* SpotNameCellView.swift in Sources */,
+				B41E2BD719B054D900E1A180 /* SpotTableViewCell.swift in Sources */,
+				B44AFD7519AF2A3100565AFA /* TopSpotsTableViewCell.swift in Sources */,
 				B4DCC96E19BA138800AAC38F /* GTLRatingAPIResponse.m in Sources */,
 				B44AFDBB19AF4E6700565AFA /* GTLSpotAPILatLng.m in Sources */,
 				B4DCC95C19BA137A00AAC38F /* GTLServiceClusterAPI.m in Sources */,
@@ -632,16 +634,14 @@
 				B44AFD7819AF358E00565AFA /* EndPointControllerForTopSpots.swift in Sources */,
 				B4DCC96F19BA138800AAC38F /* GTLServiceRatingAPI.m in Sources */,
 				B44AFDB519AF4E6700565AFA /* GTLServiceSpotAPI.m in Sources */,
-				B4102A1519B7074100DBF1B9 /* Constants.swift in Sources */,
 				B4DCC96C19BA138800AAC38F /* GTLRatingAPIJsonMap.m in Sources */,
-				B4D0B35919AE368F005291B5 /* MainViewController.swift in Sources */,
-				B4102A1019B6E97600DBF1B9 /* LoginHandler.swift in Sources */,
+				B4D0B35919AE368F005291B5 /* TopSpotsViewController.swift in Sources */,
+				B4102A1019B6E97600DBF1B9 /* AbstractAuthenticationManager.swift in Sources */,
 				B4DCC96B19BA138800AAC38F /* GTLRatingAPIConstants.m in Sources */,
 				B4DCC95A19BA137A00AAC38F /* GTLClusterAPIResponse.m in Sources */,
 				81A0F412198D2BEE00D148B1 /* main.m in Sources */,
 				B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */,
 				81A0F440198E428400D148B1 /* LoginViewController.m in Sources */,
-				B44AFD7119AF053600565AFA /* UIHelper.swift in Sources */,
 				B4DCC8E619B9B1D100AAC38F /* UIHelperMethods.swift in Sources */,
 				B4DCC95B19BA137A00AAC38F /* GTLQueryClusterAPI.m in Sources */,
 				B44AFDB919AF4E6700565AFA /* GTLSpotAPIJsonMap.m in Sources */,
@@ -650,7 +650,7 @@
 				B4DCC91019B9ED5F00AAC38F /* EndpointControllerforRatingAPI.swift in Sources */,
 				B44AFDBC19AF4E6700565AFA /* GTLSpotAPIPointOfInterest.m in Sources */,
 				B44AFDB819AF4E6700565AFA /* GTLSpotAPIConstants.m in Sources */,
-				B4F0AD6F19AE4ADA00213B12 /* MapViewController.swift in Sources */,
+				B4F0AD6F19AE4ADA00213B12 /* DetailedClusterMapViewController.swift in Sources */,
 				B44AFDBF19AF4E6700565AFA /* GTLSpotAPISpotResultList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

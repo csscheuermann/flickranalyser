@@ -1,5 +1,5 @@
 //
-//  SpotNameCellView.swift
+//  TopSpotsTableViewCell.swift
 //  SEEKRET
 //
 //  Created by Constantin Scheuermann on 8/28/14.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpotNameCellView: UITableViewCell {
+class TopSpotsTableViewCell: UITableViewCell {
 
    
     @IBOutlet weak var fullSpotNameLabel: UILabel!

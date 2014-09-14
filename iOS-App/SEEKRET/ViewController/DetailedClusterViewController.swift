@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DetailedClusterViewController: CustomSeekretUIViewController, EndpointControllerforRatingProtocoll, SDWebImageManagerDelegate, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate{
+class DetailedClusterViewController: AbstractSeekretViewController, EndpointControllerforRatingProtocoll, SDWebImageManagerDelegate, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate{
     
     @IBOutlet weak var uiImageClusterImage: UIImageView!
     @IBOutlet weak var tabBarForVoting: UITabBar!

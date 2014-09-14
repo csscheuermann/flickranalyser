@@ -1,4 +1,4 @@
-//  MainViewController.swift
+//  TopSpotsViewController.swift
 //  SEEKRET
 //
 //  Created by Constantin Scheuermann on 8/27/14.
@@ -7,7 +7,7 @@
 import UIKit
 
 
-class MainViewController: CustomSeekretUIViewController, EndPointControllerForTopSpotsProtocoll, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
+class TopSpotsViewController: AbstractSeekretViewController, EndPointControllerForTopSpotsProtocoll, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
     
     @IBOutlet weak var topSpotsTableView: UITableView!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
@@ -53,7 +53,7 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
     func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
         if (buttonIndex == 0){
             GPPSignIn.sharedInstance() .disconnect()
-            var hud = MBProgressHUD .showHUDAddedTo(self.view, animated: true)
+            var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             hud.labelText = "Logging out from SEEKRET ..."
             hud.hide(true, afterDelay: 2.0)
             var timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("showLoginScreen"), userInfo: nil, repeats: false)
@@ -71,9 +71,6 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
     func refreshTopSpots(){
         getTopSpots()
     }
-    
-
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -104,7 +101,7 @@ class MainViewController: CustomSeekretUIViewController, EndPointControllerForTo
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: SpotNameCellView = topSpotsTableView.dequeueReusableCellWithIdentifier(self.cellIdentifierforSpot) as SpotNameCellView
+        let cell: TopSpotsTableViewCell = topSpotsTableView.dequeueReusableCellWithIdentifier(self.cellIdentifierforSpot) as TopSpotsTableViewCell
         cell.setCell(topSpots[indexPath.row])
         return cell
     }

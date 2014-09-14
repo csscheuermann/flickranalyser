@@ -1,5 +1,5 @@
 //
-//  LoginHandler.swift
+//  AbstractAuthenticationManager.swift
 //  SEEKRET
 //
 //  Created by Constantin Scheuermann on 9/3/14.
@@ -10,9 +10,9 @@ import Foundation
 
 
 //Login Handler. Important to mention is the closure pattern. It allows us to create something like abstact methods.
-class Loginhandler: LoginProtocol{
+class AbstractAuthenticationManager: LoginProtocol{
     
-    let className: String = "LOGINHANDLER"
+    let className: String = "AbstractAuthenticationManager"
     
     func handleLogin(auth: GTMOAuth2Authentication,  error: NSError?){
         if error != nil{

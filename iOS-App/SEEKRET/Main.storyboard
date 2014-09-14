@@ -92,7 +92,7 @@
                                         <rect key="frame" x="0.0" y="-5" width="320" height="508"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="ClusterCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ClusterImageIdent" rowHeight="282" id="K1i-9m-EQD" customClass="ClusterImageCellView" customModule="SEEKRET" customModuleProvider="target">
+                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="ClusterCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ClusterImageIdent" rowHeight="282" id="K1i-9m-EQD" customClass="SpotTableViewCell">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1i-9m-EQD" id="NgO-Yd-CEb">
@@ -214,7 +214,7 @@
         <!--Top Seekret Cities-->
         <scene sceneID="JRA-8l-Me0">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="kyC-JP-zoM" customClass="MainViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TopSpotsViewController" id="kyC-JP-zoM" customClass="TopSpotsViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nnz-mo-pMU"/>
                         <viewControllerLayoutGuide type="bottom" id="Gjt-FX-4vM"/>
@@ -230,7 +230,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="534"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="SpotNameCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SpotNameCellIdent" rowHeight="48" id="3A9-9h-ajb" customClass="SpotNameCellView" customModule="SEEKRET" customModuleProvider="target">
+                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="SpotNameCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SpotNameCellIdent" rowHeight="48" id="3A9-9h-ajb" customClass="TopSpotsTableViewCell" customModule="SEEKRET" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3A9-9h-ajb" id="CaD-h0-jMz">
@@ -277,7 +277,7 @@
         <!--Map View Controller-->
         <scene sceneID="g6R-he-cfg">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" id="apZ-wV-8MU" userLabel="Map View Controller" customClass="MapViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="apZ-wV-8MU" userLabel="Map View Controller" customClass="DetailedClusterMapViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qvu-PJ-8va"/>
                         <viewControllerLayoutGuide type="bottom" id="1SI-CD-5VP"/>

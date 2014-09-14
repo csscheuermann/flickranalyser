@@ -1,5 +1,5 @@
 //
-//  LoginProtocoll.swift
+//  LoginProtocol.swift
 //  SEEKRET
 //
 //  Created by Constantin Scheuermann on 9/3/14.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-// The protocoll for the Login. Its like an Interface in Java. 
+// The protocol for the Login. Its like an Interface in Java. 
 
 protocol LoginProtocol{
     

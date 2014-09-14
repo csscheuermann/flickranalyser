@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, EndpointControllerProtocol, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate{
+class SpotViewController: AbstractSeekretViewController ,GPPSignInDelegate, EndpointControllerProtocol, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate{
     
     @IBOutlet weak var spotNameLabel: UILabel!
     @IBOutlet weak var clusterTableView: UITableView!
@@ -18,7 +18,7 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
     var spotName: String?
     var cluster: [GTLSpotAPICluster]!
     var currentUrl: String?
-    var currentCell:ClusterImageCellView?
+    var currentCell:SpotTableViewCell?
     
     //Constants
     let showSpinnerText: String = "Fetching Cluster"
@@ -51,7 +51,7 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: ClusterImageCellView = clusterTableView.dequeueReusableCellWithIdentifier(self.clusterImageIdentifier) as ClusterImageCellView
+        let cell: SpotTableViewCell = clusterTableView.dequeueReusableCellWithIdentifier(self.clusterImageIdentifier) as SpotTableViewCell
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         if (cluster != nil){
             var indexRow = indexPath.row
@@ -95,7 +95,7 @@ class SpotViewController: CustomSeekretUIViewController ,GPPSignInDelegate, Endp
         
         var swipeLocation: CGPoint = gesture.locationInView(self.clusterTableView)
         var swipedIndexPath: NSIndexPath = self.clusterTableView.indexPathForRowAtPoint(swipeLocation)!
-        var swipedCell: ClusterImageCellView = self.clusterTableView.cellForRowAtIndexPath(swipedIndexPath) as ClusterImageCellView
+        var swipedCell: SpotTableViewCell = self.clusterTableView.cellForRowAtIndexPath(swipedIndexPath) as SpotTableViewCell
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             

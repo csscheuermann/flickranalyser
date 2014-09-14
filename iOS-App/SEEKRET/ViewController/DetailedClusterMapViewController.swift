@@ -1,5 +1,5 @@
 //
-//  MapViewController.swift
+//  DetailedClusterMapViewController.swift
 //  SEEKRET-SWIFT
 //
 //  Created by Constantin Scheuermann on 8/25/14.
@@ -9,13 +9,12 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, EndpointControllerProtocol, GPPSignInDelegate{
+class DetailedClusterMapViewController: UIViewController, EndpointControllerProtocol, GPPSignInDelegate{
     
     @IBOutlet weak var spotMapView: MKMapView!
- 
-    var uiHelper:UIHelper!
+    var hud:MBProgressHUD!
     var spotName: String?
-   var loginHandler: Loginhandler!
+    var abstractAuthenticationManager: AbstractAuthenticationManager!
     
     /// We have to do the Login here, because it is only possible in subclasses from UIViewController.
     /// Sad but true ...
@@ -30,7 +29,7 @@ class MapViewController: UIViewController, EndpointControllerProtocol, GPPSignIn
         }
     }
     
-
+    
     
     
     func finishedWithAuth(auth: GTMOAuth2Authentication,  error: NSError? ) -> Void{
@@ -38,8 +37,8 @@ class MapViewController: UIViewController, EndpointControllerProtocol, GPPSignIn
             debugPrintln("AUTH WENT WRONG")
         }else{
             debugPrintln("FINISHED WITH AUTH")
-            self.uiHelper = UIHelper(uiView: self.spotMapView)
-            uiHelper.showSpinner("Fetching Cluster")
+            hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.labelText = "Loading"
             let endpointController = EnpointController(delegate: self);
             endpointController.getCluster(spotName!, auth: auth)
         }
@@ -67,7 +66,8 @@ class MapViewController: UIViewController, EndpointControllerProtocol, GPPSignIn
         }
         
         self.spotMapView.addAnnotations(annotations)
-        uiHelper.stopSpinner()
+        hud.hide(true)
+        
     }
     
     
@@ -76,7 +76,7 @@ class MapViewController: UIViewController, EndpointControllerProtocol, GPPSignIn
         performSilentLogin();
     }
     
- 
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
