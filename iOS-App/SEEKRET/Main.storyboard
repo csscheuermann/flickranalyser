@@ -160,19 +160,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bqA-c8-JvB">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqA-c8-JvB">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wds-pK-eVf">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wds-pK-eVf">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     </imageView>
-                                    <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W14-bO-XEd" userLabel="Transparten View">
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W14-bO-XEd" userLabel="Transparten View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dli-7F-Lcx">
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dli-7F-Lcx">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="1WT-NM-oc5">
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1WT-NM-oc5">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -197,6 +197,23 @@
                                         <blurEffect style="light"/>
                                     </visualEffectView>
                                 </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="W14-bO-XEd" secondAttribute="trailing" id="1M5-Vi-BJL"/>
+                                    <constraint firstAttribute="trailing" secondItem="dli-7F-Lcx" secondAttribute="trailing" id="4vq-Xs-6cl"/>
+                                    <constraint firstItem="dli-7F-Lcx" firstAttribute="top" secondItem="bqA-c8-JvB" secondAttribute="top" id="TDe-OZ-97l"/>
+                                    <constraint firstItem="Wds-pK-eVf" firstAttribute="leading" secondItem="bqA-c8-JvB" secondAttribute="leading" id="fjM-8U-dyD"/>
+                                    <constraint firstItem="Wds-pK-eVf" firstAttribute="top" secondItem="bqA-c8-JvB" secondAttribute="top" id="gfn-gl-4tw"/>
+                                    <constraint firstItem="dli-7F-Lcx" firstAttribute="leading" secondItem="bqA-c8-JvB" secondAttribute="leading" id="kFH-HN-JTx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wds-pK-eVf" secondAttribute="trailing" id="muq-kn-vMo"/>
+                                    <constraint firstAttribute="bottom" secondItem="W14-bO-XEd" secondAttribute="bottom" id="nFn-nh-IXu"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wds-pK-eVf" secondAttribute="bottom" id="pGF-Yf-69E"/>
+                                    <constraint firstAttribute="width" secondItem="Wds-pK-eVf" secondAttribute="width" id="pjb-1X-nHN"/>
+                                    <constraint firstItem="W14-bO-XEd" firstAttribute="top" secondItem="bqA-c8-JvB" secondAttribute="top" id="qmH-x9-9rA"/>
+                                    <constraint firstAttribute="bottom" secondItem="dli-7F-Lcx" secondAttribute="bottom" id="w1h-Xl-TjI"/>
+                                    <constraint firstAttribute="height" secondItem="Wds-pK-eVf" secondAttribute="height" id="yrL-xa-CaZ"/>
+                                    <constraint firstItem="W14-bO-XEd" firstAttribute="leading" secondItem="bqA-c8-JvB" secondAttribute="leading" id="zNp-jf-n9P"/>
+                                </constraints>
                             </scrollView>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-Ng-OjU">
                                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
@@ -225,6 +242,7 @@
                     <navigationItem key="navigationItem" id="Ypr-0f-jzj"/>
                     <connections>
                         <outlet property="mapView" destination="c4S-31-E4S" id="N5j-6L-lL9"/>
+                        <outlet property="scrollView" destination="bqA-c8-JvB" id="9ON-A7-j7w"/>
                         <outlet property="tabBarForVoting" destination="Ooj-Ng-OjU" id="GUo-I2-wPj"/>
                         <outlet property="uiImageClusterImage" destination="He4-pR-Kco" id="Gkf-oz-m9E"/>
                         <outlet property="uiImageViewForBluredBackground" destination="Wds-pK-eVf" id="0Am-4i-ber"/>

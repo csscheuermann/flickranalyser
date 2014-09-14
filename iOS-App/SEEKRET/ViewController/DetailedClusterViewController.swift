@@ -13,6 +13,7 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
     
     @IBOutlet weak var uiImageClusterImage: UIImageView!
     @IBOutlet weak var tabBarForVoting: UITabBar!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var counter: Int!
     var ePCFRP: EndPointControllerForCluster!
@@ -30,6 +31,10 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
     override func viewDidLoad() {
         super.viewDidLoad()
         self.uiHelperMethods = UIHelperMethods()
+        
+        if (UIScreen.mainScreen().bounds.size.height < 568) {
+            self.scrollView.scrollEnabled = true;
+        }
 
         self.uIHelper = MBProgressHUD .showHUDAddedTo(self.view, animated: true);
         self.navigationItem.title = cluster.name
