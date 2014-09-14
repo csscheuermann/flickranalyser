@@ -16,6 +16,7 @@ class AbstractAuthenticationManager: LoginProtocol{
     
     func handleLogin(auth: GTMOAuth2Authentication,  error: NSError?){
         if error != nil{
+        
             NSLog("\(className): Something went wrong: %@", error!)
         }else{
             NSLog("\(className): Login was sucessfull!")
