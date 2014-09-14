@@ -139,7 +139,7 @@ static GPPSignIn *signIn;
         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"error.png"]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"Error with Login";
-        
+        hud.detailsLabelText = @"There was an error while login you in. Please reauthenicate!";
         [hud show:YES];
         [hud hide:YES afterDelay:3];
         

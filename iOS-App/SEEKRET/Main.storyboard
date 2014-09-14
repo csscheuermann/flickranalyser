@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -16,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hd1-e5-dtS">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hd1-e5-dtS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sfu-kP-kyA">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sfu-kP-kyA">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHV-r1-EGo" customClass="GPPSignInButton">
@@ -51,13 +52,23 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mJE-pf-m9W">
-                                        <rect key="frame" x="-8" y="264" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="264" width="320" height="40"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="bottom" secondItem="Sfu-kP-kyA" secondAttribute="bottom" id="GO4-SW-OwD"/>
+                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="bottom" secondItem="MRd-sy-RVx" secondAttribute="top" id="R4L-zn-n0j"/>
+                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" id="UgT-S3-ft5"/>
+                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="trailing" secondItem="Sfu-kP-kyA" secondAttribute="trailing" id="Vec-Ng-inf"/>
+                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="leading" secondItem="MRd-sy-RVx" secondAttribute="leading" id="eCp-l7-LOh"/>
+                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="leading" secondItem="Sfu-kP-kyA" secondAttribute="leading" id="hM3-Rc-LmZ"/>
+                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="top" secondItem="Sfu-kP-kyA" secondAttribute="top" id="llw-5P-zni"/>
+                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="mm1-P9-sCe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WK9-3d-FIO"/>
                     <connections>
@@ -145,34 +156,34 @@
                         <viewControllerLayoutGuide type="top" id="JfZ-x5-YtP"/>
                         <viewControllerLayoutGuide type="bottom" id="9ZL-4w-hzJ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleAspectFit" id="CXd-Jl-PFQ">
+                    <view key="view" contentMode="scaleToFill" id="CXd-Jl-PFQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K6y-RE-Cnb">
-                                <rect key="frame" x="0.0" y="56" width="320" height="512"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bqA-c8-JvB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wds-pK-eVf">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     </imageView>
                                     <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W14-bO-XEd" userLabel="Transparten View">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dli-7F-Lcx">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="574"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="1WT-NM-oc5">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="574"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="He4-pR-Kco">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                                 </imageView>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4S-31-E4S">
-                                                    <rect key="frame" x="85" y="252" width="150" height="150"/>
+                                                    <rect key="frame" x="23" y="252" width="274" height="150"/>
                                                 </mapView>
                                                 <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOg-vr-zmA">
-                                                    <rect key="frame" x="205" y="371" width="24" height="24"/>
+                                                    <rect key="frame" x="265" y="370" width="24" height="24"/>
                                                     <color key="backgroundColor" red="0.44138443129486044" green="0.46804827428613527" blue="0.51369310461956519" alpha="0.46000000000000002" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="error">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,10 +197,13 @@
                                         <blurEffect style="light"/>
                                     </visualEffectView>
                                 </subviews>
-                            </view>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-Ng-OjU">
+                            </scrollView>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-Ng-OjU">
                                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="7JM-R1-9pt"/>
+                                </constraints>
                                 <items>
                                     <tabBarItem title="Dismiss" image="dismiss" selectedImage="dismiss" id="FA5-u5-ELm"/>
                                     <tabBarItem title="Seekret" image="seekret" selectedImage="seekret" id="9jy-Oe-scf"/>
@@ -198,6 +212,15 @@
                             </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ooj-Ng-OjU" secondAttribute="trailing" constant="-16" id="6xa-5d-Wgh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bqA-c8-JvB" secondAttribute="trailing" constant="-16" id="91Z-Pz-gG5"/>
+                            <constraint firstItem="9ZL-4w-hzJ" firstAttribute="top" secondItem="bqA-c8-JvB" secondAttribute="bottom" id="KZZ-Ke-uw6"/>
+                            <constraint firstItem="9ZL-4w-hzJ" firstAttribute="top" secondItem="Ooj-Ng-OjU" secondAttribute="bottom" id="PR7-RV-akK"/>
+                            <constraint firstItem="Ooj-Ng-OjU" firstAttribute="leading" secondItem="CXd-Jl-PFQ" secondAttribute="leadingMargin" constant="-16" id="Qob-8j-qXQ"/>
+                            <constraint firstItem="bqA-c8-JvB" firstAttribute="top" secondItem="JfZ-x5-YtP" secondAttribute="bottom" constant="-64" id="ixM-KB-yQv"/>
+                            <constraint firstItem="bqA-c8-JvB" firstAttribute="leading" secondItem="CXd-Jl-PFQ" secondAttribute="leadingMargin" constant="-16" id="nbo-Uk-0Ok"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ypr-0f-jzj"/>
                     <connections>

@@ -30,7 +30,7 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
     override func viewDidLoad() {
         super.viewDidLoad()
         self.uiHelperMethods = UIHelperMethods()
-        
+
         self.uIHelper = MBProgressHUD .showHUDAddedTo(self.view, animated: true);
         self.navigationItem.title = cluster.name
         
