@@ -16,17 +16,20 @@ class AbstractAuthenticationManager: LoginProtocol{
     
     func handleLogin(auth: GTMOAuth2Authentication,  error: NSError?){
         if error != nil{
-    
+            
             NSLog("\(className): Something went wrong: %@", error!)
         }else{
-
+            DDLog.addLogger(DDTTYLogger.sharedInstance())
+            DDLog.logLevel = .Info
+            
+            DDLog.logDebug("SWIFT DEBUG")
+            DDLog.logInfo("SWIFT INFO")
+            DDLog.logWarn("SWIFT WARN")
+            
             NSLog("\(className): Login was sucessfull!")
             self.handleSucessfullLogin(auth)
-            SeekretLogging.("INFO");
-            DDLogError("ERROR");
-            DDLogVerbose("VERBOSE");
-            DDLogDebug("DEBUG");
-            DDLogWarn("WARN");
+            
+            
         }
     }
     
@@ -52,6 +55,6 @@ class AbstractAuthenticationManager: LoginProtocol{
             NSLog("\(className): Silentlogin logged in!")
         }
     }
-
+    
     
 }
