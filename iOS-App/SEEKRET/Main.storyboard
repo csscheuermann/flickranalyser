@@ -92,7 +92,7 @@
                                         <rect key="frame" x="0.0" y="-5" width="320" height="508"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="ClusterCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ClusterImageIdent" rowHeight="282" id="K1i-9m-EQD" customClass="SpotTableViewCell">
+                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="SpotTableViewCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ClusterImageIdent" rowHeight="282" id="K1i-9m-EQD" customClass="SpotTableViewCell" customModule="SEEKRET" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1i-9m-EQD" id="NgO-Yd-CEb">
