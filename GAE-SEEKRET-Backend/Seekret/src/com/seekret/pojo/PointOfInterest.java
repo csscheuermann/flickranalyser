@@ -1,6 +1,7 @@
 package com.seekret.pojo;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -15,11 +16,15 @@ public class PointOfInterest implements Serializable, Comparable<PointOfInterest
 	private String pictureUrl;
 	private Set<String> tags;
 	private int licenseId;
+	private int width;
+	private int height;
 
-	public PointOfInterest(int countOfViews, LatLng location, String pictureUrl, Set<String> tags, int licenseId) {
+	public PointOfInterest(int countOfViews, LatLng location, String pictureUrl, int width, int height, Set<String> tags, int licenseId) {
 		this.pictureUrl = pictureUrl;
 		this.countOfViews = countOfViews;
 		this.location = location;
+		this.width = width;
+		this.height = height;
 		this.tags = tags;
 		this.licenseId = licenseId;
 	}
@@ -28,33 +33,30 @@ public class PointOfInterest implements Serializable, Comparable<PointOfInterest
 		return this.pictureUrl;
 	}
 
-	public void setPictureUrl(String pictureUrl) {
-		this.pictureUrl = pictureUrl;
-	}
 
 	public int getCountOfViews() {
 		return this.countOfViews;
 	}
 
-	public void setCountOfViews(int countOfViews) {
-		this.countOfViews = countOfViews;
-	}
 
 	public LatLng getLocation() {
 		return this.location;
 	}
 
-	public void setLocation(LatLng location) {
-		this.location = location;
-	}
 
 	public int getLicenseId() {
 		return licenseId;
 	}
 
-	public void setLicenseId(int licenseId) {
-		this.licenseId = licenseId;
+	public int getHeight() {
+		return height;
 	}
+	
+	
+	public int getWidth() {
+		return width;
+	}
+	
 
 	@Override
 	public int compareTo(PointOfInterest comparePOI) {
@@ -63,6 +65,6 @@ public class PointOfInterest implements Serializable, Comparable<PointOfInterest
 	}
 
 	public Set<String> getTags() {
-		return this.tags;
+		return Collections.unmodifiableSet(this.tags);
 	}
 }

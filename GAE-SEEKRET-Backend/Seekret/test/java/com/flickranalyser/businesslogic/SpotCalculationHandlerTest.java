@@ -23,25 +23,25 @@ public class SpotCalculationHandlerTest {
 		// 48.1333° N, 11.5667
 		// 48.1334° N, 11.5668
 		pointOfInterestsToTest.add(new PointOfInterest(4, new LatLng(48.1333,
-				11.5667),"test1", new HashSet<String>(),4));
+				11.5667),"test1",0,0, new HashSet<String>(),4));
 		pointOfInterestsToTest.add(new PointOfInterest(3, new LatLng(48.1334,
-				11.5668),"test2", new HashSet<String>(),4));
+				11.5668),"test2",0,0, new HashSet<String>(),4));
 		pointOfInterestsToTest.add(new PointOfInterest(3, new LatLng(48.1335,
-				11.5669),"test3", new HashSet<String>(),4));
+				11.5669),"test3",0,0, new HashSet<String>(),4));
 
 		pointOfInterestsToTest.add(new PointOfInterest(10, new LatLng(48.2333,
-				11.4667),"test4", new HashSet<String>(),4));
+				11.4667),"test4",0,0, new HashSet<String>(),4));
 		pointOfInterestsToTest.add(new PointOfInterest(10, new LatLng(48.2334,
-				11.4668),"test5", new HashSet<String>(),4));
+				11.4668),"test5",0,0, new HashSet<String>(),4));
 		pointOfInterestsToTest.add(new PointOfInterest(10, new LatLng(48.2335,
-				11.4669),"test6", new HashSet<String>(),4));
+				11.4669),"test6",0,0, new HashSet<String>(),4));
 
 		pointOfInterestsToTest.add(new PointOfInterest(10, new LatLng(48.3333,
-				11.5667),"test7", new HashSet<String>(),4));
+				11.5667),"test7",0,0, new HashSet<String>(),4));
 		pointOfInterestsToTest.add(new PointOfInterest(3, new LatLng(48.3334,
-				11.5668),"test8", new HashSet<String>(),4));
+				11.5668),"test8",0,0, new HashSet<String>(),4));
 		pointOfInterestsToTest.add(new PointOfInterest(2, new LatLng(48.3335,
-				11.5669),"test9", new HashSet<String>(),4));
+				11.5669),"test9",0,0, new HashSet<String>(),4));
 	}
 
 	@Test

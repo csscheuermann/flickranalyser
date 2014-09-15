@@ -131,17 +131,21 @@ public class FlickrRequestHandler {
 								url = photo.get("url_z").asString();
 							}
 							int licenseId = Integer.valueOf(photo.get("license").asString()).intValue();
-							int height; 
-							int width;
-							if(photo.get("height_z").isNumber()){
-								height = photo.get("height_z").asInt();
-							}else{
-								height = Integer.valueOf(photo.get("height_z").asString()).intValue();
+							int height = 0; 
+							int width = 0;
+							if(photo.names().contains("height_z")){
+								if(photo.get("height_z").isNumber()){
+									height = photo.get("height_z").asInt();
+								}else{
+									height = Integer.valueOf(photo.get("height_z").asString()).intValue();
+								}
 							}
-							if(photo.get("width_z").isNumber()){
-								width = photo.get("width_z").asInt();
-							}else{
-								width = Integer.valueOf(photo.get("width_z").asString()).intValue();
+							if(photo.names().contains("width_z")){
+								if(photo.get("width_z").isNumber()){
+									width = photo.get("width_z").asInt();
+								}else{
+									width = Integer.valueOf(photo.get("width_z").asString()).intValue();
+								}
 							}
 							
 							log.log(Level.INFO, "HEIGHT " + height + " " + "WIDTH " +width);
@@ -149,10 +153,10 @@ public class FlickrRequestHandler {
 							String picture_id = photo.get("id").asString();
 							LatLng location = new LatLng(latitude, longitude);
 
-							if (!picture_ids.contains(picture_id) && (width >= height)) {
+							if (!picture_ids.contains(picture_id)) {
 								picture_ids.add(picture_id);
 								PointOfInterest pointOfInterest = new PointOfInterest(
-										numberViews, location, url, tags, licenseId);
+										numberViews, location, url, width, height,tags, licenseId);
 								if (!fotoExcluder
 										.isFotoToExclude(pointOfInterest)) {
 									result.add(pointOfInterest);

@@ -66,7 +66,7 @@ public class SpotCalculationHandler {
 			while ((iterator.hasNext()) && (counter < 3)) {
 
 				PointOfInterest next = iterator.next();
-				if (next.getPictureUrl() != null && !next.getPictureUrl().isEmpty() && allowedLicenseForFlickrPhotos.contains(next.getLicenseId())) {
+				if (isPictureSuitedAsClusterProfilePicture(next)) {
 					urls.add(next.getPictureUrl());
 					counter++;
 				}
@@ -78,6 +78,14 @@ public class SpotCalculationHandler {
 		}
 
 		return hardcodedSpot;
+	}
+
+	private boolean isPictureSuitedAsClusterProfilePicture(PointOfInterest next) {
+		return next.getPictureUrl() != null && !next.getPictureUrl().isEmpty() && allowedLicenseForFlickrPhotos.contains(next.getLicenseId()) && next.getWidth()!=0 && next.getHeight() != 0 && isLandscape(next);
+	}
+
+	private boolean isLandscape(PointOfInterest next) {
+		return next.getWidth() > next.getHeight();
 	}
 
 	private boolean isPointIntrestInCluster(Spot hardcodedSpot, List<Cluster> clusterList, PointOfInterest pointOfInterest) {
