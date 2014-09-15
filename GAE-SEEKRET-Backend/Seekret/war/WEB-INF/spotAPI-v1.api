@@ -200,17 +200,17 @@
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
+          "maxClusterViews" : {
+            "type" : "integer"
+          },
+          "spotRadiusInMeter" : {
+            "type" : "number"
+          },
           "cluster" : {
             "type" : "array",
             "items" : {
               "$ref" : "Cluster"
             }
-          },
-          "spotRadiusInMeter" : {
-            "type" : "number"
-          },
-          "maxClusterViews" : {
-            "type" : "integer"
           }
         }
       },
