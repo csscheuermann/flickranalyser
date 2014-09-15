@@ -73,7 +73,7 @@ public class SpotCalculationHandler {
 
 			}
 			if(urls.isEmpty()){
-				urls.add("http://www.naturepictures.co/wp-content/uploads/2014/09/sunset_landscape.jpg");
+				urls.add("http://de.jigzone.com/p/jz/jz1/The_Scream.jpg");
 			}
 
 			cluster.setUrlOfMostViewedPicture(urls);
