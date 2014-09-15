@@ -68,7 +68,7 @@ public class FlickrRequestHandler {
 						.append("lon=").append(key.getLongitude())
 						.append("&radius=").append(radiusInKm)
 						.append("&sort=interestingness-desc")
-						.append("&extras=views%2Cgeo%2Curl_z%2Ctags")
+						.append("&extras=views%2Cgeo%2Curl_z%2Ctags%2Clicense")
 						.append("&per_page=250").append("&page=")
 						.append(requestedPage)
 						.append("&format=json&nojsoncallback=1");
@@ -127,10 +127,7 @@ public class FlickrRequestHandler {
 							latitude = photo.get("latitude").asDouble();
 							longitude = photo.get("longitude").asDouble();
 							String url = photo.get("url_z").asString();
-							
-							
-							
-							
+							int licenseId = Integer.valueOf(photo.get("license").asString()).intValue();
 							String widthString = photo.get("height_z").asString();
 							String heightString = photo.get("width_z").asString();
 
@@ -147,7 +144,7 @@ public class FlickrRequestHandler {
 							if (!picture_ids.contains(picture_id) && (width >= height)) {
 								picture_ids.add(picture_id);
 								PointOfInterest pointOfInterest = new PointOfInterest(
-										numberViews, location, url, tags);
+										numberViews, location, url, tags, licenseId);
 								if (!fotoExcluder
 										.isFotoToExclude(pointOfInterest)) {
 									result.add(pointOfInterest);
