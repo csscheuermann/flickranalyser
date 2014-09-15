@@ -126,15 +126,23 @@ public class FlickrRequestHandler {
 							}
 							latitude = photo.get("latitude").asDouble();
 							longitude = photo.get("longitude").asDouble();
-							String url = photo.get("url_z").asString();
+							String url = null;
+							if(photo.names().contains("url_z")){
+								url = photo.get("url_z").asString();
+							}
 							int licenseId = Integer.valueOf(photo.get("license").asString()).intValue();
-							String widthString = photo.get("height_z").asString();
-							String heightString = photo.get("width_z").asString();
-
-							log.log(Level.INFO, "widthString " + widthString + " " + "heightString " +heightString);
-							
-							int height = Integer.parseInt(widthString);
-							int width = Integer.parseInt(heightString);	
+							int height; 
+							int width;
+							if(photo.get("height_z").isNumber()){
+								height = photo.get("height_z").asInt();
+							}else{
+								height = Integer.valueOf(photo.get("height_z").asString()).intValue();
+							}
+							if(photo.get("width_z").isNumber()){
+								width = photo.get("width_z").asInt();
+							}else{
+								width = Integer.valueOf(photo.get("width_z").asString()).intValue();
+							}
 							
 							log.log(Level.INFO, "HEIGHT " + height + " " + "WIDTH " +width);
 							

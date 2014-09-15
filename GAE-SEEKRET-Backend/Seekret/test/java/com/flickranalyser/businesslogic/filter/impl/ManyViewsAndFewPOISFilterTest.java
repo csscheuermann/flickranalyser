@@ -48,7 +48,7 @@ public class ManyViewsAndFewPOISFilterTest {
 	private void addPointsOfInterests(Cluster cluster,
 			int numberPointsOfInterests) {
 		for (int i = 0; i < numberPointsOfInterests; i++) {
-			PointOfInterest pointOfInterest = new PointOfInterest(0, new LatLng(cluster.getLatitude(), cluster.getLongitude()),"test", new HashSet<String>());
+			PointOfInterest pointOfInterest = new PointOfInterest(0, new LatLng(cluster.getLatitude(), cluster.getLongitude()),"test", new HashSet<String>(),4);
 			cluster.addPointOfInterestToList(pointOfInterest);
 		}
 
