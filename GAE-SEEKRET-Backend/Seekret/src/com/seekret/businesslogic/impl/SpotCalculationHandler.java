@@ -72,6 +72,9 @@ public class SpotCalculationHandler {
 				}
 
 			}
+			if(urls.isEmpty()){
+				urls.add("http://www.naturepictures.co/wp-content/uploads/2014/09/sunset_landscape.jpg");
+			}
 
 			cluster.setUrlOfMostViewedPicture(urls);
 
