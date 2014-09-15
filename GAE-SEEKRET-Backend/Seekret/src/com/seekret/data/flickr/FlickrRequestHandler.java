@@ -14,6 +14,7 @@ import org.apache.http.client.fluent.Request;
 
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
@@ -29,9 +30,10 @@ public class FlickrRequestHandler {
 	private static final Logger log = Logger
 			.getLogger(FlickrRequestHandler.class.getName());
 
-	private static final String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/";
+	private static final String FLICKR_REQUEST_URL = "https://api.flickr.com/services/rest/?method=";
 	private static final String FLICKR_API_KEY = "1d39a97f7a90235ed4894bad6ad14a93";
 	private static final String PHOTO_SEARCH_REQUEST = "flickr.photos.search";
+	private static final String PHOTO_GETINFO_REQUEST = "flickr.photos.getInfo";
 
 	private final IFotoExcluder fotoExcluder;
 
@@ -60,7 +62,7 @@ public class FlickrRequestHandler {
 			do {
 				StringBuilder urlForRequest = new StringBuilder(
 						FLICKR_REQUEST_URL);
-				urlForRequest.append("?method=").append(PHOTO_SEARCH_REQUEST)
+				urlForRequest.append(PHOTO_SEARCH_REQUEST)
 						.append("&api_key=").append(FLICKR_API_KEY).append("&")
 						.append("lat=").append(key.getLatitude()).append("&")
 						.append("lon=").append(key.getLongitude())
@@ -177,6 +179,41 @@ public class FlickrRequestHandler {
 		return allPoints;
 	}
 
+	public void getInfoForPoi(String poiId) {
+		StringBuilder urlForRequest = new StringBuilder(FLICKR_REQUEST_URL);
+		urlForRequest.append(PHOTO_GETINFO_REQUEST).append("&api_key=").append(FLICKR_API_KEY).append("&photo_id=").append(poiId).append("&format=json&nojsoncallback=1");
+
+		JsonObject photosObject = null;
+
+		try {
+			log.log(Level.INFO, "Retrieving info for image id " + poiId);
+			String jsonResponse = Request.Get(urlForRequest.toString()).execute().returnContent().asString();
+			photosObject = JsonObject.readFrom(jsonResponse);
+		} catch (Exception e) {
+			log.log(Level.WARNING, "Could not execute http request", e);
+		}
+		JsonObject photoObject = photosObject.get("photo").asObject();
+		
+		String title = photoObject.get("title").asObject().get("_content").asString();
+		String description = photoObject.get("description").asObject().get("_content").asString();
+		JsonArray tagArray = photoObject.get("tags").asObject().get("tag").asArray();
+		Set<String> tags = new HashSet<String>();
+		for (JsonValue tag : tagArray){
+			tags.add(tag.asObject().get("_content").asString());
+		}
+		JsonArray urlArray = photoObject.get("urls").asObject().get("url").asArray();
+		String photoUrl = null;
+		for(JsonValue url : urlArray){
+			photoUrl = url.asObject().get("_content").asString();	
+		}
+		
+		
+		log.log(Level.INFO, "title: " + title);
+		log.log(Level.INFO, "description: " + description);
+		log.log(Level.INFO, "tags: " + tags);
+		log.log(Level.INFO, "photoUrl: " + photoUrl);
+	}
+	
 	/**
 	 * This method generates satelites around a given spot. Attention, using
 	 * this method for requests to flickr, we can get problems with write/read

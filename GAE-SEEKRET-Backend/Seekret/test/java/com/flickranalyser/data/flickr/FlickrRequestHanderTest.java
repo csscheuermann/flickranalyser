@@ -29,6 +29,11 @@ public class FlickrRequestHanderTest {
 		flickrRequestHandler.calculateNewPoint(munichSpot);
 	}
 	
+	@Test
+	public void test_GetInfoForPicture(){
+		FlickrRequestHandler flickrRequestHandler = new FlickrRequestHandler(new TagBasedFotoExcluder(false));
+		flickrRequestHandler.getInfoForPoi("5951678688");
+	}
 	
 
 	
