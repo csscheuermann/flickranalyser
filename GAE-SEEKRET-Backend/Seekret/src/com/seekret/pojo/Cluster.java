@@ -245,4 +245,10 @@ public class Cluster implements Serializable {
 		}
 	}
 
+
+	public void addPictureUrl(String pictureUrl) {
+		urlOfMostViewedPicture.add(pictureUrl);
+		
+	}
+
 }
