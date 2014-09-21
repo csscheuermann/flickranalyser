@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DetailedClusterViewController: AbstractSeekretViewController, EndpointControllerforRatingProtocoll, SDWebImageManagerDelegate, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate{
+class DetailedClusterViewController: AbstractSeekretViewController, EndpointControllerforRatingProtocoll, SDWebImageManagerDelegate, EndPointControllerForClusterProtocoll, UITabBarDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     @IBOutlet weak var uiImageClusterImage: UIImageView!
     @IBOutlet weak var tabBarForVoting: UITabBar!
@@ -35,7 +35,7 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
         if (UIScreen.mainScreen().bounds.size.height < 568) {
             self.scrollView.scrollEnabled = true;
         }
-
+        
         self.uIHelper = MBProgressHUD .showHUDAddedTo(self.view, animated: true);
         self.navigationItem.title = cluster.name
         
@@ -61,11 +61,16 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
         swipeDown.direction = UISwipeGestureRecognizerDirection.Left
         imageView.addGestureRecognizer(swipeDown)
         
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        swipeUp.direction = UISwipeGestureRecognizerDirection.Up
+        imageView.addGestureRecognizer(swipeUp)
+        
+        
     }
     
     func didReceiveHasAlreadyVotedOrDismissed(responseCode: NSNumber, entity: Bool){
         self.setEnableStatusForRatingBar(!entity)
-         DDLog.logInfo("MESSAGE: \(entity), RESPONSE CODE: \(responseCode)")
+        DDLog.logInfo("MESSAGE: \(entity), RESPONSE CODE: \(responseCode)")
         uIHelper.hide(true)
         
     }
@@ -97,12 +102,75 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
                 loadImageForIndex(counter)
                 DDLog.logInfo("SWIPE LEFT")
                 break
+            case UISwipeGestureRecognizerDirection.Up:
+                DDLog.logInfo("SWIPE UP")
+                showCameraView()
+                break
             default:
                 DDLog.logError("Not a safe place for humans ;)")
                 fatalError("SWIPE GESTURE THAT WAS NOT IMPLEMENTED, PLEASE IMPLEMENT IT!")
                 break
             }
         }
+    }
+    
+    func showCameraView(){
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
+            var imag = UIImagePickerController()
+            imag.delegate = self
+            imag.sourceType = UIImagePickerControllerSourceType.Camera;
+            imag.allowsEditing = false
+            self.presentViewController(imag, animated: true, completion: nil)
+        }else{
+            DDLog.logError("CAMERA IS NOT AVAILABLE.")
+        }
+        
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
+        DDLog.logInfo("Image Received")
+        let selectedImage : UIImage = image
+        
+        
+        
+        /* FlickrKit.sharedFlickrKit().initializeWithAPIKey("e4888f4d798398ea9b0903d94ddcd8fb", sharedSecret: "5b27f8c26455fa69")
+        
+        
+        if (FlickrKit.sharedFlickrKit().authorized){
+        DDLog.logInfo("AUTHORIZED ")
+        var uploadArgs:NSDictionary = ["title": "Test Photo", "description": "A Test Photo via FlickrKitDemo", "is_public": "0", "is_friend": "0", "is_family": "0", "hidden": "2"]
+        
+        var uploadOperation = FlickrKit.sharedFlickrKit().uploadImage(image, args: uploadArgs, completion: { (imageID: String!,  error: NSError!) -> Void in
+        
+        
+        if error != nil {
+        DDLog.logError("ERROR \(error.localizedDescription)")
+        }else{
+        DDLog.logInfo("UPLOADED ")
+        
+        }
+        
+        
+        })
+        
+        }else{
+        DDLog.logInfo("NOT AUTHORIZED ")
+        }
+        
+        
+        */
+        
+        
+        
+        
+        
+        
+        
+        
+        //var tempImage:UIImage = editingInfo[UIImagePickerControllerOriginalImage] as UIImage
+        //img.image=selectedImage
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -146,7 +214,8 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
                 }else if (index == 2){
                     ePCFRP.evaluateCluster(auth, touristicness: 10,  datastoreClusterKey: cluster.datastoreClusterKey, spotName: spotName)
                     uIHelper.labelText = "VOTING CLUSTER AS TOURISTIC"
-                    
+                }else if (index == 3){
+                    showCameraView()
                 }else{
                     fatalError("WE HAVE NOT BEHAVIOUR FOR THAT!")
                 }

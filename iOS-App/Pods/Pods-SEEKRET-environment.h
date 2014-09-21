@@ -78,6 +78,12 @@
 #define COCOAPODS_VERSION_MINOR_CrashlyticsFramework 2
 #define COCOAPODS_VERSION_PATCH_CrashlyticsFramework 4
 
+// FlickrKit
+#define COCOAPODS_POD_AVAILABLE_FlickrKit
+#define COCOAPODS_VERSION_MAJOR_FlickrKit 1
+#define COCOAPODS_VERSION_MINOR_FlickrKit 0
+#define COCOAPODS_VERSION_PATCH_FlickrKit 4
+
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0

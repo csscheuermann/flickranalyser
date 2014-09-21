@@ -66,6 +66,7 @@
 		B4DCC96F19BA138800AAC38F /* GTLServiceRatingAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DCC96919BA138800AAC38F /* GTLServiceRatingAPI.m */; };
 		B4E4B41819C5DEDF00977EE3 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E4B41719C5DEDF00977EE3 /* CocoaLumberjack.swift */; };
 		B4E4B41B19C5EED700977EE3 /* SeekretFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E4B41A19C5EED700977EE3 /* SeekretFormatter.m */; };
+		B4E4B41E19CEED4500977EE3 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E4B41D19CEED4500977EE3 /* CameraViewController.swift */; };
 		B4F0AD6F19AE4ADA00213B12 /* DetailedClusterMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6D19AE4ADA00213B12 /* DetailedClusterMapViewController.swift */; };
 		B4F0AD7019AE4ADA00213B12 /* EndpointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */; };
 		F725501D9E8A46C8A26A93B5 /* libPods-SEEKRET.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */; };
@@ -176,6 +177,7 @@
 		B4E4B41719C5DEDF00977EE3 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
 		B4E4B41919C5EE9100977EE3 /* SeekretFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekretFormatter.h; sourceTree = "<group>"; };
 		B4E4B41A19C5EED700977EE3 /* SeekretFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekretFormatter.m; sourceTree = "<group>"; };
+		B4E4B41D19CEED4500977EE3 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B4F0AD6D19AE4ADA00213B12 /* DetailedClusterMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedClusterMapViewController.swift; sourceTree = "<group>"; };
 		B4F0AD6E19AE4ADA00213B12 /* EndpointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EndpointController.swift; path = ViewController/EndpointController.swift; sourceTree = "<group>"; };
 		CBF8489DBCFD440081CF3D34 /* libPods-SEEKRET.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEEKRET.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,6 +304,7 @@
 		81A0F43C198E428400D148B1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B4E4B41C19CEED1400977EE3 /* Camera */,
 				B4E4B41519C5D83800977EE3 /* Logging */,
 				B4E4B41319C5CC4900977EE3 /* Login */,
 				B4102A1319B7071100DBF1B9 /* Abstract */,
@@ -478,6 +481,14 @@
 				B4E4B41A19C5EED700977EE3 /* SeekretFormatter.m */,
 			);
 			name = Logging;
+			sourceTree = "<group>";
+		};
+		B4E4B41C19CEED1400977EE3 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B4E4B41D19CEED4500977EE3 /* CameraViewController.swift */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -666,6 +677,7 @@
 				81A0F412198D2BEE00D148B1 /* main.m in Sources */,
 				B41E2BD919B057BF00E1A180 /* SpotViewController.swift in Sources */,
 				81A0F440198E428400D148B1 /* LoginViewController.m in Sources */,
+				B4E4B41E19CEED4500977EE3 /* CameraViewController.swift in Sources */,
 				B4DCC8E619B9B1D100AAC38F /* UIHelperMethods.swift in Sources */,
 				B4DCC95B19BA137A00AAC38F /* GTLQueryClusterAPI.m in Sources */,
 				B44AFDB919AF4E6700565AFA /* GTLSpotAPIJsonMap.m in Sources */,

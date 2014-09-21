@@ -21,12 +21,15 @@ public class SpotCalculationHandler {
 	public SpotCalculationHandler() {
 		allowedLicenseForFlickrPhotos = new HashSet<>();
 		/*
-		 * Photo licences we are allowed to use in a commercial way.
+		 * Photo licences we are allowed to use in a non-commercial way.
 		 * 
 		 * See
 		 * https://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html 
 		 * for more information
 		 */
+		allowedLicenseForFlickrPhotos.add(1);
+		allowedLicenseForFlickrPhotos.add(2);
+		allowedLicenseForFlickrPhotos.add(3);
 		allowedLicenseForFlickrPhotos.add(4);
 		allowedLicenseForFlickrPhotos.add(5);
 		allowedLicenseForFlickrPhotos.add(6);

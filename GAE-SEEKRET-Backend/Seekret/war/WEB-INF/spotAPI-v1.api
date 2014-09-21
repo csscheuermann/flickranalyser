@@ -135,24 +135,24 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
+          "metadata" : {
+            "$ref" : "JsonMap"
+          },
           "status" : {
             "type" : "integer"
           },
           "entity" : {
             "$ref" : "_any"
-          },
-          "metadata" : {
-            "$ref" : "JsonMap"
           }
         }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
       },
       "JsonMap" : {
         "id" : "JsonMap",
         "type" : "object"
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
       },
       "Spot" : {
         "id" : "Spot",
@@ -191,17 +191,14 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "clusterRadiusInMeter" : {
-            "type" : "number"
-          },
           "maxNumberOfViewsPerCluster" : {
             "type" : "integer"
           },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
-          "maxClusterViews" : {
-            "type" : "integer"
+          "clusterRadiusInMeter" : {
+            "type" : "number"
           },
           "spotRadiusInMeter" : {
             "type" : "number"
@@ -211,6 +208,9 @@
             "items" : {
               "$ref" : "Cluster"
             }
+          },
+          "maxClusterViews" : {
+            "type" : "integer"
           }
         }
       },
@@ -231,11 +231,11 @@
           "name" : {
             "type" : "string"
           },
-          "parent" : {
-            "$ref" : "Key"
-          },
           "complete" : {
             "type" : "boolean"
+          },
+          "parent" : {
+            "$ref" : "Key"
           },
           "namespace" : {
             "type" : "string"
@@ -334,12 +334,12 @@
             "type" : "string",
             "format" : "int64"
           },
+          "polar" : {
+            "type" : "boolean"
+          },
           "longitudeInternal" : {
             "type" : "string",
             "format" : "int64"
-          },
-          "polar" : {
-            "type" : "boolean"
           }
         }
       },

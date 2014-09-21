@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="LoginViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lfk-Yt-MrW"/>
-                        <viewControllerLayoutGuide type="bottom" id="MRd-sy-RVx"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hd1-e5-dtS">
+                            <view contentMode="scaleToFill" id="Hd1-e5-dtS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sfu-kP-kyA">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Sfu-kP-kyA">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHV-r1-EGo" customClass="GPPSignInButton">
+                                    <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GHV-r1-EGo" customClass="GPPSignInButton">
                                         <rect key="frame" x="90" y="347" width="145" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,14 +32,16 @@
                                             <action selector="loginButtonTouched:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Zpf-TK-f0y"/>
                                         </connections>
                                     </button>
-                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login to SEEKRET with your Google Account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ead-gg-kJO">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to SEEKRET with your Google Account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ead-gg-kJO">
                                         <rect key="frame" x="33" y="254" width="254" height="69"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7P-gG-vQH">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E7P-gG-vQH">
                                         <rect key="frame" x="49" y="471" width="226" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                         <state key="normal" title="Proceed without Login">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -51,24 +51,15 @@
                                             <action selector="loginWithoutOAuthTouched:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Whi-yb-NxT"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mJE-pf-m9W">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="mJE-pf-m9W">
                                         <rect key="frame" x="0.0" y="264" width="320" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="bottom" secondItem="Sfu-kP-kyA" secondAttribute="bottom" id="GO4-SW-OwD"/>
-                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="bottom" secondItem="MRd-sy-RVx" secondAttribute="top" id="R4L-zn-n0j"/>
-                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" id="UgT-S3-ft5"/>
-                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="trailing" secondItem="Sfu-kP-kyA" secondAttribute="trailing" id="Vec-Ng-inf"/>
-                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="leading" secondItem="MRd-sy-RVx" secondAttribute="leading" id="eCp-l7-LOh"/>
-                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="leading" secondItem="Sfu-kP-kyA" secondAttribute="leading" id="hM3-Rc-LmZ"/>
-                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="top" secondItem="Sfu-kP-kyA" secondAttribute="top" id="llw-5P-zni"/>
-                            <constraint firstItem="Hd1-e5-dtS" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="mm1-P9-sCe"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WK9-3d-FIO"/>
                     <connections>
@@ -88,19 +79,17 @@
         <scene sceneID="ehK-hu-rg2">
             <objects>
                 <viewController storyboardIdentifier="SpotViewController" id="f2N-Av-Smy" customClass="SpotViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0jw-Nw-zra"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ejt-Wi-Sj0"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vCa-4k-lvd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhe-6y-v2F">
+                            <view contentMode="scaleToFill" id="rhe-6y-v2F">
                                 <rect key="frame" x="0.0" y="70" width="320" height="503"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="282" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HiQ-mz-PgX">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="282" sectionHeaderHeight="22" sectionFooterHeight="22" id="HiQ-mz-PgX">
                                         <rect key="frame" x="0.0" y="-5" width="320" height="508"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="SpotTableViewCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ClusterImageIdent" rowHeight="282" id="K1i-9m-EQD" customClass="SpotTableViewCell" customModule="SEEKRET" customModuleProvider="target">
@@ -109,8 +98,9 @@
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1i-9m-EQD" id="NgO-Yd-CEb">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9T-IJ-r93">
-                                                            <rect key="frame" x="0.0" y="13" width="320" height="200"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="P9T-IJ-r93">
+                                                            <rect key="frame" x="0.0" y="14" width="320" height="200"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                     </subviews>
                                                 </tableViewCellContentView>
@@ -124,11 +114,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0024416334313203114" green="0.10958674663378742" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ckL-gt-q2N">
+                            <view contentMode="scaleToFill" id="ckL-gt-q2N">
                                 <rect key="frame" x="0.0" y="20" width="320" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7m-R2-6lt">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K7m-R2-6lt">
                                         <rect key="frame" x="73" y="13" width="260" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -152,38 +144,41 @@
         <scene sceneID="RLw-rG-yh1">
             <objects>
                 <viewController storyboardIdentifier="DetailedClusterViewController" id="qXY-Ry-8NJ" customClass="DetailedClusterViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JfZ-x5-YtP"/>
-                        <viewControllerLayoutGuide type="bottom" id="9ZL-4w-hzJ"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CXd-Jl-PFQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqA-c8-JvB">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" id="bqA-c8-JvB">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wds-pK-eVf">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Wds-pK-eVf">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W14-bO-XEd" userLabel="Transparten View">
+                                    <view alpha="0.5" contentMode="scaleToFill" id="W14-bO-XEd" userLabel="Transparten View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dli-7F-Lcx">
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" id="dli-7F-Lcx">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1WT-NM-oc5">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="He4-pR-Kco">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="He4-pR-Kco">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4S-31-E4S">
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" id="c4S-31-E4S">
                                                     <rect key="frame" x="23" y="252" width="274" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </mapView>
-                                                <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOg-vr-zmA">
+                                                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hOg-vr-zmA">
                                                     <rect key="frame" x="265" y="370" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.44138443129486044" green="0.46804827428613527" blue="0.51369310461956519" alpha="0.46000000000000002" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="error">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -198,46 +193,20 @@
                                     </visualEffectView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="W14-bO-XEd" secondAttribute="trailing" id="1M5-Vi-BJL"/>
-                                    <constraint firstAttribute="trailing" secondItem="dli-7F-Lcx" secondAttribute="trailing" id="4vq-Xs-6cl"/>
-                                    <constraint firstItem="dli-7F-Lcx" firstAttribute="top" secondItem="bqA-c8-JvB" secondAttribute="top" id="TDe-OZ-97l"/>
-                                    <constraint firstItem="Wds-pK-eVf" firstAttribute="leading" secondItem="bqA-c8-JvB" secondAttribute="leading" id="fjM-8U-dyD"/>
-                                    <constraint firstItem="Wds-pK-eVf" firstAttribute="top" secondItem="bqA-c8-JvB" secondAttribute="top" id="gfn-gl-4tw"/>
-                                    <constraint firstItem="dli-7F-Lcx" firstAttribute="leading" secondItem="bqA-c8-JvB" secondAttribute="leading" id="kFH-HN-JTx"/>
-                                    <constraint firstAttribute="trailing" secondItem="Wds-pK-eVf" secondAttribute="trailing" id="muq-kn-vMo"/>
-                                    <constraint firstAttribute="bottom" secondItem="W14-bO-XEd" secondAttribute="bottom" id="nFn-nh-IXu"/>
-                                    <constraint firstAttribute="bottom" secondItem="Wds-pK-eVf" secondAttribute="bottom" id="pGF-Yf-69E"/>
-                                    <constraint firstAttribute="width" secondItem="Wds-pK-eVf" secondAttribute="width" id="pjb-1X-nHN"/>
-                                    <constraint firstItem="W14-bO-XEd" firstAttribute="top" secondItem="bqA-c8-JvB" secondAttribute="top" id="qmH-x9-9rA"/>
-                                    <constraint firstAttribute="bottom" secondItem="dli-7F-Lcx" secondAttribute="bottom" id="w1h-Xl-TjI"/>
-                                    <constraint firstAttribute="height" secondItem="Wds-pK-eVf" secondAttribute="height" id="yrL-xa-CaZ"/>
-                                    <constraint firstItem="W14-bO-XEd" firstAttribute="leading" secondItem="bqA-c8-JvB" secondAttribute="leading" id="zNp-jf-n9P"/>
-                                </constraints>
                             </scrollView>
-                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-Ng-OjU">
+                            <tabBar contentMode="scaleToFill" id="Ooj-Ng-OjU">
                                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="7JM-R1-9pt"/>
-                                </constraints>
                                 <items>
                                     <tabBarItem title="Dismiss" image="dismiss" selectedImage="dismiss" id="FA5-u5-ELm"/>
                                     <tabBarItem title="Seekret" image="seekret" selectedImage="seekret" id="9jy-Oe-scf"/>
                                     <tabBarItem title="Touristic" image="touristic" selectedImage="touristic" id="BsN-y5-rre"/>
+                                    <tabBarItem systemItem="topRated" id="owo-o1-Yn6" userLabel="Camera"/>
                                 </items>
                             </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ooj-Ng-OjU" secondAttribute="trailing" constant="-16" id="6xa-5d-Wgh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bqA-c8-JvB" secondAttribute="trailing" constant="-16" id="91Z-Pz-gG5"/>
-                            <constraint firstItem="9ZL-4w-hzJ" firstAttribute="top" secondItem="bqA-c8-JvB" secondAttribute="bottom" id="KZZ-Ke-uw6"/>
-                            <constraint firstItem="9ZL-4w-hzJ" firstAttribute="top" secondItem="Ooj-Ng-OjU" secondAttribute="bottom" id="PR7-RV-akK"/>
-                            <constraint firstItem="Ooj-Ng-OjU" firstAttribute="leading" secondItem="CXd-Jl-PFQ" secondAttribute="leadingMargin" constant="-16" id="Qob-8j-qXQ"/>
-                            <constraint firstItem="bqA-c8-JvB" firstAttribute="top" secondItem="JfZ-x5-YtP" secondAttribute="bottom" constant="-64" id="ixM-KB-yQv"/>
-                            <constraint firstItem="bqA-c8-JvB" firstAttribute="leading" secondItem="CXd-Jl-PFQ" secondAttribute="leadingMargin" constant="-16" id="nbo-Uk-0Ok"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ypr-0f-jzj"/>
                     <connections>
@@ -256,19 +225,17 @@
         <scene sceneID="JRA-8l-Me0">
             <objects>
                 <viewController storyboardIdentifier="TopSpotsViewController" id="kyC-JP-zoM" customClass="TopSpotsViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nnz-mo-pMU"/>
-                        <viewControllerLayoutGuide type="bottom" id="Gjt-FX-4vM"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Qhj-oV-JBo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PeD-3A-Hra" userLabel="View For TableView">
+                            <view contentMode="scaleToFill" id="PeD-3A-Hra" userLabel="View For TableView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DEV-0O-eTT">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="DEV-0O-eTT">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="534"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="SpotNameCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SpotNameCellIdent" rowHeight="48" id="3A9-9h-ajb" customClass="TopSpotsTableViewCell" customModule="SEEKRET" customModuleProvider="target">
@@ -277,8 +244,9 @@
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3A9-9h-ajb" id="CaD-h0-jMz">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DAS IST EIN TEST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65O-iT-t9e">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAS IST EIN TEST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="65O-iT-t9e">
                                                             <rect key="frame" x="8" y="15" width="304" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -319,19 +287,17 @@
         <scene sceneID="g6R-he-cfg">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="apZ-wV-8MU" userLabel="Map View Controller" customClass="DetailedClusterMapViewController" customModule="SEEKRET" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qvu-PJ-8va"/>
-                        <viewControllerLayoutGuide type="bottom" id="1SI-CD-5VP"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="c0i-cQ-fx0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvs-6C-Peg">
+                            <view contentMode="scaleToFill" id="dvs-6C-Peg">
                                 <rect key="frame" x="0.0" y="17" width="320" height="510"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kU6-h0-4OQ">
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="kU6-h0-4OQ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </mapView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.036265060260000002" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
