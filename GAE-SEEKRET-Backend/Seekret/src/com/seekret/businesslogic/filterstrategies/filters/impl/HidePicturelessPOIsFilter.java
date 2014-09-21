@@ -9,7 +9,7 @@ import com.seekret.businesslogic.filterstrategies.filters.IClusterFilter;
 import com.seekret.pojo.Cluster;
 import com.seekret.pojo.Spot;
 
-public class HideDismissedPOIsFilter implements IClusterFilter {
+public class HidePicturelessPOIsFilter implements IClusterFilter {
 
 	private static final Logger LOGGER = Logger.getLogger(HideDismissedPOIsFilter.class.getName());
 	
@@ -17,11 +17,12 @@ public class HideDismissedPOIsFilter implements IClusterFilter {
 	public List<Cluster> filterCluster(List<Cluster> clusterToFilter, Spot spot) {
 		List<Cluster> result = new ArrayList<Cluster>(clusterToFilter.size());
 		for (Cluster cluster : clusterToFilter) {
-			if(cluster.getDismissCounter() == 0){
+			if(!cluster.getUrlOfMostViewedPicture().isEmpty()){
 				result.add(cluster);
 			}
 		}
-		LOGGER.log(Level.INFO, "Number of clusters that have been dismissed and are not going to be shown: " + (clusterToFilter.size() - result.size()) );
+		int numberFilteredClusters = clusterToFilter.size() - result.size();
+		LOGGER.log(Level.INFO, "Number of clusters that have no pictures and are not going to be shown: " + numberFilteredClusters+ "("+(100.0*numberFilteredClusters)/clusterToFilter.size()+"%)" );
 		return result;
 	}
 

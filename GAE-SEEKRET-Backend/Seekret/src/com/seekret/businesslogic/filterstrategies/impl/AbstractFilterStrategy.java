@@ -10,6 +10,7 @@ import com.seekret.businesslogic.filterstrategies.IFilterStrategy;
 import com.seekret.businesslogic.filterstrategies.common.ClusterScoreComparator;
 import com.seekret.businesslogic.filterstrategies.common.ClusterScorePair;
 import com.seekret.businesslogic.filterstrategies.filters.impl.HideDismissedPOIsFilter;
+import com.seekret.businesslogic.filterstrategies.filters.impl.HidePicturelessPOIsFilter;
 import com.seekret.businesslogic.filterstrategies.scoredecorator.IClusterScoreDecorator;
 import com.seekret.pojo.Cluster;
 import com.seekret.pojo.Spot;
@@ -19,19 +20,19 @@ public abstract class AbstractFilterStrategy implements IFilterStrategy {
 	private static final int DEFAULT_MAX_NUMBER_OF_CLUSTERS = 60;
 	private static final Logger LOGGER = Logger.getLogger(AbstractFilterStrategy.class.getName());
 	private boolean ignoreDismissedClusters;
+	private boolean ignorePicturelessClusters;
 
 	private boolean limitResultSize;
 
 	public AbstractFilterStrategy() {
 		ignoreDismissedClusters = false;
+		ignorePicturelessClusters = false;
 		limitResultSize = true;
 	}
-	
-	public AbstractFilterStrategy( boolean limitResultSize){
+
+	public AbstractFilterStrategy(boolean limitResultSize) {
 		this.limitResultSize = limitResultSize;
 	}
-	
-	
 
 	@Override
 	public final List<Cluster> filterCluster(List<Cluster> clusterToFilter, Spot spot) {
@@ -44,12 +45,26 @@ public abstract class AbstractFilterStrategy implements IFilterStrategy {
 		List<Cluster> clustersToReturn = new ArrayList<Cluster>();
 		if (limitResultSize) {
 			clustersToReturn = limitResultSize(scoredClusters);
-		}else{
+		} else {
 			clustersToReturn = getClustersOnly(scoredClusters);
 		}
-		
+
+		postProcessClusters(clustersToReturn);
 		return clustersToReturn;
 
+	}
+
+	private void postProcessClusters(List<Cluster> clustersToReturn) {
+		addDefaultPictureIfPictureIsNotAvailable(clustersToReturn);
+
+	}
+
+	private void addDefaultPictureIfPictureIsNotAvailable(List<Cluster> clustersToReturn) {
+		for (Cluster cluster : clustersToReturn) {
+			if(cluster.getUrlOfMostViewedPicture().isEmpty()){
+				cluster.addPictureUrl("http://de.jigzone.com/p/jz/jz1/The_Scream.jpg");
+			}
+		}
 	}
 
 	private List<Cluster> getClustersOnly(List<ClusterScorePair> scoredClusters) {
@@ -61,17 +76,26 @@ public abstract class AbstractFilterStrategy implements IFilterStrategy {
 	}
 
 	private List<Cluster> preprocessClusterList(List<Cluster> clusterToFilter, Spot spot) {
+		List<Cluster> clusterList = clusterToFilter;
 		if (ignoreDismissedClusters) {
 			HideDismissedPOIsFilter hideDismissedPOIsFilter = new HideDismissedPOIsFilter();
-			return hideDismissedPOIsFilter.filterCluster(clusterToFilter, spot);
-		} else {
-			return clusterToFilter;
+			clusterList = hideDismissedPOIsFilter.filterCluster(clusterList, spot);
 		}
+		if (ignorePicturelessClusters) {
+			HidePicturelessPOIsFilter hidePicturelessPOIsFilter = new HidePicturelessPOIsFilter();
+			clusterList = hidePicturelessPOIsFilter.filterCluster(clusterList, spot);
+		}
+		return clusterList;
 	}
 
 	@Override
 	public void setIgnoreDismissedClustersFlag(boolean ignoreDismissedClusters) {
 		this.ignoreDismissedClusters = ignoreDismissedClusters;
+	}
+
+	@Override
+	public void setIgnorePictureLessClusters(boolean ignorePicturelessClusters) {
+		this.ignorePicturelessClusters = ignorePicturelessClusters;
 	}
 
 	private List<Cluster> limitResultSize(List<ClusterScorePair> scoredClusters) {

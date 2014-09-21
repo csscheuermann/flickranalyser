@@ -34,9 +34,11 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
 		String location = pRequest.getParameter("location");
 		String filterStrategy = pRequest.getParameter("strategy");
 		boolean dissmissCluster = Boolean.parseBoolean(pRequest.getParameter("dissmissCluster"));
+		boolean doNotConsiderPicturelessCluster = Boolean.parseBoolean(pRequest.getParameter("doNotConsiderPicturelessCluster"));
 		boolean useFluster = Boolean.parseBoolean(pRequest.getParameter("useFluster"));
 
 		LOGGER.log(Level.INFO, "DISMISS CLUSTER: " + dissmissCluster);
+		LOGGER.log(Level.INFO, "DO NOT CONSIDER PICTURELESS CLUSTER: " + doNotConsiderPicturelessCluster);
 		LOGGER.log(Level.INFO, "USE FLUSTER: " + useFluster);
 		LOGGER.log(Level.INFO, "LOCATION: " + location);
 		LOGGER.log(Level.INFO, "FILTER STRATEGY: " + filterStrategy);
@@ -63,6 +65,7 @@ public class PrepareSpotMapHandler extends AbstractHtmlRequestHandler{
 
 		IFilterStrategy choosenFilterStrategy = HelperMethods.instantiate(fullClassPath.toString(), IFilterStrategy.class);
 		choosenFilterStrategy.setIgnoreDismissedClustersFlag(dissmissCluster);
+		choosenFilterStrategy.setIgnorePictureLessClusters(doNotConsiderPicturelessCluster);
 		LOGGER.log(Level.INFO, "INITIALIZED FILTER STRATEGY:" + choosenFilterStrategy.getClass().getName());
 
 		Spot spot = this.spotService.getSpotById(location);

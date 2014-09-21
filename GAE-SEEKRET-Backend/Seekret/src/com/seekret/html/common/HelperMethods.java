@@ -78,6 +78,7 @@ public class HelperMethods {
 		//TODO COS WTF :) Das bitte ??ndern
 		
 		getFilterStrategyButtons.append("$('#doNotConsiderDismissedClusters').val($('#doNotConsiderDismissedClusters').is(':checked'));");
+		getFilterStrategyButtons.append("$('#doNotConsiderClusterWithoutPictures').val($('#doNotConsiderClusterWithoutPictures').is(':checked'));");
 		getFilterStrategyButtons.append("$('#useFlusterFlag').val($('#useFlusterFlag').is(':checked'));");
 		
 		getFilterStrategyButtons.append("spotName.setAttribute('value', spotname);");
@@ -133,6 +134,12 @@ public class HelperMethods {
 			createFilterSettings.append("      <input type='checkbox' name='dissmissCluster' id='doNotConsiderDismissedClusters'> ");
 			createFilterSettings.append("  </div>");
 			createFilterSettings.append("<div class='col-xs-11'>Do not consider dismissed clusters</div>");
+			createFilterSettings.append("</div>");
+			createFilterSettings.append("<div class='row'>");
+			createFilterSettings.append("<div class='col-xs-1'>  ");
+			createFilterSettings.append("      <input type='checkbox' name='doNotConsiderPicturelessCluster' id='doNotConsiderClusterWithoutPictures'> ");
+			createFilterSettings.append("  </div>");
+			createFilterSettings.append("<div class='col-xs-11'>do not consider cluster without pictures</div>");
 			createFilterSettings.append("</div>");
 			createFilterSettings.append("<div class='row'>");
 			createFilterSettings.append("<div class='col-xs-1'>  ");
