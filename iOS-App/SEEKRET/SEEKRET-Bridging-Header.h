@@ -27,7 +27,7 @@
 #import "GTLClusterAPI.h"
 #import <MBProgressHUD.h>
 
-
+#import <FlickrKit/FlickrKit.h>
 
 #import "DDLog.h"
 #import "DDLog+LOGV.h"

@@ -20,11 +20,11 @@ public class SpotCalculationHandler {
 
 	// private static final Logger LOGGER =
 	// Logger.getLogger(SpotCalculationHandler.class.getName());
-	public Spot getSpot(Set<PointOfInterest> pointOfInterests, Spot spotToSearchFor) {
-		List<Cluster> clusters = spotToSearchFor.getCluster();
+	public Spot getSpot(Set<PointOfInterest> pointOfInterests, Spot hardcodedSpot) {
+		List<Cluster> clusters = hardcodedSpot.getCluster();
 
 		for (PointOfInterest pointOfInterest : pointOfInterests) {
-			if (!isPointIntrestInCluster(spotToSearchFor, clusters, pointOfInterest)) {
+			if (!isPointIntrestInCluster(hardcodedSpot, clusters, pointOfInterest)) {
 				// Add new Cluster, no Cluster found or List was empty
 				double poiLatitude = pointOfInterest.getLocation().getLatitude();
 				double poiLongitude = pointOfInterest.getLocation().getLongitude();
@@ -34,13 +34,13 @@ public class SpotCalculationHandler {
 				cluster.setName(findAddressByLatLng);
 				cluster.addPointOfInterestToList(pointOfInterest);
 				cluster.addViewCount(pointOfInterest.getCountOfViews());
-				spotToSearchFor.addClusterTo(cluster);
+				hardcodedSpot.addClusterTo(cluster);
 
 			}
 		}
 
 		// Now set an image URL for the Cluster
-		for (Cluster cluster : spotToSearchFor.getCluster()) {
+		for (Cluster cluster : hardcodedSpot.getCluster()) {
 			List<PointOfInterest> pointOfInterestList = cluster.getPointOfInterestList();
 
 			// LOGGER.log(Level.INFO, "SIZE:" +pointOfInterestList.size() );
@@ -57,12 +57,15 @@ public class SpotCalculationHandler {
 				}
 
 			}
+			if(urls.isEmpty()){
+				urls.add("http://de.jigzone.com/p/jz/jz1/The_Scream.jpg");
+			}
 
 			cluster.setUrlOfMostViewedPicture(urls);
 
 		}
 
-		return spotToSearchFor;
+		return hardcodedSpot;
 	}
 
 	public boolean isPictureSuitedAsClusterProfilePicture(PointOfInterest next) {

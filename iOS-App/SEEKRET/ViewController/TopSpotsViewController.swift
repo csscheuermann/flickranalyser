@@ -36,7 +36,7 @@ class TopSpotsViewController: AbstractSeekretViewController, EndPointControllerF
         refreshControl.tintColor = UIColor.orangeColor();
         refreshControl.addTarget(self, action: "refreshTopSpots", forControlEvents: UIControlEvents.ValueChanged)
         
-        var refreshTitle: NSAttributedString = NSAttributedString(string: "Pull to Refersh List")
+        var refreshTitle: NSAttributedString = NSAttributedString(string: "Pull to Refresh")
         refreshControl.attributedTitle = refreshTitle
         self.topSpotsTableView.addSubview(refreshControl)
         self.refreshControl = refreshControl
