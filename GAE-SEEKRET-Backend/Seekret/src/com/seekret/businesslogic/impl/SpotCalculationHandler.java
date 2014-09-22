@@ -16,7 +16,7 @@ import com.seekret.pojo.Spot;
 
 public class SpotCalculationHandler {
 
-	
+	public static int NUMBER_MAX_PICTURES_PER_CLUSTER = 4;
 
 	// private static final Logger LOGGER =
 	// Logger.getLogger(SpotCalculationHandler.class.getName());
@@ -48,7 +48,7 @@ public class SpotCalculationHandler {
 			List<String> urls = new ArrayList<String>();
 			Iterator<PointOfInterest> iterator = pointOfInterestList.iterator();
 			int counter = 0;
-			while ((iterator.hasNext()) && (counter < 3)) {
+			while ((iterator.hasNext()) && (counter < NUMBER_MAX_PICTURES_PER_CLUSTER)) {
 
 				PointOfInterest next = iterator.next();
 				if (isPictureSuitedAsClusterProfilePicture(next)) {
