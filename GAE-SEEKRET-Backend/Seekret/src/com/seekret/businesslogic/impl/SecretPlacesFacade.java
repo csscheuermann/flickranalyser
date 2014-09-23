@@ -44,26 +44,31 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 		LOGGER.log(Level.INFO, " Number of POIs: " + allPOIsForSpot.size());
 
 		Spot spot = spotCalculationHandler.getSpot(allPOIsForSpot, spotToSearchFor);
-		handlePictureLessPOIs(spot);
+		handlePOIsWithFewPictures(spot);
 		return spot;
 	}
 
-	private void handlePictureLessPOIs(Spot spot) {
+	private void handlePOIsWithFewPictures(Spot spot) {
 		int numberPicturesLessClusters = 0;
-		int numberPicturesFounds = 0;
+		int numberClustersWhichHaveAPictureNow = 0;
+		int numberNewPictures = 0;
 		Set<Cluster> clusterFilledWithPictures = new HashSet<Cluster>();
 		for (Cluster cluster : spot.getCluster()) {
-			if (cluster.getUrlOfMostViewedPicture().isEmpty()) {
-				numberPicturesLessClusters++;
+			if (cluster.getUrlOfMostViewedPicture().size() < SpotCalculationHandler.NUMBER_MAX_PICTURES_PER_CLUSTER) {
+				if (cluster.getUrlOfMostViewedPicture().isEmpty()) {
+					numberPicturesLessClusters++;
+				}
 				Set<PointOfInterest> picturesForCluster = flickrRequestHandler.getPicturesForCluster(cluster);
 				if (!picturesForCluster.isEmpty()) {
-					int numberPictures = 0;
 					for (PointOfInterest pointOfInterest : picturesForCluster) {
 						if (spotCalculationHandler.isPictureSuitedAsClusterProfilePicture(pointOfInterest)) {
+							if(cluster.getUrlOfMostViewedPicture().isEmpty()){
+								numberClustersWhichHaveAPictureNow++;
+							}
 							cluster.addPictureUrl(pointOfInterest.getPictureUrl());
 							clusterFilledWithPictures.add(cluster);
-							numberPictures++;
-							if (numberPictures > 3) {
+							numberNewPictures++;
+							if (cluster.getUrlOfMostViewedPicture().size() < SpotCalculationHandler.NUMBER_MAX_PICTURES_PER_CLUSTER) {
 								break;
 							}
 						}
@@ -71,8 +76,8 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 				}
 			}
 		}
-		LOGGER.log(Level.INFO, "number pictureless clusters: " + numberPicturesLessClusters + " number of clusters filled with pictures: " + clusterFilledWithPictures.size() + "(" + 100.0
-				* clusterFilledWithPictures.size() / numberPicturesLessClusters + "%)");
+		LOGGER.log(Level.INFO, "number new pictures:"+numberNewPictures+"; number pictureless clusters: " + numberPicturesLessClusters + "; number of clusters filled with pictures: " + clusterFilledWithPictures.size() + "("+100.0*clusterFilledWithPictures.size()/spot.getCluster().size()+"%); number of clusters which haven´t hat pictures before: of(" + 100.0
+				* numberClustersWhichHaveAPictureNow / numberPicturesLessClusters + "%)");
 
 	}
 

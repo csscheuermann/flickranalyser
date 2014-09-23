@@ -1,7 +1,6 @@
 package com.seekret.businesslogic.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +8,7 @@ import java.util.Set;
 import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
+import com.seekret.businesslogic.common.AllowedLicenses;
 import com.seekret.businesslogic.spotfinder.impl.NearestSpotFinder;
 import com.seekret.pojo.Cluster;
 import com.seekret.pojo.PointOfInterest;
@@ -16,25 +16,7 @@ import com.seekret.pojo.Spot;
 
 public class SpotCalculationHandler {
 
-	private static Set<Integer> allowedLicenseForFlickrPhotos;
-
-	public SpotCalculationHandler() {
-		allowedLicenseForFlickrPhotos = new HashSet<>();
-		/*
-		 * Photo licences we are allowed to use in a non-commercial way.
-		 * 
-		 * See
-		 * https://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html 
-		 * for more information
-		 */
-		allowedLicenseForFlickrPhotos.add(1);
-		allowedLicenseForFlickrPhotos.add(2);
-		allowedLicenseForFlickrPhotos.add(3);
-		allowedLicenseForFlickrPhotos.add(4);
-		allowedLicenseForFlickrPhotos.add(5);
-		allowedLicenseForFlickrPhotos.add(6);
-		allowedLicenseForFlickrPhotos.add(7);
-	}
+	public static int NUMBER_MAX_PICTURES_PER_CLUSTER = 4;
 
 	// private static final Logger LOGGER =
 	// Logger.getLogger(SpotCalculationHandler.class.getName());
@@ -66,7 +48,7 @@ public class SpotCalculationHandler {
 			List<String> urls = new ArrayList<String>();
 			Iterator<PointOfInterest> iterator = pointOfInterestList.iterator();
 			int counter = 0;
-			while ((iterator.hasNext()) && (counter < 3)) {
+			while ((iterator.hasNext()) && (counter < NUMBER_MAX_PICTURES_PER_CLUSTER)) {
 
 				PointOfInterest next = iterator.next();
 				if (isPictureSuitedAsClusterProfilePicture(next)) {
@@ -86,8 +68,8 @@ public class SpotCalculationHandler {
 		return hardcodedSpot;
 	}
 
-	private boolean isPictureSuitedAsClusterProfilePicture(PointOfInterest next) {
-		return next.getPictureUrl() != null && !next.getPictureUrl().isEmpty() && allowedLicenseForFlickrPhotos.contains(next.getLicenseId()) && next.getWidth()!=0 && next.getHeight() != 0 && isLandscape(next);
+	public boolean isPictureSuitedAsClusterProfilePicture(PointOfInterest next) {
+		return next.getPictureUrl() != null && !next.getPictureUrl().isEmpty() && AllowedLicenses.licenses.contains(next.getLicenseId()) && next.getWidth()!=0 && next.getHeight() != 0 && isLandscape(next);
 	}
 
 	private boolean isLandscape(PointOfInterest next) {
