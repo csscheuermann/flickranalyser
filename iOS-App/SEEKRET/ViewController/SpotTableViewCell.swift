@@ -44,7 +44,7 @@ class SpotTableViewCell: UITableViewCell, SDWebImageManagerDelegate{
             assert(validIndex <= urls.count, "COUNTER WAS BIGGER THAN ARRAY SIZE - SHOULD NEVER HAPPEN. COUNTER \(validIndex) URL ARRAY COUNT \(urls.count)")
             
             var manager = SDWebImageManager.sharedManager()
-            manager.downloadImageWithURL(NSURL.URLWithString(urls[validIndex]), options: SDWebImageOptions.RetryFailed,
+            manager.downloadImageWithURL(NSURL(fileURLWithPath: urls[validIndex]), options: SDWebImageOptions.RetryFailed,
                 progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
                        //DDLog.logInfo("RECEIVED SIZE  \(receivedSize), EXPECTED SIZE \(expectedSize)")
                 },
