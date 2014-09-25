@@ -109,7 +109,7 @@ class UIHelperMethods{
     {
         var clippedRect:CGRect = CGRectMake(0, 0, 640, 400);
         var imageRef:CGImageRef  = CGImageCreateWithImageInRect(imageToCrop.CGImage, clippedRect);
-        var croppedImage: UIImage  = UIImage(CGImage: imageRef)
+        var croppedImage: UIImage!  = UIImage(CGImage: imageRef)
         return croppedImage;
     }
     

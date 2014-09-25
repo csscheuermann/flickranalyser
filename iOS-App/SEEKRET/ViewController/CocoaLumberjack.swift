@@ -13,23 +13,24 @@
 //}
 
 struct LogFlag : RawOptionSetType {
-    private var value: Int32 = 0
-    init(_ value: Int32) { self.value = value }
-    var boolValue: Bool { return self.value != 0 }
-    func toRaw() -> Int32 { return self.value }
+   // private var value: Int32 = 0
+    var rawValue: Int32 =  0
+    init(rawValue: Int32) { self.rawValue = rawValue }
+    var boolValue: Bool { return self.rawValue != 0 }
+    func toRaw() -> Int32 { return self.rawValue }
     
-    static var allZeros:LogFlag { return self(0) }
-    static func fromRaw(raw: Int32) -> LogFlag? { return self(raw) }
-    static func fromMask(raw: Int32) -> LogFlag { return self(raw) }
-    static func convertFromNilLiteral() -> LogFlag { return self(0) }
+    static var allZeros:LogFlag { return self(rawValue: 0) }
+    static func fromRaw(rawValue: Int32) -> LogFlag? { return self(rawValue: rawValue) }
+    static func fromMask(rawValue: Int32) -> LogFlag { return self(rawValue: rawValue) }
+    static func convertFromNilLiteral() -> LogFlag { return self(rawValue: 0) }
     
-    static var Error:   LogFlag { return self(1 << 0) }
-    static var Warn:    LogFlag { return self(1 << 1) }
-    static var Info:    LogFlag { return self(1 << 2) }
-    static var Debug:   LogFlag { return self(1 << 3) }
-    static var Verbose: LogFlag { return self(1 << 4) }
+    static var Error:   LogFlag { return self(rawValue: 1 << 0) }
+    static var Warn:    LogFlag { return self(rawValue: 1 << 1) }
+    static var Info:    LogFlag { return self(rawValue: 1 << 2) }
+    static var Debug:   LogFlag { return self(rawValue: 1 << 3) }
+    static var Verbose: LogFlag { return self(rawValue: 1 << 4) }
 }
-func == (lhs: LogFlag, rhs: LogFlag) -> Bool { return lhs.value == rhs.value }
+func == (lhs: LogFlag, rhs: LogFlag) -> Bool { return lhs.rawValue == rhs.rawValue }
 
 
 
@@ -44,24 +45,25 @@ func == (lhs: LogFlag, rhs: LogFlag) -> Bool { return lhs.value == rhs.value }
 //}
 
 struct LogLevel : RawOptionSetType {
-    private var value: Int32 = 0
-    init(_ value: Int32) { self.value = value }
-    var boolValue: Bool { return self.value != 0 }
-    func toRaw() -> Int32 { return self.value }
-    static func fromRaw(raw: Int32) -> LogLevel? { return self(raw) }
-    static func fromMask(raw: Int32) -> LogLevel { return self(raw) }
-    static func convertFromNilLiteral() -> LogLevel { return self(0) }
+    //private var value: Int32 = 0
+    var rawValue: Int32 =  0
+    init(rawValue: Int32) { self.rawValue = rawValue }
+    var boolValue: Bool { return self.rawValue != 0 }
+    func toRaw() -> Int32 { return self.rawValue }
+    static func fromRaw(rawValue: Int32) -> LogLevel? { return self(rawValue: rawValue) }
+    static func fromMask(rawValue: Int32) -> LogLevel { return self(rawValue: rawValue) }
+    static func convertFromNilLiteral() -> LogLevel { return self(rawValue: 0) }
     
-    static var allZeros: LogLevel { return self(0b11111111) }
-    static var Off:     LogLevel { return self(0b0) }
-    static var Error:   LogLevel { return self(0b1) }
-    static var Warn:    LogLevel { return self(0b11) }
-    static var Info:    LogLevel { return self(0b111) }
-    static var Debug:   LogLevel { return self(0b1111) }
-    static var Verbose: LogLevel { return self(0b11111) }
-    static var All:     LogLevel { return self(0b11111111) }
+    static var allZeros: LogLevel { return self(rawValue: 0b11111111) }
+    static var Off:     LogLevel { return self(rawValue: 0b0) }
+    static var Error:   LogLevel { return self(rawValue: 0b1) }
+    static var Warn:    LogLevel { return self(rawValue: 0b11) }
+    static var Info:    LogLevel { return self(rawValue: 0b111) }
+    static var Debug:   LogLevel { return self(rawValue: 0b1111) }
+    static var Verbose: LogLevel { return self(rawValue: 0b11111) }
+    static var All:     LogLevel { return self(rawValue: 0b11111111) }
 }
-func == (lhs: LogLevel, rhs: LogLevel) -> Bool { return lhs.value == rhs.value }
+func == (lhs: LogLevel, rhs: LogLevel) -> Bool { return lhs.rawValue == rhs.rawValue }
 
 
 

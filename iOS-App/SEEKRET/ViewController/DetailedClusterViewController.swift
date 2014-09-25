@@ -179,7 +179,7 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
         
         var manager = SDWebImageManager.sharedManager()
         
-        manager.downloadImageWithURL(NSURL.URLWithString(urls[index]), options: SDWebImageOptions.RetryFailed,
+        manager.downloadImageWithURL(NSURL(fileURLWithPath: urls[index]), options: SDWebImageOptions.RetryFailed,
             progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
                 NSLog("RECEIVED SIZE  %d, EXPECTED SIZE %d", receivedSize, expectedSize)
             },

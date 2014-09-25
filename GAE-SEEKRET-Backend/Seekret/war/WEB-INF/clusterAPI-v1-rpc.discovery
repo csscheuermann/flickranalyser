@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/qCGcePBAn0qAKNPCfyGU63uwq4k\"",
+ "etag": "\"koCc_mmAOJe4d9CoedmJUnZeEcg/qCGcePBAn0qAKNPCfyGU63uwq4k\"",
  "discoveryVersion": "v1",
  "id": "clusterAPI:v1",
  "name": "clusterAPI",
