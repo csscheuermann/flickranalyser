@@ -1,6 +1,5 @@
 package com.seekret.businesslogic.impl;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -45,24 +44,15 @@ public class SpotCalculationHandler {
 
 			// LOGGER.log(Level.INFO, "SIZE:" +pointOfInterestList.size() );
 			// Add the top three POI URLs
-			List<String> urls = new ArrayList<String>();
 			Iterator<PointOfInterest> iterator = pointOfInterestList.iterator();
-			int counter = 0;
-			while ((iterator.hasNext()) && (counter < NUMBER_MAX_PICTURES_PER_CLUSTER)) {
+			while ((iterator.hasNext()) && (cluster.getUrlOfMostViewedPicture().size() < NUMBER_MAX_PICTURES_PER_CLUSTER)) {
 
 				PointOfInterest next = iterator.next();
 				if (isPictureSuitedAsClusterProfilePicture(next)) {
-					urls.add(next.getPictureUrl());
-					counter++;
+					cluster.addPictureUrl(next.getPictureUrl());
 				}
 
 			}
-			if(urls.isEmpty()){
-				urls.add("http://de.jigzone.com/p/jz/jz1/The_Scream.jpg");
-			}
-
-			cluster.setUrlOfMostViewedPicture(urls);
-
 		}
 
 		return hardcodedSpot;

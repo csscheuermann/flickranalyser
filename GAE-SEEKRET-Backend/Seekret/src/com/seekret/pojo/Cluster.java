@@ -1,6 +1,7 @@
 package com.seekret.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -76,6 +77,7 @@ public class Cluster implements Serializable {
 		this.pointsOfInterest = new LinkedList<PointOfInterest>();
 		overallTouristicnessInPointsFrom1To10 =0.0;
 		overallTouristicnessVotes = 0;
+		urlOfMostViewedPicture = new ArrayList<String>();
 	}
 
 
@@ -152,9 +154,6 @@ public class Cluster implements Serializable {
 
 
 
-	public void setUrlOfMostViewedPicture(List<String> urlOfMostViewedPicture) {
-		this.urlOfMostViewedPicture = urlOfMostViewedPicture;
-	}
 
 
 
