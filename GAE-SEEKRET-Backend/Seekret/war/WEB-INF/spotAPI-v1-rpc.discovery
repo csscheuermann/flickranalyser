@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/aGTnCYoJLoa3I2_fzgAMUlNTglQ\"",
+ "etag": "\"koCc_mmAOJe4d9CoedmJUnZeEcg/kS_EIqPFpaFim7u6QLn-2wBC270\"",
  "discoveryVersion": "v1",
  "id": "spotAPI:v1",
  "name": "spotAPI",
@@ -201,6 +201,14 @@
      "type": "integer",
      "format": "int32"
     },
+    "height": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "licenseId": {
+     "type": "integer",
+     "format": "int32"
+    },
     "location": {
      "$ref": "LatLng"
     },
@@ -212,6 +220,10 @@
      "items": {
       "type": "string"
      }
+    },
+    "width": {
+     "type": "integer",
+     "format": "int32"
     }
    }
   },

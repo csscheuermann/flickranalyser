@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"MKGA2miAJpVGF7yQTQhsoDXpye8/vCe9ozTsjQ2keQdCHikEJRTy9zc\"",
+ "etag": "\"koCc_mmAOJe4d9CoedmJUnZeEcg/vCe9ozTsjQ2keQdCHikEJRTy9zc\"",
  "discoveryVersion": "v1",
  "id": "ratingAPI:v1",
  "name": "ratingAPI",
