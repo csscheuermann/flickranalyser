@@ -158,14 +158,14 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
-          "status" : {
-            "type" : "integer"
-          },
           "entity" : {
             "$ref" : "_any"
           },
           "metadata" : {
             "$ref" : "JsonMap"
+          },
+          "status" : {
+            "type" : "integer"
           }
         }
       },
