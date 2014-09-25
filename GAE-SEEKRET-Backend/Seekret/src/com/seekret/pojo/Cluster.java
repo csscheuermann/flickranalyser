@@ -108,17 +108,6 @@ public class Cluster implements Serializable {
 	}
 
 
-	public Cluster(Key datastoreClusterKey, double latitude, double longitude, String name, String description,int overallViews, List<String> urlOfMostViewedPicture, int numberOfPOIs, double overallTouristicnessInPointsFrom1To10,int overallTouristicnessVotes) {
-		this(latitude,longitude ,name,description);
-		this.overallViews = overallViews;
-		this.urlOfMostViewedPicture = urlOfMostViewedPicture;
-		this.numberOfPOIs = numberOfPOIs;
-		this.overallTouristicnessInPointsFrom1To10 = overallTouristicnessInPointsFrom1To10;
-		this.overallTouristicnessVotes = overallTouristicnessVotes;
-		this.datastoreClusterKey = datastoreClusterKey;
-	}
-
-
 	public int getNumberOfPOIs() {
 		return numberOfPOIs;
 	}
@@ -138,24 +127,14 @@ public class Cluster implements Serializable {
 	}
 
 
-
-
 	public String getDatastoreClusterKey() {
 		return KeyFactory.keyToString(datastoreClusterKey);
 	}
 
 
-
-
 	public void setDatastoreClusterKey(Key datastoreClusterKey) {
 		this.datastoreClusterKey = datastoreClusterKey;
 	}
-
-
-
-
-
-
 
 
 	public void addViewCount(int viewCount){
