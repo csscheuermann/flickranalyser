@@ -35,8 +35,13 @@ class EndPointControllerForTopSpots{
                 DDLog.logError("SOMETHING DURING GET TOP SPOTS WENT WRONG \(nsError.description)")
             }else{
                 DDLog.logInfo("UHH JEAH I GOT THE TOP SPOTS BABY...")
-                var resultArray: [String] = returnedSpot.topSpots as [String]
-                self.delegate.didRecieveTopSpots(resultArray)
+                
+                if let resultArray = returnedSpot?.topSpots?  {
+                    var resultArray = returnedSpot.topSpots as [String]
+                    self.delegate.didRecieveTopSpots(resultArray)
+                }else{
+                    self.delegate.didRecieveTopSpots([])
+                }
             }
         })
     }

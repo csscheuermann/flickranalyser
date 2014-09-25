@@ -191,17 +191,8 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "cluster" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Cluster"
-            }
-          },
           "maxClusterViews" : {
             "type" : "integer"
-          },
-          "spotRadiusInMeter" : {
-            "type" : "number"
           },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
@@ -210,6 +201,15 @@
             "type" : "integer"
           },
           "clusterRadiusInMeter" : {
+            "type" : "number"
+          },
+          "cluster" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Cluster"
+            }
+          },
+          "spotRadiusInMeter" : {
             "type" : "number"
           }
         }
@@ -231,11 +231,11 @@
           "name" : {
             "type" : "string"
           },
-          "complete" : {
-            "type" : "boolean"
-          },
           "namespace" : {
             "type" : "string"
+          },
+          "complete" : {
+            "type" : "boolean"
           },
           "parent" : {
             "$ref" : "Key"

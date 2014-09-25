@@ -32,7 +32,7 @@ class SpotTableViewCell: UITableViewCell, SDWebImageManagerDelegate{
         self.uiHelperMethods = UIHelperMethods()
     }
     
- 
+    
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -42,16 +42,20 @@ class SpotTableViewCell: UITableViewCell, SDWebImageManagerDelegate{
         if (urls != nil){
             let validIndex = uiHelperMethods.getValidCounterValue(self.counter, urls: urls)
             assert(validIndex <= urls.count, "COUNTER WAS BIGGER THAN ARRAY SIZE - SHOULD NEVER HAPPEN. COUNTER \(validIndex) URL ARRAY COUNT \(urls.count)")
-            
+          
+            var url:NSURL = NSURL(string: urls[validIndex])!
+            //DDLog.logInfo("URL auf index \(url.parameterString)")
             var manager = SDWebImageManager.sharedManager()
-            manager.downloadImageWithURL(NSURL(fileURLWithPath: urls[validIndex]), options: SDWebImageOptions.RetryFailed,
+            manager.downloadImageWithURL(url, options: SDWebImageOptions.RetryFailed,
                 progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
-                       //DDLog.logInfo("RECEIVED SIZE  \(receivedSize), EXPECTED SIZE \(expectedSize)")
+                    DDLog.logInfo("RECEIVED SIZE  \(receivedSize), EXPECTED SIZE \(expectedSize)")
                 },
                 
                 completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
                     //TODO COS AND SIW: DAS SOLLTEN WIR MAL VERSTEHEN. WIE FUNKTIONIERT DIESER CROP. Ich habe es so hingebogen, dass es geht, aber verstehen tu ich es nicht mehr ... ich will skalieren und dann croppen.
-                    self.uiHelperMethods.setImageToImageView(image, imageView: self.clusterImageView )
+                    if (image != nil){
+                        self.uiHelperMethods.setImageToImageView(image, imageView: self.clusterImageView )
+                    }
                     self.setTextForVotes()
             })
         }
@@ -73,8 +77,8 @@ class SpotTableViewCell: UITableViewCell, SDWebImageManagerDelegate{
         }
     }
     
-   
-        
+    
+    
     func setTouristicnessValue(){
         switch self.touristicnessValue {
         case 0,1,2:
