@@ -54,7 +54,9 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 		int numberNewPictures = 0;
 		Set<Cluster> clusterFilledWithPictures = new HashSet<Cluster>();
 		for (Cluster cluster : spot.getCluster()) {
-			if (cluster.getUrlOfMostViewedPicture().size() < SpotCalculationHandler.NUMBER_MAX_PICTURES_PER_CLUSTER) {
+			// only load pictures for empty clusters. otherwise we have the timing issue with gae
+			//if (cluster.getUrlOfMostViewedPicture().size() < SpotCalculationHandler.NUMBER_MAX_PICTURES_PER_CLUSTER) {
+			if(cluster.getUrlOfMostViewedPicture().isEmpty()){
 				if (cluster.getUrlOfMostViewedPicture().isEmpty()) {
 					numberPicturesLessClusters++;
 				}

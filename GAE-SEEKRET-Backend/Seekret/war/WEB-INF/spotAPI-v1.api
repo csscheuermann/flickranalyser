@@ -71,27 +71,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "spotAPI.getSpotById" : {
-      "path" : "getSpotById",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com" ],
-      "clientIds" : [ "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com", "", "449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v4gu.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.seekret.endpoints.SpotService.getSpotById",
-      "request" : {
-        "parameters" : {
-          "spotId" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "spotAPI.getSeekretSpotsBySpotName" : {
       "path" : "clustercollection/{spotName}",
       "httpMethod" : "GET",
@@ -103,6 +82,27 @@
       "request" : {
         "parameters" : {
           "spotName" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "spotAPI.getSpotById" : {
+      "path" : "getSpotById",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com" ],
+      "clientIds" : [ "449444009918-2or65i59u6m5s97arnnsg8econu0rvot.apps.googleusercontent.com", "", "449444009918-25mnitq6rqvgnuj0kvrg9qgm1ms2v4gu.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.seekret.endpoints.SpotService.getSpotById",
+      "request" : {
+        "parameters" : {
+          "spotId" : {
             "type" : "string",
             "required" : true
           }
@@ -135,14 +135,14 @@
         "id" : "Response",
         "type" : "object",
         "properties" : {
+          "status" : {
+            "type" : "integer"
+          },
           "entity" : {
             "$ref" : "_any"
           },
           "metadata" : {
             "$ref" : "JsonMap"
-          },
-          "status" : {
-            "type" : "integer"
           }
         }
       },
@@ -197,6 +197,9 @@
               "$ref" : "Cluster"
             }
           },
+          "maxClusterViews" : {
+            "type" : "integer"
+          },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
@@ -208,9 +211,6 @@
           },
           "spotRadiusInMeter" : {
             "type" : "number"
-          },
-          "maxClusterViews" : {
-            "type" : "integer"
           }
         }
       },
@@ -330,14 +330,14 @@
           "longitude" : {
             "type" : "number"
           },
-          "latitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
-          },
           "polar" : {
             "type" : "boolean"
           },
           "longitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "latitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           }
@@ -379,14 +379,14 @@
           "$ref" : "Spot"
         }
       },
-      "com.seekret.endpoints.SpotService.getSpotById" : {
-        "response" : {
-          "$ref" : "Spot"
-        }
-      },
       "com.seekret.endpoints.SpotService.getSeekretSpotsBySpotName" : {
         "response" : {
           "$ref" : "ClusterCollection"
+        }
+      },
+      "com.seekret.endpoints.SpotService.getSpotById" : {
+        "response" : {
+          "$ref" : "Spot"
         }
       },
       "com.seekret.endpoints.SpotService.getTopSpots" : {
