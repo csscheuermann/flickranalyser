@@ -409,7 +409,15 @@
 			
 			List<String> urlOfMostViewedPicture = currentCluster.getUrlOfMostViewedPicture();
 		
-			String[] urls = new String[]{"","",""};	
+			int arraySize = 3;
+			if(urlOfMostViewedPicture.size() > arraySize){
+				arraySize = urlOfMostViewedPicture.size();
+			}
+			String[] urls = new String[arraySize];
+			for (int i=0; i<arraySize; i++) {
+				urls[i] = "";
+			}
+			
 			if (urlOfMostViewedPicture != null){
 				for(int i = 0; i < urlOfMostViewedPicture.size(); i++){
 					urls[i] = urlOfMostViewedPicture.get(i);

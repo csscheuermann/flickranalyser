@@ -92,7 +92,7 @@ public class NearestSpotFinder implements ISpotFinder {
 						lng = Double.parseDouble(node.getTextContent());
 				}
 
-				LOGGER.log(Level.INFO, "lat/lng=" + lat + "," + lng);
+				LOGGER.log(Level.FINE, "lat/lng=" + lat + "," + lng);
 				return PFSaverSpotToCrawl.saveSpotToDatastore(new SpotToCrawl(new Spot(lat, lng, address, "NOT SET"), onlyExcludedPictures));
 			} else {
 				return Response.status(400).entity("SPOT ALREADY IN DATASTORE").build();
@@ -134,7 +134,6 @@ public class NearestSpotFinder implements ISpotFinder {
 			// a) obtain the formatted_address field for every result
 			NodeList resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result/formatted_address", geocoderResultDocument, XPathConstants.NODESET);
 			for (int i = 0; i < resultNodeList.getLength(); i++) {
-				LOGGER.log(Level.INFO, resultNodeList.item(i).getTextContent());
 				return resultNodeList.item(i).getTextContent();
 			}
 
@@ -156,7 +155,7 @@ public class NearestSpotFinder implements ISpotFinder {
 	@Override
 	public String findAddressByLatLng(double lat, double lng) {
 
-		LOGGER.log(Level.INFO, "LATITUDE: " + lat + " LONGITUDE :" + lng);
+		LOGGER.log(Level.FINE, "LATITUDE: " + lat + " LONGITUDE :" + lng);
 		// prepare a URL to the geocoder
 		try {
 			URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?latlng=" + lat + "," + lng + "&sensor=true");
@@ -180,7 +179,6 @@ public class NearestSpotFinder implements ISpotFinder {
 
 			// a) obtain the formatted_address field for every result
 			NodeList resultNodeList = (NodeList) xpath.evaluate("/GeocodeResponse/result/formatted_address", geocoderResultDocument, XPathConstants.NODESET);
-			LOGGER.log(Level.INFO, "LENGTH " + resultNodeList.getLength());
 			if (resultNodeList.getLength() != 0) {
 
 				return resultNodeList.item(0).getTextContent();
