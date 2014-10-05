@@ -58,19 +58,22 @@ public class FlickrRequestHandler {
 
 		for (Entry<LatLng, Double> entry : calculateNewPoint.entrySet()) {
 			int requestedPage = 1;
+			int logBarrier = 1;
 			int numberPages = 1;
 			int maxViewCount = 0;
 
 			LatLng position = entry.getKey();
 			double radiusInKm = entry.getValue().doubleValue();
-
 			do {
 				String urlForRequest = buildPhotoRequestURL(requestedPage, position, radiusInKm, LicenseEnum.ALL);
 
 				JsonObject photosObject;
 
 				try {
-					log.log(Level.INFO, "Retrieving all images for spot " + spot + " (page=" + requestedPage + ",numberPages=" + numberPages + ") -> " + urlForRequest);
+					if (requestedPage == logBarrier) {
+						logBarrier *= 2;
+						log.log(Level.INFO, "Retrieving all images for spot " + spot + " (page=" + requestedPage + ",numberPages=" + numberPages + ") -> " + urlForRequest);
+					}
 					String jsonResponse = Request.Get(urlForRequest.toString()).execute().returnContent().asString();
 					requestedPage++;
 					photosObject = JsonObject.readFrom(jsonResponse);
@@ -150,8 +153,7 @@ public class FlickrRequestHandler {
 						}
 					}
 				} catch (Exception e) {
-					log.log(Level.SEVERE, "COULD NOT PARSE THIS HERE.");
-					e.printStackTrace();
+					log.log(Level.SEVERE, "COULD NOT PARSE THIS HERE.", e);
 				}
 			}
 		} else {
@@ -286,7 +288,7 @@ public class FlickrRequestHandler {
 			log.log(Level.WARNING, "Could not load picture page from flickr", e);
 		}
 		if (!result.isEmpty()) {
-			log.log(Level.INFO, "number of pictures found for cluster[" + cluster + "]: " + result.size());
+			log.log(Level.FINE, "number of pictures found for cluster[" + cluster + "]: " + result.size());
 		}
 		return result;
 	}

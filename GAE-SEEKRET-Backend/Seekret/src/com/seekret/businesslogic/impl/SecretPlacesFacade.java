@@ -53,8 +53,20 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 		int numberClustersWhichHaveAPictureNow = 0;
 		int numberNewPictures = 0;
 		Set<Cluster> clusterFilledWithPictures = new HashSet<Cluster>();
+		int numberClustersToHandle = 0;
+		int handledClusters = 0;
+		int logBarrier = 1;
 		for (Cluster cluster : spot.getCluster()) {
-			if (cluster.getUrlOfMostViewedPicture().size() < SpotCalculationHandler.NUMBER_MAX_PICTURES_PER_CLUSTER) {
+			if (cluster.getUrlOfMostViewedPicture().isEmpty()) {
+				numberClustersToHandle++;
+			}
+		}
+		for (Cluster cluster : spot.getCluster()) {
+			// only load pictures for empty clusters. otherwise we have the
+			// timing issue with gae
+			// if (cluster.getUrlOfMostViewedPicture().size() <
+			// SpotCalculationHandler.NUMBER_MAX_PICTURES_PER_CLUSTER) {
+			if (cluster.getUrlOfMostViewedPicture().isEmpty()) {
 				if (cluster.getUrlOfMostViewedPicture().isEmpty()) {
 					numberPicturesLessClusters++;
 				}
@@ -62,7 +74,7 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 				if (!picturesForCluster.isEmpty()) {
 					for (PointOfInterest pointOfInterest : picturesForCluster) {
 						if (spotCalculationHandler.isPictureSuitedAsClusterProfilePicture(pointOfInterest)) {
-							if(cluster.getUrlOfMostViewedPicture().isEmpty()){
+							if (cluster.getUrlOfMostViewedPicture().isEmpty()) {
 								numberClustersWhichHaveAPictureNow++;
 							}
 							cluster.addPictureUrl(pointOfInterest.getPictureUrl());
@@ -74,10 +86,16 @@ public class SecretPlacesFacade implements ISecretPlacesFacade {
 						}
 					}
 				}
+				handledClusters++;
+				if(logBarrier == handledClusters){
+					logBarrier += 5*numberClustersToHandle/100;
+					LOGGER.info("Status of handling pois with few pictures: "+ (100.0 * handledClusters)/numberClustersToHandle+" % completed" );
+				}
 			}
 		}
-		LOGGER.log(Level.INFO, "number new pictures:"+numberNewPictures+"; number pictureless clusters: " + numberPicturesLessClusters + "; number of clusters filled with pictures: " + clusterFilledWithPictures.size() + "("+100.0*clusterFilledWithPictures.size()/spot.getCluster().size()+"%); number of clusters which haven´t hat pictures before: of(" + 100.0
-				* numberClustersWhichHaveAPictureNow / numberPicturesLessClusters + "%)");
+		LOGGER.log(Level.INFO, "number new pictures:" + numberNewPictures + "; number pictureless clusters: " + numberPicturesLessClusters + "; number of clusters filled with pictures: "
+				+ clusterFilledWithPictures.size() + "(" + 100.0 * clusterFilledWithPictures.size() / spot.getCluster().size() + "%); number of clusters which haven´t hat pictures before: of("
+				+ 100.0 * numberClustersWhichHaveAPictureNow / numberPicturesLessClusters + "%)");
 
 	}
 

@@ -12,7 +12,8 @@ public class TagBasedFotoExcluder implements IFotoExcluder {
 
 	private static final Logger LOGGER = Logger.getLogger(TagBasedFotoExcluder.class.getName());
 	private final Set<String> unwantedTags;
-	private static int filterCounter = 0;
+	private int filterCounter = 0;
+	private int nextLoggingFilterCounter =1;
 	private boolean onlyExcludedTags;
 
 	public TagBasedFotoExcluder(boolean onlyExcludedTags) {
@@ -152,7 +153,10 @@ public class TagBasedFotoExcluder implements IFotoExcluder {
 				return false;
 			}else{
 				filterCounter++;
-				LOGGER.log(Level.INFO, "I FILTERED: " + filterCounter + " out of the List");
+				if(filterCounter == nextLoggingFilterCounter){
+					nextLoggingFilterCounter *=2;
+					LOGGER.log(Level.INFO, "I FILTERED: " + filterCounter + " out of the List");
+				}
 			}
 			return true;
 		}
