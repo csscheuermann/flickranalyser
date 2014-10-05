@@ -138,11 +138,11 @@
           "entity" : {
             "$ref" : "_any"
           },
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "status" : {
             "type" : "integer"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           }
         }
       },
@@ -191,12 +191,6 @@
           "overallMaxViewNumberPerCluster" : {
             "type" : "integer"
           },
-          "cluster" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Cluster"
-            }
-          },
           "maxNumberOfPOIsPerCluster" : {
             "type" : "integer"
           },
@@ -205,6 +199,12 @@
           },
           "clusterRadiusInMeter" : {
             "type" : "number"
+          },
+          "cluster" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Cluster"
+            }
           },
           "spotRadiusInMeter" : {
             "type" : "number"
@@ -330,14 +330,14 @@
           "longitude" : {
             "type" : "number"
           },
-          "latitudeInternal" : {
-            "type" : "string",
-            "format" : "int64"
-          },
           "polar" : {
             "type" : "boolean"
           },
           "longitudeInternal" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "latitudeInternal" : {
             "type" : "string",
             "format" : "int64"
           }

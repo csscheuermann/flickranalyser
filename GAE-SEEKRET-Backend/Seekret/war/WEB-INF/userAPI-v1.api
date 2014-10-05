@@ -93,11 +93,11 @@
           "entity" : {
             "$ref" : "_any"
           },
-          "metadata" : {
-            "$ref" : "JsonMap"
-          },
           "status" : {
             "type" : "integer"
+          },
+          "metadata" : {
+            "$ref" : "JsonMap"
           }
         }
       },

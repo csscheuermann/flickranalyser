@@ -20,7 +20,7 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
     var ePCFRPAPI: EndpointControllerforRatingAPI!
     var cluster: GTLSpotAPICluster!
     var uIHelper: MBProgressHUD!
-    var urls: [String]!
+    var urls: [String]! = [String]()
     var spotName: String!
     
     
@@ -42,7 +42,12 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
         self.tabBarForVoting.delegate = self
         self.addPointToMapView()
         self.addGestureListenerToUiImageView(self.uiImageClusterImage)
-        self.urls = cluster.urlOfMostViewedPicture as [String]
+        if (cluster.urlOfMostViewedPicture != nil){
+            self.urls = cluster.urlOfMostViewedPicture as [String]
+        }else{
+            DDLog.logInfo("Cluster does not contain ULRs: \(cluster.urlOfMostViewedPicture),URL COUNT: \(cluster.urlOfMostViewedPicture.count)")
+        }
+        
         self.counter = 0
         self.loadImageForIndex(0)
         self.ePCFRP = EndPointControllerForCluster(delegate: self)
@@ -179,15 +184,18 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
         
         var manager = SDWebImageManager.sharedManager()
         
-        manager.downloadImageWithURL(NSURL(fileURLWithPath: urls[index]), options: SDWebImageOptions.RetryFailed,
+        manager.downloadImageWithURL(NSURL(string: urls[index]), options: SDWebImageOptions.RetryFailed,
             progress: { (receivedSize: NSInteger , expectedSize: NSInteger ) -> Void in
                 NSLog("RECEIVED SIZE  %d, EXPECTED SIZE %d", receivedSize, expectedSize)
             },
             
             completed: { (image :UIImage!, error: NSError!, cachType: SDImageCacheType, Bool, finished) -> Void in
-                
-                self.uiImageViewForBluredBackground.image = image
-                self.uiHelperMethods.setImageToImageView(image, imageView: self.uiImageClusterImage)
+                if (image != nil){
+                    self.uiImageViewForBluredBackground.image = image
+                    self.uiHelperMethods.setImageToImageView(image, imageView: self.uiImageClusterImage)
+                }else{
+                    DDLog.logInfo("Image was nil at Index \(index)")
+                }
         })
     }
     
@@ -240,8 +248,8 @@ class DetailedClusterViewController: AbstractSeekretViewController, EndpointCont
         var currentClusterLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
         currentClusterAnnotation.coordinate = currentClusterLocation
         
-        currentClusterAnnotation.title = "TEST"
-        currentClusterAnnotation.subtitle = "TEST"
+        //currentClusterAnnotation.title = "TEST"
+        //currentClusterAnnotation.subtitle = "TEST"
         
         var latDelta:CLLocationDegrees = 0.01
         var longDelta:CLLocationDegrees = 0.01
