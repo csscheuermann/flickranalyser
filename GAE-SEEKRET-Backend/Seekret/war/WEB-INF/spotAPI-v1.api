@@ -200,6 +200,9 @@
           "clusterRadiusInMeter" : {
             "type" : "number"
           },
+          "maxClusterViews" : {
+            "type" : "integer"
+          },
           "cluster" : {
             "type" : "array",
             "items" : {
@@ -208,9 +211,6 @@
           },
           "spotRadiusInMeter" : {
             "type" : "number"
-          },
-          "maxClusterViews" : {
-            "type" : "integer"
           }
         }
       },
@@ -234,11 +234,11 @@
           "parent" : {
             "$ref" : "Key"
           },
-          "complete" : {
-            "type" : "boolean"
-          },
           "namespace" : {
             "type" : "string"
+          },
+          "complete" : {
+            "type" : "boolean"
           }
         }
       },

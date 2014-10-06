@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.junit.Assert;
+
+import com.google.gwt.dev.jjs.impl.AssertionNormalizer;
 import com.seekret.businesslogic.filterstrategies.IFilterStrategy;
 import com.seekret.businesslogic.filterstrategies.common.ClusterScoreComparator;
 import com.seekret.businesslogic.filterstrategies.common.ClusterScorePair;
@@ -61,8 +65,12 @@ public abstract class AbstractFilterStrategy implements IFilterStrategy {
 
 	private void addDefaultPictureIfPictureIsNotAvailable(List<Cluster> clustersToReturn) {
 		for (Cluster cluster : clustersToReturn) {
-			if(cluster.getUrlOfMostViewedPicture().isEmpty()){
-				cluster.addPictureUrl("http://de.jigzone.com/p/jz/jz1/The_Scream.jpg");
+			if(cluster.getUrlOfMostViewedPicture() == null){
+				LOGGER.log(Level.SEVERE, "SOMETHING IS WRONG HERE,  WHY COULD THIS BE NULL cluster.getUrlOfMostViewedPicture()");
+			}else{
+				if(cluster.getUrlOfMostViewedPicture().isEmpty()){
+					cluster.addPictureUrl("http://de.jigzone.com/p/jz/jz1/The_Scream.jpg");
+				}
 			}
 		}
 	}
